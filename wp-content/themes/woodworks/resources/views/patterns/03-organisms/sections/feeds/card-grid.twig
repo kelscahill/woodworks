@@ -1,0 +1,35 @@
+{% if card_grid %}
+  <section class="c-card-grid{{ card_grid.classes ? ' ' ~ card_grid.classes }} l-wrap">
+    <div class="c-card-grid__container l-container u-spacing">
+      {% if card_grid.heading or card_grid.dek %}
+        <div class="c-card-grid__header l-conatiner--m u-spacing--half">
+          {% include "@atoms/text/heading/heading.twig" with {
+            "heading": {
+              "level": "2",
+              "size": "xl",
+              "text": card_grid.title,
+              "classes": "c-card-grid__heading"
+            }
+          } %}
+          {% include "@atoms/text/dek/dek.twig" with {
+            "dek": {
+              "text": card_grid.dek,
+              "classes": "c-card-grid__dek"
+            }
+          } %}
+        </div>
+      {% endif %}
+      {% if card_grid.posts %}
+        <div class="c-card-grid__posts" data-bp="grid 6 4@md 3@lg">
+          {% for post in card_grid.posts %}
+            {% include "@molecules/cards/card.twig" with {
+              "card": post
+            } %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Sorry, there are no posts at this time.</p>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

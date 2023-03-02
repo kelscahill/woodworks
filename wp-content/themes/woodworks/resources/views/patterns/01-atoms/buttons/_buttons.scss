@@ -1,0 +1,11 @@
+/* ------------------------------------ *\
+    $BUTTONS
+\* ------------------------------------ */
+
+.o-button {
+  @include o-button;
+
+  &--secondary {
+    @include o-button--secondary;
+  }
+}

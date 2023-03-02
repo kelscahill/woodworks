@@ -1,0 +1,57 @@
+{% if card %}
+  <div class="c-card{{ card.classes ? ' ' ~ card.classes }}">
+    {% include "@atoms/images/image/figure.twig" with {
+      "figure": {
+        "link": {
+          "url": card.link
+        },
+        "image": {
+          "src": card.thumbnail.src|resize(330, 330),
+          "alt": card.thumbnail.alt
+        },
+        "classes": "c-card__image"
+      }
+    } %}
+    <div class="c-card__content u-spacing--half">
+      {% include "@atoms/text/kicker/kicker.twig" with {
+        "kicker": {
+          "text": card.category,
+          "link": card.category.link,
+          "classes": "c-card__kicker"
+        }
+      } %}
+      {% include "@atoms/text/heading/heading.twig" with {
+        "heading": {
+          "level": "2",
+          "size": "md",
+          "text": card.title,
+          "link": {
+            "url": card.link,
+          },
+          "classes": "c-card__heading"
+        }
+      } %}
+      {% include "@atoms/text/dek/dek.twig" with {
+        "dek": {
+          "text": card.preview.length(20).read_more(false),
+          "classes": "c-card__dek"
+        }
+      } %}
+    </div>
+    <div class="c-card__footer">
+      {% include "@atoms/links/link.twig" with {
+        "link": {
+          "url": card.link,
+          "text": "Read More",
+          "classes": "c-card__link"
+        }
+      } %}
+      {% include "@atoms/text/meta/meta.twig" with {
+        "meta": {
+          "date": card.date,
+          "classes": "c-card__meta"
+        }
+      } %}
+    </div>
+  </div>
+{% endif %}

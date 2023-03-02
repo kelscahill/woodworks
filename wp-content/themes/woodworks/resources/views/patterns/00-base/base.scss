@@ -1,0 +1,85 @@
+/* ------------------------------------ *\
+    $RESET
+\* ------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+p {
+  @include body-copy;
+}
+
+blockquote,
+body,
+div,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+html,
+iframe,
+label,
+legend,
+li,
+nav,
+object,
+ol,
+p,
+section,
+table,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+article,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+img,
+video,
+object,
+svg,
+iframe {
+  max-width: 100%;
+  border: none;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition-all);
+  color: inherit;
+
+  svg path {
+    fill: currentcolor;
+  }
+}

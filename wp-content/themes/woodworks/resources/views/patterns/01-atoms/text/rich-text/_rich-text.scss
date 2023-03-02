@@ -1,0 +1,58 @@
+/* ------------------------------------ *\
+    $RICH TEXT
+\* ------------------------------------ */
+
+.o-rich-text {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: auto;
+
+  & > * + * {
+    margin-top: var(--space);
+
+    @include media(">medium") {
+      margin-top: var(--space-md);
+    }
+  }
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    padding-top: var(--space);
+    margin-bottom: calc(var(--space-sm) * -1);
+  }
+
+  > *:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h2:empty,
+  h3:empty,
+  p:empty {
+    display: none;
+  }
+
+  > p a,
+  > a {
+    @include o-link;
+    display: unset;
+  }
+
+  > hr {
+    margin: var(--space-xl) auto;
+  }
+
+  > ul {
+    margin-left: var(--space-lg);
+  }
+
+  .wp-block-quote,
+  .wp-block-pullquote {
+    @include o-blockquote;
+  }
+}

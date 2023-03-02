@@ -1,0 +1,179 @@
+@import "./_variables";
+
+/**
+ * General Variables
+ */
+@import "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap";
+
+/**
+ * Colors
+ */
+:root {
+  /* Brand Colors */
+  --color-brand-blue: #226fee;
+  --color-brand-pink: #d748ee;
+
+  /* Teir 1 Colors */
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray: #525252;
+  --color-gray--light: #b4b7b4;
+
+  /* Teir 2 Colors */
+  --color-primary: var(--color-brand-blue);
+  --color-secondary: var(--color-brand-pink);
+  --color-tertiary: var(--color-gray);
+  --color-border: var(--color-gray--light);
+  --color-overlay: rgb(0 0 0 / 50%);
+
+  /* Default Colors - Error */
+  --color-error--light: #f99;
+  --color-error: #cb4324;
+  --color-error--dark: #bf2600;
+  --color-error--darker: #841a00;
+
+  /* Default Colors - Valid */
+  --color-valid--lighter: #fafdfc;
+  --color-valid--light: #ecf3ee;
+  --color-valid: #36b370;
+  --color-valid--dark: #008842;
+  --color-valid--darker: #1a6343;
+
+  /* Default Colors - Warning */
+  --color-warning--lighter: #fffef9;
+  --color-warning--light: #fffae6;
+  --color-warning: #ffab00;
+  --color-warning--dark: #b26100;
+  --color-warning--darker: #774100;
+
+  /* Default Colors - Information */
+  --color-information--lighter: #fffef9;
+  --color-information--light: #e6fcff;
+  --color-information: #00b8d9;
+  --color-information--dark: #008da6;
+  --color-information--darker: #005b6b;
+}
+
+/**
+ * Border/Shadow Styles.
+ */
+:root {
+  --border: 1px solid var(--color-gray--light);
+  --border-radius-sm: 3px;
+  --border-radius: 5px;
+  --box-shadow-sm: -16px 0px 32px rgb(0 0 0 / 4%);
+  --box-shadow: 0 4px 16px rgb(black 0.25);
+  --box-shadow-lg: 0px 16px 32px rgb(0 0 0 / 8%);
+}
+
+/**
+ * Transitions.
+ */
+:root {
+  --transition-effect: cubic-bezier(0.86, 0, 0.07, 1);
+  --transition-all: all 0.25s var(--transition-effect);
+}
+
+/**
+ * Icons.
+ */
+:root {
+  --icon-xs: 10px;
+  --icon-sm: 20px;
+  --icon-md: 30px;
+  --icon-lg: 40px;
+  --icon-xl: 50px;
+  --icon-xxl: 60px;
+}
+
+/**
+ * Z Index.
+ */
+:root {
+  --z-index-vanish: -1;
+  --z-index-none: 0;
+  --z-index-1: 100;
+  --z-index-2: 200;
+  --z-index-5: 500;
+  --z-index-10: 1000;
+  --z-index-15: 1500;
+  --z-index-30: 3000;
+  --z-index-50: 5000;
+  --z-index-75: 7500;
+  --z-index-100: 10000;
+}
+
+/**
+ * Max width.
+ */
+:root {
+  --max-width-sm: 600px;
+  --max-width-md: 800px;
+  --max-width-lg: 1000px;
+  --max-width-xl: 1260px;
+  --max-width-xxl: 1440px;
+}
+
+/**
+ * Spacing.
+ */
+ :root {
+  --space: 20px;
+  --space-xs: calc(var(--space) / 4);
+  --space-sm: calc(var(--space) / 2);
+  --space-md: calc(var(--space) * 1.5);
+  --space-lg: calc(var(--space) * 2);
+  --space-xl: calc(var(--space) * 3);
+  --space-xxl: calc(var(--space) * 4);
+}
+
+/**
+ * Fonts
+ */
+:root {
+  --font-family-body: "Roboto", sans-serif;
+  --font-family-primary: serif;
+}
+
+/**
+ * Font Sizes
+ */
+:root {
+  --font-size-body: 16px;
+  --font-size-xs: 11px;
+  --font-size-s: 12px;
+  --font-size-m: 16px;
+  --font-size-h6: 18px;
+  --font-size-h5: 20px;
+  --font-size-h4: 24px;
+  --font-size-h3: 36px;
+  --font-size-h2: 48px;
+  --font-size-h1: 56px;
+}
+
+/* Medium Breakpoint */
+@media screen and (min-width: $breakpoint-md) {
+  :root {
+    --font-size-body: 16px;
+    --font-size-xs: 12px;
+    --font-size-s: 14px;
+    --font-size-m: 18px;
+    --font-size-h6: 20px;
+    --font-size-h5: 24px;
+    --font-size-h4: 36px;
+    --font-size-h3: 48px;
+    --font-size-h2: 56px;
+    --font-size-h1: 64px;
+  }
+}
+
+/**
+ * Theme variables.
+ */
+:root {
+  --sidebar-width: 300px;
+  --main-width: calc(100% - var(--sidebar-width));
+}
+
+@import "./_breakpoints";
+@import "./_mixins";

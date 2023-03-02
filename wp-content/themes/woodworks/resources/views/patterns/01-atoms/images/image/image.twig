@@ -1,0 +1,15 @@
+{% if image.src %}
+  <img class="o-image{{ image.classes ? ' ' ~ image.classes }}" loading="lazy"
+    {% if image.srcset %}
+      srcset="{{ image.srcset }}"
+    {% endif %}
+    {% if image.sizes %}
+      sizes="{{ image.sizes }}"
+    {% endif %}
+    src="{{ image.src }}"
+    alt="{{ image.alt ? image.alt : "Image" }}"
+    {% if image.title %}
+      title="{{ image.title }}"
+    {% endif %}
+  />
+{% endif %}

@@ -1,0 +1,42 @@
+/* ------------------------------------ *\
+    $HEADINGS
+\* ------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.o-heading--xxl,
+h1 {
+  @include o-heading--xxl;
+}
+
+.o-heading--xl,
+h2 {
+  @include o-heading--xl;
+}
+
+.o-heading--lg,
+h3 {
+  @include o-heading--lg;
+}
+
+.o-heading--md,
+h4 {
+  @include o-heading--md;
+}
+
+.o-heading--sm,
+h5 {
+  @include o-heading--sm;
+}
+
+.o-heading--xs,
+h6 {
+  @include o-heading--xs;
+}

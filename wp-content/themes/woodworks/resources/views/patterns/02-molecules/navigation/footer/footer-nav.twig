@@ -1,0 +1,36 @@
+{% if footer_nav.name == "Footer Navigation" %}
+  <nav role="navigation" class="c-footer-nav{{ footer_nav.classes ? ' ' ~ footer_nav.classes }}">
+    {% if footer_nav.items %}
+      <ul class="c-footer-nav__parent-list">
+        {% for item in footer_nav.get_items %}
+          <li class="c-footer-nav__parent-list-item">
+            {% include "@atoms/links/link.twig" with {
+              "link": {
+                "text": item.title,
+                "url": item.url,
+                "target": item.target,
+                "classes": "c-footer-nav__link" ~ item.classes|join(' '),
+              }
+            } %}
+            {% if item.children %}
+              <ul class="c-footer-nav__child-list">
+                {% for item in item.children %}
+                  <li class="c-footer-nav__child-list-item">
+                    {% include "@atoms/links/link.twig" with {
+                      "link": {
+                        "text": item.title,
+                        "url": item.url,
+                        "target": item.target,
+                        "classes": "c-footer-nav__link" ~ item.classes|join(' '),
+                      }
+                    } %}
+                    </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endfor %}
+        </li>
+      </ul>
+    {% endif %}
+  </nav>
+{% endif %}

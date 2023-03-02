@@ -1,0 +1,26 @@
+/* ------------------------------------*\
+    $COLORS
+\*------------------------------------ */
+
+$colors: (
+  "primary": var(--color-primary),
+  "secondary": var(--color-secondary),
+  "tertiary": var(--color-tertiary),
+  "white": var(--color-white),
+  "black": var(--color-black),
+  "gray": var(--color-gray),
+);
+
+$styles: (
+  "background-color": "background-color",
+  "color": "color",
+  "path-fill": "fill",
+);
+
+@each $style_key, $style_value in $styles {
+  @each $color_key, $color_value in $colors {
+    .u-#{$style_key}--#{$color_key} {
+      #{$style_value}: #{$color_value};
+    }
+  }
+}

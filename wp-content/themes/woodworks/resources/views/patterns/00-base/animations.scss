@@ -1,0 +1,21 @@
+/* ------------------------------------ *\
+    $ANIMATIONS
+\* ------------------------------------ */
+
+@for $i from 1 to 10 {
+  .u-animation-delay *:nth-child(#{$i}) {
+    animation-delay: $i * 0.25s + 0.5s;
+  }
+}
+
+.u-fade-up {
+  transform: translateY(40px);
+  animation: fade-up 1.4s var(--transition-effect) forwards;
+}
+
+@keyframes fade-up {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,22 @@
+<article class="c-content-page{{ content.classes ? ' ' ~ content.classes }} u-spacing--double">
+  {% include "@organisms/sections/headers/page-header.twig" with {
+    "page_header": {
+      "title": post.title,
+      "classes": "c-content-page__heade"
+    }
+  } %}
+  {% include "@atoms/images/image/responsive-image.twig" with {
+    "image": {
+      "srcset": post.thumbnail.src|resize(720, 405) ~ ' 720w, ' ~ post.thumbnail.src|resize(960, 540) ~ ' 960w',
+      "src": post.thumbnail.src|resize(500, 281),
+      "alt": post.thumbnail.alt,
+      "classes": "c-content-page__image"
+    }
+  } %}
+  {% include "@atoms/text/rich-text/rich-text.twig" with {
+    "rich_text": {
+      "text": post.content,
+      "classes": "c-content-page__body l-container--m"
+    }
+  } %}
+</article>

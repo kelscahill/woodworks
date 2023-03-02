@@ -1,0 +1,16 @@
+<article class="c-content{{ content.classes ? ' ' ~ content.classes }} u-spacing--double">
+  {% include "@organisms/sections/headers/page-header.twig" with {
+    "page_header": {
+      "title": post.title,
+      "classes": "c-content__header"
+    }
+  } %}
+  {% include "@organisms/sections/feeds/card-grid.twig" with {
+    "card_grid": {
+      "title": "Example Heading",
+      "dek": "This is an example dek.",
+      "posts": posts,
+      "classes": "c-content__feed"
+    }
+  } %}
+</article>

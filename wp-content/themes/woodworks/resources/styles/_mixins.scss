@@ -1,0 +1,257 @@
+/* ------------------------------------ *\
+    $MIXINS
+\* ------------------------------------ */
+
+/*
+ * Generic header styles:
+ * All arguments are optional. If not defined, the defaults below will be used
+*/
+
+@mixin o-heading-link($color-link: currentcolor, $color-link-hover: var(--color-primary)) {
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:focus {
+      color: $color-link-hover;
+    }
+  }
+}
+
+/*
+ * Headings
+*/
+
+@mixin o-heading--xxl {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h1);
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--color-primary);
+
+  @include o-heading-link;
+}
+
+@mixin o-heading--xl {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h2);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.175;
+
+  @include o-heading-link;
+}
+
+@mixin o-heading--lg {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.375;
+
+  @include o-heading-link;
+}
+
+@mixin o-heading--md {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.175;
+
+  @include o-heading-link;
+}
+
+@mixin o-heading--sm {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h5);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.16;
+
+  @include o-heading-link;
+}
+
+@mixin o-heading--xs {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h6);
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.2;
+
+  @include o-heading-link;
+}
+
+/**
+ * Text
+ */
+
+@mixin body-copy {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+}
+
+@mixin u-font--xs {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+@mixin u-font--sm {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.3;
+}
+
+@mixin u-font--md {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+}
+
+/**
+ * Blockquote
+ */
+
+@mixin o-blockquote {
+  padding-left: var(--space);
+  border-left: var(--border);
+
+  p {
+    @include o-heading--sm;
+  }
+
+  cite {
+    display: block;
+    margin-top: var(--space);
+    @include u-font--sm;
+  }
+}
+
+/**
+ * Buttons
+ */
+
+@mixin o-button(
+  $background-color: var(--color-black),
+  $color: var(--color-white),
+  $border-color: var(--color-black),
+  $background-color-hover: var(--color-primary),
+  $color-hover: var(--color-white),
+  $border-color-hover: var(--color-primary)
+) {
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+  background-color: $background-color;
+  color: $color;
+  padding: var(--space-xs) var(--space);
+  transition: var(--transition-all);
+  border-radius: var(--border-radius);
+  border: 1px solid $border-color;
+  font-family: var(--font-size-sm);
+  line-height: 1;
+
+  &:focus,
+  &:hover {
+    color: $color-hover;
+    background-color: $background-color-hover;
+    border-color: $border-color-hover;
+  }
+
+  span + span {
+    margin-left: var(--space-sm);
+  }
+
+  svg path {
+    fill: currentcolor;
+  }
+}
+
+@mixin o-button--secondary {
+  @include o-button(
+    var(--color-primary),
+    var(--color-white),
+    var(--color-primary),
+    var(--color-black),
+    var(--color-white),
+    var(--color-black)
+  );
+}
+
+/**
+ * Links
+ */
+
+@mixin o-link($color: var(--color-primary), $color-hover: var(--color-secondary)) {
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+  transition: var(--transition-all);
+  color: $color;
+  font-family: var(--font-size-body);
+  line-height: 1.4;
+
+  &:hover,
+  &:focus {
+    color: $color-hover;
+  }
+
+  span + span {
+    margin-left: var(--space-sm);
+  }
+
+  svg path {
+    fill: currentcolor;
+  }
+}
+
+/**
+ * String interpolation function for SASS variables in SVG Image URI's
+ */
+
+@function url-friendly-color($color) {
+  @return "%23" + str-slice("#{$color}", 2, -1);
+}
+
+/*
+ * Align center.
+*/
+
+@mixin u-align--center {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/**
+ * 1) The size function multiplies a provided value ($value)
+ * by the base sizing unit ($size-base-unit)
+ * 2) $value should be limited to integers (e.g. 3) or half integers (e.g. 1.5)
+ */
+@function size($value) {
+  @return calc(var(--space) * $value);
+}
+
+/**
+ * Responsive videos/iframes
+ */
+@mixin video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

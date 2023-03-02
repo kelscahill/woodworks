@@ -1,0 +1,14 @@
+<article class="c-content-404{{ content.classes ? ' ' ~ content.classes }} l-container u-spacing--double">
+  {% include "@organisms/sections/headers/page-header.twig" with {
+    "page_header": {
+      "title": "404",
+      "classes": "c-content-404__header"
+    }
+  } %}
+  {% include "@atoms/text/rich-text/rich-text.twig" with {
+    "rich_text": {
+      "text": "Sorry, we couldn't find what you're looking for.",
+      "classes": "c-content-404__body"
+    }
+  } %}
+</article>

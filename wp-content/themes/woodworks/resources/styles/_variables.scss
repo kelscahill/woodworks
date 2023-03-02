@@ -1,0 +1,31 @@
+/**
+ * General Variables
+ */
+$tests: true;
+
+/**
+ * Common breakpoints.
+ */
+$breakpoint-xs: 320px;
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+$breakpoints: (
+  "xsmall": $breakpoint-xs,
+  "small": $breakpoint-sm,
+  "medium": $breakpoint-md,
+  "large": $breakpoint-lg,
+  "xlarge": $breakpoint-xl,
+  "xxlarge": $breakpoint-xxl
+);
+
+/**
+ * Grid.
+ */
+$grid-prefix: "data-bp";
+$grid-columns: 12;
+$grid-gutter: 20px;
+$grid-max-width: $breakpoint-xl;

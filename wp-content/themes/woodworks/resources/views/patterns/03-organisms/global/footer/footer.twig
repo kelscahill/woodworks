@@ -1,0 +1,16 @@
+<footer class="c-footer{{ footer.classes ? ' ' ~ footer.classes }} l-wrap" role="contentinfo">
+  <div class="c-footer__container l-container">
+    {% include "@molecules/components/social-links/social-links.twig" %}
+    {% include "@atoms/images/logos/logo.twig" with {
+      "logo": {
+        "image": {
+          "src": theme.link ~ '/resources/images/logo.svg',
+          "alt": site.name,
+        },
+        "link": site.link,
+        "classes": "c-footer__logo"
+      }
+    } %}
+    {% include "@molecules/navigation/footer/footer-nav.twig" %}
+  </div>
+</footer>

@@ -1,0 +1,69 @@
+{
+  "plugins": ["stylelint-scss"],
+  "customSyntax": "postcss-scss",
+  "extends": "stylelint-config-standard",
+  "selector-class-pattern": null,
+  "ignoreFiles": [
+    "resources/styles/**/*.scss"
+  ],
+  "rules": {
+    "indentation": [2],
+    "color-no-invalid-hex": true,
+    "function-no-unknown": null,
+    "no-empty-source": null,
+    "max-empty-lines": 2,
+    "length-zero-no-unit": null,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "no-missing-end-of-source-newline": null,
+    "declaration-empty-line-before": null,
+    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
+    "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "after-same-name",
+          "inside-block",
+          "blockless-after-same-name-blockless",
+          "blockless-after-blockless",
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment",
+          "first-nested",
+          "inside-block",
+          "blockless-after-same-name-blockless",
+          "blockless-after-blockless"
+        ]
+      }
+    ],
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "extend",
+          "at-root",
+          "debug",
+          "warn",
+          "error",
+          "if",
+          "else",
+          "for",
+          "each",
+          "while",
+          "mixin",
+          "include",
+          "content",
+          "return",
+          "function",
+          "tailwind",
+          "apply",
+          "responsive",
+          "variants",
+          "screen"
+        ]
+      }
+    ]
+  }
+}

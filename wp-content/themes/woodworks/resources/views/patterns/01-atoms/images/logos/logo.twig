@@ -1,0 +1,11 @@
+{% if logo %}
+  <div class="o-logo{{ logo.classes ? ' ' ~ logo.classes }}">
+    {% if logo.link %}
+      <a href="{{ logo.link }}" class="o-logo__link">
+    {% endif %}
+      <img class="o-logo__image" src="{{ logo.image.src }}" alt="{{ logo.image.alt ? logo.image.alt : "Logo" }}" />
+    {% if logo.link %}
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

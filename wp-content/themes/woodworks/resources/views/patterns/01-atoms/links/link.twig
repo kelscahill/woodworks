@@ -1,0 +1,18 @@
+{% if link.url %}
+  <a class="o-link{{ link.classes ? ' ' ~ link.classes }}" href="{{ link.url }}"{{ link.target == '_blank' ? ' target="_blank" rel="noreferrer"' : ' target="_self"' }}{{ link.aria-label ? ' aria-label="' ~ link.aria-label ~ '"' }}>
+    {% if link.icon %}
+      {% include "@atoms/images/icons/icon.twig" with link %}
+    {% endif %}
+    {% if link.text %}
+      <span>{{ link.text }}</span>
+    {% endif %}
+    {% if link.arrow %}
+      {% include "@atoms/images/icons/icon.twig" with {
+        "icon": {
+          "name": "arrow",
+          "classes": "o-icon--small"
+        }
+      } %}
+    {% endif %}
+  </a>
+{% endif %}

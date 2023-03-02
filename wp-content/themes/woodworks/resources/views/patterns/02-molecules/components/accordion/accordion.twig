@@ -1,0 +1,32 @@
+{% if accordion.heading or accordion.items %}
+  <div{{ accordion.anchor ? ' id="' ~ accordion.anchor ~ '"'}} class="c-accordion{{ accordion.classes ? ' ' ~ accordion.classes }} u-spacing">
+    {% if accordion.heading %}
+      {% include "@atoms/text/heading/heading.twig" with {
+        "heading": {
+          "level": "3",
+          "size": "l",
+          "text": accordion.heading,
+          "extra": "c-accordion__heading"
+        }
+      } %}
+    {% endif %}
+    {% if accordion.items %}
+      <div class="c-accordion__items u-spacing--half">
+        {% for item in accordion.items %}
+          <div class="c-accordion__item {{ 'c-accordion__item--' ~ loop.index }}">
+            {% if item.heading %}
+              <div class="c-accordion__item-heading js-toggle" data-toggled="{{ 'c-accordion__item--' ~ loop.index }}" data-predix="this">
+                {{ item.heading }}
+              </div>
+            {% endif %}
+            {% if item.body %}
+              <div class="c-accordion__item-body">
+                {{ item.body }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

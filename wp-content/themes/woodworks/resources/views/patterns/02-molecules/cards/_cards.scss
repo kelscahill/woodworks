@@ -1,0 +1,22 @@
+/* ------------------------------------ *\
+    $CARDS
+\* ------------------------------------ */
+
+.c-card {
+  display: flex;
+  flex-direction: column;
+  border: var(--border);
+
+  &__content {
+    padding: var(--space);
+    flex: 1;
+  }
+
+  &__footer {
+    padding: var(--space);
+    border-top: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,22 @@
+/* ------------------------------------ *\
+    $IMAGE
+\* ------------------------------------ */
+
+img,
+picture {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+figcaption {
+  display: block;
+  margin-top: var(--space-sm);
+}
+
+.o-picture {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
