@@ -1,8 +1,8 @@
 node_modules
 vendor
 # public
-public/entrypoints.json
-public/manifest.json
+# public/entrypoints.json
+# public/manifest.json
 .env
 .budfiles
 npm-debug.log
