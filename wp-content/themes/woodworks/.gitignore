@@ -1,6 +1,6 @@
 node_modules
 vendor
-public
+# public
 public/entrypoints.json
 public/manifest.json
 .env
