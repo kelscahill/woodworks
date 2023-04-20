@@ -1,55 +1,25 @@
 {% if card %}
   <div class="c-card{{ card.classes ? ' ' ~ card.classes }}">
-    {% include "@atoms/images/image/figure.twig" with {
-      "figure": {
-        "link": {
-          "url": card.link
-        },
-        "image": {
-          "src": card.thumbnail.src|resize(330, 330),
-          "alt": card.thumbnail.alt
-        },
-        "classes": "c-card__image"
-      }
-    } %}
-    <div class="c-card__content u-spacing--half">
+    <div class="c-card__content u-spacing">
       {% include "@atoms/text/kicker/kicker.twig" with {
         "kicker": {
-          "text": card.category,
-          "link": card.category.link,
+          "text": card.kicker,
           "classes": "c-card__kicker"
         }
       } %}
       {% include "@atoms/text/heading/heading.twig" with {
         "heading": {
-          "level": "2",
-          "size": "md",
+          "level": "3",
+          "size": "lg",
           "text": card.title,
-          "link": {
-            "url": card.link,
-          },
           "classes": "c-card__heading"
         }
       } %}
+      <hr class="o-hr--small" />
       {% include "@atoms/text/dek/dek.twig" with {
         "dek": {
-          "text": card.preview.length(20).read_more(false),
+          "text": card.description,
           "classes": "c-card__dek"
-        }
-      } %}
-    </div>
-    <div class="c-card__footer">
-      {% include "@atoms/links/link.twig" with {
-        "link": {
-          "url": card.link,
-          "text": "Read More",
-          "classes": "c-card__link"
-        }
-      } %}
-      {% include "@atoms/text/meta/meta.twig" with {
-        "meta": {
-          "date": card.date,
-          "classes": "c-card__meta"
         }
       } %}
     </div>

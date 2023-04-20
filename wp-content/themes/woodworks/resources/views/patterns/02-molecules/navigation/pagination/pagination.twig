@@ -1,0 +1,40 @@
+{% if posts.pagination.prev.link or posts.pagination.next.link %}
+  <div class="c-pagination{{ pagination.classes ? ' ' ~ pagination.classes }}">
+    {% if posts.pagination.prev.link %}
+      {% include "@atoms/buttons/button.twig" with {
+        "button": {
+          "text": "Previous",
+          "url": posts.pagination.prev.link,
+          "target": "_self",
+          "classes": "c-pagination__nav c-pagination__nav--prev"
+        }
+      } %}
+    {% endif %}
+    {% if posts.pagination.pages %}
+      <div class="c-pagination__pages">
+        {% for page in posts.pagination.pages %}
+          {% if page.link %}
+            <a target="_self" href="{{ page.link }}" class="c-pagination__page c-pagination__page--link">{{ page.title }}</a>
+          {% else %}
+            {% if page.title == "&hellip;" %}
+              <span class="c-pagination__page c-pagination__page--hellip">{{ page.title }}</span>
+            {% else %}
+              <span class="c-pagination__page c-pagination__page--current">{{ page.title }}</span>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if posts.pagination.next.link %}
+      {% include "@atoms/buttons/button.twig" with {
+        "button": {
+          "text": "Next",
+          "url": posts.pagination.next.link,
+          "target": "_self",
+          "arrow": true,
+          "classes": "c-pagination__nav c-pagination__nav--next"
+        }
+      } %}
+    {% endif %}
+  </div>
+{% endif %}

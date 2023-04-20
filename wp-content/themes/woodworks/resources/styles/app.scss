@@ -1,30 +1,78 @@
 @import "./_variables";
 
 /**
- * General Variables
+ * Fonts
  */
-@import "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap";
+@font-face {
+  font-family: "DIN Next LT Pro";
+  src: url(~@fonts/DINNextLTPro-Black.eot);
+  src: url(~@fonts/DINNextLTPro-Black.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Black.woff) format("woff"),
+    url(~@fonts/DINNextLTPro-Black.woff2) format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DIN Next LT Pro";
+  src: url(~@fonts/DINNextLTPro-Bold.eot);
+  src: url(~@fonts/DINNextLTPro-Bold.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Bold.woff) format("woff"),
+    url(~@fonts/DINNextLTPro-Bold.woff2) format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DIN Next LT Pro";
+  src: url(~@fonts/DINNextLTPro-Regular.eot);
+  src: url(~@fonts/DINNextLTPro-Regular.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Regular.woff) format("woff"),
+    url(~@fonts/DINNextLTPro-Regular.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DIN Next LT Pro";
+  src: url(~@fonts/DINNextLTPro-Italic.eot);
+  src: url(~@fonts/DINNextLTPro-Italic.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Italic.woff) format("woff"),
+    url(~@fonts/DINNextLTPro-Italic.woff2) format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Revelstoke";
+  src: url(~@fonts/Revelstoke-Regular.eot);
+  src: url(~@fonts/Revelstoke-Regular.ttf) format("truetype"), url(~@fonts/Revelstoke-Regular.woff) format("woff"),
+    url(~@fonts/Revelstoke-Regular.woff2) format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 /**
  * Colors
  */
 :root {
   /* Brand Colors */
-  --color-brand-blue: #226fee;
-  --color-brand-pink: #d748ee;
+  --color-brand-orange: #ff4713;
 
   /* Teir 1 Colors */
-  --color-black: #000;
+  --color-black: #1e1e1e;
   --color-white: #fff;
-  --color-gray: #525252;
-  --color-gray--light: #b4b7b4;
+  --color-gray: #434343;
+  --color-gray--light: #cac9c6;
 
   /* Teir 2 Colors */
-  --color-primary: var(--color-brand-blue);
-  --color-secondary: var(--color-brand-pink);
-  --color-tertiary: var(--color-gray);
-  --color-border: var(--color-gray--light);
-  --color-overlay: rgb(0 0 0 / 50%);
+  --color-primary: var(--color-brand-orange);
+  --color-secondary: var(--color-gray);
+  --color-tertiary: var(--color-gray--light);
+  --color-border: var(--color-gray);
+  --color-overlay: rgba(67, 67, 67, 0.8);
+  --color-background: rgba(202, 201, 196, 0.3);
 
   /* Default Colors - Error */
   --color-error--light: #f99;
@@ -59,11 +107,9 @@
  */
 :root {
   --border: 1px solid var(--color-gray--light);
-  --border-radius-sm: 3px;
-  --border-radius: 5px;
-  --box-shadow-sm: -16px 0px 32px rgb(0 0 0 / 4%);
-  --box-shadow: 0 4px 16px rgb(black 0.25);
-  --box-shadow-lg: 0px 16px 32px rgb(0 0 0 / 8%);
+  --border-lg: 10px solid var(--color-primary);
+  --border-radius: 2px;
+  --box-shadow: 0 0 20px rgba(0 ,0, 0, 0.1);
 }
 
 /**
@@ -79,11 +125,11 @@
  */
 :root {
   --icon-xs: 10px;
-  --icon-sm: 20px;
-  --icon-md: 30px;
-  --icon-lg: 40px;
-  --icon-xl: 50px;
-  --icon-xxl: 60px;
+  --icon-sm: 15px;
+  --icon-md: 20px;
+  --icon-lg: 30px;
+  --icon-xl: 40px;
+  --icon-xxl: 50px;
 }
 
 /**
@@ -107,7 +153,7 @@
  * Max width.
  */
 :root {
-  --max-width-sm: 600px;
+  --max-width-sm: 620px;
   --max-width-md: 800px;
   --max-width-lg: 1000px;
   --max-width-xl: 1260px;
@@ -117,7 +163,7 @@
 /**
  * Spacing.
  */
- :root {
+:root {
   --space: 20px;
   --space-xs: calc(var(--space) / 4);
   --space-sm: calc(var(--space) / 2);
@@ -131,8 +177,9 @@
  * Fonts
  */
 :root {
-  --font-family-body: "Roboto", sans-serif;
-  --font-family-primary: serif;
+  --font-family-body: "DIN Next LT Pro", sans-serif;
+  --font-family-primary: "DIN Next LT Pro", sans-serif;
+  --font-family-secondary: "Revelstoke", sans-serif;
 }
 
 /**
@@ -140,29 +187,27 @@
  */
 :root {
   --font-size-body: 16px;
-  --font-size-xs: 11px;
-  --font-size-s: 12px;
-  --font-size-m: 16px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
   --font-size-h6: 18px;
-  --font-size-h5: 20px;
-  --font-size-h4: 24px;
-  --font-size-h3: 36px;
-  --font-size-h2: 48px;
-  --font-size-h1: 56px;
+  --font-size-h5: 16px;
+  --font-size-h4: 20px;
+  --font-size-h3: 22px;
+  --font-size-h2: 36px;
+  --font-size-h1: 48px;
 }
 
 /* Medium Breakpoint */
 @media screen and (min-width: $breakpoint-md) {
   :root {
     --font-size-body: 16px;
-    --font-size-xs: 12px;
-    --font-size-s: 14px;
-    --font-size-m: 18px;
+    --font-size-xs: 14px;
+    --font-size-sm: 16px;
     --font-size-h6: 20px;
-    --font-size-h5: 24px;
-    --font-size-h4: 36px;
-    --font-size-h3: 48px;
-    --font-size-h2: 56px;
+    --font-size-h5: 18px;
+    --font-size-h4: 24px;
+    --font-size-h3: 28px;
+    --font-size-h2: 48px;
     --font-size-h1: 64px;
   }
 }
@@ -171,9 +216,11 @@
  * Theme variables.
  */
 :root {
-  --sidebar-width: 300px;
+  --card-width: 294px;
+  --sidebar-width: 340px;
   --main-width: calc(100% - var(--sidebar-width));
 }
 
 @import "./_breakpoints";
 @import "./_mixins";
+@import "./_overrides";

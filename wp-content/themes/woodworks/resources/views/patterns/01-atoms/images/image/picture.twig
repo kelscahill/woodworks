@@ -1,10 +1,10 @@
 {% if image.src %}
-  <picture class="o-picture{{ picture.classes ? ' ' ~ picture.classes }}">
+  <picture class="o-picture{{ picture.classes ? ' ' ~ picture.classes }}"{{ picture.attributes ? ' ' ~ picture.attributes }}>
     {% if image.sources %}
       {% for source in image.sources %}
-        {{ source }}
+        <source media="{{ source.media }}" srcset="{{ source.srcset }}" />
       {% endfor %}
     {% endif %}
-    {% include "@atoms/images/image.twig" with image %}
+    {% include "@atoms/images/image/image.twig" with image %}
   </picture>
 {% endif %}

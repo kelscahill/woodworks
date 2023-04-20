@@ -1,5 +1,5 @@
 {% if figure %}
-  <figure class="o-figure{{ figure.classes ? ' ' ~ figure.classes }}">
+  <figure class="o-figure{{ figure.classes ? ' ' ~ figure.classes }}"{{ figure.attributes ? ' ' ~ figure.attributes }}>
     {% if figure.link.url %}
       <a class="o-figure__link" href="{{ figure.link.url }}">
     {% endif %}

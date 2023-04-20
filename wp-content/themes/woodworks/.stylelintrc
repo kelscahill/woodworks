@@ -17,6 +17,7 @@
     "no-duplicate-selectors": null,
     "no-missing-end-of-source-newline": null,
     "declaration-empty-line-before": null,
+    "value-no-vendor-prefix": null,
     "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
     "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
     "at-rule-empty-line-before": [

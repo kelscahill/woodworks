@@ -1,0 +1,25 @@
+{% if card %}
+  <div class="c-card c-card-testimonials{{ card.classes ? ' ' ~ card.classes }}">
+    <div class="c-card__content u-spacing">
+       {% include "@atoms/images/icons/icon.twig" with {
+        "icon": {
+          "name": "chat",
+          "classes": "o-icon--md"
+        }
+      } %}
+      {% include "@atoms/text/dek/dek.twig" with {
+        "dek": {
+          "text": card.content,
+          "classes": "c-card__dek"
+        }
+      } %}
+      <hr class="o-hr--small" />
+      {% include "@atoms/text/kicker/kicker.twig" with {
+        "kicker": {
+          "text": card.title,
+          "classes": "c-card__kicker"
+        }
+      } %}
+    </div>
+  </div>
+{% endif %}

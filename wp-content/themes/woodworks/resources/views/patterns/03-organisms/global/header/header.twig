@@ -1,15 +1,6 @@
 <header role="banner" class="c-header{{ header.classes ? ' ' ~ header.classes }} l-wrap">
   <div class="c-header__container l-container">
-    {% include "@atoms/images/logos/logo.twig" with {
-      "logo": {
-        "image": {
-          "src": theme.link ~ '/resources/images/logo.svg',
-          "alt": site.name,
-        },
-        "link": site.link,
-        "classes": "c-header__logo"
-      }
-    } %}
+    {% include "@molecules/components/contact/contact.twig" %}
     {% include "@molecules/navigation/primary/primary-nav.twig" %}
   </div>
 </header>

@@ -1,0 +1,67 @@
+{% if post %}
+  {# {% if sf_current_query %}
+    {% set item = sf_current_query|filter(item => item.ID == post.id) %}
+    {% set nextKey = item|keys|first + 1 %}
+    {% set prevKey = item|keys|first > 0 ? item|keys|first - 1 %}
+  {% endif %} #}
+  <div id="{{ post.id }}" class="c-block{{ post.classes ? ' ' ~ post.classes }} u-spacing">
+    {% if post.meta('gallery') %}
+      <div class="c-block__media">
+        <div class="c-block__media__header">
+          {% include "@atoms/text/tag/tag.twig" with {
+            "tag": {
+              "text": post.category.name,
+              "link": "?_sft_category=" ~ post.category.slug,
+            }
+          } %}
+          {% if post.meta('gallery')|length > 1 %}
+            {% include "@atoms/images/icons/icon.twig" with {
+              "icon": {
+                "name": "gallery",
+                "classes": "o-icon--sm u-path-fill--white"
+              }
+            } %}
+          {% endif %}
+        </div>
+        <div class="c-block__media__image js-toggle-modal">
+          {% set thumbnail = post.meta('gallery')[0] %}
+          {% include "@atoms/images/image/figure.twig" with {
+            "figure": {
+              "image": {
+                "src": Image(thumbnail).src|resize(500, 500),
+                "alt": Image(thumbnail).alt,
+                "classes": "c-block__image"
+              }
+            }
+          } %}
+        </div>
+      </div>
+    {% endif %}
+    {% if post.preview %}
+      <div class="c-block__content">
+        <div class="c-block__body js-block-body-more this-is-active">
+          {% if post.preview|length > 150 %}
+            {{ post.preview.end('...').chars(150).read_more('more').force }}
+          {% else %}
+            {{ post.preview.read_more('') }}
+          {% endif %}
+        </div>
+        {% if post.preview|length > 150 %}
+          <div class="c-block__body js-block-body-full">
+            {{ post.preview.read_more('') }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% include "@organisms/sections/modal/modal.twig" with {
+      "modal": {
+        "attributes": 'id="js-modal-' ~ post.id ~'"',
+        "category": post.category,
+        "images": post.gallery,
+        "content": post.content,
+        "next_post_id": post.prev.id,
+        "prev_post_id": post.next.id,
+      }
+    } %}
+  </div>
+{% endif %}

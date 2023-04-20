@@ -47,8 +47,10 @@
     margin: var(--space-xl) auto;
   }
 
-  > ul {
+  > ul,
+  > ol {
     margin-left: var(--space-lg);
+    @include body-copy;
   }
 
   .wp-block-quote,

@@ -1,0 +1,42 @@
+.c-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-lg);
+
+  &__pages {
+    padding: 0 var(--space-sm);
+  }
+
+  &__page {
+    display: inline-flex;
+    margin: 0;
+    position: relative;
+    color: var(--color-black);
+
+    &:hover,
+    &:focus,
+    &--current {
+      background-color: var(--color-background);
+      color: var(--color-secondary);
+    }
+  }
+
+  &__nav {
+    &--prev {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__nav,
+  &__page {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+  }
+}

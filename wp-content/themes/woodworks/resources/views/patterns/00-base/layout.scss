@@ -13,42 +13,36 @@
   @include u-align--center;
 }
 
+.l-wrap--inner {
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+}
+
 /**
  * Layout containers - keep content centered and within a maximum width. Also
  * adjusts left and right padding as the viewport widens.
  */
 .l-container {
   @include u-align--center;
+  max-width: var(--max-width-xxl);
 
-  max-width: var(--max-width-xl);
-
-  &--s {
-    @include u-align--center;
-
+  &--sm {
     max-width: var(--max-width-sm);
   }
 
-  &--m {
-    @include u-align--center;
-
+  &--md {
     max-width: var(--max-width-md);
   }
 
-  &--l {
-    @include u-align--center;
-
+  &--lg {
     max-width: var(--max-width-lg);
   }
 
   &--xl {
-    @include u-align--center;
-
     max-width: var(--max-width-xl);
   }
 
   &--xxl {
-    @include u-align--center;
-
     max-width: var(--max-width-xxl);
   }
 }
@@ -60,11 +54,6 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-}
-
-.l-main {
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
 }
 
 .has-sidebar {

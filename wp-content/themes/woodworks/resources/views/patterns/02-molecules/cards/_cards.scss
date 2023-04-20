@@ -3,20 +3,37 @@
 \* ------------------------------------ */
 
 .c-card {
-  display: flex;
-  flex-direction: column;
-  border: var(--border);
+  width: var(--card-width);
+  min-width: var(--card-width);
+  aspect-ratio: 3/4;
 
-  &__content {
-    padding: var(--space);
-    flex: 1;
+  &.c-card-testimonials {
+    aspect-ratio: unset;
   }
 
-  &__footer {
-    padding: var(--space);
-    border-top: var(--border);
+  &__content {
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: stretch;
+    flex: 1;
+    padding: var(--space-xl) var(--space) var(--space-md) var(--space);
+    background-color: var(--color-white);
+    clip-path: polygon(50% 0, 100% 25%, 100% 100%, 0 100%, 0 25%);
+
+    .c-card-testimonials & {
+      text-align: center;
+    }
+  }
+
+  &__heading {
+    text-align: center;
+  }
+
+  &__dek {
+    width: 100%;
+    flex-basis: 100%;
   }
 }

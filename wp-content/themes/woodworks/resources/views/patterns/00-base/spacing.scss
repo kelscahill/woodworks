@@ -4,13 +4,13 @@
 
 $sizes: (
   "": var(--space),
-  --quarter: var(--space-xs),
-  --half: var(--space-sm),
-  --and-half: var(--space-md),
-  --double: var(--space-lg),
-  --triple: var(--space-xl),
-  --quad: var(--space-xxl),
-  --zero: 0
+  --xs: var(--space-xs),
+  --sm: var(--space-sm),
+  --md: var(--space-md),
+  --lg: var(--space-lg),
+  --xl: var(--space-xl),
+  --xxl: var(--space-xxl),
+  --none: 0
 );
 
 $sides: (

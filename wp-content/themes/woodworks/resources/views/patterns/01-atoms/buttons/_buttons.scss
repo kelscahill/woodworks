@@ -8,4 +8,8 @@
   &--secondary {
     @include o-button--secondary;
   }
+
+  &--bare {
+    @include o-button--bare;
+  }
 }

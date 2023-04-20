@@ -20,3 +20,9 @@ figcaption {
     height: auto;
   }
 }
+
+.o-figure {
+  &__link {
+    display: block;
+  }
+}

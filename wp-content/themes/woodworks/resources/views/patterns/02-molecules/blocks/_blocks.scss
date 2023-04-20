@@ -1,0 +1,59 @@
+/* ------------------------------------ *\
+    $BLOCKS
+\* ------------------------------------ */
+
+.c-block {
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-primary);
+
+  &__media {
+    position: relative;
+    background-color: var(--color-secondary);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      .c-block__image {
+        opacity: 0.6;
+        transition: var(--transition-all);
+      }
+    }
+
+    &__header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: var(--space-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+      pointer-events: none;
+
+      .o-tag {
+        pointer-events: all;
+      }
+    }
+
+    &__image {
+      position: relative;
+      z-index: 1;
+      transition: var(--transition-all);
+      opacity: 1;
+    }
+  }
+
+  &__body {
+    @include body-copy;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+
+    &.this-is-active {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+    }
+  }
+}

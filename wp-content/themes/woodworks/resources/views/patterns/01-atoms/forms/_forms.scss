@@ -62,6 +62,7 @@ input[type="checkbox"] {
   display: block;
   float: left;
   border: var(--border);
+  border-radius: var(--border-radius);
   padding: 0;
   user-select: none;
   appearance: none;
@@ -84,7 +85,7 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"]:checked,
 input[type="radio"]:checked {
-  background: var(--color-primary) url("data:image/svg+xml),%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M26.08,3.56l-2,1.95L10.61,19l-5-4L3.47,13.29,0,17.62l2.17,1.73L9.1,24.9,11,26.44l1.77-1.76L28.05,9.43,30,7.48Z' fill='%23000'/%3E%3C/svg%3E") no-repeat center center;
+  background: var(--color-primary) url("data:image/svg+xml),%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M26.08,3.56l-2,1.95L10.61,19l-5-4L3.47,13.29,0,17.62l2.17,1.73L9.1,24.9,11,26.44l1.77-1.76L28.05,9.43,30,7.48Z' fill='%23fff'/%3E%3C/svg%3E") no-repeat center center;
   background-size: 10px 10px;
   border-color: var(--color-primary);
 }
@@ -156,6 +157,101 @@ select {
     input[type="submit"] {
       width: 120px;
       margin-top: 0;
+    }
+  }
+}
+
+label {
+  @include u-font--xs;
+}
+
+div.wpforms-container-full .wpforms-form {
+  .wpforms-field-label {
+    font-weight: 600;
+  }
+
+  button[type="submit"] {
+    @include o-button;
+  }
+}
+
+.searchandfilter {
+  .sf-field-category {
+    position: relative;
+
+    h4 {
+      color: var(--color-secondary);
+      position: relative;
+      z-index: 2;
+
+      @include media(">large") {
+        color: var(--color-tertiary);
+      }
+    }
+
+    ul {
+      display: inline-flex;
+      width: 100%;
+      overflow: auto;
+      z-index: 1;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        pointer-events: none;
+
+        @include media(">large") {
+          display: none;
+        }
+      }
+
+      &::before {
+        left: 0;
+        background: linear-gradient(to right, rgb(255 255 255/ 100%) 0%, rgb(255 255 255/ 0%) 100%);
+      }
+
+      &::after {
+        right: 0;
+        background: linear-gradient(to left, rgb(255 255 255/ 100%) 0%, rgb(255 255 255/ 0%) 100%);
+      }
+
+      @include media(">large") {
+        flex-direction: column;
+      }
+    }
+
+    .sf-input-radio {
+      display: none;
+    }
+
+    .sf-label-radio {
+      display: inline-flex;
+      padding: 9px var(--space-sm) var(--space-xs) var(--space-sm);
+      border-radius: var(--border-radius);
+      line-height: 1;
+      font-weight: 600;
+      transition: var(--transition-all);
+      white-space: nowrap;
+
+      &:hover {
+        background-color: var(--color-tertiary);
+
+        @include media(">large") {
+          background-color: var(--color-secondary);
+        }
+      }
+    }
+
+    .sf-option-active .sf-label-radio {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      z-index: 3;
     }
   }
 }

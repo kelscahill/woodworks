@@ -1,16 +1,31 @@
-<footer class="c-footer{{ footer.classes ? ' ' ~ footer.classes }} l-wrap" role="contentinfo">
-  <div class="c-footer__container l-container">
-    {% include "@molecules/components/social-links/social-links.twig" %}
-    {% include "@atoms/images/logos/logo.twig" with {
-      "logo": {
-        "image": {
-          "src": theme.link ~ '/resources/images/logo.svg',
-          "alt": site.name,
-        },
-        "link": site.link,
-        "classes": "c-footer__logo"
-      }
-    } %}
-    {% include "@molecules/navigation/footer/footer-nav.twig" %}
+<footer class="c-footer{{ footer.classes ? ' ' ~ footer.classes }} l-container--full">
+  <div class="c-footer__container l-container" data-bp="grid">
+    <div class="c-footer__sidebar u-background-color--black u-hide-until--md" data-bp="4@md 3@lg">
+      {% if is_frontpage %}
+        {% include "@atoms/images/logos/logo.twig" with {
+          "logo": {
+            "image": {
+              "src": theme.link ~ '/resources/images/logo.svg',
+              "alt": site.name,
+            },
+            "link": site.link,
+            "classes": "c-footer__logo"
+          }
+        } %}
+      {% endif %}
+    </div>
+      <div class="c-footer__wrap l-wrap" data-bp="8@md offset-5@xl 9@lg">
+        <div class="c-footer__row">
+          {% include "@molecules/navigation/footer/footer-nav.twig" %}
+          <a href="/terms-conditions" class="o-link--inverted">Terms & Conditions</a>
+        </div>
+        <div class="c-footer__row">
+          {% include "@molecules/components/contact/contact.twig" %}
+          <div clas="c-footer__copyright">
+            © {{ "now"|date("Y") }} {{ site.name }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>

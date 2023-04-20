@@ -1,3 +1,16 @@
 /* ------------------------------------ *\
     $FOOTER NAV
 \* ------------------------------------ */
+
+.c-footer-nav {
+  &__parent-list {
+    list-style-type: none;
+    display: flex;
+    gap: var(--space);
+  }
+
+  &__link {
+    @include o-link(var(--color-tertiary), var(--color-white));
+    @include o-heading--sm;
+  }
+}

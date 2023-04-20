@@ -1,0 +1,49 @@
+{% if gallery.images %}
+  <div class="c-gallery{{ gallery.classes ? ' ' ~ gallery.classes }}">
+    <div class="c-gallery__images">
+      {% for image in gallery.images %}
+        {% include "@atoms/images/image/responsive-image.twig" with {
+          "image": {
+            "srcset": Image(image).src|resize(800, 800) ~ ' 768w, ' ~ Image(image).src|resize(1000, 1000) ~ ' 1024w',
+            "src": Image(image).src,
+            "alt": Image(image).alt,
+          },
+          "picture": {
+            "classes": gallery.images|length > 1 ? "c-gallery__images-item js-gallery-image" : "c-gallery__images-item this-is-active",
+          }
+        } %}
+      {% endfor %}
+    </div>
+    {% if gallery.images|length > 1 %}
+      <div class="c-gallery__dots">
+        {% for image in gallery.images %}
+          <span class="c-gallery__dots-item js-gallery-dot"></span>
+        {% endfor %}
+      </div>
+      <div class="c-gallery__controls">
+        {% include "@atoms/buttons/button.twig" with {
+          "button": {
+            "aria-label": "Previous",
+            "icon": {
+              "name": "arrow-left",
+              "classes": "o-icon--lg"
+            },
+            "variant": "bare",
+            "classes": "c-gallery__arrow c-gallery__arrow--previous js-gallery-prev"
+          }
+        } %}
+        {% include "@atoms/buttons/button.twig" with {
+          "button": {
+            "aria-label": "Next",
+            "icon": {
+              "name": "arrow-right",
+              "classes": "o-icon--lg"
+            },
+            "variant": "bare",
+            "classes": "c-gallery__arrow c-gallery__arrow--next js-gallery-next"
+          }
+        } %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

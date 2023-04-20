@@ -1,3 +1,19 @@
 /* ------------------------------------ *\
     $HEADER
 \* ------------------------------------ */
+
+.c-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  z-index: var(--z-index-5);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

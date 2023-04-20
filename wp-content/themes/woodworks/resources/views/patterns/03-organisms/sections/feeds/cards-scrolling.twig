@@ -1,0 +1,24 @@
+{% if cards_scrolling.post_type %}
+  {% set cards_scrolling_posts = function([
+      'Timber', 'get_posts'
+    ], {
+      'post_type': cards_scrolling.post_type,
+      'post_status': 'publish',
+      'order': 'DESC',
+      'posts_per_page': cards_scrolling.posts_per_page
+    })
+  %}
+  {% set cards_scrolling_post_type = "-" ~ cards_scrolling.post_type %}
+{% else %}
+  {% set cards_scrolling_posts = cards_scrolling.cards %}
+{% endif %}
+
+{% if cards_scrolling_posts %}
+  <div class="c-cards-scrolling{{ cards_scrolling.classes ? ' ' ~ cards_scrolling.classes }}">
+    <div class="c-cards-scrolling__cards">
+      {% for card in cards_scrolling_posts %}
+        {% include "@molecules/cards/card" ~ cards_scrolling_post_type ~ ".twig" %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

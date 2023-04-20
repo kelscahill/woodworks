@@ -1,5 +1,5 @@
 {% if page_header %}
-  <div class="c-page-header{{ page_header.classes ? ' ' ~ page_header.classes }} l-wrap">
+  <div class="c-page-header{{ page_header.classes ? ' ' ~ page_header.classes }}">
     <div class="c-page-header__container l-container u-spacing">
       {% include "@atoms/text/kicker/kicker.twig" with {
         "kicker": {
@@ -10,7 +10,7 @@
       {% include "@atoms/text/heading/heading.twig" with {
         "heading": {
           "level": "1",
-          "size": "xxl",
+          "size": "xl",
           "text": page_header.title,
           "classes": "c-page-header__title"
         }

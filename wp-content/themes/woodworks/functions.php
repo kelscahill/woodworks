@@ -224,10 +224,10 @@ if (file_exists($register_custom_content_types)) {
 /**
  * Register Custom Taxonomies.
  */
-$register_custom_taxonomy = __DIR__ . '/resources/functions/custom-taxonomy.php';
-if (file_exists($register_custom_taxonomy)) {
-  require_once $register_custom_taxonomy;
-}
+// $register_custom_taxonomy = __DIR__ . '/resources/functions/custom-taxonomy.php';
+// if (file_exists($register_custom_taxonomy)) {
+//   require_once $register_custom_taxonomy;
+// }
 
 /**
  * Register Custom Blocks.

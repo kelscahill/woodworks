@@ -1,12 +1,52 @@
 {% if hero %}
-  <section class="c-hero{{ hero.classes ? ' ' ~ hero.classes }} l-wrap">
-    <div class="c-hero__container l-container" data-bp="grid 6@md">
-      <div class="c-hero__content u-spacing">
-        <div class="c-hero__heading u-spacing--half">
+  <section{{ hero.anchor ? ' id="' ~ hero.anchor ~ '"'}} class="c-hero{{ hero.classes ? ' ' ~ hero.classes }} l-container--full o-background-image o-background-image--{{ Image(hero.image).id }}">
+    <style>
+      .o-background-image--{{ Image(hero.image).id }} {
+        background-image: url('{{ Image(hero.image).src|resize(720, 720) }}');
+      }
+      @media(min-width: 720px) {
+        .o-background-image--{{ Image(hero.image).id }} {
+          background-image: url('{{ Image(hero.image).src|resize(960, 540) }}');
+        }
+      }
+      @media(min-width: 960px) {
+        .o-background-image--{{ Image(hero.image).id }} {
+          background-image: url('{{ Image(hero.image).src|resize(1200, 675) }}');
+        }
+      }
+      @media(min-width: 1200px) {
+        .o-background-image--{{ Image(hero.image).id }} {
+          background-image: url('{{ Image(hero.image).src|resize(1600, 900) }}');
+        }
+      }
+    </style>
+    <div class="c-hero__container l-container" data-bp="grid">
+      <div class="c-hero__sidebar" data-bp="4@md 3@lg">
+        <div class="c-hero__logo-wrap">
+          {% include "@atoms/images/logos/logo.twig" with {
+            "logo": {
+              "image": {
+                "src": theme.link ~ '/resources/images/logo.svg',
+                "alt": site.name,
+              },
+              "link": site.link,
+              "classes": "c-hero__logo"
+            }
+          } %}
+        </div>
+        {% include "@atoms/text/dek/dek.twig" with {
+          "dek": {
+            "text": hero.dek,
+            "classes": "c-hero__dek u-color--tertiary",
+          }
+        } %}
+      </div>
+      <div class="c-hero__content l-wrap u-spacing" data-bp="8@md offset-5@xl 9@lg">
+        <div class="c-hero__heading u-spacing">
           {% include "@atoms/text/kicker/kicker.twig" with {
             "kicker": {
               "text": hero.kicker,
-              "extra": "o-hero__kicker"
+              "classes": "c-hero__kicker"
             }
           } %}
           {% include "@atoms/text/heading/heading.twig" with {
@@ -14,36 +54,11 @@
               "level": "1",
               "size": "xxl",
               "text": hero.heading,
-              "extra": "o-hero__title"
+              "classes": "c-hero__title"
             }
           } %}
         </div>
-        {% include "@atoms/text/dek/dek.twig" with {
-          "dek": {
-            "text": hero.dek,
-            "extra": "o-hero__dek"
-          }
-        } %}
-        {% include "@atoms/buttons/button.twig" with {
-          "button": {
-            "url": hero.button.url,
-            "text": hero.button.title,
-            "target": hero.button.target,
-            "extra": "o-hero__button"
-          }
-        } %}
       </div>
-      {% if Image(hero.image).src %}
-        <div class="c-hero__image">
-          {% include "@atoms/images/image/responsive-image.twig" with {
-            "image": {
-              "srcset": Image(hero.image).srcset,
-              "src": Image(hero.image).src,
-              "alt": Image(hero.image).alt
-            }
-          } %}
-        </div>
-      {% endif %}
     </div>
   </section>
 {% endif %}

@@ -19,7 +19,7 @@ export default async (app) => {
     /**
      * Directory contents to be included in the compilation
      */
-    .assets(["images"])
+    .assets(["images", "fonts"])
 
     /**
      * Matched files trigger a page reload when modified
@@ -29,22 +29,23 @@ export default async (app) => {
     /**
      * Proxy origin (`WP_HOME`)
      */
-    .proxy("http://your-site.lndo.site/")
+    .proxy("http://woodworks.local.host/")
 
     /**
      * Development origin
      */
-    .serve("http://0.0.0.0:3005")
+    .serve("http://localhost:56174")
 
     /**
      * URI of the `public` directory
      */
-    .setPublicPath("/app/themes/your-site/public/");
+    .setPublicPath("/wp-content/themes/woodworks/");
 
   app.sass.importGlobal([
     '@styles/_variables',
     '@styles/_breakpoints',
     '@styles/_mixins',
     '@styles/_grid',
+    '@styles/_overrides',
   ])
 };

@@ -1,0 +1,39 @@
+{% if promo %}
+  <section{{ promo.anchor ? ' id="' ~ promo.anchor ~ '"'}} class="c-promo{{ promo.classes ? ' ' ~ promo.classes }} l-container--full">
+    <div class="c-promo__container l-container" data-bp="grid">
+      <div class="c-promo__sidebar u-background-color--black u-hide-until--md" data-bp="4@md 3@lg"></div>
+      <div class="c-promo__wrap l-wrap l-wrap--inner" data-bp="8@md offset-5@xl 9@lg">
+        <div class="c-promo__image">
+          <div class="c-promo__image--inner o-background-image o-background-image--{{ Image(promo.image).id }}">
+            <style>
+              .o-background-image--{{ Image(promo.image).id }} {
+                background-image: url('{{ Image(promo.image).src|resize(800, 600) }}');
+              }
+              @media(min-width: 1024px) {
+                .o-background-image--{{ Image(promo.image).id }} {
+                  background-image: url('{{ Image(promo.image).src|resize(450, 600) }}');
+                }
+              }
+            </style>
+          </div>
+        </div>
+        <div class="c-promo__content u-spacing">
+          {% include "@atoms/text/heading/heading.twig" with {
+            "heading": {
+              "level": "2",
+              "size": "xl",
+              "text": promo.heading,
+              "classes": "c-promo__title"
+            }
+          } %}
+          {% include "@atoms/text/rich-text/rich-text.twig" with {
+            "rich_text": {
+              "text": promo.content
+            }
+          } %}
+          {% include "@atoms/buttons/button.twig" with promo %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

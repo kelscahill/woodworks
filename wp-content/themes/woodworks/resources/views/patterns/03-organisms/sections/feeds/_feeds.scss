@@ -1,3 +1,44 @@
 /* ------------------------------------ *\
     $FEEDS
 \* ------------------------------------ */
+
+.c-posts {
+  @include media(">large") {
+    min-height: 300px;
+  }
+}
+
+.c-cards-scrolling {
+  margin-left: calc(#{var(--space)} * -1);
+  margin-right: calc(#{var(--space)} * -1);
+
+  &__cards {
+    padding-left: var(--space);
+    padding-right: var(--space);
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--space);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-lg);
+
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--color-primary);
+      margin-left: var(--space);
+      margin-right: var(--space);
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-primary);
+      border-radius: 5px;
+    }
+  }
+}

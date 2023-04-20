@@ -1,0 +1,75 @@
+{% if modal %}
+  <div class="c-modal{{ modal.classes ? ' ' ~ modal.classes }}"{{ modal.attributes ? ' ' ~ modal.attributes }}>
+    {% include "@atoms/buttons/button.twig" with {
+      "button": {
+        "aria-label": "Close",
+        "icon": {
+          "name": "close",
+          "classes": "o-icon--md"
+        },
+        "variant": "bare",
+        "classes": "c-modal__close u-path-fill--white js-toggle-modal"
+      }
+    } %}
+    <div class="c-modal__container l-container">
+      {% include "@atoms/buttons/button.twig" with {
+        "button": {
+          "aria-label": "Previous",
+          "icon": {
+            "name": "arrow-left",
+            "classes": "o-icon--xl"
+          },
+          "variant": "bare",
+          "classes": "c-modal__arrow c-modal__arrow--prev js-modal-prev",
+          "attributes": modal.prev_post_id ? 'block-id="' ~ modal.prev_post_id ~ '"'
+        }
+      } %}
+      <div class="c-modal__content">
+        {% include "@molecules/components/gallery/gallery.twig" with {
+          "gallery": {
+            "images": modal.images,
+            "classes": "c-modal__gallery"
+          }
+        } %}
+        <div class="c-modal__sidebar u-spacing--lg">
+          <div class="u-spacing">
+            {% include "@atoms/text/tag/tag.twig" with {
+              "tag": {
+                "text": modal.category.name,
+                "link": "?_sft_category=" ~ modal.category.slug,
+                "classes": "js-toggle-modal"
+              }
+            } %}
+            <p>{{ modal.content }}</p>
+          </div>
+          <div class="c-modal__sidebar-footer u-spacing">
+            {% include "@molecules/components/contact/contact.twig" with {
+              "contact": {
+                "classes": "c-contact--stacked"
+              }
+            } %}
+            {% include "@atoms/buttons/button.twig" with {
+              "button": {
+                "url": "/#contact",
+                "title": "Get a free Consultation",
+                "classes": "c-modal__sidebar-button js-toggle-modal"
+              }
+            } %}
+          </div>
+        </div>
+      </div>
+      {% include "@atoms/buttons/button.twig" with {
+        "button": {
+          "aria-label": "Next",
+          "icon": {
+            "name": "arrow-right",
+            "classes": "o-icon--xl"
+          },
+          "variant": "bare",
+          "classes": "c-modal__arrow c-modal__arrow--next js-modal-next",
+          "attributes": modal.next_post_id ? 'block-id="' ~ modal.next_post_id ~ '"'
+        }
+      } %}
+    </div>
+  </div>
+{% endif %}

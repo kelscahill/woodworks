@@ -1,0 +1,77 @@
+{% if section %}
+  <section{{ section.anchor ? ' id="' ~ section.anchor ~ '"'}} class="c-section{{ section.classes ? ' ' ~ section.classes }} l-container--full u-background-color--{{ section.background_color }}">
+    <div class="c-section__container l-container" data-bp="grid">
+      <div class="c-section__sidebar u-background-color--black u-hide-until--md" data-bp="4@md 3@lg"></div>
+      <div class="c-section__wrap l-wrap l-wrap--inner u-spacing--xl" data-bp="8@md offset-5@xl 9@lg">
+        {% if section.kicker or section.heading or section.description %}
+          <div class="c-section__header l-container--sm u-spacing">
+            {% include "@atoms/text/kicker/kicker.twig" with {
+              "kicker": {
+                "text": section.kicker,
+                "classes": "c-section__header__kicker"
+              }
+            } %}
+            {% include "@atoms/text/heading/heading.twig" with {
+              "heading": {
+                "level": "2",
+                "size": "xl",
+                "text": section.heading,
+                "classes": "c-section__header__title"
+              }
+            } %}
+            {% include "@atoms/text/dek/dek.twig" with {
+              "dek": {
+                "text": section.description,
+                "classes": "c-section__header__dek",
+              }
+            } %}
+            {% if section.anchor == 'contact' %}
+              {% include "@molecules/components/contact/contact.twig" with {
+                "contact": {
+                  "classes": "c-contact--dark"
+                }
+              } %}
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="c-section__content{{ section.content_type == 'gallery' ? ' c-section__content--gallery'}}">
+          {% if section.content_type == 'cards' %}
+            {% include "@organisms/sections/feeds/cards-scrolling.twig" with {
+              "cards_scrolling": {
+                "cards": section.cards,
+                "classes": "c-section__cards"
+              }
+            } %}
+          {% elseif section.content_type == 'gallery' %}
+            <div id="gallery-filter" class="c-section__gallery">
+              <div class="c-section__gallery__filter">
+                {% filter shortcodes %}[searchandfilter id="127"]{% endfilter %}
+              </div>
+              <div class="c-section__gallery__results">
+                {% filter shortcodes %}[searchandfilter id="127" show="results"]{% endfilter %}
+              </div>
+            </div>
+          {% elseif section.content_type == 'testimonials' %}
+            {% include "@organisms/sections/feeds/cards-scrolling.twig" with {
+              "cards_scrolling": {
+                "posts_per_page": 8,
+                "post_type": "testimonials",
+                "classes": "c-section__testimonials"
+              }
+            } %}
+          {% elseif section.content_type == 'custom' %}
+            <div class="c-section__content-custom l-container--sm">
+              {{ section.content }}
+            </div>
+          {% endif %}
+        </div>
+        {% if section.footnote or section.button %}
+          <div class="c-section__footer u-spacing">
+            {{ section.footnote }}
+            {% include "@atoms/buttons/button.twig" with section %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}

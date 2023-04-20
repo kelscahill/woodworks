@@ -7,3 +7,7 @@ a,
   @include o-link;
 }
 
+.o-link--inverted {
+  @include o-link(var(--color-tertiary), var(--color-white));
+}
+

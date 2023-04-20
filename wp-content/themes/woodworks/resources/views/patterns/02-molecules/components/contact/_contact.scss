@@ -1,0 +1,50 @@
+/* ------------------------------------ *\
+    $CONTACT
+\* ------------------------------------ */
+
+.c-contact {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space);
+
+  &__facebook {
+    span + span {
+      display: none;
+    }
+  }
+
+  &__email {
+    span + span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      line-clamp: 1;
+
+      @include media("<=xlarge") {
+        display: none;
+      }
+    }
+  }
+
+  .o-link {
+    @include o-link(var(--color-tertiary), var(--color-white));
+  }
+
+  &--dark .o-link {
+    @include o-link(var(--color-secondary), var(--color-primary));
+  }
+
+  &--stacked {
+    @include media(">small") {
+      flex-direction: column;
+      gap: var(--space-xs);
+
+      .c-contact__facebook,
+      .c-contact__email {
+        span + span {
+          display: block;
+        }
+      }
+    }
+  }
+}

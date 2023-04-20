@@ -1,0 +1,40 @@
+{% if options.facebook_url or options.email or options. phone %}
+  <div class="c-contact{{ contact.classes ? ' ' ~ contact.classes }}">
+    {% include "@atoms/links/link.twig" with {
+      "link": {
+        "url": options.facebook_url,
+        "text": options.facebook_url|replace({'https://www.facebook.com/': '@'}),
+        "target": "_blank",
+        "icon": {
+          "name": "facebook",
+          "classes": "o-icon--sm"
+        },
+        "classes": "c-contact__facebook"
+      }
+    } %}
+    {% include "@atoms/links/link.twig" with {
+      "link": {
+        "url": "mailto:" ~ options.email,
+        "text": options.email,
+        "target": "_blank",
+        "icon": {
+          "name": "email",
+          "classes": "o-icon--sm"
+        },
+        "classes": "c-contact__email"
+      }
+    } %}
+    {% include "@atoms/links/link.twig" with {
+      "link": {
+        "url": "tel:" ~ options.phone,
+        "text": options.phone,
+        "target": "_blank",
+        "icon": {
+          "name": "phone",
+          "classes": "o-icon--sm"
+        },
+        "classes": "c-contact__phone"
+      }
+    } %}
+  </div>
+{% endif %}

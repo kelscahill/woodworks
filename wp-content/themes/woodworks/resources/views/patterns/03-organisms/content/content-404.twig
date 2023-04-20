@@ -1,14 +1,32 @@
 <article class="c-content-404{{ content.classes ? ' ' ~ content.classes }} l-container u-spacing--double">
-  {% include "@organisms/sections/headers/page-header.twig" with {
-    "page_header": {
-      "title": "404",
-      "classes": "c-content-404__header"
-    }
-  } %}
-  {% include "@atoms/text/rich-text/rich-text.twig" with {
-    "rich_text": {
-      "text": "Sorry, we couldn't find what you're looking for.",
-      "classes": "c-content-404__body"
-    }
-  } %}
+  <section{{ content.anchor ? ' id="' ~ content.anchor ~ '"'}} class="c-content{{ content.classes ? ' ' ~ content.classes }} l-container--full">
+    <div class="c-content__container l-container" data-bp="grid">
+      <div class="c-content__sidebar u-background-color--black u-hide-until--md" data-bp="4@md 3@lg">
+        {% include "@atoms/images/logos/logo.twig" with {
+          "logo": {
+            "image": {
+              "src": theme.link ~ '/resources/images/logo.svg',
+              "alt": site.name,
+            },
+            "link": site.link,
+            "classes": "c-content__logo"
+          }
+        } %}
+      </div>
+      <div class="c-content__wrap l-wrap l-wrap--inner u-spacing" data-bp="8@md offset-5@xl 9@lg">
+        {% include "@organisms/sections/headers/page-header.twig" with {
+          "page_header": {
+            "title": "404",
+            "classes": "c-content__header"
+          }
+        } %}
+        {% include "@atoms/text/rich-text/rich-text.twig" with {
+          "rich_text": {
+            "text": "Sorry, we couldn't find what you're looking for.",
+            "classes": "c-content__body l-container--m"
+          }
+        } %}
+      </div>
+    </div>
+  </section>
 </article>

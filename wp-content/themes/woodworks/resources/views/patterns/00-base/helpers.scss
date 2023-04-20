@@ -2,6 +2,13 @@
     $HELPERS
 \* ------------------------------------ */
 
+.o-hr--small {
+  width: 80px;
+  height: 1px;
+  border: none;
+  background-color: var(--color-primary);
+}
+
 /**
  * Fonts.
  */
@@ -13,8 +20,8 @@
   @include u-font--sm;
 }
 
-.u-font--md {
-  @include u-font--md;
+.o-background-image {
+  background-size: cover;
 }
 
 /**

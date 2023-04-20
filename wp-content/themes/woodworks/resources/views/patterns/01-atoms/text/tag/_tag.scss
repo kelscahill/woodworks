@@ -1,0 +1,22 @@
+/* ------------------------------------ *\
+    $TAG
+\* ------------------------------------ */
+
+.o-tag {
+  @include u-font--xs;
+  width: fit-content;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition-all);
+  font-weight: 600;
+  line-height: 1;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+  }
+}

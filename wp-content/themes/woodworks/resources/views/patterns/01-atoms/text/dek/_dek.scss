@@ -3,5 +3,10 @@
 \* ------------------------------------ */
 
 .o-dek {
-  @include u-font--md;
+  @include u-font--sm;
+
+  ul,
+  ol {
+    margin-left: var(--space);
+  }
 }

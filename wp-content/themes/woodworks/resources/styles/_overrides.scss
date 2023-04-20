@@ -1,0 +1,53 @@
+/* ------------------------------------ *\
+    $OVERRIDES
+\* ------------------------------------ */
+
+/* Specific Widths - visible greater than # */
+.u-hide-until--sm {
+  @include media("<=small") {
+    display: none;
+  }
+}
+
+.u-hide-until--md {
+  @include media("<=medium") {
+    display: none;
+  }
+}
+
+.u-hide-until--lg {
+  @include media("<=large") {
+    display: none;
+  }
+}
+
+.u-hide-until--xl {
+  @include media("<=xlarge") {
+    display: none;
+  }
+}
+
+/* Specific Widths - hide greater than # */
+.u-hide-after--sm {
+  @include media(">small") {
+    display: none;
+  }
+}
+
+.u-hide-after--md {
+  @include media(">medium") {
+    display: none;
+  }
+}
+
+.u-hide-after--lg {
+  @include media(">large") {
+    display: none;
+  }
+}
+
+.u-hide-after--xl {
+  @include media(">xlarge") {
+    display: none;
+  }
+}
