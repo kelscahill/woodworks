@@ -1,5 +1,5 @@
 node_modules
-vendor
+# vendor
 public
 public/entrypoints.json
 public/manifest.json
