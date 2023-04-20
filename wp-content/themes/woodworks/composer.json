@@ -39,7 +39,7 @@
     }
   },
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^8.0",
     "roots/acorn": "^2.1",
     "timber/timber": "^1.20"
   },
