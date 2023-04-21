@@ -20,8 +20,8 @@ $context['promo']['heading'] = get_field( 'promo_heading' );
 $context['promo']['content'] = get_field( 'promo_content' );
 $context['promo']['button'] = get_field( 'promo_button' );
 
-$templates = array(
-  '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/promos/promo.twig',
-  get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/promos/promo.twig',
-);
-Timber::render( $templates, $context );
+// $templates = array(
+//   '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/promos/promo.twig',
+//   get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/promos/promo.twig',
+// );
+// Timber::render( $templates, $context );

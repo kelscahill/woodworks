@@ -20,10 +20,10 @@ $context['hero']['heading'] = get_field( 'hero_heading' );
 $context['hero']['dek'] = get_field( 'hero_dek' );
 $context['hero']['image'] = get_field( 'hero_image' );
 
-$templates = array(
-  '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/heroes/hero.twig',
-  get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/heroes/hero.twig',
-);
-Timber::render( $templates, $context );
+// $templates = array(
+//   '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/heroes/hero.twig',
+//   get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/heroes/hero.twig',
+// );
+// Timber::render( $templates, $context );
 
 
