@@ -13,16 +13,29 @@ module.exports = {
         "views/patterns/00-base/layout.scss",
         "views/patterns/00-base/spacing.scss",
         "views/patterns/05-pages/_pages.scss",
+        "views/patterns/02-molecules/cards/_cards.scss",
+        "views/patterns/03-organisms/content/_content.scss",
         "views/patterns/01-atoms/buttons/_buttons.scss",
         "views/patterns/01-atoms/forms/_forms.scss",
-        "views/patterns/01-atoms/tables/_tables.scss",
         "views/patterns/01-atoms/links/_links.scss",
-        "views/patterns/02-molecules/cards/_cards.scss",
+        "views/patterns/01-atoms/tables/_tables.scss",
+        "views/patterns/02-molecules/components/contact/_contact.scss",
+        "views/patterns/02-molecules/components/gallery/_gallery.scss",
+        "views/patterns/02-molecules/navigation/footer/_footer-nav.scss",
+        "views/patterns/02-molecules/navigation/pagination/_pagination.scss",
         "views/patterns/02-molecules/blocks/_blocks.scss",
-        "views/patterns/03-organisms/content/_content.scss",
+        "views/patterns/03-organisms/global/footer/_footer.scss",
+        "views/patterns/03-organisms/global/header/_header.scss",
+        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss",
+        "views/patterns/03-organisms/sections/feeds/_feeds.scss",
+        "views/patterns/03-organisms/sections/headers/_headers.scss",
+        "views/patterns/03-organisms/sections/heroes/_heroes.scss",
+        "views/patterns/03-organisms/sections/modal/_modal.scss",
+        "views/patterns/03-organisms/sections/promos/_promos.scss",
         "views/patterns/01-atoms/images/icons/_icons.scss",
-        "views/patterns/01-atoms/images/logos/_logos.scss",
+        "views/patterns/03-organisms/sections/section/_section.scss",
         "views/patterns/01-atoms/images/image/_image.scss",
+        "views/patterns/01-atoms/images/logos/_logos.scss",
         "views/patterns/01-atoms/text/blockquote/_blockquote.scss",
         "views/patterns/01-atoms/text/caption/_caption.scss",
         "views/patterns/01-atoms/text/dek/_dek.scss",
@@ -31,20 +44,7 @@ module.exports = {
         "views/patterns/01-atoms/text/meta/_meta.scss",
         "views/patterns/01-atoms/text/rich-text/_rich-text.scss",
         "views/patterns/01-atoms/text/small/_small.scss",
-        "views/patterns/01-atoms/text/tag/_tag.scss",
-        "views/patterns/02-molecules/components/contact/_contact.scss",
-        "views/patterns/02-molecules/components/gallery/_gallery.scss",
-        "views/patterns/02-molecules/navigation/footer/_footer-nav.scss",
-        "views/patterns/02-molecules/navigation/pagination/_pagination.scss",
-        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss",
-        "views/patterns/03-organisms/global/footer/_footer.scss",
-        "views/patterns/03-organisms/global/header/_header.scss",
-        "views/patterns/03-organisms/sections/feeds/_feeds.scss",
-        "views/patterns/03-organisms/sections/headers/_headers.scss",
-        "views/patterns/03-organisms/sections/heroes/_heroes.scss",
-        "views/patterns/03-organisms/sections/modal/_modal.scss",
-        "views/patterns/03-organisms/sections/promos/_promos.scss",
-        "views/patterns/03-organisms/sections/section/_section.scss"
+        "views/patterns/01-atoms/text/tag/_tag.scss"
       ]
     },
     "editor": {
@@ -549,13 +549,6 @@ module.exports = {
           "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources",
           "noErrorOnMissing": true,
           "toType": "template"
-        },
-        {
-          "from": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources/fonts",
-          "to": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/public/fonts/[path][name].[contenthash:6][ext]",
-          "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources",
-          "noErrorOnMissing": true,
-          "toType": "template"
         }
       ],
       "options": {}
@@ -633,7 +626,7 @@ module.exports = {
         "failOnError": true,
         "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources"
       },
-      "startTime": 1682035304727,
+      "startTime": 1682036850347,
       "prevTimestamps": {}
     },
     {
