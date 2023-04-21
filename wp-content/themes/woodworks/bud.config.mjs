@@ -19,7 +19,7 @@ export default async (app) => {
     /**
      * Directory contents to be included in the compilation
      */
-    .assets(["images"])
+    .assets(["images", "fonts"])
 
     /**
      * Matched files trigger a page reload when modified
