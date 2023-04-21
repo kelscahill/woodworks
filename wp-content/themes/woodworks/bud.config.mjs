@@ -19,7 +19,7 @@ export default async (app) => {
     /**
      * Directory contents to be included in the compilation
      */
-    .assets(["images", "fonts"])
+    .assets(["images"])
 
     /**
      * Matched files trigger a page reload when modified
@@ -39,7 +39,7 @@ export default async (app) => {
     /**
      * URI of the `public` directory
      */
-    .setPublicPath("/wp-content/themes/woodworks/");
+    .setPublicPath("/wp-content/themes/woodworks/public/");
 
   app.sass.importGlobal([
     '@styles/_variables',

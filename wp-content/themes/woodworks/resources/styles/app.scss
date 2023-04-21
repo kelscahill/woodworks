@@ -5,9 +5,9 @@
  */
 @font-face {
   font-family: "DIN Next LT Pro";
-  src: url(~@fonts/DINNextLTPro-Black.eot);
-  src: url(~@fonts/DINNextLTPro-Black.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Black.woff) format("woff"),
-    url(~@fonts/DINNextLTPro-Black.woff2) format("woff2");
+  src: url("~@fonts/DINNextLTPro-Black.eot");
+  src: url("~@fonts/DINNextLTPro-Black.ttf") format("truetype"), url("~@fonts/DINNextLTPro-Black.woff") format("woff"),
+    url("~@fonts/DINNextLTPro-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
