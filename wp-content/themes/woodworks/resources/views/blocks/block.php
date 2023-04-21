@@ -14,9 +14,9 @@ $context = Timber::get_context();
 $post = new TimberPost($query->post);
 $context['post'] = $post;
 
-// $templates = array(
-//   '/wp-content/themes/woodworks/resources/views/patterns/02-molecules/blocks/block.twig',
-//   get_stylesheet_directory() . '/resources/views/patterns/02-molecules/blocks/block.twig',
-// );
+$templates = array(
+  '/wp-content/themes/woodworks/resources/views/patterns/02-molecules/blocks/block.twig',
+  get_stylesheet_directory() . '/resources/views/patterns/02-molecules/blocks/block.twig',
+);
 
-// Timber::render( $templates, $context );
+Timber::render( $templates, $context );

@@ -25,10 +25,10 @@ $context['section']['cards'] = get_field( 'section_cards' );
 $context['section']['footnote'] = get_field( 'section_footnote' );
 $context['section']['button'] = get_field( 'section_button' );
 
-// $templates = array(
-//   '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/section/section.twig',
-//   get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/section/section.twig',
-// );
-// Timber::render( $templates, $context );
+$templates = array(
+  '/wp-content/themes/woodworks/resources/views/patterns/03-organisms/sections/section/section.twig',
+  get_stylesheet_directory() . '/resources/views/patterns/03-organisms/sections/section/section.twig',
+);
+Timber::render( $templates, $context );
 
 
