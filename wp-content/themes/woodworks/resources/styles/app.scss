@@ -5,8 +5,10 @@
  */
 @font-face {
   font-family: "DIN Next LT Pro";
-  src: url("~@fonts/DINNextLTPro-Black.eot");
-  src: url("~@fonts/DINNextLTPro-Black.ttf") format("truetype"), url("~@fonts/DINNextLTPro-Black.woff") format("woff"),
+  src:
+    url("~@fonts/DINNextLTPro-Black.eot"),
+    url("~@fonts/DINNextLTPro-Black.ttf") format("truetype"),
+    url("~@fonts/DINNextLTPro-Black.woff") format("woff"),
     url("~@fonts/DINNextLTPro-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
@@ -15,9 +17,11 @@
 
 @font-face {
   font-family: "DIN Next LT Pro";
-  src: url(~@fonts/DINNextLTPro-Bold.eot);
-  src: url(~@fonts/DINNextLTPro-Bold.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Bold.woff) format("woff"),
-    url(~@fonts/DINNextLTPro-Bold.woff2) format("woff2");
+  src:
+    url("~@fonts/DINNextLTPro-Bold.eot"),
+    url("~@fonts/DINNextLTPro-Bold.ttf") format("truetype"),
+    url("~@fonts/DINNextLTPro-Bold.woff") format("woff"),
+    url("~@fonts/DINNextLTPro-Bold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -25,9 +29,11 @@
 
 @font-face {
   font-family: "DIN Next LT Pro";
-  src: url(~@fonts/DINNextLTPro-Regular.eot);
-  src: url(~@fonts/DINNextLTPro-Regular.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Regular.woff) format("woff"),
-    url(~@fonts/DINNextLTPro-Regular.woff2) format("woff2");
+  src:
+    url("~@fonts/DINNextLTPro-Regular.eot"),
+    url("~@fonts/DINNextLTPro-Regular.ttf") format("truetype"),
+    url("~@fonts/DINNextLTPro-Regular.woff") format("woff"),
+    url("~@fonts/DINNextLTPro-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -35,9 +41,11 @@
 
 @font-face {
   font-family: "DIN Next LT Pro";
-  src: url(~@fonts/DINNextLTPro-Italic.eot);
-  src: url(~@fonts/DINNextLTPro-Italic.ttf) format("truetype"), url(~@fonts/DINNextLTPro-Italic.woff) format("woff"),
-    url(~@fonts/DINNextLTPro-Italic.woff2) format("woff2");
+  src:
+    url("~@fonts/DINNextLTPro-Italic.eot"),
+    url("~@fonts/DINNextLTPro-Italic.ttf") format("truetype"),
+    url("~@fonts/DINNextLTPro-Italic.woff") format("woff"),
+    url("~@fonts/DINNextLTPro-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -45,11 +53,13 @@
 
 @font-face {
   font-family: "Revelstoke";
-  src: url(~@fonts/Revelstoke-Regular.eot);
-  src: url(~@fonts/Revelstoke-Regular.ttf) format("truetype"), url(~@fonts/Revelstoke-Regular.woff) format("woff"),
-    url(~@fonts/Revelstoke-Regular.woff2) format("woff2");
+  src:
+    url("~@fonts/Revelstoke-Regular.eot"),
+    url("~@fonts/Revelstoke-Regular.ttf") format("truetype"),
+    url("~@fonts/Revelstoke-Regular.woff") format("woff"),
+    url("~@fonts/Revelstoke-Regular.woff2") format("woff2");
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   font-display: swap;
 }
 
