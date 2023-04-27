@@ -35,8 +35,8 @@ module.exports = {
         "views/patterns/02-molecules/components/contact/_contact.scss",
         "views/patterns/02-molecules/components/gallery/_gallery.scss",
         "views/patterns/02-molecules/navigation/footer/_footer-nav.scss",
-        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss",
         "views/patterns/02-molecules/navigation/pagination/_pagination.scss",
+        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss",
         "views/patterns/03-organisms/global/footer/_footer.scss",
         "views/patterns/03-organisms/global/header/_header.scss",
         "views/patterns/03-organisms/sections/feeds/_feeds.scss",
@@ -626,7 +626,7 @@ module.exports = {
         "failOnError": true,
         "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources"
       },
-      "startTime": 1682638551608,
+      "startTime": 1682639280101,
       "prevTimestamps": {}
     },
     {
