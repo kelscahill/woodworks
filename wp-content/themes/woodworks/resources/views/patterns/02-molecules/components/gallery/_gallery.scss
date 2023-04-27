@@ -6,6 +6,7 @@
   position: relative;
 
   &__images {
+    touch-action: manipulation;
     display: flex;
     align-items: center;
     justify-content: center;

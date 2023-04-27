@@ -14,8 +14,8 @@ module.exports = {
         "views/patterns/00-base/spacing.scss",
         "views/patterns/05-pages/_pages.scss",
         "views/patterns/01-atoms/buttons/_buttons.scss",
-        "views/patterns/01-atoms/forms/_forms.scss",
         "views/patterns/01-atoms/links/_links.scss",
+        "views/patterns/01-atoms/forms/_forms.scss",
         "views/patterns/01-atoms/tables/_tables.scss",
         "views/patterns/02-molecules/blocks/_blocks.scss",
         "views/patterns/02-molecules/cards/_cards.scss",
@@ -626,7 +626,7 @@ module.exports = {
         "failOnError": true,
         "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources"
       },
-      "startTime": 1682639280101,
+      "startTime": 1682639495467,
       "prevTimestamps": {}
     },
     {
