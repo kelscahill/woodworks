@@ -281,7 +281,7 @@
       "log": null,
       "manifest": null,
       "minimize": null,
-      "mode": "production",
+      "mode": "development",
       "modules": null,
       "notify": true,
       "overlay": true,

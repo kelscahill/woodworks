@@ -2,6 +2,9 @@ module.exports = {
   "entry": {
     "app": {
       "import": [
+        "@roots/bud-client/lib/hmr/index.cjs?name=bud&bud.overlay=true&bud.indicator=true&path=/__bud/hmr",
+        "@roots/bud-client/lib/proxy-click-interceptor.cjs",
+        "react-refresh/runtime",
         "@scripts/app",
         "@styles/app",
         "views/patterns/00-base/animations.scss",
@@ -15,14 +18,14 @@ module.exports = {
         "views/patterns/05-pages/_pages.scss",
         "views/patterns/01-atoms/buttons/_buttons.scss",
         "views/patterns/01-atoms/forms/_forms.scss",
-        "views/patterns/01-atoms/links/_links.scss",
         "views/patterns/01-atoms/tables/_tables.scss",
+        "views/patterns/01-atoms/links/_links.scss",
+        "views/patterns/03-organisms/content/_content.scss",
         "views/patterns/02-molecules/blocks/_blocks.scss",
         "views/patterns/02-molecules/cards/_cards.scss",
-        "views/patterns/03-organisms/content/_content.scss",
+        "views/patterns/01-atoms/images/icons/_icons.scss",
         "views/patterns/01-atoms/images/image/_image.scss",
         "views/patterns/01-atoms/images/logos/_logos.scss",
-        "views/patterns/01-atoms/images/icons/_icons.scss",
         "views/patterns/01-atoms/text/blockquote/_blockquote.scss",
         "views/patterns/01-atoms/text/caption/_caption.scss",
         "views/patterns/01-atoms/text/dek/_dek.scss",
@@ -32,33 +35,36 @@ module.exports = {
         "views/patterns/01-atoms/text/rich-text/_rich-text.scss",
         "views/patterns/01-atoms/text/small/_small.scss",
         "views/patterns/01-atoms/text/tag/_tag.scss",
+        "views/patterns/03-organisms/global/footer/_footer.scss",
+        "views/patterns/03-organisms/global/header/_header.scss",
+        "views/patterns/03-organisms/sections/feeds/_feeds.scss",
+        "views/patterns/03-organisms/sections/headers/_headers.scss",
+        "views/patterns/03-organisms/sections/heroes/_heroes.scss",
+        "views/patterns/03-organisms/sections/modal/_modal.scss",
+        "views/patterns/03-organisms/sections/promos/_promos.scss",
+        "views/patterns/03-organisms/sections/section/_section.scss",
         "views/patterns/02-molecules/components/contact/_contact.scss",
         "views/patterns/02-molecules/components/gallery/_gallery.scss",
         "views/patterns/02-molecules/navigation/footer/_footer-nav.scss",
         "views/patterns/02-molecules/navigation/pagination/_pagination.scss",
-        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss",
-        "views/patterns/03-organisms/global/header/_header.scss",
-        "views/patterns/03-organisms/global/footer/_footer.scss",
-        "views/patterns/03-organisms/sections/feeds/_feeds.scss",
-        "views/patterns/03-organisms/sections/headers/_headers.scss",
-        "views/patterns/03-organisms/sections/heroes/_heroes.scss",
-        "views/patterns/03-organisms/sections/promos/_promos.scss",
-        "views/patterns/03-organisms/sections/modal/_modal.scss",
-        "views/patterns/03-organisms/sections/section/_section.scss"
+        "views/patterns/02-molecules/navigation/primary/_primary-nav.scss"
       ]
     },
     "editor": {
       "import": [
+        "@roots/bud-client/lib/hmr/index.cjs?name=bud&bud.overlay=true&bud.indicator=true&path=/__bud/hmr",
+        "@roots/bud-client/lib/proxy-click-interceptor.cjs",
+        "react-refresh/runtime",
         "@scripts/editor",
         "@styles/editor"
       ]
     }
   },
-  "bail": true,
+  "bail": false,
   "cache": {
-    "name": "bud.production",
+    "name": "bud.development",
     "type": "filesystem",
-    "version": "koa6ez6xrlohtbdyn6au_sicsy8_",
+    "version": "1piivamm_xqgtaufcufxq_mnbdq_",
     "cacheDirectory": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/.budfiles/cache/webpack",
     "managedPaths": [
       "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules"
@@ -79,6 +85,7 @@ module.exports = {
     }
   },
   "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks",
+  "devtool": "cheap-module-source-map",
   "experiments": {
     "buildHttp": {
       "allowedUris": [
@@ -97,7 +104,7 @@ module.exports = {
   "infrastructureLogging": {
     "level": "none"
   },
-  "mode": "production",
+  "mode": "development",
   "module": {
     "rules": [
       {
@@ -118,17 +125,14 @@ module.exports = {
             ],
             "use": [
               {
-                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/mini-css-extract-plugin/dist/loader.js",
-                "options": {
-                  "publicPath": "/wp-content/themes/woodworks/public/"
-                }
+                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/style-loader/dist/cjs.js"
               },
               {
                 "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/css-loader/dist/cjs.js",
                 "options": {
                   "importLoaders": 1,
                   "modules": false,
-                  "sourceMap": false
+                  "sourceMap": true
                 }
               },
               {
@@ -162,10 +166,7 @@ module.exports = {
             ],
             "use": [
               {
-                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/mini-css-extract-plugin/dist/loader.js",
-                "options": {
-                  "publicPath": "/wp-content/themes/woodworks/public/"
-                }
+                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/style-loader/dist/cjs.js"
               },
               {
                 "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/css-loader/dist/cjs.js",
@@ -174,7 +175,7 @@ module.exports = {
                   "importLoaders": 1,
                   "localIdentName": "[name]__[local]___[hash:base64:5]",
                   "modules": true,
-                  "sourceMap": false
+                  "sourceMap": true
                 }
               },
               {
@@ -222,7 +223,7 @@ module.exports = {
             ],
             "type": "asset",
             "generator": {
-              "filename": "fonts/[name].[contenthash:6][ext]"
+              "filename": "fonts/[name][ext]"
             }
           },
           {
@@ -246,7 +247,7 @@ module.exports = {
             ],
             "type": "asset/resource",
             "generator": {
-              "filename": "images/[name].[contenthash:6][ext]"
+              "filename": "images/[name][ext]"
             }
           },
           {
@@ -282,6 +283,9 @@ module.exports = {
                     ],
                     [
                       "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/@babel/plugin-syntax-dynamic-import/lib/index.js"
+                    ],
+                    [
+                      "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/react-refresh/babel.js"
                     ]
                   ],
                   "env": {
@@ -312,7 +316,7 @@ module.exports = {
             ],
             "type": "asset/resource",
             "generator": {
-              "filename": "images/[name].[contenthash:6][ext]"
+              "filename": "images/[name][ext]"
             }
           },
           {
@@ -333,7 +337,7 @@ module.exports = {
             ],
             "type": "asset/resource",
             "generator": {
-              "filename": "images/[name].[contenthash:6][ext]"
+              "filename": "images/[name][ext]"
             }
           },
           {
@@ -371,17 +375,14 @@ module.exports = {
             ],
             "use": [
               {
-                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/mini-css-extract-plugin/dist/loader.js",
-                "options": {
-                  "publicPath": "/wp-content/themes/woodworks/public/"
-                }
+                "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/style-loader/dist/cjs.js"
               },
               {
                 "loader": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/node_modules/css-loader/dist/cjs.js",
                 "options": {
                   "importLoaders": 1,
                   "modules": false,
-                  "sourceMap": false
+                  "sourceMap": true
                 }
               },
               {
@@ -450,72 +451,18 @@ module.exports = {
   "name": "bud",
   "node": false,
   "output": {
-    "assetModuleFilename": "[name].[contenthash:6][ext]",
+    "assetModuleFilename": "[name][ext]",
     "chunkFilename": "js/dynamic/[id].js",
-    "filename": "js/[name].[contenthash:6].js",
+    "filename": "js/[name].js",
     "path": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/public",
-    "publicPath": "/wp-content/themes/woodworks/public/"
+    "publicPath": "/"
   },
   "optimization": {
-    "emitOnErrors": false,
-    "minimize": true,
+    "emitOnErrors": true,
+    "minimize": false,
     "minimizer": [
-      "...",
-      {
-        "options": {
-          "test": {},
-          "parallel": true,
-          "minimizer": {
-            "options": {
-              "preset": [
-                "default",
-                {
-                  "discardComments": {
-                    "removeAll": true
-                  }
-                }
-              ]
-            }
-          }
-        }
-      },
-      {
-        "options": {
-          "test": {},
-          "extractComments": false,
-          "parallel": true,
-          "include": {},
-          "exclude": {},
-          "minimizer": {
-            "options": {
-              "compress": false,
-              "mangle": {
-                "safari10": true
-              },
-              "output": {
-                "comments": false,
-                "ascii_only": true,
-                "preamble": "/**\n  * Minified by @roots/bud\n  */"
-              }
-            }
-          }
-        }
-      }
-    ],
-    "runtimeChunk": "single",
-    "splitChunks": {
-      "chunks": "all",
-      "automaticNameDelimiter": "/",
-      "minSize": 0,
-      "cacheGroups": {
-        "vendor": {
-          "idHint": "vendor",
-          "filename": "js/bundle/vendor/[name].js",
-          "test": {},
-          "priority": -20
-        }
-      }
-    }
+      "..."
+    ]
   },
   "parallelism": 110,
   "performance": {
@@ -528,24 +475,13 @@ module.exports = {
   "target": "browserslist:/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/package.json",
   "plugins": [
     {
-      "dangerouslyAllowCleanPatternsOutsideProject": false,
-      "dry": false,
-      "verbose": false,
-      "cleanStaleWebpackAssets": true,
-      "protectWebpackAssets": true,
-      "cleanAfterEveryBuildPatterns": [],
-      "cleanOnceBeforeBuildPatterns": [
-        "**/*"
-      ],
-      "currentAssets": [],
-      "initialClean": false,
-      "outputPath": ""
+      "options": {}
     },
     {
       "patterns": [
         {
           "from": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources/images",
-          "to": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/public/images/[path][name].[contenthash:6][ext]",
+          "to": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/public/images/[path][name][ext]",
           "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources",
           "noErrorOnMissing": true,
           "toType": "template"
@@ -568,29 +504,6 @@ module.exports = {
         "useLegacyEmit": false,
         "writeToFileEmit": true
       }
-    },
-    {
-      "_sortedModulesCache": {},
-      "options": {
-        "filename": "css/[name].[contenthash:6].css",
-        "ignoreOrder": false,
-        "runtime": true,
-        "chunkFilename": "css/[name].[contenthash:6].css"
-      },
-      "runtimeOptions": {
-        "linkType": "text/css"
-      }
-    },
-    {
-      "options": {
-        "enabled": true,
-        "verbose": false,
-        "extensions": {},
-        "ignore": [],
-        "remove": {}
-      },
-      "enabled": true,
-      "verbose": false
     },
     {
       "key": "ESLintWebpackPlugin",
@@ -626,7 +539,7 @@ module.exports = {
         "failOnError": true,
         "context": "/Users/kelseycahill/Sites/Woodworks Construction/wp-content/themes/woodworks/resources"
       },
-      "startTime": 1682639703621,
+      "startTime": 1682639953083,
       "prevTimestamps": {}
     },
     {
@@ -663,6 +576,13 @@ module.exports = {
       "file": "entrypoints.json",
       "entrypointsName": "entrypoints.json",
       "wordpressName": "wordpress.json"
+    },
+    {
+      "options": {
+        "overlay": false,
+        "exclude": {},
+        "include": {}
+      }
     },
     {
       "resourceRegExp": {}

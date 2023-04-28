@@ -12,7 +12,7 @@
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  height: 100vh;
+  height: 100%;
   height: -webkit-fill-available;
   display: none;
   margin-top: 0;
@@ -142,8 +142,10 @@
     background-color: var(--color-black);
     color: var(--color-white);
     padding: var(--space);
+    padding-bottom: var(--space-lg);
 
     @include media(">large") {
+      padding-bottom: var(--space);
       max-width: var(--sidebar-width);
       max-height: 100vh;
       overflow: auto;
