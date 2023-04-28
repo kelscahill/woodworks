@@ -8,11 +8,6 @@
   box-sizing: border-box;
 }
 
-html {
-  height: stretch;
-  height: -webkit-fill-available;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -21,9 +16,6 @@ body {
   background: var(--color-white);
   color: var(--color-black);
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  min-height: stretch;
-  min-height: -webkit-fill-available;
 }
 
 p {
