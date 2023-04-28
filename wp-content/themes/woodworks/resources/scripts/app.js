@@ -9,6 +9,14 @@ const main = async (err) => {
     console.error(err);
   }
 
+  // Set the app height for 100vh.
+  const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+  }
+  window.addEventListener('resize', appHeight)
+  appHeight()
+
   /**
    * Set the active gallery image
    * 1) Set the active gallery image and cooresponding dot to display
