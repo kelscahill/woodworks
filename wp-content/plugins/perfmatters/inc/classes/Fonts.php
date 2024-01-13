@@ -1,7 +1,12 @@
 <?php
 namespace Perfmatters;
 
-use Requests;
+//use WpOrg\Requests\Requests; //wp 6.2+
+
+if(!defined('REQUESTS_SILENCE_PSR0_DEPRECATIONS')) {
+    define('REQUESTS_SILENCE_PSR0_DEPRECATIONS', true);
+}
+use Requests as RequestsOld; //deprecated
 
 class Fonts
 {
@@ -12,6 +17,7 @@ class Fonts
         if(empty(Config::$options['fonts']['disable_google_fonts'])) {
             add_action('wp', array('Perfmatters\Fonts', 'queue'));
         }
+        add_action('wp_ajax_perfmatters_clear_local_fonts', array('Perfmatters\Fonts', 'clear_local_fonts_ajax'));
     }
 
     //queue functions
@@ -119,7 +125,7 @@ class Fonts
         }
 
         //download css file
-        $css_response = wp_remote_get(html_entity_decode($url), array('user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36'));
+        $css_response = wp_remote_get(html_entity_decode($url), array('user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'));
 
         //check valid response
         if(wp_remote_retrieve_response_code($css_response) !== 200) {
@@ -146,13 +152,16 @@ class Fonts
         }
 
         //download new font files to cache directory
-        if(method_exists(Requests::class, 'request_multiple')) {
-            $font_responses = Requests::request_multiple($font_requests);
+        if(method_exists('WpOrg\Requests\Requests', 'request_multiple')) { //wp 6.2+
+            $font_responses = \WpOrg\Requests\Requests::request_multiple($font_requests);
+        }
+        elseif(method_exists(RequestsOld::class, 'request_multiple')) { //deprecated
+            $font_responses = RequestsOld::request_multiple($font_requests);
+        }   
 
+        if(!empty($font_responses)) {
             foreach($font_responses as $font_response) {
-
-                if(is_a($font_response, 'Requests_Response')) {
-
+                if(is_a($font_response, 'Requests_Response') || is_a($font_response, 'WpOrg\Requests\Response')) {
                     $font_path = PERFMATTERS_CACHE_DIR . 'fonts/' . basename($font_response->url);
 
                     //save font file
@@ -176,5 +185,17 @@ class Fonts
                 unlink($file);
             }
         }
+    }
+
+    //clear local fonts ajax action
+    public static function clear_local_fonts_ajax() {
+
+        Ajax::security_check();
+
+        self::clear_local_fonts();
+
+        wp_send_json_success(array(
+            'message' => __('Local fonts cleared.', 'perfmatters'), 
+        ));
     }
 }

@@ -1,0 +1,31 @@
+/* ------------------------------------*\
+    $PRINT STYLES
+\*------------------------------------ */
+
+/* stylelint-disable */
+@media print {
+  .u-print-only {
+    display: block;
+  }
+
+  @page {
+    margin-top: 0.5in;
+    margin-bottom: 0.5in;
+    margin-left: 1in;
+    margin-right: 1in;
+  }
+
+  .employee-handbook {
+    .c-header,
+    .c-footer,
+    .o-rich-text > *:first-child,
+    .o-rich-text > *:first-child + ul {
+      display: none;
+    }
+
+    .o-signatures {
+      flex-wrap: nowrap;
+      flex-direction: row;
+    }
+  }
+}

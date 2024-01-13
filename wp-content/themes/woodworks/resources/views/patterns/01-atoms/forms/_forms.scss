@@ -147,16 +147,32 @@ select {
 }
 
 .o-form--inline {
-  .o-fieldset {
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
 
-    input[type="email"] {
-      width: calc(100% - 120px);
+  input {
+    height: 45px;
+    padding: 0 160px 0 var(--space);
+
+    &::placeholder {
+      color: var(--color-black);
     }
+  }
 
-    input[type="submit"] {
-      width: 120px;
-      margin-top: 0;
+  button {
+    white-space: nowrap;
+    width: 160px;
+    height: 45px;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-secondary);
+      color: white;
     }
   }
 }

@@ -20,12 +20,20 @@
             "classes": "c-content__header"
           }
         } %}
-        {% include "@atoms/text/rich-text/rich-text.twig" with {
-          "rich_text": {
-            "text": post.content,
-            "classes": "c-content__body l-container--m"
-          }
-        } %}
+        {% if password_protected %}
+          <p>This content is password protected. To view it, please enter your password below:</p>
+          <form action="{{ site.link }}/wp-login.php?action=postpass" class="post-password-form o-form--inline" method="post">
+            <input placeholder="Enter password" name="post_password" id="pwbox-{{ post.id }}" type="password" spellcheck="false" size="20"/>
+            <button class="o-button" type="submit" name="Submit" value="Submit">Submit</button>
+          </form>
+        {% else %}
+          {% include "@atoms/text/rich-text/rich-text.twig" with {
+            "rich_text": {
+              "text": post.content,
+              "classes": "c-content__body l-container--m"
+            }
+          } %}
+        {% endif %}
       </div>
     </div>
   </section>

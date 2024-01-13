@@ -47,8 +47,8 @@
     margin: var(--space-xl) auto;
   }
 
-  > ul,
-  > ol {
+  ul,
+  ol {
     margin-left: var(--space-lg);
     @include body-copy;
   }
@@ -56,5 +56,24 @@
   .wp-block-quote,
   .wp-block-pullquote {
     @include o-blockquote;
+  }
+
+  .o-signatures {
+    display: flex;
+    gap: var(--space-lg);
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include media(">medium") {
+      flex-direction: row;
+    }
+  }
+
+  .o-signature {
+    flex: 1;
+    font-style: italic;
+    border-top: 1px solid black;
+    padding-top: var(--space-sm);
+    margin-top: 80px;
   }
 }

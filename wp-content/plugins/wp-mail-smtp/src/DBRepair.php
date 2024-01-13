@@ -37,7 +37,7 @@ class DBRepair {
 			isset( $_GET['create-missing-db-tables'] ) &&
 			$_GET['create-missing-db-tables'] === '1' &&
 			wp_mail_smtp()->get_admin()->is_admin_page() &&
-			current_user_can( 'manage_options' )
+			current_user_can( wp_mail_smtp()->get_capability_manage_options() )
 		) {
 			check_admin_referer( Area::SLUG . '-create-missing-db-tables' );
 
@@ -141,7 +141,7 @@ class DBRepair {
 
 		return sprintf(
 			wp_kses( /* translators: %1$s - missing table name; %2$s - error message. */
-				__( '<strong>Table</strong> %1$s: <strong>Reason</strong> %2$s', 'wp-mail-smtp' ),
+				__( '<strong>Table:</strong> %1$s. <strong>Reason:</strong> %2$s', 'wp-mail-smtp' ),
 				[
 					'strong' => [],
 				]
@@ -165,7 +165,7 @@ class DBRepair {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			isset( $_GET['check-db-tables'] ) && $_GET['check-db-tables'] === '1' &&
 			wp_mail_smtp()->get_admin()->is_admin_page() &&
-			current_user_can( 'manage_options' )
+			current_user_can( wp_mail_smtp()->get_capability_manage_options() )
 		) {
 			$missing_tables = $this->get_missing_tables();
 
@@ -195,6 +195,16 @@ class DBRepair {
 						]
 					),
 					_n( 'Table is', 'Tables are', count( $missing_tables ), 'wp-mail-smtp' ),
+					implode( '<br/>', $reasons )
+				);
+
+				$msg = sprintf(
+					wp_kses(
+						_n( 'The following DB table is still missing.', 'The following DB tables are still missing.', count( $missing_tables ), 'wp-mail-smtp' ) . '<br />%s',
+						[
+							'br' => [],
+						]
+					),
 					implode( '<br/>', $reasons )
 				);
 			} else {
