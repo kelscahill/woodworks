@@ -1152,7 +1152,11 @@ class SetupWizard {
 	/**
 	 * Get the WPForms version type if it's installed.
 	 *
+<<<<<<< HEAD
 	 * @since 3.9.0
+=======
+	 * @since {VERSION}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 *
 	 * @return false|string Return `false` if WPForms is not installed, otherwise return either `lite` or `pro`.
 	 */

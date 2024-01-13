@@ -395,6 +395,10 @@ if ( isset( $_GET['enabled'] ) ) {
 			number_format_i18n( $enabled )
 		);
 	}
+<<<<<<< HEAD
+=======
+	echo '<div id="message" class="notice notice-success is-dismissible"><p>' . sprintf( $message, number_format_i18n( $enabled ) ) . '</p></div>';
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } elseif ( isset( $_GET['disabled'] ) ) {
 	$disabled = absint( $_GET['disabled'] );
 	if ( 1 === $disabled ) {
@@ -406,6 +410,10 @@ if ( isset( $_GET['enabled'] ) ) {
 			number_format_i18n( $disabled )
 		);
 	}
+<<<<<<< HEAD
+=======
+	echo '<div id="message" class="notice notice-success is-dismissible"><p>' . sprintf( $message, number_format_i18n( $disabled ) ) . '</p></div>';
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } elseif ( isset( $_GET['deleted'] ) ) {
 	$deleted = absint( $_GET['deleted'] );
 	if ( 1 === $deleted ) {

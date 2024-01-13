@@ -104,9 +104,18 @@ class WPSEO_Slug_Change_Watcher implements WPSEO_WordPress_Integration {
 		if ( ! $this->is_term_viewable( $term_taxonomy_id ) ) {
 			return;
 		}
+		$term = \get_term_by( 'term_taxonomy_id', (int) $term_taxonomy_id );
 
+<<<<<<< HEAD
 		$term       = \get_term_by( 'term_taxonomy_id', (int) $term_taxonomy_id );
 		$term_label = $this->get_taxonomy_label_for_term( $term->term_id );
+=======
+		$first_sentence = sprintf(
+			/* translators: 1: term label */
+			__( 'You just deleted a %1$s.', 'wordpress-seo' ),
+			$this->get_taxonomy_label_for_term( $term->term_id )
+		);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 		/* translators: %1$s expands to the translated name of the term. */
 		$first_sentence  = sprintf( __( 'You just deleted a %1$s.', 'wordpress-seo' ), $term_label );

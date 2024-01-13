@@ -3276,7 +3276,7 @@ function normalizePropsAreEqual(propsAreEqual) {
 
 
 
-function createComponent_forwardRef(component) {
+function forwardRef(component) {
   return /*#__PURE__*/(0,external_React_.forwardRef)(component);
 }
 
@@ -3344,7 +3344,7 @@ function createComponent(_ref) {
 
   if (false) {}
 
-  Comp = createComponent_forwardRef(Comp);
+  Comp = forwardRef(Comp);
 
   if (shouldMemo) {
     Comp = memo(Comp, propsAreEqual && normalizePropsAreEqual(propsAreEqual));
@@ -18473,7 +18473,23 @@ function loadFeatures(features) {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
+=======
+var PAGE = '@page'
+var MEDIA = '@media'
+var IMPORT = '@import'
+var CHARSET = '@charset'
+var VIEWPORT = '@viewport'
+var SUPPORTS = '@supports'
+var DOCUMENT = '@document'
+var NAMESPACE = '@namespace'
+var Enum_KEYFRAMES = '@keyframes'
+var FONT_FACE = '@font-face'
+var COUNTER_STYLE = '@counter-style'
+var FONT_FEATURE_VALUES = '@font-feature-values'
+var LAYER = '@layer'
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 const LayoutGroupContext = (0,external_React_.createContext)({});
@@ -18486,6 +18502,7 @@ const LayoutGroupContext = (0,external_React_.createContext)({});
 /**
  * Internal, exported only for usage in Framer
  */
+<<<<<<< HEAD
 const SwitchLayoutGroupContext = (0,external_React_.createContext)({});
 
 
@@ -18498,6 +18515,16 @@ const motionComponentSymbol = Symbol.for("motionComponentSymbol");
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/motion/index.mjs
 
 
+=======
+function stringify (element, index, children, callback) {
+	switch (element.type) {
+		case LAYER: if (element.children.length) break
+		case IMPORT: case Enum_DECLARATION: return element.return = element.return || element.value
+		case COMMENT: return ''
+		case Enum_KEYFRAMES: return element.return = element.value + '{' + Serializer_serialize(element.children, callback) + '}'
+		case Enum_RULESET: element.value = element.props.join(',')
+	}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -18630,6 +18657,7 @@ function createMotionProxy(createConfig) {
  * We keep these listed seperately as we use the lowercase tag names as part
  * of the runtime bundle to detect SVG components
  */
+<<<<<<< HEAD
 const lowercaseSVGElements = [
     "animate",
     "circle",
@@ -18658,6 +18686,88 @@ const lowercaseSVGElements = [
     "view",
 ];
 
+=======
+function Parser_parse (value, root, parent, rule, rules, rulesets, pseudo, points, declarations) {
+	var index = 0
+	var offset = 0
+	var length = pseudo
+	var atrule = 0
+	var property = 0
+	var previous = 0
+	var variable = 1
+	var scanning = 1
+	var ampersand = 1
+	var character = 0
+	var type = ''
+	var props = rules
+	var children = rulesets
+	var reference = rule
+	var characters = type
+
+	while (scanning)
+		switch (previous = character, character = next()) {
+			// (
+			case 40:
+				if (previous != 108 && Utility_charat(characters, length - 1) == 58) {
+					if (indexof(characters += Utility_replace(delimit(character), '&', '&\f'), '&\f') != -1)
+						ampersand = -1
+					break
+				}
+			// " ' [
+			case 34: case 39: case 91:
+				characters += delimit(character)
+				break
+			// \t \n \r \s
+			case 9: case 10: case 13: case 32:
+				characters += whitespace(previous)
+				break
+			// \
+			case 92:
+				characters += escaping(caret() - 1, 7)
+				continue
+			// /
+			case 47:
+				switch (peek()) {
+					case 42: case 47:
+						Utility_append(comment(commenter(next(), caret()), root, parent), declarations)
+						break
+					default:
+						characters += '/'
+				}
+				break
+			// {
+			case 123 * variable:
+				points[index++] = Utility_strlen(characters) * ampersand
+			// } ; \0
+			case 125 * variable: case 59: case 0:
+				switch (character) {
+					// \0 }
+					case 0: case 125: scanning = 0
+					// ;
+					case 59 + offset: if (ampersand == -1) characters = Utility_replace(characters, /\f/g, '')
+						if (property > 0 && (Utility_strlen(characters) - length))
+							Utility_append(property > 32 ? declaration(characters + ';', rule, parent, length - 1) : declaration(Utility_replace(characters, ' ', '') + ';', rule, parent, length - 2), declarations)
+						break
+					// @ ;
+					case 59: characters += ';'
+					// { rule/at-rule
+					default:
+						Utility_append(reference = ruleset(characters, root, parent, index, offset, rules, points, type, props = [], children = [], length), rulesets)
+
+						if (character === 123)
+							if (offset === 0)
+								Parser_parse(characters, root, reference, reference, props, rulesets, length, points, children)
+							else
+								switch (atrule === 99 && Utility_charat(characters, 3) === 110 ? 100 : atrule) {
+									// d l m s
+									case 100: case 108: case 109: case 115:
+										Parser_parse(value, reference, reference, rule && Utility_append(ruleset(value, reference, reference, 0, 0, rules, points, type, rules, props = [], length), children), rules, children, length, points, rule ? props : children)
+										break
+									default:
+										Parser_parse(characters, reference, reference, reference, [''], children, 0, points, children)
+								}
+				}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs
@@ -18856,8 +18966,30 @@ function isString(v) {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/value/types/numbers/units.mjs
 
+=======
+    if (unsafePseudoClasses) {
+      var isNested = !!element.parent; // in nested rules comments become children of the "auto-inserted" rule and that's always the `element.parent`
+      //
+      // considering this input:
+      // .a {
+      //   .b /* comm */ {}
+      //   color: hotpink;
+      // }
+      // we get output corresponding to this:
+      // .a {
+      //   & {
+      //     /* comm */
+      //     color: hotpink;
+      //   }
+      //   .b {}
+      // }
+
+      var commentContainer = isNested ? element.parent.children : // global rule at the root level
+      children;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 const createUnitType = (unit) => ({
     test: (v) => isString(v) && v.endsWith(unit) && v.split(" ").length === 1,
@@ -19279,6 +19411,14 @@ function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true
 }
 
 
+<<<<<<< HEAD
+=======
+  if (key === 'css') {
+    var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])"); // get SSRed styles out of the way of React's hydration
+    // document.head is a safe place to move them to(though note document.head is not necessarily the last place they will be)
+    // note this very very intentionally targets all style elements regardless of the key to ensure
+    // that creating a cache works inside of render of a React component
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/svg/utils/build-attrs.mjs
 
@@ -19353,6 +19493,10 @@ const isSVGTag = (tag) => typeof tag === "string" && tag.toLowerCase() === "svg"
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -19380,8 +19524,65 @@ function useSVGProps(props, visualState, _isStatic, Component) {
 
 
 
+<<<<<<< HEAD
 
 
+=======
+
+
+;// CONCATENATED MODULE: ./node_modules/@emotion/unitless/dist/emotion-unitless.esm.js
+var unitlessKeys = {
+  animationIterationCount: 1,
+  aspectRatio: 1,
+  borderImageOutset: 1,
+  borderImageSlice: 1,
+  borderImageWidth: 1,
+  boxFlex: 1,
+  boxFlexGroup: 1,
+  boxOrdinalGroup: 1,
+  columnCount: 1,
+  columns: 1,
+  flex: 1,
+  flexGrow: 1,
+  flexPositive: 1,
+  flexShrink: 1,
+  flexNegative: 1,
+  flexOrder: 1,
+  gridRow: 1,
+  gridRowEnd: 1,
+  gridRowSpan: 1,
+  gridRowStart: 1,
+  gridColumn: 1,
+  gridColumnEnd: 1,
+  gridColumnSpan: 1,
+  gridColumnStart: 1,
+  msGridRow: 1,
+  msGridRowSpan: 1,
+  msGridColumn: 1,
+  msGridColumnSpan: 1,
+  fontWeight: 1,
+  lineHeight: 1,
+  opacity: 1,
+  order: 1,
+  orphans: 1,
+  tabSize: 1,
+  widows: 1,
+  zIndex: 1,
+  zoom: 1,
+  WebkitLineClamp: 1,
+  // SVG-related properties
+  fillOpacity: 1,
+  floodOpacity: 1,
+  stopOpacity: 1,
+  strokeDasharray: 1,
+  strokeDashoffset: 1,
+  strokeMiterlimit: 1,
+  strokeOpacity: 1,
+  strokeWidth: 1
+};
+
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 function createUseRender(forwardMotionProps = false) {
     const useRender = (Component, props, ref, { latestValues }, isStatic) => {
@@ -19410,6 +19611,13 @@ function createUseRender(forwardMotionProps = false) {
     return useRender;
 }
 
+<<<<<<< HEAD
+=======
+
+
+;// CONCATENATED MODULE: ./node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/dom/utils/camel-to-dash.mjs
@@ -19429,8 +19637,15 @@ function renderHTML(element, { style, vars }, styleProp, projection) {
     }
 }
 
+<<<<<<< HEAD
+=======
+var processStyleName = /* #__PURE__ */memoize(function (styleName) {
+  return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
+});
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/svg/utils/camel-case-attrs.mjs
 /**
  * A set of attribute names that are always read/written as camel case.
@@ -19460,6 +19675,11 @@ const camelCaseAttributes = new Set([
     "textLength",
     "lengthAdjust",
 ]);
+=======
+  if (unitlessKeys[key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) {
+    return value + 'px';
+  }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -19602,7 +19822,11 @@ function resolveMotionValue(value) {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/motion/utils/use-visual-state.mjs
+=======
+  var name = murmur2(styles) + identifierName;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -19610,6 +19834,7 @@ function resolveMotionValue(value) {
 
 
 
+<<<<<<< HEAD
 
 
 function makeState({ scrapeMotionValuesFromProps, createRenderState, onMount, }, props, context, presenceContext) {
@@ -19627,6 +19852,10 @@ const makeUseVisualState = (config) => (props, isStatic) => {
     const presenceContext = (0,external_React_.useContext)(PresenceContext_PresenceContext);
     const make = () => makeState(config, props, context, presenceContext);
     return isStatic ? make() : useConstant(make);
+=======
+var syncFallback = function syncFallback(create) {
+  return create();
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 };
 function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
     const values = {};
@@ -19683,6 +19912,12 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
     return values;
 }
 
+<<<<<<< HEAD
+=======
+var useInsertionEffect = external_React_['useInsertion' + 'Effect'] ? external_React_['useInsertion' + 'Effect'] : false;
+var emotion_use_insertion_effect_with_fallbacks_browser_esm_useInsertionEffectAlwaysWithSyncFallback = useInsertionEffect || syncFallback;
+var emotion_use_insertion_effect_with_fallbacks_browser_esm_useInsertionEffectWithLayoutFallback = useInsertionEffect || external_React_.useLayoutEffect;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/utils/noop.mjs
@@ -19794,6 +20029,10 @@ function createRenderStep(runNextFrame) {
     return step;
 }
 
+<<<<<<< HEAD
+=======
+;// CONCATENATED MODULE: ./node_modules/@emotion/react/dist/emotion-element-c39617d8.browser.esm.js
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/frameloop/batcher.mjs
@@ -19862,14 +20101,72 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive) {
 
 
 
+<<<<<<< HEAD
 const { schedule: frame_frame, cancel: cancelFrame, state: frameData, steps, } = createRenderBatcher(typeof requestAnimationFrame !== "undefined" ? requestAnimationFrame : noop_noop, true);
+=======
+var emotion_element_c39617d8_browser_esm_isBrowser = "object" !== 'undefined';
+var emotion_element_c39617d8_browser_esm_hasOwnProperty = {}.hasOwnProperty;
+
+var EmotionCacheContext = /* #__PURE__ */external_React_.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
+// because this module is primarily intended for the browser and node
+// but it's also required in react native and similar environments sometimes
+// and we could have a special build just for that
+// but this is much easier and the native packages
+// might use a different theme context in the future anyway
+typeof HTMLElement !== 'undefined' ? /* #__PURE__ */createCache({
+  key: 'css'
+}) : null);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/svg/config-motion.mjs
 
+=======
+var emotion_element_c39617d8_browser_esm_withEmotionCache = function withEmotionCache(func) {
+  // $FlowFixMe
+  return /*#__PURE__*/(0,external_React_.forwardRef)(function (props, ref) {
+    // the cache will never be null in the browser
+    var cache = (0,external_React_.useContext)(EmotionCacheContext);
+    return func(props, cache, ref);
+  });
+};
+
+if (!emotion_element_c39617d8_browser_esm_isBrowser) {
+  emotion_element_c39617d8_browser_esm_withEmotionCache = function withEmotionCache(func) {
+    return function (props) {
+      var cache = (0,external_React_.useContext)(EmotionCacheContext);
+
+      if (cache === null) {
+        // yes, we're potentially creating this on every render
+        // it doesn't actually matter though since it's only on the server
+        // so there will only every be a single render
+        // that could change in the future because of suspense and etc. but for now,
+        // this works and i don't want to optimise for a future thing that we aren't sure about
+        cache = createCache({
+          key: 'css'
+        });
+        return /*#__PURE__*/external_React_.createElement(EmotionCacheContext.Provider, {
+          value: cache
+        }, func(props, cache));
+      } else {
+        return func(props, cache);
+      }
+    };
+  };
+}
+
+var emotion_element_c39617d8_browser_esm_ThemeContext = /* #__PURE__ */external_React_.createContext({});
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
+=======
+var useTheme = function useTheme() {
+  return React.useContext(emotion_element_c39617d8_browser_esm_ThemeContext);
+};
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -19906,12 +20203,45 @@ const svgMotionConfig = {
     }),
 };
 
+<<<<<<< HEAD
+=======
+var createCacheWithTheme = /* #__PURE__ */(/* unused pure expression or super */ null && (weakMemoize(function (outerTheme) {
+  return weakMemoize(function (theme) {
+    return getTheme(outerTheme, theme);
+  });
+})));
+var ThemeProvider = function ThemeProvider(props) {
+  var theme = React.useContext(emotion_element_c39617d8_browser_esm_ThemeContext);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/html/config-motion.mjs
 
 
 
+=======
+  return /*#__PURE__*/React.createElement(emotion_element_c39617d8_browser_esm_ThemeContext.Provider, {
+    value: theme
+  }, props.children);
+};
+function withTheme(Component) {
+  var componentName = Component.displayName || Component.name || 'Component';
+
+  var render = function render(props, ref) {
+    var theme = React.useContext(emotion_element_c39617d8_browser_esm_ThemeContext);
+    return /*#__PURE__*/React.createElement(Component, _extends({
+      theme: theme,
+      ref: ref
+    }, props));
+  }; // $FlowFixMe
+
+
+  var WithTheme = /*#__PURE__*/React.forwardRef(render);
+  WithTheme.displayName = "WithTheme(" + componentName + ")";
+  return hoistNonReactStatics(WithTheme, Component);
+}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 const htmlMotionConfig = {
     useVisualState: makeUseVisualState({
@@ -19943,18 +20273,31 @@ function create_config_createDomMotionConfig(Component, { forwardMotionProps = f
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/events/add-dom-event.mjs
 function addDomEvent(target, eventName, handler, options = { passive: true }) {
     target.addEventListener(eventName, handler, options);
     return () => target.removeEventListener(eventName, handler);
 }
+=======
+var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
+var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
+var emotion_element_c39617d8_browser_esm_createEmotionProps = function createEmotionProps(type, props) {
+  if (false) {}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/events/utils/is-primary-pointer.mjs
 const isPrimaryPointer = (event) => {
     if (event.pointerType === "mouse") {
         return typeof event.button !== "number" || event.button <= 0;
+=======
+  for (var key in props) {
+    if (emotion_element_c39617d8_browser_esm_hasOwnProperty.call(props, key)) {
+      newProps[key] = props[key];
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     }
     else {
         /**
@@ -19973,6 +20316,17 @@ const isPrimaryPointer = (event) => {
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/events/event-info.mjs
 
+<<<<<<< HEAD
+=======
+var Insertion = function Insertion(_ref) {
+  var cache = _ref.cache,
+      serialized = _ref.serialized,
+      isStringTag = _ref.isStringTag;
+  registerStyles(cache, serialized, isStringTag);
+  useInsertionEffectAlwaysWithSyncFallback(function () {
+    return insertStyles(cache, serialized, isStringTag);
+  });
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 function extractEventInfo(event, pointType = "page") {
     return {
@@ -19986,17 +20340,29 @@ const addPointerInfo = (handler) => {
     return (event) => isPrimaryPointer(event) && handler(event, extractEventInfo(event));
 };
 
+<<<<<<< HEAD
+=======
+var emotion_element_c39617d8_browser_esm_Emotion = /* #__PURE__ */(/* unused pure expression or super */ null && (emotion_element_c39617d8_browser_esm_withEmotionCache(function (props, cache, ref) {
+  var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
+  // not passing the registered cache to serializeStyles because it would
+  // make certain babel optimisations not possible
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/events/add-pointer-event.mjs
 
 
+<<<<<<< HEAD
+=======
+  var serialized = serializeStyles(registeredStyles, undefined, React.useContext(emotion_element_c39617d8_browser_esm_ThemeContext));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 function addPointerEvent(target, eventName, handler, options) {
     return addDomEvent(target, eventName, addPointerInfo(handler), options);
 }
 
 
+<<<<<<< HEAD
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/utils/pipe.mjs
 /**
@@ -20008,6 +20374,22 @@ function addPointerEvent(target, eventName, handler, options) {
  */
 const combineFunctions = (a, b) => (v) => b(a(v));
 const pipe = (...transformers) => transformers.reduce(combineFunctions);
+=======
+  for (var key in props) {
+    if (emotion_element_c39617d8_browser_esm_hasOwnProperty.call(props, key) && key !== 'css' && key !== typePropName && ( true || 0)) {
+      newProps[key] = props[key];
+    }
+  }
+
+  newProps.ref = ref;
+  newProps.className = className;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Insertion, {
+    cache: cache,
+    serialized: serialized,
+    isStringTag: typeof WrappedComponent === 'string'
+  }), /*#__PURE__*/React.createElement(WrappedComponent, newProps));
+})));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -20064,6 +20446,8 @@ function isDragActive() {
     return false;
 }
 
+var Emotion$1 = (/* unused pure expression or super */ null && (emotion_element_c39617d8_browser_esm_Emotion));
+
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/motion/features/Feature.mjs
@@ -20075,6 +20459,11 @@ class Feature {
     update() { }
 }
 
+<<<<<<< HEAD
+=======
+    do {
+      cache.insert(serialized === current ? "." + className : '', current, cache.sheet, true);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/gestures/hover.mjs
@@ -20111,7 +20500,12 @@ class HoverGesture extends Feature {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/gestures/focus.mjs
+=======
+var createEmotion = function createEmotion(options) {
+  var cache = createCache(options); // $FlowFixMe
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -20297,6 +20691,10 @@ class PressGesture extends Feature {
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/motion/features/viewport/observers.mjs
 /**
@@ -20352,6 +20750,22 @@ function observeIntersection(element, options, callback) {
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/motion/features/viewport/index.mjs
 
 
+<<<<<<< HEAD
+=======
+var _createEmotion = createEmotion({
+  key: 'css'
+}),
+    flush = _createEmotion.flush,
+    hydrate = _createEmotion.hydrate,
+    emotion_css_esm_cx = _createEmotion.cx,
+    emotion_css_esm_merge = _createEmotion.merge,
+    emotion_css_esm_getRegisteredStyles = _createEmotion.getRegisteredStyles,
+    injectGlobal = _createEmotion.injectGlobal,
+    emotion_css_esm_keyframes = _createEmotion.keyframes,
+    css = _createEmotion.css,
+    sheet = _createEmotion.sheet,
+    cache = _createEmotion.cache;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 const thresholdNames = {
     some: 0,
@@ -20600,6 +21014,7 @@ function getFinalKeyframe(keyframes, { repeat, repeatType = "loop" }) {
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/easing/cubic-bezier.mjs
 
 
+<<<<<<< HEAD
 /*
   Bezier function generator
   This has been modified from Gaëtan Renaudeau's BezierEasing
@@ -20646,8 +21061,20 @@ function cubicBezier(mX1, mY1, mX2, mY2) {
     const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
     // If animation is at start/end, return t without easing
     return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t), mY1, mY2);
+=======
+var isPropValid = /* #__PURE__ */memoize(function (prop) {
+  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
+  /* o */
+  && prop.charCodeAt(1) === 110
+  /* n */
+  && prop.charCodeAt(2) < 91;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/easing/ease.mjs
@@ -20665,6 +21092,10 @@ const isEasingArray = (ease) => {
 };
 
 
+<<<<<<< HEAD
+=======
+var testOmitPropsOnStringTag = isPropValid;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/easing/modifiers/mirror.mjs
 // Accepts an easing function and returns a new one that outputs mirrored values for
@@ -20680,7 +21111,18 @@ const reverseEasing = (easing) => (p) => 1 - easing(1 - p);
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/easing/circ.mjs
+=======
+var emotion_styled_base_browser_esm_Insertion = function Insertion(_ref) {
+  var cache = _ref.cache,
+      serialized = _ref.serialized,
+      isStringTag = _ref.isStringTag;
+  emotion_utils_browser_esm_registerStyles(cache, serialized, isStringTag);
+  emotion_use_insertion_effect_with_fallbacks_browser_esm_useInsertionEffectAlwaysWithSyncFallback(function () {
+    return emotion_utils_browser_esm_insertStyles(cache, serialized, isStringTag);
+  });
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -20700,11 +21142,24 @@ const backIn = reverseEasing(backOut);
 const backInOut = mirrorEasing(backIn);
 
 
+<<<<<<< HEAD
+=======
+    var Styled = emotion_element_c39617d8_browser_esm_withEmotionCache(function (props, cache, ref) {
+      var FinalTag = shouldUseAs && props.as || baseTag;
+      var className = '';
+      var classInterpolations = [];
+      var mergedProps = props;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/easing/anticipate.mjs
 
 
+<<<<<<< HEAD
 const anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p) : 0.5 * (2 - Math.pow(2, -10 * (p - 1)));
+=======
+        mergedProps.theme = external_React_.useContext(emotion_element_c39617d8_browser_esm_ThemeContext);
+      }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -20713,6 +21168,26 @@ const anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p) : 0.5 * (2 - Math.pow(2
 
 
 
+<<<<<<< HEAD
+=======
+      newProps.className = className;
+      newProps.ref = ref;
+      return /*#__PURE__*/external_React_.createElement(external_React_.Fragment, null, /*#__PURE__*/external_React_.createElement(emotion_styled_base_browser_esm_Insertion, {
+        cache: cache,
+        serialized: serialized,
+        isStringTag: typeof FinalTag === 'string'
+      }), /*#__PURE__*/external_React_.createElement(FinalTag, newProps));
+    });
+    Styled.displayName = identifierName !== undefined ? identifierName : "Styled(" + (typeof baseTag === 'string' ? baseTag : baseTag.displayName || baseTag.name || 'Component') + ")";
+    Styled.defaultProps = tag.defaultProps;
+    Styled.__emotion_real = Styled;
+    Styled.__emotion_base = baseTag;
+    Styled.__emotion_styles = styles;
+    Styled.__emotion_forwardProp = shouldForwardProp;
+    Object.defineProperty(Styled, 'toString', {
+      value: function value() {
+        if (targetClassName === undefined && "production" !== 'production') {} // $FlowFixMe: coerce undefined to string
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -20745,6 +21220,10 @@ const easingDefinitionToFunction = (definition) => {
     return definition;
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/value/types/color/utils.mjs
@@ -20754,6 +21233,7 @@ const easingDefinitionToFunction = (definition) => {
  * Returns true if the provided string is a color, ie rgba(0,0,0,0) or #000,
  * but false if a number or multiple colors
  */
+<<<<<<< HEAD
 const isColorString = (type, testProp) => (v) => {
     return Boolean((isString(v) && singleColorRegex.test(v) && v.startsWith(type)) ||
         (testProp && Object.prototype.hasOwnProperty.call(v, testProp)));
@@ -20769,6 +21249,17 @@ const splitColor = (aName, bName, cName) => (v) => {
         alpha: alpha !== undefined ? parseFloat(alpha) : 1,
     };
 };
+=======
+// @ts-expect-error
+const View = createStyled("div",  true ? {
+  target: "e19lxcc00"
+} : 0)( true ? "" : 0);
+View.selector = '.components-view';
+View.displayName = 'View';
+/* harmony default export */ var component = (View);
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/visually-hidden/component.js
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -23080,7 +23571,21 @@ const auto = {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/dom/value-types/dimensions.mjs
+=======
+  uuidCache.add(key);
+  return createCache({
+    container,
+    key
+  });
+});
+function StyleProvider(props) {
+  const {
+    children,
+    document
+  } = props;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -24379,17 +24884,204 @@ function measurePageBox(element, rootProjectionNode, transformPagePoint) {
 
 
 
+<<<<<<< HEAD
+=======
+var pkg = {
+	name: "@emotion/react",
+	version: "11.11.0",
+	main: "dist/emotion-react.cjs.js",
+	module: "dist/emotion-react.esm.js",
+	browser: {
+		"./dist/emotion-react.esm.js": "./dist/emotion-react.browser.esm.js"
+	},
+	exports: {
+		".": {
+			module: {
+				worker: "./dist/emotion-react.worker.esm.js",
+				browser: "./dist/emotion-react.browser.esm.js",
+				"default": "./dist/emotion-react.esm.js"
+			},
+			"import": "./dist/emotion-react.cjs.mjs",
+			"default": "./dist/emotion-react.cjs.js"
+		},
+		"./jsx-runtime": {
+			module: {
+				worker: "./jsx-runtime/dist/emotion-react-jsx-runtime.worker.esm.js",
+				browser: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js",
+				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.esm.js"
+			},
+			"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
+			"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
+		},
+		"./_isolated-hnrs": {
+			module: {
+				worker: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.worker.esm.js",
+				browser: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js",
+				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.esm.js"
+			},
+			"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
+			"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
+		},
+		"./jsx-dev-runtime": {
+			module: {
+				worker: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.worker.esm.js",
+				browser: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.esm.js",
+				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.esm.js"
+			},
+			"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
+			"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
+		},
+		"./package.json": "./package.json",
+		"./types/css-prop": "./types/css-prop.d.ts",
+		"./macro": {
+			types: {
+				"import": "./macro.d.mts",
+				"default": "./macro.d.ts"
+			},
+			"default": "./macro.js"
+		}
+	},
+	types: "types/index.d.ts",
+	files: [
+		"src",
+		"dist",
+		"jsx-runtime",
+		"jsx-dev-runtime",
+		"_isolated-hnrs",
+		"types/*.d.ts",
+		"macro.*"
+	],
+	sideEffects: false,
+	author: "Emotion Contributors",
+	license: "MIT",
+	scripts: {
+		"test:typescript": "dtslint types"
+	},
+	dependencies: {
+		"@babel/runtime": "^7.18.3",
+		"@emotion/babel-plugin": "^11.11.0",
+		"@emotion/cache": "^11.11.0",
+		"@emotion/serialize": "^1.1.2",
+		"@emotion/use-insertion-effect-with-fallbacks": "^1.0.1",
+		"@emotion/utils": "^1.2.1",
+		"@emotion/weak-memoize": "^0.3.1",
+		"hoist-non-react-statics": "^3.3.1"
+	},
+	peerDependencies: {
+		react: ">=16.8.0"
+	},
+	peerDependenciesMeta: {
+		"@types/react": {
+			optional: true
+		}
+	},
+	devDependencies: {
+		"@definitelytyped/dtslint": "0.0.112",
+		"@emotion/css": "11.11.0",
+		"@emotion/css-prettifier": "1.1.3",
+		"@emotion/server": "11.11.0",
+		"@emotion/styled": "11.11.0",
+		"html-tag-names": "^1.1.2",
+		react: "16.14.0",
+		"svg-tag-names": "^1.1.1",
+		typescript: "^4.5.5"
+	},
+	repository: "https://github.com/emotion-js/emotion/tree/main/packages/react",
+	publishConfig: {
+		access: "public"
+	},
+	"umd:main": "dist/emotion-react.umd.min.js",
+	preconstruct: {
+		entrypoints: [
+			"./index.js",
+			"./jsx-runtime.js",
+			"./jsx-dev-runtime.js",
+			"./_isolated-hnrs.js"
+		],
+		umdName: "emotionReact",
+		exports: {
+			envConditions: [
+				"browser",
+				"worker"
+			],
+			extra: {
+				"./types/css-prop": "./types/css-prop.d.ts",
+				"./macro": {
+					types: {
+						"import": "./macro.d.mts",
+						"default": "./macro.d.ts"
+					},
+					"default": "./macro.js"
+				}
+			}
+		}
+	}
+};
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
+
+
+<<<<<<< HEAD
+=======
+  if (props == null || !hasOwnProperty.call(props, 'css')) {
+    // $FlowFixMe
+    return React.createElement.apply(undefined, args);
+  }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
 
+<<<<<<< HEAD
+=======
+  return React.createElement.apply(null, createElementArgArray);
+};
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
+<<<<<<< HEAD
 
 
+=======
+  var styles = props.styles;
+  var serialized = serializeStyles([styles], undefined, React.useContext(ThemeContext));
+
+  if (!isBrowser$1) {
+    var _ref;
+
+    var serializedNames = serialized.name;
+    var serializedStyles = serialized.styles;
+    var next = serialized.next;
+
+    while (next !== undefined) {
+      serializedNames += ' ' + next.name;
+      serializedStyles += next.styles;
+      next = next.next;
+    }
+
+    var shouldCache = cache.compat === true;
+    var rules = cache.insert("", {
+      name: serializedNames,
+      styles: serializedStyles
+    }, cache.sheet, shouldCache);
+
+    if (shouldCache) {
+      return null;
+    }
+
+    return /*#__PURE__*/React.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
+      __html: rules
+    }, _ref.nonce = cache.sheet.nonce, _ref));
+  } // yes, i know these hooks are used conditionally
+  // but it is based on a constant that will never change at runtime
+  // it's effectively like having two implementations and switching them out
+  // so it's not actually breaking anything
 
 
+  var sheetRef = React.useRef();
+  useInsertionEffectWithLayoutFallback(function () {
+    var key = cache.key + "-global"; // use case of https://github.com/emotion-js/emotion/issues/2675
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -24860,6 +25552,18 @@ class DragGesture extends Feature {
     }
 }
 
+<<<<<<< HEAD
+=======
+var emotion_react_browser_esm_Insertion = function Insertion(_ref) {
+  var cache = _ref.cache,
+      serializedArr = _ref.serializedArr;
+  useInsertionEffectAlwaysWithSyncFallback(function () {
+
+    for (var i = 0; i < serializedArr.length; i++) {
+      insertStyles(cache, serializedArr[i], false);
+    }
+  });
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/gestures/pan/index.mjs
@@ -24873,6 +25577,7 @@ const asyncHandler = (handler) => (event, info) => {
     if (handler) {
         frame_frame.update(() => handler(event, info));
     }
+<<<<<<< HEAD
 };
 class PanGesture extends Feature {
     constructor() {
@@ -24907,6 +25612,29 @@ class PanGesture extends Feature {
         this.session && this.session.end();
     }
 }
+=======
+
+    return emotion_react_browser_esm_merge(cache.registered, css, emotion_react_browser_esm_classnames(args));
+  };
+
+  var content = {
+    css: css,
+    cx: cx,
+    theme: React.useContext(ThemeContext)
+  };
+  var ele = props.children(content);
+  hasRendered = true;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(emotion_react_browser_esm_Insertion, {
+    cache: cache,
+    serializedArr: serializedArr
+  }), ele);
+})));
+
+if (false) {}
+
+if (false) { var globalKey, globalContext, isTestEnv, emotion_react_browser_esm_isBrowser; }
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -25088,6 +25816,18 @@ const correctBoxShadow = {
 
 
 
+<<<<<<< HEAD
+=======
+const Root = createStyled("div",  true ? {
+  target: "ecapk1j3"
+} : 0)(rootBase, ";border:1px solid transparent;cursor:pointer;grid-template-columns:auto;", rootSize, ";" + ( true ? "" : 0));
+const Row = createStyled("div",  true ? {
+  target: "ecapk1j2"
+} : 0)( true ? {
+  name: "1x5gbbj",
+  styles: "box-sizing:border-box;display:grid;grid-template-columns:repeat( 3, 1fr )"
+} : 0);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 class MeasureLayoutWithContext extends external_React_.Component {
@@ -25209,6 +25949,20 @@ const defaultScaleCorrectors = {
     borderBottomRightRadius: correctBorderRadius,
     boxShadow: correctBoxShadow,
 };
+<<<<<<< HEAD
+=======
+const Point = createStyled("span",  true ? {
+  target: "ecapk1j1"
+} : 0)("height:6px;width:6px;", pointBase, ";" + ( true ? "" : 0));
+const Cell = createStyled("span",  true ? {
+  target: "ecapk1j0"
+} : 0)( true ? {
+  name: "rjf3ub",
+  styles: "appearance:none;border:none;box-sizing:border-box;margin:0;display:flex;position:relative;outline:none;align-items:center;justify-content:center;padding:0"
+} : 0);
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/alignment-matrix-control/cell.js
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -28253,9 +29007,28 @@ class HTMLVisualElement extends DOMVisualElement {
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/framer-motion/dist/es/render/svg/SVGVisualElement.mjs
+=======
+const Wrapper = createStyled("div",  true ? {
+  target: "erowt52"
+} : 0)( true ? {
+  name: "ogl07i",
+  styles: "box-sizing:border-box;padding:2px"
+} : 0);
+const alignment_matrix_control_icon_styles_Root = createStyled("div",  true ? {
+  target: "erowt51"
+} : 0)("transform-origin:top left;height:100%;width:100%;", rootBase, ";", alignment_matrix_control_icon_styles_rootSize, ";", rootPointerEvents, ";" + ( true ? "" : 0));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
+=======
+const alignment_matrix_control_icon_styles_Point = createStyled("span",  true ? {
+  target: "erowt50"
+} : 0)("height:2px;width:2px;", pointBase, ";", alignment_matrix_control_icon_styles_pointActive, ";" + ( true ? "" : 0));
+const alignment_matrix_control_icon_styles_Cell = Cell;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -30637,6 +31410,7 @@ function parseProp(prop) {
     passive
   };
 }
+<<<<<<< HEAD
 function toDomEventType(device, action = '') {
   const deviceProps = EVENT_TYPE_MAP[device];
   const actionKey = deviceProps ? deviceProps[action] || action : action;
@@ -30694,6 +31468,72 @@ function pointerValues(event) {
 const LINE_HEIGHT = 40;
 const PAGE_HEIGHT = 800;
 function wheelValues(event) {
+=======
+/**
+ * Call this in the `useMemo` dependency array to ensure that subsequent renders will
+ * cause rtl styles to update based on the `isRTL` return value even if all other dependencies
+ * remain the same.
+ *
+ * @example
+ * const styles = useMemo( () => {
+ *   return css`
+ *     ${ rtl( { marginRight: '10px' } ) }
+ *   `;
+ * }, [ rtl.watch() ] );
+ */
+
+rtl.watch = () => (0,external_wp_i18n_namespaceObject.isRTL)();
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/input-control/styles/input-control-styles.js
+
+
+
+
+function input_control_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop)."; }
+
+/**
+ * External dependencies
+ */
+
+
+
+
+
+
+var _ref2 =  true ? {
+  name: "1739oy8",
+  styles: "z-index:1"
+} : 0;
+
+const rootFocusedStyles = _ref3 => {
+  let {
+    isFocused
+  } = _ref3;
+  if (!isFocused) return '';
+  return _ref2;
+};
+
+const input_control_styles_Root = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "em5sgkm7"
+} : 0)("box-sizing:border-box;position:relative;border-radius:2px;padding-top:0;", rootFocusedStyles, ";" + ( true ? "" : 0));
+
+const containerDisabledStyles = _ref4 => {
+  let {
+    disabled
+  } = _ref4;
+  const backgroundColor = disabled ? COLORS.ui.backgroundDisabled : COLORS.ui.background;
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    backgroundColor
+  },  true ? "" : 0,  true ? "" : 0);
+};
+
+var input_control_styles_ref =  true ? {
+  name: "1d3w5wq",
+  styles: "width:100%"
+} : 0;
+
+const containerWidthStyles = _ref5 => {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   let {
     deltaX,
     deltaY,
@@ -30738,6 +31578,7 @@ function getEventDetails(event) {
   return payload;
 }
 
+<<<<<<< HEAD
 function call(v, ...args) {
   if (typeof v === 'function') {
     return v(...args);
@@ -30755,6 +31596,35 @@ function actions_b1cc53c2_esm_chain(...fns) {
       result = fn.apply(this, arguments) || result;
     }
     return result;
+=======
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    width: __unstableInputWidth
+  },  true ? "" : 0,  true ? "" : 0);
+};
+
+const Container = createStyled("div",  true ? {
+  target: "em5sgkm6"
+} : 0)("align-items:center;box-sizing:border-box;border-radius:inherit;display:flex;flex:1;position:relative;", containerDisabledStyles, " ", containerWidthStyles, ";" + ( true ? "" : 0));
+
+const disabledStyles = _ref6 => {
+  let {
+    disabled
+  } = _ref6;
+  if (!disabled) return '';
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    color: COLORS.ui.textDisabled
+  },  true ? "" : 0,  true ? "" : 0);
+};
+
+const fontSizeStyles = _ref7 => {
+  let {
+    inputSize: size
+  } = _ref7;
+  const sizes = {
+    default: '13px',
+    small: '11px',
+    '__unstable-large': '13px'
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   };
 }
 function assignDefault(value, fallback) {
@@ -30953,16 +31823,106 @@ class Engine {
   }
 }
 
+<<<<<<< HEAD
 function selectAxis([dx, dy], threshold) {
   const absDx = Math.abs(dx);
   const absDy = Math.abs(dy);
   if (absDx > absDy && absDx > threshold) {
     return 'x';
+=======
+  return /*#__PURE__*/emotion_react_browser_esm_css(defaultArrowStyles, " ", activeDragCursorStyles, ";" + ( true ? "" : 0),  true ? "" : 0);
+}; // TODO: Resolve need to use &&& to increase specificity
+// https://github.com/WordPress/gutenberg/issues/18483
+
+
+const Input = createStyled("input",  true ? {
+  target: "em5sgkm5"
+} : 0)("&&&{background-color:transparent;box-sizing:border-box;border:none;box-shadow:none!important;color:", COLORS.gray[900], ";display:block;font-family:inherit;margin:0;outline:none;width:100%;", dragStyles, " ", disabledStyles, " ", fontSizeStyles, " ", sizeStyles, " ", customPaddings, " &::-webkit-input-placeholder{line-height:normal;}}" + ( true ? "" : 0));
+
+const BaseLabel = /*#__PURE__*/createStyled(text_component,  true ? {
+  target: "em5sgkm4"
+} : 0)("&&&{", baseLabelTypography, ";box-sizing:border-box;display:block;padding-top:0;padding-bottom:0;max-width:100%;z-index:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}" + ( true ? "" : 0));
+
+const Label = props => (0,external_wp_element_namespaceObject.createElement)(BaseLabel, extends_extends({}, props, {
+  as: "label"
+}));
+const LabelWrapper = /*#__PURE__*/createStyled(flex_item_component,  true ? {
+  target: "em5sgkm3"
+} : 0)( true ? {
+  name: "1b6uupn",
+  styles: "max-width:calc( 100% - 10px )"
+} : 0);
+
+const backdropFocusedStyles = _ref11 => {
+  let {
+    disabled,
+    isFocused
+  } = _ref11;
+  let borderColor = isFocused ? COLORS.ui.borderFocus : COLORS.ui.border;
+  let boxShadow;
+
+  if (isFocused) {
+    boxShadow = `0 0 0 1px ${COLORS.ui.borderFocus} inset`;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   if (absDy > absDx && absDy > threshold) {
     return 'y';
   }
+<<<<<<< HEAD
   return undefined;
+=======
+
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    boxShadow,
+    borderColor,
+    borderStyle: 'solid',
+    borderWidth: 1
+  },  true ? "" : 0,  true ? "" : 0);
+};
+
+const BackdropUI = createStyled("div",  true ? {
+  target: "em5sgkm2"
+} : 0)("&&&{box-sizing:border-box;border-radius:inherit;bottom:0;left:0;margin:0;padding:0;pointer-events:none;position:absolute;right:0;top:0;", backdropFocusedStyles, " ", rtl({
+  paddingLeft: 2
+}), ";}" + ( true ? "" : 0));
+const Prefix = createStyled("span",  true ? {
+  target: "em5sgkm1"
+} : 0)( true ? {
+  name: "pvvbxf",
+  styles: "box-sizing:border-box;display:block"
+} : 0);
+const Suffix = createStyled("span",  true ? {
+  target: "em5sgkm0"
+} : 0)( true ? {
+  name: "jgf79h",
+  styles: "align-items:center;align-self:stretch;box-sizing:border-box;display:flex"
+} : 0);
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/input-control/backdrop.js
+
+
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+function Backdrop(_ref) {
+  let {
+    disabled = false,
+    isFocused = false
+  } = _ref;
+  return (0,external_wp_element_namespaceObject.createElement)(BackdropUI, {
+    "aria-hidden": "true",
+    className: "components-input-control__backdrop",
+    disabled: disabled,
+    isFocused: isFocused
+  });
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 }
 class CoordinatesEngine extends Engine {
   constructor(...args) {
@@ -31246,6 +32206,7 @@ class DragEngine extends CoordinatesEngine {
     }
     this.emit();
   }
+<<<<<<< HEAD
   pointerClick(event) {
     if (!this.state.tap && event.detail > 0) {
       event.preventDefault();
@@ -31280,6 +32241,77 @@ class DragEngine extends CoordinatesEngine {
     persistEvent(event);
     const remove = this.eventStore.add(this.sharedConfig.window, 'touch', 'change', this.preventScroll.bind(this), {
       passive: false
+=======
+};
+function rubberband(distance, dimension, constant) {
+  if (dimension === 0 || Math.abs(dimension) === Infinity) return Math.pow(distance, constant * 5);
+  return distance * dimension * constant / (dimension + constant * distance);
+}
+function rubberbandIfOutOfBounds(position, min, max, constant = 0.15) {
+  if (constant === 0) return maths_0ab39ae9_esm_clamp(position, min, max);
+  if (position < min) return -rubberband(min - position, max - min, constant) + min;
+  if (position > max) return +rubberband(position - max, max - min, constant) + max;
+  return position;
+}
+function computeRubberband(bounds, [Vx, Vy], [Rx, Ry]) {
+  const [[X0, X1], [Y0, Y1]] = bounds;
+  return [rubberbandIfOutOfBounds(Vx, X0, X1, Rx), rubberbandIfOutOfBounds(Vy, Y0, Y1, Ry)];
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@use-gesture/core/dist/actions-94b581a0.esm.js
+
+
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
+}
+
+function actions_94b581a0_esm_defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+function actions_94b581a0_esm_ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function actions_94b581a0_esm_objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? actions_94b581a0_esm_ownKeys(Object(source), !0).forEach(function (key) {
+      actions_94b581a0_esm_defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : actions_94b581a0_esm_ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     });
     this.eventStore.add(this.sharedConfig.window, 'touch', 'end', remove);
     this.eventStore.add(this.sharedConfig.window, 'touch', 'cancel', remove);
@@ -31332,6 +32364,85 @@ class DragEngine extends CoordinatesEngine {
       });
     }
   }
+<<<<<<< HEAD
+=======
+};
+function capitalize(string) {
+  if (!string) return '';
+  return string[0].toUpperCase() + string.slice(1);
+}
+const actionsWithoutCaptureSupported = ['enter', 'leave'];
+function hasCapture(capture = false, actionKey) {
+  return capture && !actionsWithoutCaptureSupported.includes(actionKey);
+}
+function toHandlerProp(device, action = '', capture = false) {
+  const deviceProps = EVENT_TYPE_MAP[device];
+  const actionKey = deviceProps ? deviceProps[action] || action : action;
+  return 'on' + capitalize(device) + capitalize(actionKey) + (hasCapture(capture, actionKey) ? 'Capture' : '');
+}
+const pointerCaptureEvents = ['gotpointercapture', 'lostpointercapture'];
+function parseProp(prop) {
+  let eventKey = prop.substring(2).toLowerCase();
+  const passive = !!~eventKey.indexOf('passive');
+  if (passive) eventKey = eventKey.replace('passive', '');
+  const captureKey = pointerCaptureEvents.includes(eventKey) ? 'capturecapture' : 'capture';
+  const capture = !!~eventKey.indexOf(captureKey);
+  if (capture) eventKey = eventKey.replace('capture', '');
+  return {
+    device: eventKey,
+    capture,
+    passive
+  };
+}
+function toDomEventType(device, action = '') {
+  const deviceProps = EVENT_TYPE_MAP[device];
+  const actionKey = deviceProps ? deviceProps[action] || action : action;
+  return device + actionKey;
+}
+function isTouch(event) {
+  return 'touches' in event;
+}
+function getPointerType(event) {
+  if (isTouch(event)) return 'touch';
+  if ('pointerType' in event) return event.pointerType;
+  return 'mouse';
+}
+function getCurrentTargetTouchList(event) {
+  return Array.from(event.touches).filter(e => {
+    var _event$currentTarget, _event$currentTarget$;
+    return e.target === event.currentTarget || ((_event$currentTarget = event.currentTarget) === null || _event$currentTarget === void 0 ? void 0 : (_event$currentTarget$ = _event$currentTarget.contains) === null || _event$currentTarget$ === void 0 ? void 0 : _event$currentTarget$.call(_event$currentTarget, e.target));
+  });
+}
+function getTouchList(event) {
+  return event.type === 'touchend' || event.type === 'touchcancel' ? event.changedTouches : event.targetTouches;
+}
+function getValueEvent(event) {
+  return isTouch(event) ? getTouchList(event)[0] : event;
+}
+function distanceAngle(P1, P2) {
+  try {
+    const dx = P2.clientX - P1.clientX;
+    const dy = P2.clientY - P1.clientY;
+    const cx = (P2.clientX + P1.clientX) / 2;
+    const cy = (P2.clientY + P1.clientY) / 2;
+    const distance = Math.hypot(dx, dy);
+    const angle = -(Math.atan2(dx, dy) * 180) / Math.PI;
+    const origin = [cx, cy];
+    return {
+      angle,
+      distance,
+      origin
+    };
+  } catch (_unused) {}
+  return null;
+}
+function touchIds(event) {
+  return getCurrentTargetTouchList(event).map(touch => touch.identifier);
+}
+function touchDistanceAngle(event, ids) {
+  const [P1, P2] = Array.from(event.touches).filter(touch => ids.includes(touch.identifier));
+  return distanceAngle(P1, P2);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 }
 function persistEvent(event) {
   'persist' in event && typeof event.persist === 'function' && event.persist();
@@ -31357,6 +32468,7 @@ function supportsGestureEvents() {
     return false;
   }
 }
+<<<<<<< HEAD
 const SUPPORT = {
   isBrowser: actions_b1cc53c2_esm_isBrowser,
   gesture: supportsGestureEvents(),
@@ -31365,6 +32477,23 @@ const SUPPORT = {
   pointer: supportsPointerEvents(),
   pointerLock: supportsPointerLock()
 };
+=======
+function actions_94b581a0_esm_noop() {}
+function chain(...fns) {
+  if (fns.length === 0) return actions_94b581a0_esm_noop;
+  if (fns.length === 1) return fns[0];
+  return function () {
+    let result;
+    for (const fn of fns) {
+      result = fn.apply(this, arguments) || result;
+    }
+    return result;
+  };
+}
+function assignDefault(value, fallback) {
+  return Object.assign({}, fallback, value || {});
+}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 const DEFAULT_PREVENT_SCROLL_DELAY = 250;
 const DEFAULT_DRAG_DELAY = 180;
@@ -31516,6 +32645,7 @@ class PinchEngine extends Engine {
       if (this.state.axis === 'scale') v[1] = 0;else if (this.state.axis === 'angle') v[0] = 0;
     }
   }
+<<<<<<< HEAD
   cancel() {
     const state = this.state;
     if (state.canceled) return;
@@ -31525,10 +32655,40 @@ class PinchEngine extends Engine {
       this.compute();
       this.emit();
     }, 0);
+=======
+  reset() {
+    const {
+      state,
+      shared,
+      ingKey,
+      args
+    } = this;
+    shared[ingKey] = state._active = state.active = state._blocked = state._force = false;
+    state._step = [false, false];
+    state.intentional = false;
+    state._movement = [0, 0];
+    state._distance = [0, 0];
+    state._direction = [0, 0];
+    state._delta = [0, 0];
+    state._bounds = [[-Infinity, Infinity], [-Infinity, Infinity]];
+    state.args = args;
+    state.axis = undefined;
+    state.memo = undefined;
+    state.elapsedTime = state.timeDelta = 0;
+    state.direction = [0, 0];
+    state.distance = [0, 0];
+    state.overflow = [0, 0];
+    state._movementBound = [false, false];
+    state.velocity = [0, 0];
+    state.movement = [0, 0];
+    state.delta = [0, 0];
+    state.timeStamp = 0;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   touchStart(event) {
     this.ctrl.setEventIds(event);
     const state = this.state;
+<<<<<<< HEAD
     const ctrlTouchIds = this.ctrl.touchIds;
     if (state._active) {
       if (state._touchIds.every(id => ctrlTouchIds.has(id))) return;
@@ -31538,6 +32698,19 @@ class PinchEngine extends Engine {
     state._touchIds = Array.from(ctrlTouchIds).slice(0, 2);
     const payload = touchDistanceAngle(event, state._touchIds);
     this.pinchStart(event, payload);
+=======
+    const config = this.config;
+    if (!state._active) {
+      this.reset();
+      this.computeInitial();
+      state._active = true;
+      state.target = event.target;
+      state.currentTarget = event.currentTarget;
+      state.lastOffset = config.from ? call(config.from, state) : state.offset;
+      state.offset = state.lastOffset;
+      state.startTime = state.timeStamp = event.timeStamp;
+    }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   pointerStart(event) {
     if (event.buttons != null && event.buttons % 2 !== 1) return;
@@ -31663,6 +32836,7 @@ class PinchEngine extends Engine {
       }
       if (false) {}
     }
+<<<<<<< HEAD
     const state = this.state;
     state._delta = [-wheelValues(event)[1] / PINCH_WHEEL_RATIO * state.offset[0], 0];
     V.addTo(state._movement, state._delta);
@@ -31689,6 +32863,27 @@ class PinchEngine extends Engine {
       bindFunction('wheel', '', this.wheel.bind(this), {
         passive: false
       });
+=======
+    const [ox, oy] = state.offset;
+    const [[x0, x1], [y0, y1]] = state._bounds;
+    state.overflow = [ox < x0 ? -1 : ox > x1 ? 1 : 0, oy < y0 ? -1 : oy > y1 ? 1 : 0];
+    state._movementBound[0] = state.overflow[0] ? state._movementBound[0] === false ? state._movement[0] : state._movementBound[0] : false;
+    state._movementBound[1] = state.overflow[1] ? state._movementBound[1] === false ? state._movement[1] : state._movementBound[1] : false;
+    const rubberband = state._active ? config.rubberband || [0, 0] : [0, 0];
+    state.offset = computeRubberband(state._bounds, state.offset, rubberband);
+    state.delta = V.sub(state.offset, previousOffset);
+    this.computeMovement();
+    if (gestureIsActive && (!state.last || dt > BEFORE_LAST_KINEMATICS_DELAY)) {
+      state.delta = V.sub(state.offset, previousOffset);
+      const absoluteDelta = state.delta.map(Math.abs);
+      V.addTo(state.distance, absoluteDelta);
+      state.direction = state.delta.map(Math.sign);
+      state._direction = state._delta.map(Math.sign);
+      if (!state.first && dt > 0) {
+        state.velocity = [absoluteDelta[0] / dt, absoluteDelta[1] / dt];
+        state.timeDelta = dt;
+      }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     }
   }
 }
@@ -31764,11 +32959,22 @@ class MoveEngine extends CoordinatesEngine {
     if (!this.state._active) return;
     const values = pointerValues(event);
     const state = this.state;
+<<<<<<< HEAD
     state._delta = V.sub(values, state._values);
     V.addTo(state._movement, state._delta);
     this.computeValues(values);
     this.compute(event);
     this.emit();
+=======
+    const shared = this.shared;
+    const config = this.config;
+    if (!state._active) this.clean();
+    if ((state._blocked || !state.intentional) && !state._force && !config.triggerAllEvents) return;
+    const memo = this.handler(actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, shared), state), {}, {
+      [this.aliasKey]: state.values
+    }));
+    if (memo !== undefined) state.memo = memo;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   moveEnd(event) {
     if (!this.state._active) return;
@@ -31853,7 +33059,15 @@ const wheelConfigResolver = coordinatesConfigResolver;
 class HoverEngine extends CoordinatesEngine {
   constructor(...args) {
     super(...args);
+<<<<<<< HEAD
     actions_b1cc53c2_esm_defineProperty(this, "ingKey", 'hovering');
+=======
+    actions_94b581a0_esm_defineProperty(this, "aliasKey", 'xy');
+  }
+  reset() {
+    super.reset();
+    this.state.axis = undefined;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   enter(event) {
     if (this.config.mouseOnly && event.pointerType !== 'mouse') return;
@@ -31956,12 +33170,23 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
+<<<<<<< HEAD
 const sharedConfigResolver = {
   target(value) {
     if (value) {
       return () => 'current' in value ? value.current : value;
     }
     return undefined;
+=======
+const identity = v => v;
+const DEFAULT_RUBBERBAND = 0.15;
+const commonConfigResolver = {
+  enabled(value = true) {
+    return value;
+  },
+  eventOptions(value, _k, config) {
+    return actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, config.shared.eventOptions), value);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   },
   enabled(value = true) {
     return value;
@@ -31983,6 +33208,7 @@ const sharedConfigResolver = {
   }
 };
 
+<<<<<<< HEAD
 const _excluded = ["target", "eventOptions", "window", "enabled", "transform"];
 function resolveWith(config = {}, resolvers) {
   const result = {};
@@ -32000,6 +33226,62 @@ function resolveWith(config = {}, resolvers) {
         if (resolver) result[key] = config[key];
         break;
     }
+=======
+const DEFAULT_AXIS_THRESHOLD = 0;
+const coordinatesConfigResolver = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, commonConfigResolver), {}, {
+  axis(_v, _k, {
+    axis
+  }) {
+    this.lockDirection = axis === 'lock';
+    if (!this.lockDirection) return axis;
+  },
+  axisThreshold(value = DEFAULT_AXIS_THRESHOLD) {
+    return value;
+  },
+  bounds(value = {}) {
+    if (typeof value === 'function') {
+      return state => coordinatesConfigResolver.bounds(value(state));
+    }
+    if ('current' in value) {
+      return () => value.current;
+    }
+    if (typeof HTMLElement === 'function' && value instanceof HTMLElement) {
+      return value;
+    }
+    const {
+      left = -Infinity,
+      right = Infinity,
+      top = -Infinity,
+      bottom = Infinity
+    } = value;
+    return [[left, right], [top, bottom]];
+  }
+});
+
+const KEYS_DELTA_MAP = {
+  ArrowRight: (displacement, factor = 1) => [displacement * factor, 0],
+  ArrowLeft: (displacement, factor = 1) => [-1 * displacement * factor, 0],
+  ArrowUp: (displacement, factor = 1) => [0, -1 * displacement * factor],
+  ArrowDown: (displacement, factor = 1) => [0, displacement * factor]
+};
+class DragEngine extends CoordinatesEngine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'dragging');
+  }
+  reset() {
+    super.reset();
+    const state = this.state;
+    state._pointerId = undefined;
+    state._pointerActive = false;
+    state._keyboardActive = false;
+    state._preventScroll = false;
+    state._delayed = false;
+    state.swipe = [0, 0];
+    state.tap = false;
+    state.canceled = false;
+    state.cancel = this.cancel.bind(this);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   return result;
 }
@@ -32067,9 +33349,48 @@ class TimeoutStore {
   constructor() {
     actions_b1cc53c2_esm_defineProperty(this, "_timeouts", new Map());
   }
+<<<<<<< HEAD
   add(key, callback, ms = 140, ...args) {
     this.remove(key);
     this._timeouts.set(key, window.setTimeout(callback, ms, ...args));
+=======
+  pointerUp(event) {
+    this.ctrl.setEventIds(event);
+    try {
+      if (this.config.pointerCapture && event.target.hasPointerCapture(event.pointerId)) {
+        ;
+        event.target.releasePointerCapture(event.pointerId);
+      }
+    } catch (_unused) {
+      if (false) {}
+    }
+    const state = this.state;
+    const config = this.config;
+    if (!state._active || !state._pointerActive) return;
+    const id = pointerId(event);
+    if (state._pointerId !== undefined && id !== state._pointerId) return;
+    this.state._pointerActive = false;
+    this.setActive();
+    this.compute(event);
+    const [dx, dy] = state._distance;
+    state.tap = dx <= config.tapsThreshold && dy <= config.tapsThreshold;
+    if (state.tap && config.filterTaps) {
+      state._force = true;
+    } else {
+      const [_dx, _dy] = state._delta;
+      const [_mx, _my] = state._movement;
+      const [svx, svy] = config.swipe.velocity;
+      const [sx, sy] = config.swipe.distance;
+      const sdt = config.swipe.duration;
+      if (state.elapsedTime < sdt) {
+        const _vx = Math.abs(_dx / state.timeDelta);
+        const _vy = Math.abs(_dy / state.timeDelta);
+        if (_vx > svx && Math.abs(_mx) > sx) state.swipe[0] = Math.sign(_dx);
+        if (_vy > svy && Math.abs(_my) > sy) state.swipe[1] = Math.sign(_dy);
+      }
+    }
+    this.emit();
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   remove(key) {
     const timeout = this._timeouts.get(key);
@@ -32193,6 +33514,7 @@ const bindToProps = (props, eventOptions, withPassiveOption) => (device, action,
   props[handlerProp].push(handler);
 };
 
+<<<<<<< HEAD
 const RE_NOT_NATIVE = /^on(Drag|Wheel|Scroll|Move|Pinch|Hover)/;
 function sortHandlers(_handlers) {
   const native = {};
@@ -32264,6 +33586,20 @@ function useRecognizers(handlers, config = {}, gestureKey, nativeHandlers) {
     return ctrl.bind.bind(ctrl);
   }
   return undefined;
+=======
+const actions_94b581a0_esm_isBrowser = typeof window !== 'undefined' && window.document && window.document.createElement;
+function actions_94b581a0_esm_supportsTouchEvents() {
+  return actions_94b581a0_esm_isBrowser && 'ontouchstart' in window;
+}
+function isTouchScreen() {
+  return actions_94b581a0_esm_supportsTouchEvents() || actions_94b581a0_esm_isBrowser && window.navigator.maxTouchPoints > 1;
+}
+function actions_94b581a0_esm_supportsPointerEvents() {
+  return actions_94b581a0_esm_isBrowser && 'onpointerdown' in window;
+}
+function supportsPointerLock() {
+  return actions_94b581a0_esm_isBrowser && 'exitPointerLock' in window.document;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 }
 
 function useDrag(handler, config) {
@@ -32361,6 +33697,17 @@ function getDragCursor(dragDirection) {
   }
   return dragCursor;
 }
+<<<<<<< HEAD
+=======
+const SUPPORT = {
+  isBrowser: actions_94b581a0_esm_isBrowser,
+  gesture: supportsGestureEvents(),
+  touch: isTouchScreen(),
+  touchscreen: isTouchScreen(),
+  pointer: actions_94b581a0_esm_supportsPointerEvents(),
+  pointerLock: supportsPointerLock()
+};
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * Custom hook that renders a drag cursor when dragging.
@@ -32438,6 +33785,7 @@ const initialInputControlState = {
   isPressEnterToChange: false,
   value: ''
 };
+<<<<<<< HEAD
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/input-control/reducer/actions.js
 /**
@@ -32507,6 +33855,60 @@ function inputControlStateReducer(composedStateReducers) {
   return (state, action) => {
     const nextState = {
       ...state
+=======
+const dragConfigResolver = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, coordinatesConfigResolver), {}, {
+  device(_v, _k, {
+    pointer: {
+      touch = false,
+      lock = false,
+      mouse = false
+    } = {}
+  }) {
+    this.pointerLock = lock && SUPPORT.pointerLock;
+    if (SUPPORT.touch && touch) return 'touch';
+    if (this.pointerLock) return 'mouse';
+    if (SUPPORT.pointer && !mouse) return 'pointer';
+    if (SUPPORT.touch) return 'touch';
+    return 'mouse';
+  },
+  preventScrollAxis(value, _k, {
+    preventScroll
+  }) {
+    this.preventScrollDelay = typeof preventScroll === 'number' ? preventScroll : preventScroll || preventScroll === undefined && value ? DEFAULT_PREVENT_SCROLL_DELAY : undefined;
+    if (!SUPPORT.touchscreen || preventScroll === false) return undefined;
+    return value ? value : preventScroll !== undefined ? 'y' : undefined;
+  },
+  pointerCapture(_v, _k, {
+    pointer: {
+      capture = true,
+      buttons = 1,
+      keys = true
+    } = {}
+  }) {
+    this.pointerButtons = buttons;
+    this.keys = keys;
+    return !this.pointerLock && this.device === 'pointer' && capture;
+  },
+  threshold(value, _k, {
+    filterTaps = false,
+    tapsThreshold = 3,
+    axis = undefined
+  }) {
+    const threshold = V.toVector(value, filterTaps ? tapsThreshold : axis ? 1 : 0);
+    this.filterTaps = filterTaps;
+    this.tapsThreshold = tapsThreshold;
+    return threshold;
+  },
+  swipe({
+    velocity = DEFAULT_SWIPE_VELOCITY,
+    distance = DEFAULT_SWIPE_DISTANCE,
+    duration = DEFAULT_SWIPE_DURATION
+  } = {}) {
+    return {
+      velocity: this.transform(V.toVector(velocity)),
+      distance: this.transform(V.toVector(distance)),
+      duration
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     };
     switch (action.type) {
       /*
@@ -32566,7 +33968,20 @@ function inputControlStateReducer(composedStateReducers) {
         nextState.error = action.payload.error;
         break;
     }
+<<<<<<< HEAD
     nextState._event = action.payload.event;
+=======
+  },
+  axisThreshold(value) {
+    if (!value) return DEFAULT_DRAG_AXIS_THRESHOLD;
+    return actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, DEFAULT_DRAG_AXIS_THRESHOLD), value);
+  },
+  keyboardDisplacement(value = DEFAULT_KEYBOARD_DISPLACEMENT) {
+    return value;
+  }
+});
+if (false) {}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
     /**
      * Send the nextState + action to the composedReducers via
@@ -32577,6 +33992,7 @@ function inputControlStateReducer(composedStateReducers) {
   };
 }
 
+<<<<<<< HEAD
 /**
  * A custom hook that connects and external stateReducer with an internal
  * reducer. This hook manages the internal state of InputControl.
@@ -32627,6 +34043,94 @@ function useInputControlStateReducer(stateReducer = initialStateReducer, initial
     payload: {
       error,
       event
+=======
+const SCALE_ANGLE_RATIO_INTENT_DEG = 30;
+const PINCH_WHEEL_RATIO = 100;
+class PinchEngine extends Engine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'pinching');
+    actions_94b581a0_esm_defineProperty(this, "aliasKey", 'da');
+  }
+  init() {
+    this.state.offset = [1, 0];
+    this.state.lastOffset = [1, 0];
+    this.state._pointerEvents = new Map();
+  }
+  reset() {
+    super.reset();
+    const state = this.state;
+    state._touchIds = [];
+    state.canceled = false;
+    state.cancel = this.cancel.bind(this);
+    state.turns = 0;
+  }
+  computeOffset() {
+    const {
+      type,
+      movement,
+      lastOffset
+    } = this.state;
+    if (type === 'wheel') {
+      this.state.offset = V.add(movement, lastOffset);
+    } else {
+      this.state.offset = [(1 + movement[0]) * lastOffset[0], movement[1] + lastOffset[1]];
+    }
+  }
+  computeMovement() {
+    const {
+      offset,
+      lastOffset
+    } = this.state;
+    this.state.movement = [offset[0] / lastOffset[0], offset[1] - lastOffset[1]];
+  }
+  axisIntent() {
+    const state = this.state;
+    const [_m0, _m1] = state._movement;
+    if (!state.axis) {
+      const axisMovementDifference = Math.abs(_m0) * SCALE_ANGLE_RATIO_INTENT_DEG - Math.abs(_m1);
+      if (axisMovementDifference < 0) state.axis = 'angle';else if (axisMovementDifference > 0) state.axis = 'scale';
+    }
+  }
+  restrictToAxis(v) {
+    if (this.config.lockDirection) {
+      if (this.state.axis === 'scale') v[1] = 0;else if (this.state.axis === 'angle') v[0] = 0;
+    }
+  }
+  cancel() {
+    const state = this.state;
+    if (state.canceled) return;
+    setTimeout(() => {
+      state.canceled = true;
+      state._active = false;
+      this.compute();
+      this.emit();
+    }, 0);
+  }
+  touchStart(event) {
+    this.ctrl.setEventIds(event);
+    const state = this.state;
+    const ctrlTouchIds = this.ctrl.touchIds;
+    if (state._active) {
+      if (state._touchIds.every(id => ctrlTouchIds.has(id))) return;
+    }
+    if (ctrlTouchIds.size < 2) return;
+    this.start(event);
+    state._touchIds = Array.from(ctrlTouchIds).slice(0, 2);
+    const payload = touchDistanceAngle(event, state._touchIds);
+    if (!payload) return;
+    this.pinchStart(event, payload);
+  }
+  pointerStart(event) {
+    if (event.buttons != null && event.buttons % 2 !== 1) return;
+    this.ctrl.setEventIds(event);
+    event.target.setPointerCapture(event.pointerId);
+    const state = this.state;
+    const _pointerEvents = state._pointerEvents;
+    const ctrlPointerIds = this.ctrl.pointerIds;
+    if (state._active) {
+      if (Array.from(_pointerEvents.keys()).every(id => ctrlPointerIds.has(id))) return;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     }
   });
   const reset = createChangeEvent(RESET);
@@ -32661,6 +34165,7 @@ function useInputControlStateReducer(stateReducer = initialStateReducer, initial
         event: currentState.current._event
       });
     }
+<<<<<<< HEAD
   }, [state.value, state.isDirty]);
 
   // Updates the state from props.
@@ -32769,6 +34274,58 @@ function InputField({
     if (isDirty || !event.target.validity.valid) {
       wasDirtyOnBlur.current = true;
       handleOnCommit(event);
+=======
+    if (state._pointerEvents.size < 2) return;
+    this.start(event);
+    const payload = distanceAngle(...Array.from(_pointerEvents.values()));
+    if (!payload) return;
+    this.pinchStart(event, payload);
+  }
+  pinchStart(event, payload) {
+    const state = this.state;
+    state.origin = payload.origin;
+    this.computeValues([payload.distance, payload.angle]);
+    this.computeInitial();
+    this.compute(event);
+    this.emit();
+  }
+  touchMove(event) {
+    if (!this.state._active) return;
+    const payload = touchDistanceAngle(event, this.state._touchIds);
+    if (!payload) return;
+    this.pinchMove(event, payload);
+  }
+  pointerMove(event) {
+    const _pointerEvents = this.state._pointerEvents;
+    if (_pointerEvents.has(event.pointerId)) {
+      _pointerEvents.set(event.pointerId, event);
+    }
+    if (!this.state._active) return;
+    const payload = distanceAngle(...Array.from(_pointerEvents.values()));
+    if (!payload) return;
+    this.pinchMove(event, payload);
+  }
+  pinchMove(event, payload) {
+    const state = this.state;
+    const prev_a = state._values[1];
+    const delta_a = payload.angle - prev_a;
+    let delta_turns = 0;
+    if (Math.abs(delta_a) > 270) delta_turns += Math.sign(delta_a);
+    this.computeValues([payload.distance, payload.angle - 360 * delta_turns]);
+    state.origin = payload.origin;
+    state.turns = delta_turns;
+    state._movement = [state._values[0] / state._initial[0] - 1, state._values[1] - state._initial[1]];
+    this.compute(event);
+    this.emit();
+  }
+  touchEnd(event) {
+    this.ctrl.setEventIds(event);
+    if (!this.state._active) return;
+    if (this.state._touchIds.some(id => !this.ctrl.touchIds.has(id))) {
+      this.state._active = false;
+      this.compute(event);
+      this.emit();
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     }
   };
   const handleOnFocus = event => {
@@ -32851,10 +34408,19 @@ function InputField({
       onDragStart(dragProps);
       dragStart(dragProps);
     }
+<<<<<<< HEAD
   }, {
     axis: dragDirection === 'e' || dragDirection === 'w' ? 'x' : 'y',
     threshold: dragThreshold,
     enabled: isDragEnabled,
+=======
+  }
+}
+
+const pinchConfigResolver = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, commonConfigResolver), {}, {
+  device(_v, _k, {
+    shared,
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     pointer: {
       capture: false
     }
@@ -32872,6 +34438,62 @@ function InputField({
         event.currentTarget.focus();
       }
     };
+<<<<<<< HEAD
+=======
+    if (typeof scaleBounds !== 'function' && typeof angleBounds !== 'function') return [_scaleBounds(), _angleBounds()];
+    return state => [_scaleBounds(state), _angleBounds(state)];
+  },
+  threshold(value, _k, config) {
+    this.lockDirection = config.axis === 'lock';
+    const threshold = V.toVector(value, this.lockDirection ? [0.1, 3] : 0);
+    return threshold;
+  },
+  modifierKey(value) {
+    if (value === undefined) return 'ctrlKey';
+    return value;
+  },
+  pinchOnWheel(value = true) {
+    return value;
+  }
+});
+
+class MoveEngine extends CoordinatesEngine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'moving');
+  }
+  move(event) {
+    if (this.config.mouseOnly && event.pointerType !== 'mouse') return;
+    if (!this.state._active) this.moveStart(event);else this.moveChange(event);
+    this.timeoutStore.add('moveEnd', this.moveEnd.bind(this));
+  }
+  moveStart(event) {
+    this.start(event);
+    this.computeValues(pointerValues(event));
+    this.compute(event);
+    this.computeInitial();
+    this.emit();
+  }
+  moveChange(event) {
+    if (!this.state._active) return;
+    const values = pointerValues(event);
+    const state = this.state;
+    state._delta = V.sub(values, state._values);
+    V.addTo(state._movement, state._delta);
+    this.computeValues(values);
+    this.compute(event);
+    this.emit();
+  }
+  moveEnd(event) {
+    if (!this.state._active) return;
+    this.state._active = false;
+    this.compute(event);
+    this.emit();
+  }
+  bind(bindFunction) {
+    bindFunction('pointer', 'change', this.move.bind(this));
+    bindFunction('pointer', 'leave', this.moveEnd.bind(this));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   return (0,external_wp_element_namespaceObject.createElement)(Input, {
     ...props,
@@ -32898,6 +34520,7 @@ function InputField({
 const ForwardedComponent = (0,external_wp_element_namespaceObject.forwardRef)(InputField);
 /* harmony default export */ var input_field = (ForwardedComponent);
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/utils/font-values.js
 /* harmony default export */ var font_values = ({
   'default.fontFamily': "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
@@ -32910,8 +34533,45 @@ const ForwardedComponent = (0,external_wp_element_namespaceObject.forwardRef)(In
 /**
  * Internal dependencies
  */
+=======
+const moveConfigResolver = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, coordinatesConfigResolver), {}, {
+  mouseOnly: (value = true) => value
+});
+
+class ScrollEngine extends CoordinatesEngine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'scrolling');
+  }
+  scroll(event) {
+    if (!this.state._active) this.start(event);
+    this.scrollChange(event);
+    this.timeoutStore.add('scrollEnd', this.scrollEnd.bind(this));
+  }
+  scrollChange(event) {
+    if (event.cancelable) event.preventDefault();
+    const state = this.state;
+    const values = scrollValues(event);
+    state._delta = V.sub(values, state._values);
+    V.addTo(state._movement, state._delta);
+    this.computeValues(values);
+    this.compute(event);
+    this.emit();
+  }
+  scrollEnd() {
+    if (!this.state._active) return;
+    this.state._active = false;
+    this.compute();
+    this.emit();
+  }
+  bind(bindFunction) {
+    bindFunction('scroll', '', this.scroll.bind(this));
+  }
+}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
+<<<<<<< HEAD
 /**
  *
  * @param {keyof FONT} value Path of value from `FONT`
@@ -32920,6 +34580,35 @@ const ForwardedComponent = (0,external_wp_element_namespaceObject.forwardRef)(In
 function font(value) {
   var _FONT$value;
   return (_FONT$value = font_values[value]) !== null && _FONT$value !== void 0 ? _FONT$value : '';
+=======
+class WheelEngine extends CoordinatesEngine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'wheeling');
+  }
+  wheel(event) {
+    if (!this.state._active) this.start(event);
+    this.wheelChange(event);
+    this.timeoutStore.add('wheelEnd', this.wheelEnd.bind(this));
+  }
+  wheelChange(event) {
+    const state = this.state;
+    state._delta = wheelValues(event);
+    V.addTo(state._movement, state._delta);
+    clampStateInternalMovementToBounds(state);
+    this.compute(event);
+    this.emit();
+  }
+  wheelEnd() {
+    if (!this.state._active) return;
+    this.state._active = false;
+    this.compute();
+    this.emit();
+  }
+  bind(bindFunction) {
+    bindFunction('wheel', '', this.wheel.bind(this));
+  }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/utils/box-sizing.js
@@ -32928,6 +34617,7 @@ function box_sizing_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have tried to
  * External dependencies
  */
 
+<<<<<<< HEAD
 const boxSizingReset =  true ? {
   name: "kv6lnz",
   styles: "box-sizing:border-box;*,*::before,*::after{box-sizing:inherit;}"
@@ -33072,6 +34762,77 @@ const VisualLabel = ({
     ...props,
     className: classnames_default()('components-base-control__label', className)
   }, children);
+=======
+class HoverEngine extends CoordinatesEngine {
+  constructor(...args) {
+    super(...args);
+    actions_94b581a0_esm_defineProperty(this, "ingKey", 'hovering');
+  }
+  enter(event) {
+    if (this.config.mouseOnly && event.pointerType !== 'mouse') return;
+    this.start(event);
+    this.computeValues(pointerValues(event));
+    this.compute(event);
+    this.emit();
+  }
+  leave(event) {
+    if (this.config.mouseOnly && event.pointerType !== 'mouse') return;
+    const state = this.state;
+    if (!state._active) return;
+    state._active = false;
+    const values = pointerValues(event);
+    state._movement = state._delta = V.sub(values, state._values);
+    this.computeValues(values);
+    this.compute(event);
+    state.delta = state.movement;
+    this.emit();
+  }
+  bind(bindFunction) {
+    bindFunction('pointer', 'enter', this.enter.bind(this));
+    bindFunction('pointer', 'leave', this.leave.bind(this));
+  }
+}
+
+const hoverConfigResolver = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, coordinatesConfigResolver), {}, {
+  mouseOnly: (value = true) => value
+});
+
+const actions_94b581a0_esm_EngineMap = new Map();
+const ConfigResolverMap = new Map();
+function actions_94b581a0_esm_registerAction(action) {
+  actions_94b581a0_esm_EngineMap.set(action.key, action.engine);
+  ConfigResolverMap.set(action.key, action.resolver);
+}
+const actions_94b581a0_esm_dragAction = {
+  key: 'drag',
+  engine: DragEngine,
+  resolver: dragConfigResolver
+};
+const actions_94b581a0_esm_hoverAction = {
+  key: 'hover',
+  engine: HoverEngine,
+  resolver: hoverConfigResolver
+};
+const actions_94b581a0_esm_moveAction = {
+  key: 'move',
+  engine: MoveEngine,
+  resolver: moveConfigResolver
+};
+const actions_94b581a0_esm_pinchAction = {
+  key: 'pinch',
+  engine: PinchEngine,
+  resolver: pinchConfigResolver
+};
+const actions_94b581a0_esm_scrollAction = {
+  key: 'scroll',
+  engine: ScrollEngine,
+  resolver: scrollConfigResolver
+};
+const actions_94b581a0_esm_wheelAction = {
+  key: 'wheel',
+  engine: WheelEngine,
+  resolver: wheelConfigResolver
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 };
 BaseControl.VisualLabel = VisualLabel;
 /* harmony default export */ var base_control = (BaseControl);
@@ -33255,6 +35016,7 @@ function Dashicon({
  * WordPress dependencies
  */
 
+<<<<<<< HEAD
 
 
 /**
@@ -33271,6 +35033,123 @@ function Icon({
       icon: icon,
       size: size,
       ...additionalProps
+=======
+const _excluded = ["target", "eventOptions", "window", "enabled", "transform"];
+function resolveWith(config = {}, resolvers) {
+  const result = {};
+  for (const [key, resolver] of Object.entries(resolvers)) {
+    switch (typeof resolver) {
+      case 'function':
+        if (false) {} else {
+          result[key] = resolver.call(result, config[key], key, config);
+        }
+        break;
+      case 'object':
+        result[key] = resolveWith(config[key], resolver);
+        break;
+      case 'boolean':
+        if (resolver) result[key] = config[key];
+        break;
+    }
+  }
+  return result;
+}
+function use_gesture_core_esm_parse(newConfig, gestureKey, _config = {}) {
+  const _ref = newConfig,
+    {
+      target,
+      eventOptions,
+      window,
+      enabled,
+      transform
+    } = _ref,
+    rest = _objectWithoutProperties(_ref, _excluded);
+  _config.shared = resolveWith({
+    target,
+    eventOptions,
+    window,
+    enabled,
+    transform
+  }, sharedConfigResolver);
+  if (gestureKey) {
+    const resolver = ConfigResolverMap.get(gestureKey);
+    _config[gestureKey] = resolveWith(actions_94b581a0_esm_objectSpread2({
+      shared: _config.shared
+    }, rest), resolver);
+  } else {
+    for (const key in rest) {
+      const resolver = ConfigResolverMap.get(key);
+      if (resolver) {
+        _config[key] = resolveWith(actions_94b581a0_esm_objectSpread2({
+          shared: _config.shared
+        }, rest[key]), resolver);
+      } else if (false) {}
+    }
+  }
+  return _config;
+}
+
+class EventStore {
+  constructor(ctrl, gestureKey) {
+    actions_94b581a0_esm_defineProperty(this, "_listeners", new Set());
+    this._ctrl = ctrl;
+    this._gestureKey = gestureKey;
+  }
+  add(element, device, action, handler, options) {
+    const listeners = this._listeners;
+    const type = toDomEventType(device, action);
+    const _options = this._gestureKey ? this._ctrl.config[this._gestureKey].eventOptions : {};
+    const eventOptions = actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, _options), options);
+    element.addEventListener(type, handler, eventOptions);
+    const remove = () => {
+      element.removeEventListener(type, handler, eventOptions);
+      listeners.delete(remove);
+    };
+    listeners.add(remove);
+    return remove;
+  }
+  clean() {
+    this._listeners.forEach(remove => remove());
+    this._listeners.clear();
+  }
+}
+
+class TimeoutStore {
+  constructor() {
+    actions_94b581a0_esm_defineProperty(this, "_timeouts", new Map());
+  }
+  add(key, callback, ms = 140, ...args) {
+    this.remove(key);
+    this._timeouts.set(key, window.setTimeout(callback, ms, ...args));
+  }
+  remove(key) {
+    const timeout = this._timeouts.get(key);
+    if (timeout) window.clearTimeout(timeout);
+  }
+  clean() {
+    this._timeouts.forEach(timeout => void window.clearTimeout(timeout));
+    this._timeouts.clear();
+  }
+}
+
+class Controller {
+  constructor(handlers) {
+    actions_94b581a0_esm_defineProperty(this, "gestures", new Set());
+    actions_94b581a0_esm_defineProperty(this, "_targetEventStore", new EventStore(this));
+    actions_94b581a0_esm_defineProperty(this, "gestureEventStores", {});
+    actions_94b581a0_esm_defineProperty(this, "gestureTimeoutStores", {});
+    actions_94b581a0_esm_defineProperty(this, "handlers", {});
+    actions_94b581a0_esm_defineProperty(this, "config", {});
+    actions_94b581a0_esm_defineProperty(this, "pointerIds", new Set());
+    actions_94b581a0_esm_defineProperty(this, "touchIds", new Set());
+    actions_94b581a0_esm_defineProperty(this, "state", {
+      shared: {
+        shiftKey: false,
+        metaKey: false,
+        ctrlKey: false,
+        altKey: false
+      }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     });
   }
   if ((0,external_wp_element_namespaceObject.isValidElement)(icon) && dashicon === icon.type) {
@@ -33295,12 +35174,55 @@ function Icon({
       ...appliedProps
     });
   }
+<<<<<<< HEAD
   if ((0,external_wp_element_namespaceObject.isValidElement)(icon)) {
     return (0,external_wp_element_namespaceObject.cloneElement)(icon, {
       // @ts-ignore Just forwarding the size prop along
       size,
       ...additionalProps
     });
+=======
+  bind(...args) {
+    const sharedConfig = this.config.shared;
+    const props = {};
+    let target;
+    if (sharedConfig.target) {
+      target = sharedConfig.target();
+      if (!target) return;
+    }
+    if (sharedConfig.enabled) {
+      for (const gestureKey of this.gestures) {
+        const gestureConfig = this.config[gestureKey];
+        const bindFunction = bindToProps(props, gestureConfig.eventOptions, !!target);
+        if (gestureConfig.enabled) {
+          const Engine = actions_94b581a0_esm_EngineMap.get(gestureKey);
+          new Engine(this, args, gestureKey).bind(bindFunction);
+        }
+      }
+      const nativeBindFunction = bindToProps(props, sharedConfig.eventOptions, !!target);
+      for (const eventKey in this.nativeHandlers) {
+        nativeBindFunction(eventKey, '', event => this.nativeHandlers[eventKey](actions_94b581a0_esm_objectSpread2(actions_94b581a0_esm_objectSpread2({}, this.state.shared), {}, {
+          event,
+          args
+        })), undefined, true);
+      }
+    }
+    for (const handlerProp in props) {
+      props[handlerProp] = chain(...props[handlerProp]);
+    }
+    if (!target) return props;
+    for (const handlerProp in props) {
+      const {
+        device,
+        capture,
+        passive
+      } = parseProp(handlerProp);
+      this._targetEventStore.add(target, device, '', props[handlerProp], {
+        capture,
+        passive
+      });
+    }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   return icon;
 }
@@ -33344,6 +35266,7 @@ function button_useDeprecatedProps({
     var _computedSize;
     (_computedSize = computedSize) !== null && _computedSize !== void 0 ? _computedSize : computedSize = 'small';
   }
+<<<<<<< HEAD
   if (isPrimary) {
     var _computedVariant;
     (_computedVariant = computedVariant) !== null && _computedVariant !== void 0 ? _computedVariant : computedVariant = 'primary';
@@ -33373,6 +35296,62 @@ function button_useDeprecatedProps({
     ...otherProps,
     size: computedSize,
     variant: computedVariant
+=======
+  return undefined;
+}
+
+function use_gesture_react_esm_useDrag(handler, config) {
+  actions_94b581a0_esm_registerAction(actions_94b581a0_esm_dragAction);
+  return useRecognizers({
+    drag: handler
+  }, config || {}, 'drag');
+}
+
+function usePinch(handler, config) {
+  registerAction(pinchAction);
+  return useRecognizers({
+    pinch: handler
+  }, config || {}, 'pinch');
+}
+
+function useWheel(handler, config) {
+  registerAction(wheelAction);
+  return useRecognizers({
+    wheel: handler
+  }, config || {}, 'wheel');
+}
+
+function useScroll(handler, config) {
+  registerAction(scrollAction);
+  return useRecognizers({
+    scroll: handler
+  }, config || {}, 'scroll');
+}
+
+function useMove(handler, config) {
+  registerAction(moveAction);
+  return useRecognizers({
+    move: handler
+  }, config || {}, 'move');
+}
+
+function useHover(handler, config) {
+  actions_94b581a0_esm_registerAction(actions_94b581a0_esm_hoverAction);
+  return useRecognizers({
+    hover: handler
+  }, config || {}, 'hover');
+}
+
+function createUseGesture(actions) {
+  actions.forEach(registerAction);
+  return function useGesture(_handlers, _config) {
+    const {
+      handlers,
+      nativeHandlers,
+      config
+    } = parseMergedHandlers(_handlers, _config || {});
+    return useRecognizers(handlers, config, undefined, nativeHandlers);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   };
 }
 function UnforwardedButton(props, ref) {
@@ -34447,6 +36426,7 @@ function filterOptions(search, options = [], maxResults = 10) {
     }
     filtered.push(option);
 
+<<<<<<< HEAD
     // Abort early if max reached.
     if (filtered.length === maxResults) {
       break;
@@ -34503,10 +36483,39 @@ function getDefaultUseItems(autocompleter) {
     return [items];
   };
 }
+=======
+const base_control_styles_Wrapper = createStyled("div",  true ? {
+  target: "ej5x27r4"
+} : 0)("font-family:", font('default.fontFamily'), ";font-size:", font('default.fontSize'), ";", boxSizingReset, ";" + ( true ? "" : 0));
+
+const deprecatedMarginField = _ref2 => {
+  let {
+    __nextHasNoMarginBottom = false
+  } = _ref2;
+  return !__nextHasNoMarginBottom && /*#__PURE__*/emotion_react_browser_esm_css("margin-bottom:", space(2), ";" + ( true ? "" : 0),  true ? "" : 0);
+};
+
+const StyledField = createStyled("div",  true ? {
+  target: "ej5x27r3"
+} : 0)(deprecatedMarginField, " .components-panel__row &{margin-bottom:inherit;}" + ( true ? "" : 0));
+const labelStyles = /*#__PURE__*/emotion_react_browser_esm_css(baseLabelTypography, ";display:inline-block;margin-bottom:", space(2), ";padding:0;" + ( true ? "" : 0),  true ? "" : 0);
+const StyledLabel = createStyled("label",  true ? {
+  target: "ej5x27r2"
+} : 0)(labelStyles, ";" + ( true ? "" : 0));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/@floating-ui/react-dom/dist/floating-ui.react-dom.mjs
 
 
+<<<<<<< HEAD
+=======
+const StyledHelp = createStyled("p",  true ? {
+  target: "ej5x27r1"
+} : 0)("margin-top:", space(2), ";margin-bottom:0;font-size:", font('helpText.fontSize'), ";font-style:normal;color:", COLORS.gray[700], ";", deprecatedMarginHelp, ";" + ( true ? "" : 0));
+const StyledVisualLabel = createStyled("span",  true ? {
+  target: "ej5x27r0"
+} : 0)(labelStyles, ";" + ( true ? "" : 0));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -35364,14 +37373,30 @@ const markPending = (sourceObject, callback) => {
     }
   }
 };
+<<<<<<< HEAD
 const checkPending = (sourceObject, callback) => {
   const sourceObjectEntry = sourceObjectMap.get(sourceObject);
   if (sourceObjectEntry == null ? void 0 : sourceObjectEntry[2]) {
     sourceObjectEntry[3].add(callback);
     return true;
+=======
+
+const number_control_styles_Input = /*#__PURE__*/createStyled(input_control,  true ? {
+  target: "ep09it41"
+} : 0)(htmlArrowStyles, ";" + ( true ? "" : 0));
+
+const spinButtonSizeStyles = _ref3 => {
+  let {
+    size
+  } = _ref3;
+
+  if (size !== 'small') {
+    return ``;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
   return false;
 };
+<<<<<<< HEAD
 const unmarkPending = (sourceObject) => {
   const sourceObjectEntry = sourceObjectMap.get(sourceObject);
   if (sourceObjectEntry) {
@@ -35386,6 +37411,36 @@ const unmarkPending = (sourceObject) => {
         unmarkPending(derivedObject);
       }
     });
+=======
+
+const SpinButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
+  target: "ep09it40"
+} : 0)("&&&&&{color:", COLORS.ui.theme, ";", spinButtonSizeStyles, ";}" + ( true ? "" : 0));
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/utils/math.js
+/**
+ * Parses and retrieves a number value.
+ *
+ * @param {unknown} value The incoming value.
+ *
+ * @return {number} The parsed number value.
+ */
+function getNumber(value) {
+  const number = Number(value);
+  return isNaN(number) ? 0 : number;
+}
+/**
+ * Safely adds 2 values.
+ *
+ * @param {Array<number|string>} args Values to add together.
+ *
+ * @return {number} The sum of values.
+ */
+
+function add() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   }
 };
 const addSubscription = (subscription) => {
@@ -36182,9 +38237,27 @@ function StyleProvider(props) {
  */
 
 
+<<<<<<< HEAD
 /**
  * Internal dependencies
  */
+=======
+const angle_picker_control_styles_Root = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "e65ony43"
+} : 0)(deprecatedBottomMargin, ";" + ( true ? "" : 0));
+const CircleRoot = createStyled("div",  true ? {
+  target: "e65ony42"
+} : 0)("border-radius:50%;border:", config_values.borderWidth, " solid ", COLORS.ui.border, ";box-sizing:border-box;cursor:grab;height:", CIRCLE_SIZE, "px;overflow:hidden;width:", CIRCLE_SIZE, "px;" + ( true ? "" : 0));
+const CircleIndicatorWrapper = createStyled("div",  true ? {
+  target: "e65ony41"
+} : 0)( true ? {
+  name: "1r307gh",
+  styles: "box-sizing:border-box;position:relative;width:100%;height:100%;:focus-visible{outline:none;}"
+} : 0);
+const CircleIndicator = createStyled("div",  true ? {
+  target: "e65ony40"
+} : 0)("background:", COLORS.ui.theme, ";border-radius:50%;border:", INNER_CIRCLE_SIZE, "px solid ", COLORS.ui.theme, ";bottom:0;box-sizing:border-box;display:block;height:0px;left:0;margin:auto;position:absolute;right:0;top:-", CIRCLE_SIZE / 2, "px;width:0px;" + ( true ? "" : 0));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 function fill_useForceUpdate() {
@@ -37724,8 +39797,12 @@ const lineDotted = (0,external_wp_element_namespaceObject.createElement)(externa
 
 // TODO: Resolve need to use &&& to increase specificity
 // https://github.com/WordPress/gutenberg/issues/18483
+<<<<<<< HEAD
 
 const ValueInput = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+=======
+const ValueInput = /*#__PURE__*/createStyled(number_control,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1bagdl32"
 } : 0)("&&&{input{display:block;width:100%;}", BackdropUI, "{transition:box-shadow 0.1s linear;}}" + ( true ? "" : 0));
 const baseUnitLabelStyles = ({
@@ -37737,7 +39814,12 @@ const baseUnitLabelStyles = ({
   };
   return selectSize === '__unstable-large' ? sizes.large : sizes.default;
 };
+<<<<<<< HEAD
 const UnitLabel = emotion_styled_base_browser_esm("div",  true ? {
+=======
+
+const UnitLabel = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1bagdl31"
 } : 0)("&&&{pointer-events:none;", baseUnitLabelStyles, ";color:", COLORS.gray[900], ";}" + ( true ? "" : 0));
 const unitSelectSizes = ({
@@ -37752,7 +39834,12 @@ const unitSelectSizes = ({
   };
   return selectSize === '__unstable-large' ? sizes.large : sizes.default;
 };
+<<<<<<< HEAD
 const UnitSelect = emotion_styled_base_browser_esm("select",  true ? {
+=======
+
+const UnitSelect = createStyled("select",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1bagdl30"
 } : 0)("&&&{appearance:none;background:transparent;border-radius:2px;border:none;display:block;outline:none;margin:0;min-height:auto;font-family:inherit;", baseUnitLabelStyles, ";", unitSelectSizes, ";&:not( :disabled ){cursor:pointer;}}" + ( true ? "" : 0));
 
@@ -38308,13 +40395,13 @@ const overflowStyles = ({
 // TODO: Resolve need to use &&& to increase specificity
 // https://github.com/WordPress/gutenberg/issues/18483
 
-const Select = emotion_styled_base_browser_esm("select",  true ? {
+const Select = createStyled("select",  true ? {
   target: "e1mv6sxx2"
 } : 0)("&&&{appearance:none;background:transparent;box-sizing:border-box;border:none;box-shadow:none!important;color:", COLORS.gray[900], ";display:block;font-family:inherit;margin:0;width:100%;max-width:none;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;", select_control_styles_disabledStyles, ";", select_control_styles_fontSizeStyles, ";", select_control_styles_sizeStyles, ";", sizePaddings, ";", overflowStyles, ";}" + ( true ? "" : 0));
-const DownArrowWrapper = emotion_styled_base_browser_esm("div",  true ? {
+const DownArrowWrapper = createStyled("div",  true ? {
   target: "e1mv6sxx1"
 } : 0)("margin-inline-end:", space(-1), ";line-height:0;" + ( true ? "" : 0));
-const InputControlSuffixWrapperWithClickThrough = /*#__PURE__*/emotion_styled_base_browser_esm(input_suffix_wrapper,  true ? {
+const InputControlSuffixWrapperWithClickThrough = /*#__PURE__*/createStyled(input_suffix_wrapper,  true ? {
   target: "e1mv6sxx0"
 } : 0)("position:absolute;pointer-events:none;", rtl({
   right: 0
@@ -38698,12 +40785,16 @@ const rangeHeight = () => /*#__PURE__*/emotion_react_browser_esm_css({
   minHeight: rangeHeightValue
 },  true ? "" : 0,  true ? "" : 0);
 const thumbSize = 12;
+<<<<<<< HEAD
 const deprecatedHeight = ({
   __next40pxDefaultSize
 }) => !__next40pxDefaultSize && /*#__PURE__*/emotion_react_browser_esm_css({
   minHeight: rangeHeightValue
 },  true ? "" : 0,  true ? "" : 0);
 const range_control_styles_Root = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const range_control_styles_Root = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk14"
 } : 0)("-webkit-tap-highlight-color:transparent;align-items:center;display:flex;justify-content:flex-start;padding:0;position:relative;touch-action:none;width:100%;min-height:40px;", deprecatedHeight, ";" + ( true ? "" : 0));
 const wrapperColor = ({
@@ -38722,15 +40813,20 @@ const wrapperMargin = ({
   }
   return '';
 };
+<<<<<<< HEAD
 const range_control_styles_Wrapper = emotion_styled_base_browser_esm("div",  true ? {
+=======
+
+const range_control_styles_Wrapper = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk13"
 } : 0)("display:block;flex:1;position:relative;width:100%;", wrapperColor, ";", rangeHeight, ";", wrapperMargin, ";" + ( true ? "" : 0));
-const BeforeIconWrapper = emotion_styled_base_browser_esm("span",  true ? {
+const BeforeIconWrapper = createStyled("span",  true ? {
   target: "e1epgpqk12"
 } : 0)("display:flex;margin-top:", railHeight, "px;", rtl({
   marginRight: 6
 }), ";" + ( true ? "" : 0));
-const AfterIconWrapper = emotion_styled_base_browser_esm("span",  true ? {
+const AfterIconWrapper = createStyled("span",  true ? {
   target: "e1epgpqk11"
 } : 0)("display:flex;margin-top:", railHeight, "px;", rtl({
   marginLeft: 6
@@ -38747,7 +40843,12 @@ const railBackgroundColor = ({
     background
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const Rail = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const Rail = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk10"
 } : 0)("background-color:", COLORS.gray[300], ";left:0;pointer-events:none;right:0;display:block;height:", railHeight, "px;position:absolute;margin-top:", (rangeHeightValue - railHeight) / 2, "px;top:0;border-radius:", railHeight, "px;", railBackgroundColor, ";" + ( true ? "" : 0));
 const trackBackgroundColor = ({
@@ -38762,10 +40863,15 @@ const trackBackgroundColor = ({
     background
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const Track = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const Track = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk9"
 } : 0)("background-color:currentColor;border-radius:", railHeight, "px;height:", railHeight, "px;pointer-events:none;display:block;position:absolute;margin-top:", (rangeHeightValue - railHeight) / 2, "px;top:0;", trackBackgroundColor, ";" + ( true ? "" : 0));
-const MarksWrapper = emotion_styled_base_browser_esm("span",  true ? {
+const MarksWrapper = createStyled("span",  true ? {
   target: "e1epgpqk8"
 } : 0)( true ? {
   name: "l7tjj5",
@@ -38783,7 +40889,12 @@ const markFill = ({
     backgroundColor
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const Mark = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const Mark = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk7"
 } : 0)("height:", thumbSize, "px;left:0;position:absolute;top:-4px;width:1px;", markFill, ";" + ( true ? "" : 0));
 const markLabelFill = ({
@@ -38793,6 +40904,7 @@ const markLabelFill = ({
     color: isFilled ? COLORS.gray[700] : COLORS.gray[300]
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const MarkLabel = emotion_styled_base_browser_esm("span",  true ? {
   target: "e1epgpqk6"
 } : 0)("color:", COLORS.gray[300], ";left:0;font-size:11px;position:absolute;top:12px;transform:translateX( -50% );white-space:nowrap;", markLabelFill, ";" + ( true ? "" : 0));
@@ -38800,6 +40912,21 @@ const thumbColor = ({
   disabled
 }) => disabled ? /*#__PURE__*/emotion_react_browser_esm_css("background-color:", COLORS.gray[400], ";" + ( true ? "" : 0),  true ? "" : 0) : /*#__PURE__*/emotion_react_browser_esm_css("background-color:", COLORS.theme.accent, ";" + ( true ? "" : 0),  true ? "" : 0);
 const ThumbWrapper = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const MarkLabel = createStyled("span",  true ? {
+  target: "e1epgpqk6"
+} : 0)("color:", COLORS.gray[300], ";left:0;font-size:11px;position:absolute;top:12px;transform:translateX( -50% );white-space:nowrap;", markLabelFill, ";" + ( true ? "" : 0));
+
+const thumbColor = _ref9 => {
+  let {
+    disabled
+  } = _ref9;
+  return disabled ? /*#__PURE__*/emotion_react_browser_esm_css("background-color:", COLORS.gray[400], ";" + ( true ? "" : 0),  true ? "" : 0) : /*#__PURE__*/emotion_react_browser_esm_css("background-color:", COLORS.ui.theme, ";" + ( true ? "" : 0),  true ? "" : 0);
+};
+
+const ThumbWrapper = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk5"
 } : 0)("align-items:center;display:flex;height:", thumbSize, "px;justify-content:center;margin-top:", (rangeHeightValue - thumbSize) / 2, "px;outline:0;pointer-events:none;position:absolute;top:0;user-select:none;width:", thumbSize, "px;border-radius:50%;", thumbColor, ";", rtl({
   marginLeft: -10
@@ -38813,10 +40940,15 @@ const thumbFocus = ({
 }) => {
   return isFocused ? /*#__PURE__*/emotion_react_browser_esm_css("&::before{content:' ';position:absolute;background-color:", COLORS.theme.accent, ";opacity:0.4;border-radius:50%;height:", thumbSize + 8, "px;width:", thumbSize + 8, "px;top:-4px;left:-4px;}" + ( true ? "" : 0),  true ? "" : 0) : '';
 };
+<<<<<<< HEAD
 const Thumb = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const Thumb = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk4"
 } : 0)("align-items:center;border-radius:50%;height:100%;outline:0;position:absolute;user-select:none;width:100%;", thumbColor, ";", thumbFocus, ";" + ( true ? "" : 0));
-const InputRange = emotion_styled_base_browser_esm("input",  true ? {
+const InputRange = createStyled("input",  true ? {
   target: "e1epgpqk3"
 } : 0)("box-sizing:border-box;cursor:pointer;display:block;height:100%;left:0;margin:0 -", thumbSize / 2, "px;opacity:0;outline:none;position:absolute;right:0;top:0;width:calc( 100% + ", thumbSize, "px );" + ( true ? "" : 0));
 const tooltipShow = ({
@@ -38843,7 +40975,12 @@ const tooltipPosition = ({
   }
   return range_control_styles_ref;
 };
+<<<<<<< HEAD
 const range_control_styles_Tooltip = emotion_styled_base_browser_esm("span",  true ? {
+=======
+
+const range_control_styles_Tooltip = createStyled("span",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk2"
 } : 0)("background:rgba( 0, 0, 0, 0.8 );border-radius:2px;color:white;display:inline-block;font-size:12px;min-width:32px;opacity:0;padding:4px 8px;pointer-events:none;position:absolute;text-align:center;transition:opacity 120ms ease;user-select:none;line-height:1.4;", tooltipShow, ";", tooltipPosition, ";", reduceMotion('transition'), ";", rtl({
   transform: 'translateX(-50%)'
@@ -38851,14 +40988,18 @@ const range_control_styles_Tooltip = emotion_styled_base_browser_esm("span",  tr
   transform: 'translateX(50%)'
 }), ";" + ( true ? "" : 0));
 
+<<<<<<< HEAD
 // @todo: Refactor RangeControl with latest HStack configuration
 // @wordpress/components/ui/hstack.
 const InputNumber = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+=======
+const InputNumber = /*#__PURE__*/createStyled(number_control,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e1epgpqk1"
 } : 0)("display:inline-block;font-size:13px;margin-top:0;input[type='number']&{", rangeHeight, ";}", rtl({
   marginLeft: `${space(4)} !important`
 }), ";" + ( true ? "" : 0));
-const ActionRightWrapper = emotion_styled_base_browser_esm("span",  true ? {
+const ActionRightWrapper = createStyled("span",  true ? {
   target: "e1epgpqk0"
 } : 0)("display:block;margin-top:0;button,button.is-small{margin-left:0;", rangeHeight, ";}", rtl({
   marginLeft: 8
@@ -39403,13 +41544,18 @@ const RangeControl = (0,external_wp_element_namespaceObject.forwardRef)(Unforwar
 
 
 
-const NumberControlWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+const NumberControlWrapper = /*#__PURE__*/createStyled(number_control,  true ? {
   target: "ez9hsf47"
 } : 0)(Container, "{width:", space(24), ";}" + ( true ? "" : 0));
-const styles_SelectControl = /*#__PURE__*/emotion_styled_base_browser_esm(select_control,  true ? {
+const styles_SelectControl = /*#__PURE__*/createStyled(select_control,  true ? {
   target: "ez9hsf46"
+<<<<<<< HEAD
 } : 0)("margin-left:", space(-2), ";width:5em;select:not( :focus )~", BackdropUI, BackdropUI, BackdropUI, "{border-color:transparent;}" + ( true ? "" : 0));
 const styles_RangeControl = /*#__PURE__*/emotion_styled_base_browser_esm(range_control,  true ? {
+=======
+} : 0)("margin-left:", space(-2), ";width:5em;", BackdropUI, "{display:none;}" + ( true ? "" : 0));
+const styles_RangeControl = /*#__PURE__*/createStyled(range_control,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "ez9hsf45"
 } : 0)("flex:1;margin-right:", space(2), ";" + ( true ? "" : 0));
 
@@ -39419,19 +41565,19 @@ const interactiveHueStyles = `
 	width: calc( 100% - ${space(2)} );
 	margin-left: ${space(1)};
 }`;
-const AuxiliaryColorArtefactWrapper = emotion_styled_base_browser_esm("div",  true ? {
+const AuxiliaryColorArtefactWrapper = createStyled("div",  true ? {
   target: "ez9hsf44"
 } : 0)("padding-top:", space(2), ";padding-right:0;padding-left:0;padding-bottom:0;" + ( true ? "" : 0));
-const AuxiliaryColorArtefactHStackHeader = /*#__PURE__*/emotion_styled_base_browser_esm(h_stack_component,  true ? {
+const AuxiliaryColorArtefactHStackHeader = /*#__PURE__*/createStyled(h_stack_component,  true ? {
   target: "ez9hsf43"
 } : 0)("padding-left:", space(4), ";padding-right:", space(4), ";" + ( true ? "" : 0));
-const ColorInputWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
+const ColorInputWrapper = /*#__PURE__*/createStyled(flex_component,  true ? {
   target: "ez9hsf42"
 } : 0)("padding-top:", space(4), ";padding-left:", space(4), ";padding-right:", space(3), ";padding-bottom:", space(5), ";" + ( true ? "" : 0));
-const ColorfulWrapper = emotion_styled_base_browser_esm("div",  true ? {
+const ColorfulWrapper = createStyled("div",  true ? {
   target: "ez9hsf41"
 } : 0)(boxSizingReset, ";width:216px;.react-colorful{display:flex;flex-direction:column;align-items:center;width:216px;height:auto;overflow:hidden;}.react-colorful__saturation{width:100%;border-radius:0;height:216px;margin-bottom:", space(4), ";border-bottom:none;}.react-colorful__hue,.react-colorful__alpha{width:184px;height:16px;border-radius:16px;margin-bottom:", space(2), ";}.react-colorful__pointer{height:16px;width:16px;border:none;box-shadow:0 0 2px 0 rgba( 0, 0, 0, 0.25 );outline:2px solid transparent;}.react-colorful__pointer-fill{box-shadow:inset 0 0 0 ", config_values.borderWidthFocus, " #fff;}", interactiveHueStyles, ";" + ( true ? "" : 0));
-const CopyButton = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
+const CopyButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
   target: "ez9hsf40"
 } : 0)("&&&&&{min-width:", space(6), ";padding:0;>svg{margin-right:0;}}" + ( true ? "" : 0));
 
@@ -39494,7 +41640,7 @@ var math_round = Math.round;
 function getUAString() {
   var uaData = navigator.userAgentData;
 
-  if (uaData != null && uaData.brands) {
+  if (uaData != null && uaData.brands && Array.isArray(uaData.brands)) {
     return uaData.brands.map(function (item) {
       return item.brand + "/" + item.version;
     }).join(' ');
@@ -40349,10 +42495,9 @@ var unsetSides = {
 // Zooming can change the DPR, but it seems to report a value that will
 // cleanly divide the values into the appropriate subpixels.
 
-function roundOffsetsByDPR(_ref) {
+function roundOffsetsByDPR(_ref, win) {
   var x = _ref.x,
       y = _ref.y;
-  var win = window;
   var dpr = win.devicePixelRatio || 1;
   return {
     x: math_round(x * dpr) / dpr || 0,
@@ -40435,7 +42580,7 @@ function mapToStyles(_ref2) {
   var _ref4 = roundOffsets === true ? roundOffsetsByDPR({
     x: x,
     y: y
-  }) : {
+  }, getWindow_getWindow(popper)) : {
     x: x,
     y: y
   };
@@ -42304,14 +44449,14 @@ function tooltip_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have trie
 
 
 const TooltipContent = /*#__PURE__*/emotion_react_browser_esm_css("z-index:", z_index_Tooltip, ";box-sizing:border-box;opacity:0;outline:none;transform-origin:top center;transition:opacity ", config_values.transitionDurationFastest, " ease;font-size:", config_values.fontSize, ";&[data-enter]{opacity:1;}" + ( true ? "" : 0),  true ? "" : 0);
-const TooltipPopoverView = emotion_styled_base_browser_esm("div",  true ? {
+const TooltipPopoverView = createStyled("div",  true ? {
   target: "e7tfjmw1"
 } : 0)("background:rgba( 0, 0, 0, 0.8 );border-radius:2px;box-shadow:0 0 0 1px rgba( 255, 255, 255, 0.04 );color:", COLORS.white, ";padding:4px 8px;" + ( true ? "" : 0));
 const noOutline =  true ? {
   name: "12mkfdx",
   styles: "outline:none"
 } : 0;
-const TooltipShortcut = /*#__PURE__*/emotion_styled_base_browser_esm(shortcut_component,  true ? {
+const TooltipShortcut = /*#__PURE__*/createStyled(shortcut_component,  true ? {
   target: "e7tfjmw0"
 } : 0)("display:inline-block;margin-left:", space(1), ";" + ( true ? "" : 0));
 
@@ -43619,7 +45764,7 @@ function color_palette_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You hav
  * Internal dependencies
  */
 
-const ColorHeading = /*#__PURE__*/emotion_styled_base_browser_esm(heading_component,  true ? {
+const ColorHeading = /*#__PURE__*/createStyled(heading_component,  true ? {
   target: "ev9wop70"
 } : 0)( true ? {
   name: "13lxv2o",
@@ -43646,7 +45791,12 @@ const padding = ({
   };
   return /*#__PURE__*/emotion_react_browser_esm_css("padding:", paddingValues[paddingSize] || paddingValues.small, ";" + ( true ? "" : 0),  true ? "" : 0);
 };
+<<<<<<< HEAD
 const DropdownContentWrapperDiv = emotion_styled_base_browser_esm("div",  true ? {
+=======
+
+const DropdownContentWrapperDiv = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "eovvns30"
 } : 0)("margin-left:", space(-2), ";margin-right:", space(-2), ";&:first-of-type{margin-top:", space(-2), ";}&:last-of-type{margin-bottom:", space(-2), ";}", padding, ";" + ( true ? "" : 0));
 
@@ -45911,38 +48061,68 @@ function box_control_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have 
 
 
 
+<<<<<<< HEAD
 const box_control_styles_Root = emotion_styled_base_browser_esm("div",  true ? {
   target: "e1jovhle6"
+=======
+const box_control_styles_Root = createStyled("div",  true ? {
+  target: "e7pk0lh6"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "14bvcyk",
   styles: "box-sizing:border-box;max-width:235px;padding-bottom:12px;width:100%"
 } : 0);
+<<<<<<< HEAD
 const Header = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
   target: "e1jovhle5"
+=======
+const Header = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "e7pk0lh5"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "5bhc30",
   styles: "margin-bottom:8px"
 } : 0);
+<<<<<<< HEAD
 const HeaderControlWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
   target: "e1jovhle4"
+=======
+const HeaderControlWrapper = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "e7pk0lh4"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "aujtid",
   styles: "min-height:30px;gap:0"
 } : 0);
+<<<<<<< HEAD
 const UnitControlWrapper = emotion_styled_base_browser_esm("div",  true ? {
   target: "e1jovhle3"
+=======
+const UnitControlWrapper = createStyled("div",  true ? {
+  target: "e7pk0lh3"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "112jwab",
   styles: "box-sizing:border-box;max-width:80px"
 } : 0);
+<<<<<<< HEAD
 const LayoutContainer = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
   target: "e1jovhle2"
+=======
+const LayoutContainer = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "e7pk0lh2"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "xy18ro",
   styles: "justify-content:center;padding-top:8px"
 } : 0);
+<<<<<<< HEAD
 const Layout = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
   target: "e1jovhle1"
+=======
+const Layout = /*#__PURE__*/createStyled(flex_component,  true ? {
+  target: "e7pk0lh1"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "3tw5wk",
   styles: "position:relative;height:100%;width:100%;justify-content:flex-start"
@@ -45986,8 +48166,14 @@ const unitControlMarginStyles = ({
     marginLeft
   })();
 };
+<<<<<<< HEAD
 const box_control_styles_UnitControl = /*#__PURE__*/emotion_styled_base_browser_esm(unit_control,  true ? {
   target: "e1jovhle0"
+=======
+
+const box_control_styles_UnitControl = /*#__PURE__*/createStyled(unit_control,  true ? {
+  target: "e7pk0lh0"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)("max-width:60px;", unitControlBorderRadiusStyles, ";", unitControlMarginStyles, ";" + ( true ? "" : 0));
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/box-control/unit-control.js
@@ -46573,14 +48759,24 @@ function box_control_icon_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You 
  * External dependencies
  */
 
+<<<<<<< HEAD
 const box_control_icon_styles_Root = emotion_styled_base_browser_esm("span",  true ? {
   target: "e1j5nr4z8"
+=======
+const box_control_icon_styles_Root = createStyled("span",  true ? {
+  target: "eaw9yqk8"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1w884gc",
   styles: "box-sizing:border-box;display:block;width:24px;height:24px;position:relative;padding:4px"
 } : 0);
+<<<<<<< HEAD
 const Viewbox = emotion_styled_base_browser_esm("span",  true ? {
   target: "e1j5nr4z7"
+=======
+const Viewbox = createStyled("span",  true ? {
+  target: "eaw9yqk7"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "i6vjox",
   styles: "box-sizing:border-box;display:block;position:relative;width:100%;height:100%"
@@ -46593,41 +48789,78 @@ const strokeFocus = ({
     opacity: isFocused ? 1 : 0.3
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const Stroke = emotion_styled_base_browser_esm("span",  true ? {
   target: "e1j5nr4z6"
 } : 0)("box-sizing:border-box;display:block;pointer-events:none;position:absolute;", strokeFocus, ";" + ( true ? "" : 0));
 const VerticalStroke = /*#__PURE__*/emotion_styled_base_browser_esm(Stroke,  true ? {
   target: "e1j5nr4z5"
+=======
+
+const Stroke = createStyled("span",  true ? {
+  target: "eaw9yqk6"
+} : 0)("box-sizing:border-box;display:block;pointer-events:none;position:absolute;", strokeFocus, ";" + ( true ? "" : 0));
+
+const VerticalStroke = /*#__PURE__*/createStyled(Stroke,  true ? {
+  target: "eaw9yqk5"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1k2w39q",
   styles: "bottom:3px;top:3px;width:2px"
 } : 0);
+<<<<<<< HEAD
 const HorizontalStroke = /*#__PURE__*/emotion_styled_base_browser_esm(Stroke,  true ? {
   target: "e1j5nr4z4"
+=======
+
+const HorizontalStroke = /*#__PURE__*/createStyled(Stroke,  true ? {
+  target: "eaw9yqk4"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1q9b07k",
   styles: "height:2px;left:3px;right:3px"
 } : 0);
+<<<<<<< HEAD
 const TopStroke = /*#__PURE__*/emotion_styled_base_browser_esm(HorizontalStroke,  true ? {
   target: "e1j5nr4z3"
+=======
+
+const TopStroke = /*#__PURE__*/createStyled(HorizontalStroke,  true ? {
+  target: "eaw9yqk3"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "abcix4",
   styles: "top:0"
 } : 0);
+<<<<<<< HEAD
 const RightStroke = /*#__PURE__*/emotion_styled_base_browser_esm(VerticalStroke,  true ? {
   target: "e1j5nr4z2"
+=======
+const RightStroke = /*#__PURE__*/createStyled(VerticalStroke,  true ? {
+  target: "eaw9yqk2"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1wf8jf",
   styles: "right:0"
 } : 0);
+<<<<<<< HEAD
 const BottomStroke = /*#__PURE__*/emotion_styled_base_browser_esm(HorizontalStroke,  true ? {
   target: "e1j5nr4z1"
+=======
+const BottomStroke = /*#__PURE__*/createStyled(HorizontalStroke,  true ? {
+  target: "eaw9yqk1"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "8tapst",
   styles: "bottom:0"
 } : 0);
+<<<<<<< HEAD
 const LeftStroke = /*#__PURE__*/emotion_styled_base_browser_esm(VerticalStroke,  true ? {
   target: "e1j5nr4z0"
+=======
+const LeftStroke = /*#__PURE__*/createStyled(VerticalStroke,  true ? {
+  target: "eaw9yqk0"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1ode3cm",
   styles: "left:0"
@@ -47661,6 +49894,7 @@ const renderBorder = ({
     [orientation === 'vertical' ? 'borderRight' : 'borderBottom']: '1px solid currentColor'
   },  true ? "" : 0,  true ? "" : 0);
 };
+<<<<<<< HEAD
 const renderSize = ({
   'aria-orientation': orientation = 'horizontal'
 }) => /*#__PURE__*/emotion_react_browser_esm_css({
@@ -47668,6 +49902,20 @@ const renderSize = ({
   width: orientation === 'vertical' ? 0 : 'auto'
 },  true ? "" : 0,  true ? "" : 0);
 const DividerView = emotion_styled_base_browser_esm("hr",  true ? {
+=======
+
+const renderSize = _ref5 => {
+  let {
+    'aria-orientation': orientation = 'horizontal'
+  } = _ref5;
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    height: orientation === 'vertical' ? 'auto' : 0,
+    width: orientation === 'vertical' ? 0 : 'auto'
+  },  true ? "" : 0,  true ? "" : 0);
+};
+
+const DividerView = createStyled("hr",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e19on6iw0"
 } : 0)("border:0;margin:0;", renderDisplay, " ", renderBorder, " ", renderSize, " ", renderMargin, ";" + ( true ? "" : 0));
 
@@ -49104,14 +51352,24 @@ function custom_gradient_picker_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return
  * Internal dependencies
  */
 
+<<<<<<< HEAD
 const SelectWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(flex_block_component,  true ? {
   target: "e10bzpgi1"
+=======
+const SelectWrapper = /*#__PURE__*/createStyled(flex_block_component,  true ? {
+  target: "e99xvul1"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1gvx10y",
   styles: "flex-grow:5"
 } : 0);
+<<<<<<< HEAD
 const AccessoryWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(flex_block_component,  true ? {
   target: "e10bzpgi0"
+=======
+const AccessoryWrapper = /*#__PURE__*/createStyled(flex_block_component,  true ? {
+  target: "e99xvul0"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1gvx10y",
   styles: "flex-grow:5"
@@ -50060,37 +52318,54 @@ function palette_edit_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have
 
 
 
+<<<<<<< HEAD
 const IndicatorStyled = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_circular_option_picker.Option,  true ? {
+=======
+const IndicatorStyled = /*#__PURE__*/createStyled(CircularOptionPicker.Option,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e5bw3229"
 } : 0)("width:", space(6), ";height:", space(6), ";pointer-events:none;" + ( true ? "" : 0));
-const NameInputControl = /*#__PURE__*/emotion_styled_base_browser_esm(input_control,  true ? {
+const NameInputControl = /*#__PURE__*/createStyled(input_control,  true ? {
   target: "e5bw3228"
 } : 0)(Container, "{background:", COLORS.gray[100], ";border-radius:", config_values.controlBorderRadius, ";", Input, Input, Input, Input, "{height:", space(8), ";}", BackdropUI, BackdropUI, BackdropUI, "{border-color:transparent;box-shadow:none;}}" + ( true ? "" : 0));
-const PaletteItem = /*#__PURE__*/emotion_styled_base_browser_esm(component,  true ? {
+const PaletteItem = /*#__PURE__*/createStyled(component,  true ? {
   target: "e5bw3227"
+<<<<<<< HEAD
 } : 0)("padding-block:3px;padding-inline-start:", space(3), ";border:1px solid ", config_values.surfaceBorderColor, ";border-bottom-color:transparent;&:first-of-type{border-top-left-radius:", config_values.controlBorderRadius, ";border-top-right-radius:", config_values.controlBorderRadius, ";}&:last-of-type{border-bottom-left-radius:", config_values.controlBorderRadius, ";border-bottom-right-radius:", config_values.controlBorderRadius, ";border-bottom-color:", config_values.surfaceBorderColor, ";}&.is-selected+&{border-top-color:transparent;}&.is-selected{border-color:", COLORS.theme.accent, ";}" + ( true ? "" : 0));
 const NameContainer = emotion_styled_base_browser_esm("div",  true ? {
   target: "e5bw3226"
 } : 0)("line-height:", space(8), ";margin-left:", space(2), ";margin-right:", space(2), ";white-space:nowrap;overflow:hidden;", PaletteItem, ":hover &{color:", COLORS.theme.accent, ";}" + ( true ? "" : 0));
 const PaletteHeading = /*#__PURE__*/emotion_styled_base_browser_esm(heading_component,  true ? {
+=======
+} : 0)("padding:3px 0 3px ", space(3), ";height:calc( 40px - ", config_values.borderWidth, " );border:1px solid ", config_values.surfaceBorderColor, ";border-bottom-color:transparent;&:first-of-type{border-top-left-radius:", config_values.controlBorderRadius, ";border-top-right-radius:", config_values.controlBorderRadius, ";}&:last-of-type{border-bottom-left-radius:", config_values.controlBorderRadius, ";border-bottom-right-radius:", config_values.controlBorderRadius, ";border-bottom-color:", config_values.surfaceBorderColor, ";}&.is-selected+&{border-top-color:transparent;}&.is-selected{border-color:", COLORS.ui.theme, ";}" + ( true ? "" : 0));
+const NameContainer = createStyled("div",  true ? {
+  target: "e5bw3226"
+} : 0)("line-height:", space(8), ";margin-left:", space(2), ";margin-right:", space(2), ";white-space:nowrap;overflow:hidden;", PaletteItem, ":hover &{color:", COLORS.ui.theme, ";}" + ( true ? "" : 0));
+const PaletteHeading = /*#__PURE__*/createStyled(heading_component,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e5bw3225"
 } : 0)("text-transform:uppercase;line-height:", space(6), ";font-weight:500;&&&{font-size:11px;margin-bottom:0;}" + ( true ? "" : 0));
-const PaletteActionsContainer = /*#__PURE__*/emotion_styled_base_browser_esm(component,  true ? {
+const PaletteActionsContainer = /*#__PURE__*/createStyled(component,  true ? {
   target: "e5bw3224"
 } : 0)("height:", space(6), ";display:flex;" + ( true ? "" : 0));
-const PaletteHStackHeader = /*#__PURE__*/emotion_styled_base_browser_esm(h_stack_component,  true ? {
+const PaletteHStackHeader = /*#__PURE__*/createStyled(h_stack_component,  true ? {
   target: "e5bw3223"
 } : 0)("margin-bottom:", space(2), ";" + ( true ? "" : 0));
-const PaletteEditStyles = /*#__PURE__*/emotion_styled_base_browser_esm(component,  true ? {
+const PaletteEditStyles = /*#__PURE__*/createStyled(component,  true ? {
   target: "e5bw3222"
 } : 0)( true ? {
   name: "u6wnko",
   styles: "&&&{.components-button.has-icon{min-width:0;padding:0;}}"
 } : 0);
-const DoneButton = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
+const DoneButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
   target: "e5bw3221"
+<<<<<<< HEAD
 } : 0)("&&{color:", COLORS.theme.accent, ";}" + ( true ? "" : 0));
 const RemoveButton = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
+=======
+} : 0)("&&{color:", COLORS.ui.theme, ";}" + ( true ? "" : 0));
+const RemoveButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e5bw3220"
 } : 0)("&&{margin-top:", space(1), ";}" + ( true ? "" : 0));
 
@@ -50518,10 +52793,23 @@ function PaletteEdit({
  */
 
 
+<<<<<<< HEAD
 const deprecatedDefaultSize = ({
   __next40pxDefaultSize
 }) => !__next40pxDefaultSize && /*#__PURE__*/emotion_react_browser_esm_css("height:28px;padding-left:", space(1), ";padding-right:", space(1), ";" + ( true ? "" : 0),  true ? "" : 0);
 const InputWrapperFlex = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
+=======
+
+
+const deprecatedDefaultSize = _ref => {
+  let {
+    __next36pxDefaultSize
+  } = _ref;
+  return !__next36pxDefaultSize && /*#__PURE__*/emotion_react_browser_esm_css("height:28px;padding-left:", space(1), ";padding-right:", space(1), ";" + ( true ? "" : 0),  true ? "" : 0);
+};
+
+const InputWrapperFlex = /*#__PURE__*/createStyled(flex_component,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "evuatpg0"
 } : 0)("height:38px;padding-left:", space(2), ";padding-right:", space(2), ";", deprecatedDefaultSize, ";" + ( true ? "" : 0));
 
@@ -55667,7 +57955,12 @@ function useMultipleSelection(userProps) {
 
 
 const backCompatMinWidth = props => !props.__nextUnconstrainedWidth ? /*#__PURE__*/emotion_react_browser_esm_css(Container, "{min-width:130px;}" + ( true ? "" : 0),  true ? "" : 0) : '';
+<<<<<<< HEAD
 const InputBaseWithBackCompatMinWidth = /*#__PURE__*/emotion_styled_base_browser_esm(input_base,  true ? {
+=======
+
+const InputBaseWithBackCompatMinWidth = /*#__PURE__*/createStyled(input_base,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "eswuck60"
 } : 0)(backCompatMinWidth, ";" + ( true ? "" : 0));
 
@@ -56909,6 +59202,16 @@ var useLilius = function (_a) {
 
 
 
+;// CONCATENATED MODULE: ./node_modules/date-fns/node_modules/@babel/runtime/helpers/esm/typeof.js
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/_lib/requiredArgs/index.js
 function requiredArgs_requiredArgs(required, args) {
   if (args.length < required) {
@@ -56916,7 +59219,6 @@ function requiredArgs_requiredArgs(required, args) {
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/toDate/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
 /**
@@ -56949,11 +59251,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  * const result = toDate(1392098430000)
  * //=> Tue Feb 11 2014 11:30:30
  */
-
 function toDate_toDate(argument) {
   requiredArgs_requiredArgs(1, arguments);
-  var argStr = Object.prototype.toString.call(argument); // Clone the date
+  var argStr = Object.prototype.toString.call(argument);
 
+  // Clone the date
   if (argument instanceof Date || _typeof(argument) === 'object' && argStr === '[object Date]') {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
     return new Date(argument.getTime());
@@ -56962,11 +59264,10 @@ function toDate_toDate(argument) {
   } else {
     if ((typeof argument === 'string' || argStr === '[object String]') && typeof console !== 'undefined') {
       // eslint-disable-next-line no-console
-      console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments"); // eslint-disable-next-line no-console
-
+      console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments");
+      // eslint-disable-next-line no-console
       console.warn(new Error().stack);
     }
-
     return new Date(NaN);
   }
 }
@@ -56991,7 +59292,6 @@ function toDate_toDate(argument) {
  * const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
  * //=> Tue Sep 02 2014 00:00:00
  */
-
 function startOfDay_startOfDay(dirtyDate) {
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
@@ -57003,13 +59303,10 @@ function toInteger_toInteger(dirtyNumber) {
   if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
     return NaN;
   }
-
   var number = Number(dirtyNumber);
-
   if (isNaN(number)) {
     return number;
   }
-
   return number < 0 ? Math.ceil(number) : Math.floor(number);
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/addMonths/index.js
@@ -57034,22 +59331,20 @@ function toInteger_toInteger(dirtyNumber) {
  * const result = addMonths(new Date(2014, 8, 1), 5)
  * //=> Sun Feb 01 2015 00:00:00
  */
-
 function addMonths_addMonths(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var date = toDate_toDate(dirtyDate);
   var amount = toInteger_toInteger(dirtyAmount);
-
   if (isNaN(amount)) {
     return new Date(NaN);
   }
-
   if (!amount) {
     // If 0 months, no-op to avoid changing times in the hour before end of DST
     return date;
   }
+  var dayOfMonth = date.getDate();
 
-  var dayOfMonth = date.getDate(); // The JS Date object supports date math by accepting out-of-bounds values for
+  // The JS Date object supports date math by accepting out-of-bounds values for
   // month, day, etc. For example, new Date(2020, 0, 0) returns 31 Dec 2019 and
   // new Date(2020, 13, 1) returns 1 Feb 2021.  This is *almost* the behavior we
   // want except that dates will wrap around the end of a month, meaning that
@@ -57057,11 +59352,9 @@ function addMonths_addMonths(dirtyDate, dirtyAmount) {
   // we'll default to the end of the desired month by adding 1 to the desired
   // month and using a date of 0 to back up one day to the end of the desired
   // month.
-
   var endOfDesiredMonth = new Date(date.getTime());
   endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0);
   var daysInMonth = endOfDesiredMonth.getDate();
-
   if (dayOfMonth >= daysInMonth) {
     // If we're already at the end of the month, then this is the correct date
     // and we're done.
@@ -57100,14 +59393,12 @@ function addMonths_addMonths(dirtyDate, dirtyAmount) {
  * const result = subMonths(new Date(2015, 1, 1), 5)
  * //=> Mon Sep 01 2014 00:00:00
  */
-
 function subMonths_subMonths(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var amount = toInteger_toInteger(dirtyAmount);
   return addMonths_addMonths(dirtyDate, -amount);
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/isDate/index.js
-function isDate_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { isDate_typeof = function _typeof(obj) { return typeof obj; }; } else { isDate_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return isDate_typeof(obj); }
 
 
 /**
@@ -57142,10 +59433,9 @@ function isDate_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "
  * const result = isDate({})
  * //=> false
  */
-
 function isDate(value) {
   requiredArgs_requiredArgs(1, arguments);
-  return value instanceof Date || isDate_typeof(value) === 'object' && Object.prototype.toString.call(value) === '[object Date]';
+  return value instanceof Date || _typeof(value) === 'object' && Object.prototype.toString.call(value) === '[object Date]';
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/isValid/index.js
 
@@ -57182,14 +59472,11 @@ function isDate(value) {
  * const result = isValid(new Date(''))
  * //=> false
  */
-
 function isValid(dirtyDate) {
   requiredArgs_requiredArgs(1, arguments);
-
   if (!isDate(dirtyDate) && typeof dirtyDate !== 'number') {
     return false;
   }
-
   var date = toDate_toDate(dirtyDate);
   return !isNaN(Number(date));
 }
@@ -57215,7 +59502,6 @@ function isValid(dirtyDate) {
  * const result = addMilliseconds(new Date(2014, 6, 10, 12, 45, 30, 0), 750)
  * //=> Thu Jul 10 2014 12:45:30.750
  */
-
 function addMilliseconds(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var timestamp = toDate_toDate(dirtyDate).getTime();
@@ -57244,7 +59530,6 @@ function addMilliseconds(dirtyDate, dirtyAmount) {
  * const result = subMilliseconds(new Date(2014, 6, 10, 12, 45, 30, 0), 750)
  * //=> Thu Jul 10 2014 12:45:29.250
  */
-
 function subMilliseconds(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var amount = toInteger_toInteger(dirtyAmount);
@@ -57293,7 +59578,6 @@ function getUTCISOWeekYear(dirtyDate) {
   fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
   fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
   var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
-
   if (date.getTime() >= startOfNextYear.getTime()) {
     return year + 1;
   } else if (date.getTime() >= startOfThisYear.getTime()) {
@@ -57324,10 +59608,11 @@ var MILLISECONDS_IN_WEEK = 604800000;
 function getUTCISOWeek(dirtyDate) {
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
-  var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime(); // Round the number of days to the nearest integer
+  var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime();
+
+  // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-
   return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/_lib/defaultOptions/index.js
@@ -57345,15 +59630,14 @@ function setDefaultOptions(newOptions) {
 
 function startOfUTCWeek(dirtyDate, options) {
   var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
   requiredArgs_requiredArgs(1, arguments);
   var defaultOptions = defaultOptions_getDefaultOptions();
-  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
 
+  // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
-
   var date = toDate_toDate(dirtyDate);
   var day = date.getUTCDay();
   var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
@@ -57369,17 +59653,16 @@ function startOfUTCWeek(dirtyDate, options) {
 
 function getUTCWeekYear(dirtyDate, options) {
   var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
   var year = date.getUTCFullYear();
   var defaultOptions = defaultOptions_getDefaultOptions();
-  var firstWeekContainsDate = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+  var firstWeekContainsDate = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
 
+  // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
   if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
     throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
   }
-
   var firstWeekOfNextYear = new Date(0);
   firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
   firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
@@ -57388,7 +59671,6 @@ function getUTCWeekYear(dirtyDate, options) {
   firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
   firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
   var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
-
   if (date.getTime() >= startOfNextYear.getTime()) {
     return year + 1;
   } else if (date.getTime() >= startOfThisYear.getTime()) {
@@ -57405,7 +59687,6 @@ function getUTCWeekYear(dirtyDate, options) {
 
 function startOfUTCWeekYear(dirtyDate, options) {
   var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
   requiredArgs_requiredArgs(1, arguments);
   var defaultOptions = defaultOptions_getDefaultOptions();
   var firstWeekContainsDate = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
@@ -57425,21 +59706,20 @@ var getUTCWeek_MILLISECONDS_IN_WEEK = 604800000;
 function getUTCWeek(dirtyDate, options) {
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
-  var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime(); // Round the number of days to the nearest integer
+  var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime();
+
+  // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-
   return Math.round(diff / getUTCWeek_MILLISECONDS_IN_WEEK) + 1;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/_lib/addLeadingZeros/index.js
 function addLeadingZeros(number, targetLength) {
   var sign = number < 0 ? '-' : '';
   var output = Math.abs(number).toString();
-
   while (output.length < targetLength) {
     output = '0' + output;
   }
-
   return sign + output;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/_lib/format/lightFormatters/index.js
@@ -57456,7 +59736,6 @@ function addLeadingZeros(number, targetLength) {
  *
  * Letters marked by * are not implemented but reserved by Unicode standard.
  */
-
 var formatters = {
   // Year
   y: function y(date, token) {
@@ -57468,8 +59747,9 @@ var formatters = {
     // | AD 123   |   123 | 23 |   123 |  0123 | 00123 |
     // | AD 1234  |  1234 | 34 |  1234 |  1234 | 01234 |
     // | AD 12345 | 12345 | 45 | 12345 | 12345 | 12345 |
-    var signedYear = date.getUTCFullYear(); // Returns 1 for 1 BC (which is year 0 in JavaScript)
 
+    var signedYear = date.getUTCFullYear();
+    // Returns 1 for 1 BC (which is year 0 in JavaScript)
     var year = signedYear > 0 ? signedYear : 1 - signedYear;
     return addLeadingZeros(token === 'yy' ? year % 100 : year, token.length);
   },
@@ -57485,18 +59765,14 @@ var formatters = {
   // AM or PM
   a: function a(date, token) {
     var dayPeriodEnumValue = date.getUTCHours() / 12 >= 1 ? 'pm' : 'am';
-
     switch (token) {
       case 'a':
       case 'aa':
         return dayPeriodEnumValue.toUpperCase();
-
       case 'aaa':
         return dayPeriodEnumValue;
-
       case 'aaaaa':
         return dayPeriodEnumValue[0];
-
       case 'aaaa':
       default:
         return dayPeriodEnumValue === 'am' ? 'a.m.' : 'p.m.';
@@ -57545,7 +59821,6 @@ var dayPeriodEnum = {
   evening: 'evening',
   night: 'night'
 };
-
 /*
  * |     | Unit                           |     | Unit                           |
  * |-----|--------------------------------|-----|--------------------------------|
@@ -57591,11 +59866,11 @@ var dayPeriodEnum = {
  * - `P` is long localized date format
  * - `p` is long localized time format
  */
+
 var formatters_formatters = {
   // Era
   G: function G(date, token, localize) {
     var era = date.getUTCFullYear() > 0 ? 1 : 0;
-
     switch (token) {
       // AD, BC
       case 'G':
@@ -57605,13 +59880,11 @@ var formatters_formatters = {
           width: 'abbreviated'
         });
       // A, B
-
       case 'GGGGG':
         return localize.era(era, {
           width: 'narrow'
         });
       // Anno Domini, Before Christ
-
       case 'GGGG':
       default:
         return localize.era(era, {
@@ -57623,41 +59896,42 @@ var formatters_formatters = {
   y: function y(date, token, localize) {
     // Ordinal number
     if (token === 'yo') {
-      var signedYear = date.getUTCFullYear(); // Returns 1 for 1 BC (which is year 0 in JavaScript)
-
+      var signedYear = date.getUTCFullYear();
+      // Returns 1 for 1 BC (which is year 0 in JavaScript)
       var year = signedYear > 0 ? signedYear : 1 - signedYear;
       return localize.ordinalNumber(year, {
         unit: 'year'
       });
     }
-
     return lightFormatters.y(date, token);
   },
   // Local week-numbering year
   Y: function Y(date, token, localize, options) {
-    var signedWeekYear = getUTCWeekYear(date, options); // Returns 1 for 1 BC (which is year 0 in JavaScript)
+    var signedWeekYear = getUTCWeekYear(date, options);
+    // Returns 1 for 1 BC (which is year 0 in JavaScript)
+    var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
 
-    var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear; // Two digit year
-
+    // Two digit year
     if (token === 'YY') {
       var twoDigitYear = weekYear % 100;
       return addLeadingZeros(twoDigitYear, 2);
-    } // Ordinal number
+    }
 
-
+    // Ordinal number
     if (token === 'Yo') {
       return localize.ordinalNumber(weekYear, {
         unit: 'year'
       });
-    } // Padding
+    }
 
-
+    // Padding
     return addLeadingZeros(weekYear, token.length);
   },
   // ISO week-numbering year
   R: function R(date, token) {
-    var isoWeekYear = getUTCISOWeekYear(date); // Padding
+    var isoWeekYear = getUTCISOWeekYear(date);
 
+    // Padding
     return addLeadingZeros(isoWeekYear, token.length);
   },
   // Extended year. This is a single number designating the year of this calendar system.
@@ -57676,37 +59950,31 @@ var formatters_formatters = {
   // Quarter
   Q: function Q(date, token, localize) {
     var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
-
     switch (token) {
       // 1, 2, 3, 4
       case 'Q':
         return String(quarter);
       // 01, 02, 03, 04
-
       case 'QQ':
         return addLeadingZeros(quarter, 2);
       // 1st, 2nd, 3rd, 4th
-
       case 'Qo':
         return localize.ordinalNumber(quarter, {
           unit: 'quarter'
         });
       // Q1, Q2, Q3, Q4
-
       case 'QQQ':
         return localize.quarter(quarter, {
           width: 'abbreviated',
           context: 'formatting'
         });
       // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-
       case 'QQQQQ':
         return localize.quarter(quarter, {
           width: 'narrow',
           context: 'formatting'
         });
       // 1st quarter, 2nd quarter, ...
-
       case 'QQQQ':
       default:
         return localize.quarter(quarter, {
@@ -57718,37 +59986,31 @@ var formatters_formatters = {
   // Stand-alone quarter
   q: function q(date, token, localize) {
     var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
-
     switch (token) {
       // 1, 2, 3, 4
       case 'q':
         return String(quarter);
       // 01, 02, 03, 04
-
       case 'qq':
         return addLeadingZeros(quarter, 2);
       // 1st, 2nd, 3rd, 4th
-
       case 'qo':
         return localize.ordinalNumber(quarter, {
           unit: 'quarter'
         });
       // Q1, Q2, Q3, Q4
-
       case 'qqq':
         return localize.quarter(quarter, {
           width: 'abbreviated',
           context: 'standalone'
         });
       // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-
       case 'qqqqq':
         return localize.quarter(quarter, {
           width: 'narrow',
           context: 'standalone'
         });
       // 1st quarter, 2nd quarter, ...
-
       case 'qqqq':
       default:
         return localize.quarter(quarter, {
@@ -57760,33 +60022,28 @@ var formatters_formatters = {
   // Month
   M: function M(date, token, localize) {
     var month = date.getUTCMonth();
-
     switch (token) {
       case 'M':
       case 'MM':
         return lightFormatters.M(date, token);
       // 1st, 2nd, ..., 12th
-
       case 'Mo':
         return localize.ordinalNumber(month + 1, {
           unit: 'month'
         });
       // Jan, Feb, ..., Dec
-
       case 'MMM':
         return localize.month(month, {
           width: 'abbreviated',
           context: 'formatting'
         });
       // J, F, ..., D
-
       case 'MMMMM':
         return localize.month(month, {
           width: 'narrow',
           context: 'formatting'
         });
       // January, February, ..., December
-
       case 'MMMM':
       default:
         return localize.month(month, {
@@ -57798,37 +60055,31 @@ var formatters_formatters = {
   // Stand-alone month
   L: function L(date, token, localize) {
     var month = date.getUTCMonth();
-
     switch (token) {
       // 1, 2, ..., 12
       case 'L':
         return String(month + 1);
       // 01, 02, ..., 12
-
       case 'LL':
         return addLeadingZeros(month + 1, 2);
       // 1st, 2nd, ..., 12th
-
       case 'Lo':
         return localize.ordinalNumber(month + 1, {
           unit: 'month'
         });
       // Jan, Feb, ..., Dec
-
       case 'LLL':
         return localize.month(month, {
           width: 'abbreviated',
           context: 'standalone'
         });
       // J, F, ..., D
-
       case 'LLLLL':
         return localize.month(month, {
           width: 'narrow',
           context: 'standalone'
         });
       // January, February, ..., December
-
       case 'LLLL':
       default:
         return localize.month(month, {
@@ -57840,25 +60091,21 @@ var formatters_formatters = {
   // Local week of year
   w: function w(date, token, localize, options) {
     var week = getUTCWeek(date, options);
-
     if (token === 'wo') {
       return localize.ordinalNumber(week, {
         unit: 'week'
       });
     }
-
     return addLeadingZeros(week, token.length);
   },
   // ISO week of year
   I: function I(date, token, localize) {
     var isoWeek = getUTCISOWeek(date);
-
     if (token === 'Io') {
       return localize.ordinalNumber(isoWeek, {
         unit: 'week'
       });
     }
-
     return addLeadingZeros(isoWeek, token.length);
   },
   // Day of the month
@@ -57868,25 +60115,21 @@ var formatters_formatters = {
         unit: 'date'
       });
     }
-
     return lightFormatters.d(date, token);
   },
   // Day of year
   D: function D(date, token, localize) {
     var dayOfYear = getUTCDayOfYear(date);
-
     if (token === 'Do') {
       return localize.ordinalNumber(dayOfYear, {
         unit: 'dayOfYear'
       });
     }
-
     return addLeadingZeros(dayOfYear, token.length);
   },
   // Day of week
   E: function E(date, token, localize) {
     var dayOfWeek = date.getUTCDay();
-
     switch (token) {
       // Tue
       case 'E':
@@ -57897,21 +60140,18 @@ var formatters_formatters = {
           context: 'formatting'
         });
       // T
-
       case 'EEEEE':
         return localize.day(dayOfWeek, {
           width: 'narrow',
           context: 'formatting'
         });
       // Tu
-
       case 'EEEEEE':
         return localize.day(dayOfWeek, {
           width: 'short',
           context: 'formatting'
         });
       // Tuesday
-
       case 'EEEE':
       default:
         return localize.day(dayOfWeek, {
@@ -57924,43 +60164,36 @@ var formatters_formatters = {
   e: function e(date, token, localize, options) {
     var dayOfWeek = date.getUTCDay();
     var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-
     switch (token) {
       // Numerical value (Nth day of week with current locale or weekStartsOn)
       case 'e':
         return String(localDayOfWeek);
       // Padded numerical value
-
       case 'ee':
         return addLeadingZeros(localDayOfWeek, 2);
       // 1st, 2nd, ..., 7th
-
       case 'eo':
         return localize.ordinalNumber(localDayOfWeek, {
           unit: 'day'
         });
-
       case 'eee':
         return localize.day(dayOfWeek, {
           width: 'abbreviated',
           context: 'formatting'
         });
       // T
-
       case 'eeeee':
         return localize.day(dayOfWeek, {
           width: 'narrow',
           context: 'formatting'
         });
       // Tu
-
       case 'eeeeee':
         return localize.day(dayOfWeek, {
           width: 'short',
           context: 'formatting'
         });
       // Tuesday
-
       case 'eeee':
       default:
         return localize.day(dayOfWeek, {
@@ -57973,43 +60206,36 @@ var formatters_formatters = {
   c: function c(date, token, localize, options) {
     var dayOfWeek = date.getUTCDay();
     var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-
     switch (token) {
       // Numerical value (same as in `e`)
       case 'c':
         return String(localDayOfWeek);
       // Padded numerical value
-
       case 'cc':
         return addLeadingZeros(localDayOfWeek, token.length);
       // 1st, 2nd, ..., 7th
-
       case 'co':
         return localize.ordinalNumber(localDayOfWeek, {
           unit: 'day'
         });
-
       case 'ccc':
         return localize.day(dayOfWeek, {
           width: 'abbreviated',
           context: 'standalone'
         });
       // T
-
       case 'ccccc':
         return localize.day(dayOfWeek, {
           width: 'narrow',
           context: 'standalone'
         });
       // Tu
-
       case 'cccccc':
         return localize.day(dayOfWeek, {
           width: 'short',
           context: 'standalone'
         });
       // Tuesday
-
       case 'cccc':
       default:
         return localize.day(dayOfWeek, {
@@ -58022,44 +60248,37 @@ var formatters_formatters = {
   i: function i(date, token, localize) {
     var dayOfWeek = date.getUTCDay();
     var isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-
     switch (token) {
       // 2
       case 'i':
         return String(isoDayOfWeek);
       // 02
-
       case 'ii':
         return addLeadingZeros(isoDayOfWeek, token.length);
       // 2nd
-
       case 'io':
         return localize.ordinalNumber(isoDayOfWeek, {
           unit: 'day'
         });
       // Tue
-
       case 'iii':
         return localize.day(dayOfWeek, {
           width: 'abbreviated',
           context: 'formatting'
         });
       // T
-
       case 'iiiii':
         return localize.day(dayOfWeek, {
           width: 'narrow',
           context: 'formatting'
         });
       // Tu
-
       case 'iiiiii':
         return localize.day(dayOfWeek, {
           width: 'short',
           context: 'formatting'
         });
       // Tuesday
-
       case 'iiii':
       default:
         return localize.day(dayOfWeek, {
@@ -58072,7 +60291,6 @@ var formatters_formatters = {
   a: function a(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue = hours / 12 >= 1 ? 'pm' : 'am';
-
     switch (token) {
       case 'a':
       case 'aa':
@@ -58080,19 +60298,16 @@ var formatters_formatters = {
           width: 'abbreviated',
           context: 'formatting'
         });
-
       case 'aaa':
         return localize.dayPeriod(dayPeriodEnumValue, {
           width: 'abbreviated',
           context: 'formatting'
         }).toLowerCase();
-
       case 'aaaaa':
         return localize.dayPeriod(dayPeriodEnumValue, {
           width: 'narrow',
           context: 'formatting'
         });
-
       case 'aaaa':
       default:
         return localize.dayPeriod(dayPeriodEnumValue, {
@@ -58105,7 +60320,6 @@ var formatters_formatters = {
   b: function b(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue;
-
     if (hours === 12) {
       dayPeriodEnumValue = dayPeriodEnum.noon;
     } else if (hours === 0) {
@@ -58113,7 +60327,6 @@ var formatters_formatters = {
     } else {
       dayPeriodEnumValue = hours / 12 >= 1 ? 'pm' : 'am';
     }
-
     switch (token) {
       case 'b':
       case 'bb':
@@ -58121,19 +60334,16 @@ var formatters_formatters = {
           width: 'abbreviated',
           context: 'formatting'
         });
-
       case 'bbb':
         return localize.dayPeriod(dayPeriodEnumValue, {
           width: 'abbreviated',
           context: 'formatting'
         }).toLowerCase();
-
       case 'bbbbb':
         return localize.dayPeriod(dayPeriodEnumValue, {
           width: 'narrow',
           context: 'formatting'
         });
-
       case 'bbbb':
       default:
         return localize.dayPeriod(dayPeriodEnumValue, {
@@ -58146,7 +60356,6 @@ var formatters_formatters = {
   B: function B(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue;
-
     if (hours >= 17) {
       dayPeriodEnumValue = dayPeriodEnum.evening;
     } else if (hours >= 12) {
@@ -58156,7 +60365,6 @@ var formatters_formatters = {
     } else {
       dayPeriodEnumValue = dayPeriodEnum.night;
     }
-
     switch (token) {
       case 'B':
       case 'BB':
@@ -58165,13 +60373,11 @@ var formatters_formatters = {
           width: 'abbreviated',
           context: 'formatting'
         });
-
       case 'BBBBB':
         return localize.dayPeriod(dayPeriodEnumValue, {
           width: 'narrow',
           context: 'formatting'
         });
-
       case 'BBBB':
       default:
         return localize.dayPeriod(dayPeriodEnumValue, {
@@ -58189,7 +60395,6 @@ var formatters_formatters = {
         unit: 'hour'
       });
     }
-
     return lightFormatters.h(date, token);
   },
   // Hour [0-23]
@@ -58199,32 +60404,27 @@ var formatters_formatters = {
         unit: 'hour'
       });
     }
-
     return lightFormatters.H(date, token);
   },
   // Hour [0-11]
   K: function K(date, token, localize) {
     var hours = date.getUTCHours() % 12;
-
     if (token === 'Ko') {
       return localize.ordinalNumber(hours, {
         unit: 'hour'
       });
     }
-
     return addLeadingZeros(hours, token.length);
   },
   // Hour [1-24]
   k: function k(date, token, localize) {
     var hours = date.getUTCHours();
     if (hours === 0) hours = 24;
-
     if (token === 'ko') {
       return localize.ordinalNumber(hours, {
         unit: 'hour'
       });
     }
-
     return addLeadingZeros(hours, token.length);
   },
   // Minute
@@ -58234,7 +60434,6 @@ var formatters_formatters = {
         unit: 'minute'
       });
     }
-
     return lightFormatters.m(date, token);
   },
   // Second
@@ -58244,7 +60443,6 @@ var formatters_formatters = {
         unit: 'second'
       });
     }
-
     return lightFormatters.s(date, token);
   },
   // Fraction of second
@@ -58255,30 +60453,27 @@ var formatters_formatters = {
   X: function X(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
-
     if (timezoneOffset === 0) {
       return 'Z';
     }
-
     switch (token) {
       // Hours and optional minutes
       case 'X':
         return formatTimezoneWithOptionalMinutes(timezoneOffset);
+
       // Hours, minutes and optional seconds without `:` delimiter
       // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
       // so this token always has the same output as `XX`
-
       case 'XXXX':
       case 'XX':
         // Hours and minutes without `:` delimiter
         return formatTimezone(timezoneOffset);
+
       // Hours, minutes and optional seconds with `:` delimiter
       // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
       // so this token always has the same output as `XXX`
-
       case 'XXXXX':
       case 'XXX': // Hours and minutes with `:` delimiter
-
       default:
         return formatTimezone(timezoneOffset, ':');
     }
@@ -58287,26 +60482,24 @@ var formatters_formatters = {
   x: function x(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
-
     switch (token) {
       // Hours and optional minutes
       case 'x':
         return formatTimezoneWithOptionalMinutes(timezoneOffset);
+
       // Hours, minutes and optional seconds without `:` delimiter
       // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
       // so this token always has the same output as `xx`
-
       case 'xxxx':
       case 'xx':
         // Hours and minutes without `:` delimiter
         return formatTimezone(timezoneOffset);
+
       // Hours, minutes and optional seconds with `:` delimiter
       // Note: neither ISO-8601 nor JavaScript supports seconds in timezone offsets
       // so this token always has the same output as `xxx`
-
       case 'xxxxx':
       case 'xxx': // Hours and minutes with `:` delimiter
-
       default:
         return formatTimezone(timezoneOffset, ':');
     }
@@ -58315,7 +60508,6 @@ var formatters_formatters = {
   O: function O(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
-
     switch (token) {
       // Short
       case 'O':
@@ -58323,7 +60515,6 @@ var formatters_formatters = {
       case 'OOO':
         return 'GMT' + formatTimezoneShort(timezoneOffset, ':');
       // Long
-
       case 'OOOO':
       default:
         return 'GMT' + formatTimezone(timezoneOffset, ':');
@@ -58333,7 +60524,6 @@ var formatters_formatters = {
   z: function z(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
-
     switch (token) {
       // Short
       case 'z':
@@ -58341,7 +60531,6 @@ var formatters_formatters = {
       case 'zzz':
         return 'GMT' + formatTimezoneShort(timezoneOffset, ':');
       // Long
-
       case 'zzzz':
       default:
         return 'GMT' + formatTimezone(timezoneOffset, ':');
@@ -58360,30 +60549,24 @@ var formatters_formatters = {
     return addLeadingZeros(timestamp, token.length);
   }
 };
-
 function formatTimezoneShort(offset, dirtyDelimiter) {
   var sign = offset > 0 ? '-' : '+';
   var absOffset = Math.abs(offset);
   var hours = Math.floor(absOffset / 60);
   var minutes = absOffset % 60;
-
   if (minutes === 0) {
     return sign + String(hours);
   }
-
   var delimiter = dirtyDelimiter || '';
   return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
 }
-
 function formatTimezoneWithOptionalMinutes(offset, dirtyDelimiter) {
   if (offset % 60 === 0) {
     var sign = offset > 0 ? '-' : '+';
     return sign + addLeadingZeros(Math.abs(offset) / 60, 2);
   }
-
   return formatTimezone(offset, dirtyDelimiter);
 }
-
 function formatTimezone(offset, dirtyDelimiter) {
   var delimiter = dirtyDelimiter || '';
   var sign = offset > 0 ? '-' : '+';
@@ -58392,7 +60575,6 @@ function formatTimezone(offset, dirtyDelimiter) {
   var minutes = addLeadingZeros(absOffset % 60, 2);
   return sign + hours + delimiter + minutes;
 }
-
 /* harmony default export */ var format_formatters = (formatters_formatters);
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/_lib/format/longFormatters/index.js
 var dateLongFormatter = function dateLongFormatter(pattern, formatLong) {
@@ -58401,17 +60583,14 @@ var dateLongFormatter = function dateLongFormatter(pattern, formatLong) {
       return formatLong.date({
         width: 'short'
       });
-
     case 'PP':
       return formatLong.date({
         width: 'medium'
       });
-
     case 'PPP':
       return formatLong.date({
         width: 'long'
       });
-
     case 'PPPP':
     default:
       return formatLong.date({
@@ -58419,24 +60598,20 @@ var dateLongFormatter = function dateLongFormatter(pattern, formatLong) {
       });
   }
 };
-
 var timeLongFormatter = function timeLongFormatter(pattern, formatLong) {
   switch (pattern) {
     case 'p':
       return formatLong.time({
         width: 'short'
       });
-
     case 'pp':
       return formatLong.time({
         width: 'medium'
       });
-
     case 'ppp':
       return formatLong.time({
         width: 'long'
       });
-
     case 'pppp':
     default:
       return formatLong.time({
@@ -58444,37 +60619,30 @@ var timeLongFormatter = function timeLongFormatter(pattern, formatLong) {
       });
   }
 };
-
 var dateTimeLongFormatter = function dateTimeLongFormatter(pattern, formatLong) {
   var matchResult = pattern.match(/(P+)(p+)?/) || [];
   var datePattern = matchResult[1];
   var timePattern = matchResult[2];
-
   if (!timePattern) {
     return dateLongFormatter(pattern, formatLong);
   }
-
   var dateTimeFormat;
-
   switch (datePattern) {
     case 'P':
       dateTimeFormat = formatLong.dateTime({
         width: 'short'
       });
       break;
-
     case 'PP':
       dateTimeFormat = formatLong.dateTime({
         width: 'medium'
       });
       break;
-
     case 'PPP':
       dateTimeFormat = formatLong.dateTime({
         width: 'long'
       });
       break;
-
     case 'PPPP':
     default:
       dateTimeFormat = formatLong.dateTime({
@@ -58482,10 +60650,8 @@ var dateTimeLongFormatter = function dateTimeLongFormatter(pattern, formatLong) 
       });
       break;
   }
-
   return dateTimeFormat.replace('{{date}}', dateLongFormatter(datePattern, formatLong)).replace('{{time}}', timeLongFormatter(timePattern, formatLong));
 };
-
 var longFormatters = {
   p: timeLongFormatter,
   P: dateTimeLongFormatter
@@ -58592,11 +60758,9 @@ var formatDistanceLocale = {
     other: 'almost {{count}} years'
   }
 };
-
 var formatDistance = function formatDistance(token, count, options) {
   var result;
   var tokenValue = formatDistanceLocale[token];
-
   if (typeof tokenValue === 'string') {
     result = tokenValue;
   } else if (count === 1) {
@@ -58604,7 +60768,6 @@ var formatDistance = function formatDistance(token, count, options) {
   } else {
     result = tokenValue.other.replace('{{count}}', count.toString());
   }
-
   if (options !== null && options !== void 0 && options.addSuffix) {
     if (options.comparison && options.comparison > 0) {
       return 'in ' + result;
@@ -58612,10 +60775,8 @@ var formatDistance = function formatDistance(token, count, options) {
       return result + ' ago';
     }
   }
-
   return result;
 };
-
 /* harmony default export */ var _lib_formatDistance = (formatDistance);
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/locale/_lib/buildFormatLongFn/index.js
 function buildFormatLongFn(args) {
@@ -58671,32 +60832,26 @@ var formatRelativeLocale = {
   nextWeek: "eeee 'at' p",
   other: 'P'
 };
-
 var formatRelative = function formatRelative(token, _date, _baseDate, _options) {
   return formatRelativeLocale[token];
 };
-
 /* harmony default export */ var _lib_formatRelative = (formatRelative);
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/locale/_lib/buildLocalizeFn/index.js
 function buildLocalizeFn(args) {
   return function (dirtyIndex, options) {
     var context = options !== null && options !== void 0 && options.context ? String(options.context) : 'standalone';
     var valuesArray;
-
     if (context === 'formatting' && args.formattingValues) {
       var defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
       var width = options !== null && options !== void 0 && options.width ? String(options.width) : defaultWidth;
       valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
     } else {
       var _defaultWidth = args.defaultWidth;
-
       var _width = options !== null && options !== void 0 && options.width ? String(options.width) : args.defaultWidth;
-
       valuesArray = args.values[_width] || args.values[_defaultWidth];
     }
-
-    var index = args.argumentCallback ? args.argumentCallback(dirtyIndex) : dirtyIndex; // @ts-ignore: For some reason TypeScript just don't want to match it, no matter how hard we try. I challenge you to try to remove it!
-
+    var index = args.argumentCallback ? args.argumentCallback(dirtyIndex) : dirtyIndex;
+    // @ts-ignore: For some reason TypeScript just don't want to match it, no matter how hard we try. I challenge you to try to remove it!
     return valuesArray[index];
   };
 }
@@ -58711,11 +60866,12 @@ var quarterValues = {
   narrow: ['1', '2', '3', '4'],
   abbreviated: ['Q1', 'Q2', 'Q3', 'Q4'],
   wide: ['1st quarter', '2nd quarter', '3rd quarter', '4th quarter']
-}; // Note: in English, the names of days of the week and months are capitalized.
+};
+
+// Note: in English, the names of days of the week and months are capitalized.
 // If you are making a new locale based on this one, check if the same is true for the language you're working on.
 // Generally, formatted dates should look like they are in the middle of a sentence,
 // e.g. in Spanish language the weekdays and months should be in the lowercase.
-
 var monthValues = {
   narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
   abbreviated: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -58791,9 +60947,10 @@ var formattingDayPeriodValues = {
     night: 'at night'
   }
 };
-
 var ordinalNumber = function ordinalNumber(dirtyNumber, _options) {
-  var number = Number(dirtyNumber); // If ordinal numbers depend on context, for example,
+  var number = Number(dirtyNumber);
+
+  // If ordinal numbers depend on context, for example,
   // if they are different for different grammatical genders,
   // use `options.unit`.
   //
@@ -58801,23 +60958,18 @@ var ordinalNumber = function ordinalNumber(dirtyNumber, _options) {
   // 'day', 'hour', 'minute', 'second'.
 
   var rem100 = number % 100;
-
   if (rem100 > 20 || rem100 < 10) {
     switch (rem100 % 10) {
       case 1:
         return number + 'st';
-
       case 2:
         return number + 'nd';
-
       case 3:
         return number + 'rd';
     }
   }
-
   return number + 'th';
 };
-
 var localize = {
   ordinalNumber: ordinalNumber,
   era: buildLocalizeFn({
@@ -58854,11 +61006,9 @@ function buildMatchFn(args) {
     var width = options.width;
     var matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
     var matchResult = string.match(matchPattern);
-
     if (!matchResult) {
       return null;
     }
-
     var matchedString = matchResult[0];
     var parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
     var key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, function (pattern) {
@@ -58876,24 +61026,20 @@ function buildMatchFn(args) {
     };
   };
 }
-
 function findKey(object, predicate) {
   for (var key in object) {
     if (object.hasOwnProperty(key) && predicate(object[key])) {
       return key;
     }
   }
-
   return undefined;
 }
-
 function findIndex(array, predicate) {
   for (var key = 0; key < array.length; key++) {
     if (predicate(array[key])) {
       return key;
     }
   }
-
   return undefined;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/locale/_lib/buildMatchPatternFn/index.js
@@ -59019,7 +61165,6 @@ var match_match = {
 
 
 
-
 /**
  * @type {Locale}
  * @category Locales
@@ -59037,9 +61182,7 @@ var locale = {
   localize: _lib_localize,
   match: _lib_match,
   options: {
-    weekStartsOn: 0
-    /* Sunday */
-    ,
+    weekStartsOn: 0 /* Sunday */,
     firstWeekContainsDate: 1
   }
 };
@@ -59069,14 +61212,15 @@ var locale = {
 //   If there is no matching single quote
 //   then the sequence will continue until the end of the string.
 // - . matches any single character unmatched by previous parts of the RegExps
+var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
 
-var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g; // This RegExp catches symbols escaped by quotes, and also
+// This RegExp catches symbols escaped by quotes, and also
 // sequences of symbols P, p, and the combinations like `PPPPPPPppppp`
-
 var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
 var escapedStringRegExp = /^'([^]*?)'?$/;
 var doubleQuoteRegExp = /''/g;
 var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+
 /**
  * @name format
  * @category Common Helpers
@@ -59371,40 +61515,36 @@ var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
 
 function format(dirtyDate, dirtyFormatStr, options) {
   var _ref, _options$locale, _ref2, _ref3, _ref4, _options$firstWeekCon, _options$locale2, _options$locale2$opti, _defaultOptions$local, _defaultOptions$local2, _ref5, _ref6, _ref7, _options$weekStartsOn, _options$locale3, _options$locale3$opti, _defaultOptions$local3, _defaultOptions$local4;
-
   requiredArgs_requiredArgs(2, arguments);
   var formatStr = String(dirtyFormatStr);
   var defaultOptions = defaultOptions_getDefaultOptions();
   var locale = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions.locale) !== null && _ref !== void 0 ? _ref : defaultLocale;
-  var firstWeekContainsDate = toInteger_toInteger((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+  var firstWeekContainsDate = toInteger_toInteger((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1);
 
+  // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
   if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
     throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
   }
+  var weekStartsOn = toInteger_toInteger((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0);
 
-  var weekStartsOn = toInteger_toInteger((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
-
+  // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
-
   if (!locale.localize) {
     throw new RangeError('locale must contain localize property');
   }
-
   if (!locale.formatLong) {
     throw new RangeError('locale must contain formatLong property');
   }
-
   var originalDate = toDate_toDate(dirtyDate);
-
   if (!isValid(originalDate)) {
     throw new RangeError('Invalid time value');
-  } // Convert the date in system timezone to the same date in UTC+00:00 timezone.
+  }
+
+  // Convert the date in system timezone to the same date in UTC+00:00 timezone.
   // This ensures that when UTC functions will be implemented, locales will be compatible with them.
   // See an issue about UTC functions: https://github.com/date-fns/date-fns/issues/376
-
-
   var timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate);
   var utcDate = subMilliseconds(originalDate, timezoneOffset);
   var formatterOptions = {
@@ -59415,55 +61555,42 @@ function format(dirtyDate, dirtyFormatStr, options) {
   };
   var result = formatStr.match(longFormattingTokensRegExp).map(function (substring) {
     var firstCharacter = substring[0];
-
     if (firstCharacter === 'p' || firstCharacter === 'P') {
       var longFormatter = format_longFormatters[firstCharacter];
       return longFormatter(substring, locale.formatLong);
     }
-
     return substring;
   }).join('').match(formattingTokensRegExp).map(function (substring) {
     // Replace two single quote characters with one single quote character
     if (substring === "''") {
       return "'";
     }
-
     var firstCharacter = substring[0];
-
     if (firstCharacter === "'") {
       return cleanEscapedString(substring);
     }
-
     var formatter = format_formatters[firstCharacter];
-
     if (formatter) {
       if (!(options !== null && options !== void 0 && options.useAdditionalWeekYearTokens) && isProtectedWeekYearToken(substring)) {
         throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
       }
-
       if (!(options !== null && options !== void 0 && options.useAdditionalDayOfYearTokens) && isProtectedDayOfYearToken(substring)) {
         throwProtectedError(substring, dirtyFormatStr, String(dirtyDate));
       }
-
       return formatter(utcDate, substring, locale.localize, formatterOptions);
     }
-
     if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
       throw new RangeError('Format string contains an unescaped latin alphabet character `' + firstCharacter + '`');
     }
-
     return substring;
   }).join('');
   return result;
 }
-
 function cleanEscapedString(input) {
   var matched = input.match(escapedStringRegExp);
-
   if (!matched) {
     return input;
   }
-
   return matched[1].replace(doubleQuoteRegExp, "'");
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/isSameMonth/index.js
@@ -59492,7 +61619,6 @@ function cleanEscapedString(input) {
  * const result = isSameMonth(new Date(2014, 8, 2), new Date(2015, 8, 25))
  * //=> false
  */
-
 function isSameMonth(dirtyDateLeft, dirtyDateRight) {
   requiredArgs_requiredArgs(2, arguments);
   var dateLeft = toDate_toDate(dirtyDateLeft);
@@ -59523,7 +61649,6 @@ function isSameMonth(dirtyDateLeft, dirtyDateRight) {
  * )
  * //=> false
  */
-
 function isEqual_isEqual(dirtyLeftDate, dirtyRightDate) {
   requiredArgs_requiredArgs(2, arguments);
   var dateLeft = toDate_toDate(dirtyLeftDate);
@@ -59561,7 +61686,6 @@ function isEqual_isEqual(dirtyLeftDate, dirtyRightDate) {
  * const result = isSameDay(new Date(2014, 8, 4), new Date(2015, 8, 4))
  * //=> false
  */
-
 function isSameDay(dirtyDateLeft, dirtyDateRight) {
   requiredArgs_requiredArgs(2, arguments);
   var dateLeftStartOfDay = startOfDay_startOfDay(dirtyDateLeft);
@@ -59590,21 +61714,17 @@ function isSameDay(dirtyDateLeft, dirtyDateRight) {
  * const result = addDays(new Date(2014, 8, 1), 10)
  * //=> Thu Sep 11 2014 00:00:00
  */
-
 function addDays_addDays(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var date = toDate_toDate(dirtyDate);
   var amount = toInteger_toInteger(dirtyAmount);
-
   if (isNaN(amount)) {
     return new Date(NaN);
   }
-
   if (!amount) {
     // If 0 days, no-op to avoid changing times in the hour before end of DST
     return date;
   }
-
   date.setDate(date.getDate() + amount);
   return date;
 }
@@ -59630,7 +61750,6 @@ function addDays_addDays(dirtyDate, dirtyAmount) {
  * const result = addWeeks(new Date(2014, 8, 1), 4)
  * //=> Mon Sep 29 2014 00:00:00
  */
-
 function addWeeks_addWeeks(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var amount = toInteger_toInteger(dirtyAmount);
@@ -59659,7 +61778,6 @@ function addWeeks_addWeeks(dirtyDate, dirtyAmount) {
  * const result = subWeeks(new Date(2014, 8, 1), 4)
  * //=> Mon Aug 04 2014 00:00:00
  */
-
 function subWeeks(dirtyDate, dirtyAmount) {
   requiredArgs_requiredArgs(2, arguments);
   var amount = toInteger_toInteger(dirtyAmount);
@@ -59697,18 +61815,16 @@ function subWeeks(dirtyDate, dirtyAmount) {
  * const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
  * //=> Mon Sep 01 2014 00:00:00
  */
-
 function startOfWeek_startOfWeek(dirtyDate, options) {
   var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
   requiredArgs_requiredArgs(1, arguments);
   var defaultOptions = defaultOptions_getDefaultOptions();
-  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
 
+  // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
-
   var date = toDate_toDate(dirtyDate);
   var day = date.getDay();
   var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
@@ -59717,7 +61833,6 @@ function startOfWeek_startOfWeek(dirtyDate, options) {
   return date;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/endOfWeek/index.js
-
 
 
 
@@ -59751,15 +61866,14 @@ function startOfWeek_startOfWeek(dirtyDate, options) {
  */
 function endOfWeek_endOfWeek(dirtyDate, options) {
   var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
   requiredArgs_requiredArgs(1, arguments);
   var defaultOptions = defaultOptions_getDefaultOptions();
-  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var weekStartsOn = toInteger_toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0);
 
+  // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
-
   var date = toDate_toDate(dirtyDate);
   var day = date.getDay();
   var diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
@@ -59812,25 +61926,25 @@ function date_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have tried t
 
 
 
-const styles_Wrapper = emotion_styled_base_browser_esm("div",  true ? {
+const styles_Wrapper = createStyled("div",  true ? {
   target: "e105ri6r5"
 } : 0)( true ? {
   name: "1khn195",
   styles: "box-sizing:border-box"
 } : 0);
-const Navigator = /*#__PURE__*/emotion_styled_base_browser_esm(h_stack_component,  true ? {
+const Navigator = /*#__PURE__*/createStyled(h_stack_component,  true ? {
   target: "e105ri6r4"
 } : 0)("margin-bottom:", space(4), ";" + ( true ? "" : 0));
-const NavigatorHeading = /*#__PURE__*/emotion_styled_base_browser_esm(heading_component,  true ? {
+const NavigatorHeading = /*#__PURE__*/createStyled(heading_component,  true ? {
   target: "e105ri6r3"
 } : 0)("font-size:", config_values.fontSize, ";font-weight:", config_values.fontWeight, ";strong{font-weight:", config_values.fontWeightHeading, ";}" + ( true ? "" : 0));
-const Calendar = emotion_styled_base_browser_esm("div",  true ? {
+const Calendar = createStyled("div",  true ? {
   target: "e105ri6r2"
 } : 0)("column-gap:", space(2), ";display:grid;grid-template-columns:0.5fr repeat( 5, 1fr ) 0.5fr;justify-items:center;row-gap:", space(2), ";" + ( true ? "" : 0));
-const DayOfWeek = emotion_styled_base_browser_esm("div",  true ? {
+const DayOfWeek = createStyled("div",  true ? {
   target: "e105ri6r1"
 } : 0)("color:", COLORS.gray[700], ";font-size:", config_values.fontSize, ";line-height:", config_values.fontLineHeightBase, ";&:nth-of-type( 1 ){justify-self:start;}&:nth-of-type( 7 ){justify-self:end;}" + ( true ? "" : 0));
-const DayButton = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
+const DayButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
   shouldForwardProp: prop => !['column', 'isSelected', 'isToday', 'hasEvents'].includes(prop),
   target: "e105ri6r0"
 } : 0)("grid-column:", props => props.column, ";position:relative;justify-content:center;", props => props.column === 1 && `
@@ -60134,7 +62248,6 @@ function getDayLabel(date, isSelected, numEvents) {
  * const result = startOfMinute(new Date(2014, 11, 1, 22, 15, 45, 400))
  * //=> Mon Dec 01 2014 22:15:00
  */
-
 function startOfMinute(dirtyDate) {
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
@@ -60161,7 +62274,6 @@ function startOfMinute(dirtyDate) {
  * const result = getDaysInMonth(new Date(2000, 1))
  * //=> 29
  */
-
 function getDaysInMonth_getDaysInMonth(dirtyDate) {
   requiredArgs_requiredArgs(1, arguments);
   var date = toDate_toDate(dirtyDate);
@@ -60195,7 +62307,6 @@ function getDaysInMonth_getDaysInMonth(dirtyDate) {
  * const result = setMonth(new Date(2014, 8, 1), 1)
  * //=> Sat Feb 01 2014 00:00:00
  */
-
 function setMonth_setMonth(dirtyDate, dirtyMonth) {
   requiredArgs_requiredArgs(2, arguments);
   var date = toDate_toDate(dirtyDate);
@@ -60205,15 +62316,13 @@ function setMonth_setMonth(dirtyDate, dirtyMonth) {
   var dateWithDesiredMonth = new Date(0);
   dateWithDesiredMonth.setFullYear(year, month, 15);
   dateWithDesiredMonth.setHours(0, 0, 0, 0);
-  var daysInMonth = getDaysInMonth_getDaysInMonth(dateWithDesiredMonth); // Set the last day of the new month
+  var daysInMonth = getDaysInMonth_getDaysInMonth(dateWithDesiredMonth);
+  // Set the last day of the new month
   // if the original date was the last day of the longer month
-
   date.setMonth(month, Math.min(day, daysInMonth));
   return date;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/set/index.js
-function set_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { set_typeof = function _typeof(obj) { return typeof obj; }; } else { set_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return set_typeof(obj); }
-
 
 
 
@@ -60259,45 +62368,36 @@ function set_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "fun
  */
 function set_set(dirtyDate, values) {
   requiredArgs_requiredArgs(2, arguments);
-
-  if (set_typeof(values) !== 'object' || values === null) {
+  if (_typeof(values) !== 'object' || values === null) {
     throw new RangeError('values parameter must be an object');
   }
+  var date = toDate_toDate(dirtyDate);
 
-  var date = toDate_toDate(dirtyDate); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
-
+  // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
   if (isNaN(date.getTime())) {
     return new Date(NaN);
   }
-
   if (values.year != null) {
     date.setFullYear(values.year);
   }
-
   if (values.month != null) {
     date = setMonth_setMonth(date, values.month);
   }
-
   if (values.date != null) {
     date.setDate(toInteger_toInteger(values.date));
   }
-
   if (values.hours != null) {
     date.setHours(toInteger_toInteger(values.hours));
   }
-
   if (values.minutes != null) {
     date.setMinutes(toInteger_toInteger(values.minutes));
   }
-
   if (values.seconds != null) {
     date.setSeconds(toInteger_toInteger(values.seconds));
   }
-
   if (values.milliseconds != null) {
     date.setMilliseconds(toInteger_toInteger(values.milliseconds));
   }
-
   return date;
 }
 ;// CONCATENATED MODULE: ./node_modules/date-fns/esm/setHours/index.js
@@ -60322,7 +62422,6 @@ function set_set(dirtyDate, values) {
  * const result = setHours(new Date(2014, 8, 1, 11, 30), 4)
  * //=> Mon Sep 01 2014 04:30:00
  */
-
 function setHours(dirtyDate, dirtyHours) {
   requiredArgs_requiredArgs(2, arguments);
   var date = toDate_toDate(dirtyDate);
@@ -60348,47 +62447,56 @@ function time_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have tried t
 
 
 
+<<<<<<< HEAD
 const time_styles_Wrapper = emotion_styled_base_browser_esm("div",  true ? {
+=======
+
+const time_styles_Wrapper = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "evcr23110"
 } : 0)("box-sizing:border-box;font-size:", config_values.fontSize, ";" + ( true ? "" : 0));
-const Fieldset = emotion_styled_base_browser_esm("fieldset",  true ? {
+const Fieldset = createStyled("fieldset",  true ? {
   target: "evcr2319"
 } : 0)("border:0;margin:0 0 ", space(2 * 2), " 0;padding:0;&:last-child{margin-bottom:0;}" + ( true ? "" : 0));
-const TimeWrapper = emotion_styled_base_browser_esm("div",  true ? {
+const TimeWrapper = createStyled("div",  true ? {
   target: "evcr2318"
 } : 0)( true ? {
   name: "pd0mhc",
   styles: "direction:ltr;display:flex"
 } : 0);
 const baseInput = /*#__PURE__*/emotion_react_browser_esm_css("&&& ", Input, "{padding-left:", space(2), ";padding-right:", space(2), ";text-align:center;}" + ( true ? "" : 0),  true ? "" : 0);
-const HoursInput = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+const HoursInput = /*#__PURE__*/createStyled(number_control,  true ? {
   target: "evcr2317"
 } : 0)(baseInput, " width:", space(9), ";&&& ", Input, "{padding-right:0;}&&& ", BackdropUI, "{border-right:0;border-top-right-radius:0;border-bottom-right-radius:0;}" + ( true ? "" : 0));
-const TimeSeparator = emotion_styled_base_browser_esm("span",  true ? {
+const TimeSeparator = createStyled("span",  true ? {
   target: "evcr2316"
 } : 0)("border-top:", config_values.borderWidth, " solid ", COLORS.gray[700], ";border-bottom:", config_values.borderWidth, " solid ", COLORS.gray[700], ";line-height:calc(\n\t\t", config_values.controlHeight, " - ", config_values.borderWidth, " * 2\n\t);display:inline-block;" + ( true ? "" : 0));
-const MinutesInput = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+const MinutesInput = /*#__PURE__*/createStyled(number_control,  true ? {
   target: "evcr2315"
 } : 0)(baseInput, " width:", space(9), ";&&& ", Input, "{padding-left:0;}&&& ", BackdropUI, "{border-left:0;border-top-left-radius:0;border-bottom-left-radius:0;}" + ( true ? "" : 0));
 
+<<<<<<< HEAD
 // Ideally we wouldn't need a wrapper, but can't otherwise target the
 // <BaseControl> in <SelectControl>
 const MonthSelectWrapper = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const MonthSelectWrapper = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "evcr2314"
 } : 0)( true ? {
   name: "1ff36h2",
   styles: "flex-grow:1"
 } : 0);
-const MonthSelect = /*#__PURE__*/emotion_styled_base_browser_esm(select_control,  true ? {
+const MonthSelect = /*#__PURE__*/createStyled(select_control,  true ? {
   target: "evcr2313"
 } : 0)("height:36px;", Select, "{line-height:30px;}" + ( true ? "" : 0));
-const DayInput = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+const DayInput = /*#__PURE__*/createStyled(number_control,  true ? {
   target: "evcr2312"
 } : 0)(baseInput, " width:", space(9), ";" + ( true ? "" : 0));
-const YearInput = /*#__PURE__*/emotion_styled_base_browser_esm(number_control,  true ? {
+const YearInput = /*#__PURE__*/createStyled(number_control,  true ? {
   target: "evcr2311"
 } : 0)(baseInput, " width:", space(14), ";" + ( true ? "" : 0));
-const TimeZone = emotion_styled_base_browser_esm("div",  true ? {
+const TimeZone = createStyled("div",  true ? {
   target: "evcr2310"
 } : 0)( true ? {
   name: "ebu3jh",
@@ -60745,12 +62853,26 @@ function date_time_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have tr
  * Internal dependencies
  */
 
+<<<<<<< HEAD
 const date_time_styles_Wrapper = /*#__PURE__*/emotion_styled_base_browser_esm(v_stack_component,  true ? {
   target: "e1p5onf00"
+=======
+const date_time_styles_Wrapper = /*#__PURE__*/createStyled(v_stack_component,  true ? {
+  target: "e1p5onf01"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1khn195",
   styles: "box-sizing:border-box"
 } : 0);
+<<<<<<< HEAD
+=======
+const CalendarHelp = createStyled("div",  true ? {
+  target: "e1p5onf00"
+} : 0)( true ? {
+  name: "l0rwn2",
+  styles: "min-width:260px"
+} : 0);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/date-time/date-time/index.js
 
@@ -61920,7 +64042,7 @@ function external_link_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You hav
  * WordPress dependencies
  */
 
-const StyledIcon = /*#__PURE__*/emotion_styled_base_browser_esm(icons_build_module_icon,  true ? {
+const StyledIcon = /*#__PURE__*/createStyled(icons_build_module_icon,  true ? {
   target: "esh4a730"
 } : 0)( true ? {
   name: "rvs7bx",
@@ -62054,22 +64176,22 @@ function focal_point_picker_style_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You
 
 
 
-const MediaWrapper = emotion_styled_base_browser_esm("div",  true ? {
+const MediaWrapper = createStyled("div",  true ? {
   target: "eeew7dm8"
 } : 0)( true ? {
   name: "w0nf6b",
   styles: "background-color:transparent;text-align:center;width:100%"
 } : 0);
-const MediaContainer = emotion_styled_base_browser_esm("div",  true ? {
+const MediaContainer = createStyled("div",  true ? {
   target: "eeew7dm7"
 } : 0)( true ? {
   name: "megach",
   styles: "align-items:center;box-shadow:0 0 0 1px rgba( 0, 0, 0, 0.2 );cursor:pointer;display:inline-flex;justify-content:center;margin:auto;position:relative;height:100%;img,video{box-sizing:border-box;display:block;height:auto;margin:0;max-height:100%;max-width:100%;pointer-events:none;user-select:none;width:auto;}"
 } : 0);
-const MediaPlaceholder = emotion_styled_base_browser_esm("div",  true ? {
+const MediaPlaceholder = createStyled("div",  true ? {
   target: "eeew7dm6"
 } : 0)("background:", COLORS.gray[100], ";box-sizing:border-box;height:", INITIAL_BOUNDS.height, "px;max-width:280px;min-width:", INITIAL_BOUNDS.width, "px;width:100%;" + ( true ? "" : 0));
-const StyledUnitControl = /*#__PURE__*/emotion_styled_base_browser_esm(unit_control,  true ? {
+const StyledUnitControl = /*#__PURE__*/createStyled(unit_control,  true ? {
   target: "eeew7dm5"
 } : 0)( true ? {
   name: "1pzk433",
@@ -62093,27 +64215,42 @@ const extraHelpTextMargin = ({
 }) => {
   return hasHelpText ? focal_point_picker_style_ref : undefined;
 };
+<<<<<<< HEAD
 const ControlWrapper = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
+=======
+
+const ControlWrapper = /*#__PURE__*/createStyled(flex_component,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "eeew7dm4"
 } : 0)("max-width:320px;padding-top:1em;", extraHelpTextMargin, " ", focal_point_picker_style_deprecatedBottomMargin, ";" + ( true ? "" : 0));
-const GridView = emotion_styled_base_browser_esm("div",  true ? {
+const GridView = createStyled("div",  true ? {
   target: "eeew7dm3"
+<<<<<<< HEAD
 } : 0)("left:50%;overflow:hidden;pointer-events:none;position:absolute;top:50%;transform:translate3d( -50%, -50%, 0 );transition:opacity 120ms linear;z-index:1;opacity:", ({
   showOverlay
 }) => showOverlay ? 1 : 0, ";" + ( true ? "" : 0));
 const GridLine = emotion_styled_base_browser_esm("div",  true ? {
+=======
+} : 0)("left:50%;overflow:hidden;pointer-events:none;position:absolute;top:50%;transform:translate3d( -50%, -50%, 0 );transition:opacity 120ms linear;z-index:1;opacity:", _ref5 => {
+  let {
+    showOverlay
+  } = _ref5;
+  return showOverlay ? 1 : 0;
+}, ";" + ( true ? "" : 0));
+const GridLine = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "eeew7dm2"
 } : 0)( true ? {
   name: "1d42i6k",
   styles: "background:white;box-shadow:0 0 2px rgba( 0, 0, 0, 0.6 );position:absolute;opacity:0.4;transform:translateZ( 0 )"
 } : 0);
-const GridLineX = /*#__PURE__*/emotion_styled_base_browser_esm(GridLine,  true ? {
+const GridLineX = /*#__PURE__*/createStyled(GridLine,  true ? {
   target: "eeew7dm1"
 } : 0)( true ? {
   name: "1qp910y",
   styles: "height:1px;left:0;right:0"
 } : 0);
-const GridLineY = /*#__PURE__*/emotion_styled_base_browser_esm(GridLine,  true ? {
+const GridLineY = /*#__PURE__*/createStyled(GridLine,  true ? {
   target: "eeew7dm0"
 } : 0)( true ? {
   name: "1oz3zka",
@@ -62193,8 +64330,12 @@ function FocalPointUnitControl(props) {
 /**
  * External dependencies
  */
+<<<<<<< HEAD
 
 const PointerCircle = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const PointerCircle = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e19snlhg0"
 } : 0)("background-color:transparent;cursor:grab;height:48px;margin:-24px 0 0 -24px;position:absolute;user-select:none;width:48px;will-change:transform;z-index:10000;background:rgba( 255, 255, 255, 0.6 );border-radius:50%;backdrop-filter:blur( 4px );box-shadow:rgb( 0 0 0 / 20% ) 0px 0px 10px;", ({
   isDragging
@@ -62683,26 +64824,45 @@ function font_size_picker_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You 
 
 
 
+<<<<<<< HEAD
 
 const styles_Container = emotion_styled_base_browser_esm("fieldset",  true ? {
   target: "e8tqeku5"
+=======
+const styles_Container = createStyled("fieldset",  true ? {
+  target: "e8tqeku4"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1t1ytme",
   styles: "border:0;margin:0;padding:0"
 } : 0);
+<<<<<<< HEAD
 const font_size_picker_styles_Header = /*#__PURE__*/emotion_styled_base_browser_esm(h_stack_component,  true ? {
   target: "e8tqeku4"
 } : 0)("height:", space(4), ";" + ( true ? "" : 0));
 const HeaderToggle = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
+=======
+const HeaderLabel = /*#__PURE__*/createStyled(base_control.VisualLabel,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e8tqeku3"
 } : 0)("margin-top:", space(-1), ";" + ( true ? "" : 0));
 const HeaderLabel = /*#__PURE__*/emotion_styled_base_browser_esm(base_control.VisualLabel,  true ? {
   target: "e8tqeku2"
 } : 0)("display:flex;gap:", space(1), ";justify-content:flex-start;margin-bottom:0;" + ( true ? "" : 0));
+<<<<<<< HEAD
 const HeaderHint = emotion_styled_base_browser_esm("span",  true ? {
   target: "e8tqeku1"
 } : 0)("color:", COLORS.gray[700], ";" + ( true ? "" : 0));
 const Controls = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const HeaderHint = createStyled("span",  true ? {
+  target: "e8tqeku2"
+} : 0)("color:", COLORS.gray[700], ";" + ( true ? "" : 0));
+const Controls = createStyled("div",  true ? {
+  target: "e8tqeku1"
+} : 0)(props => !props.__nextHasNoMarginBottom && `margin-bottom: ${space(6)};`, ";" + ( true ? "" : 0));
+const ResetButton = /*#__PURE__*/createStyled(build_module_button,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "e8tqeku0"
 } : 0)(props => !props.__nextHasNoMarginBottom && `margin-bottom: ${space(6)};`, ";" + ( true ? "" : 0));
 
@@ -62884,7 +65044,14 @@ const toggle_group_control_styles_block =  true ? {
   name: "7whenc",
   styles: "display:flex;width:100%"
 } : 0;
+<<<<<<< HEAD
 const VisualLabelWrapper = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const BackdropView = createStyled("div",  true ? {
+  target: "eakva831"
+} : 0)("background:", COLORS.gray[900], ";border-radius:", config_values.controlBorderRadius, ";left:0;position:absolute;top:2px;bottom:2px;transition:transform ", config_values.transitionDurationFast, " ease;", reduceMotion('transition'), " z-index:1;" + ( true ? "" : 0));
+const VisualLabelWrapper = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "eakva830"
 } : 0)( true ? {
   name: "zjik7",
@@ -64882,7 +67049,7 @@ function toggle_group_control_option_base_styles_EMOTION_STRINGIFIED_CSS_ERROR_(
  * Internal dependencies
  */
 
-const LabelView = emotion_styled_base_browser_esm("div",  true ? {
+const LabelView = createStyled("div",  true ? {
   target: "et6ln9s1"
 } : 0)( true ? {
   name: "sln1fl",
@@ -64901,8 +67068,13 @@ const buttonView = ({
   size
 }), " ", isPressed && pressed, ";" + ( true ? "" : 0),  true ? "" : 0);
 const pressed = /*#__PURE__*/emotion_react_browser_esm_css("color:", COLORS.white, ";&:active{background:transparent;}" + ( true ? "" : 0),  true ? "" : 0);
+<<<<<<< HEAD
 const deselectable = /*#__PURE__*/emotion_react_browser_esm_css("color:", COLORS.gray[900], ";&:focus{box-shadow:inset 0 0 0 1px ", COLORS.white, ",0 0 0 ", config_values.borderWidthFocus, " ", COLORS.theme.accent, ";outline:2px solid transparent;}" + ( true ? "" : 0),  true ? "" : 0);
 const ButtonContentView = emotion_styled_base_browser_esm("div",  true ? {
+=======
+const deselectable = /*#__PURE__*/emotion_react_browser_esm_css("color:", COLORS.gray[900], ";&:focus{box-shadow:inset 0 0 0 1px ", COLORS.white, ",0 0 0 ", config_values.borderWidthFocus, " ", COLORS.ui.theme, ";outline:2px solid transparent;}" + ( true ? "" : 0),  true ? "" : 0);
+const ButtonContentView = createStyled("div",  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "et6ln9s0"
 } : 0)("display:flex;font-size:", config_values.fontSize, ";line-height:1;" + ( true ? "" : 0));
 const isIconStyles = ({
@@ -65573,11 +67745,24 @@ function Token({
 
 
 
+<<<<<<< HEAD
 const deprecatedPaddings = ({
   __next40pxDefaultSize,
   hasTokens
 }) => !__next40pxDefaultSize && /*#__PURE__*/emotion_react_browser_esm_css("padding-top:", space(hasTokens ? 1 : 0.5), ";padding-bottom:", space(hasTokens ? 1 : 0.5), ";" + ( true ? "" : 0),  true ? "" : 0);
 const TokensAndInputWrapperFlex = /*#__PURE__*/emotion_styled_base_browser_esm(flex_component,  true ? {
+=======
+
+const deprecatedPaddings = _ref => {
+  let {
+    __next36pxDefaultSize,
+    hasTokens
+  } = _ref;
+  return !__next36pxDefaultSize && /*#__PURE__*/emotion_react_browser_esm_css("padding-top:", space(hasTokens ? 1 : 0.5), ";padding-bottom:", space(hasTokens ? 1 : 0.5), ";" + ( true ? "" : 0),  true ? "" : 0);
+};
+
+const TokensAndInputWrapperFlex = /*#__PURE__*/createStyled(flex_component,  true ? {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   target: "ehq8nmi0"
 } : 0)("padding:7px;", boxSizingReset, " ", deprecatedPaddings, ";" + ( true ? "" : 0));
 
@@ -67118,6 +69303,7 @@ function navigation_styles_EMOTION_STRINGIFIED_CSS_ERROR_() { return "You have t
 
 
 
+<<<<<<< HEAD
 const NavigationUI = emotion_styled_base_browser_esm("div",  true ? {
   target: "eeiismy11"
 } : 0)("width:100%;box-sizing:border-box;padding:0 ", space(4), ";overflow:hidden;" + ( true ? "" : 0));
@@ -67126,34 +69312,67 @@ const MenuUI = emotion_styled_base_browser_esm("div",  true ? {
 } : 0)("margin-top:", space(6), ";margin-bottom:", space(6), ";display:flex;flex-direction:column;ul{padding:0;margin:0;list-style:none;}.components-navigation__back-button{margin-bottom:", space(6), ";}.components-navigation__group+.components-navigation__group{margin-top:", space(6), ";}" + ( true ? "" : 0));
 const MenuBackButtonUI = /*#__PURE__*/emotion_styled_base_browser_esm(build_module_button,  true ? {
   target: "eeiismy9"
+=======
+
+const NavigationUI = createStyled("div",  true ? {
+  target: "ejwewyf11"
+} : 0)("width:100%;box-sizing:border-box;padding:0 ", space(4), ";overflow:hidden;" + ( true ? "" : 0));
+const MenuUI = createStyled("div",  true ? {
+  target: "ejwewyf10"
+} : 0)("margin-top:", space(6), ";margin-bottom:", space(6), ";display:flex;flex-direction:column;ul{padding:0;margin:0;list-style:none;}.components-navigation__back-button{margin-bottom:", space(6), ";}.components-navigation__group+.components-navigation__group{margin-top:", space(6), ";}" + ( true ? "" : 0));
+const MenuBackButtonUI = /*#__PURE__*/createStyled(build_module_button,  true ? {
+  target: "ejwewyf9"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "26l0q2",
   styles: "&.is-tertiary{color:inherit;opacity:0.7;&:hover:not( :disabled ){opacity:1;box-shadow:none;color:inherit;}&:active:not( :disabled ){background:transparent;opacity:1;color:inherit;}}"
 } : 0);
+<<<<<<< HEAD
 const MenuTitleUI = emotion_styled_base_browser_esm("div",  true ? {
   target: "eeiismy8"
+=======
+const MenuTitleUI = createStyled("div",  true ? {
+  target: "ejwewyf8"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "1aubja5",
   styles: "overflow:hidden;width:100%"
 } : 0);
+<<<<<<< HEAD
 const MenuTitleActionsUI = emotion_styled_base_browser_esm("span",  true ? {
   target: "eeiismy7"
 } : 0)("height:", space(6), ";.components-button.is-small{color:inherit;opacity:0.7;margin-right:", space(1), ";padding:0;&:active:not( :disabled ){background:none;opacity:1;color:inherit;}&:hover:not( :disabled ){box-shadow:none;opacity:1;color:inherit;}}" + ( true ? "" : 0));
 const MenuTitleSearchUI = /*#__PURE__*/emotion_styled_base_browser_esm(search_control,  true ? {
   target: "eeiismy6"
+=======
+const MenuTitleActionsUI = createStyled("span",  true ? {
+  target: "ejwewyf7"
+} : 0)("height:", space(6), ";.components-button.is-small{color:inherit;opacity:0.7;margin-right:", space(1), ";padding:0;&:active:not( :disabled ){background:none;opacity:1;color:inherit;}&:hover:not( :disabled ){box-shadow:none;opacity:1;color:inherit;}}" + ( true ? "" : 0));
+const MenuTitleSearchUI = /*#__PURE__*/createStyled(search_control,  true ? {
+  target: "ejwewyf6"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)( true ? {
   name: "za3n3e",
   styles: "input[type='search'].components-search-control__input{margin:0;background:#303030;color:#fff;&:focus{background:#434343;color:#fff;}&::placeholder{color:rgba( 255, 255, 255, 0.6 );}}svg{fill:white;}.components-button.has-icon{padding:0;min-width:auto;}"
 } : 0);
+<<<<<<< HEAD
 const GroupTitleUI = /*#__PURE__*/emotion_styled_base_browser_esm(heading_component,  true ? {
   target: "eeiismy5"
 } : 0)("min-height:", space(12), ";align-items:center;color:inherit;display:flex;justify-content:space-between;margin-bottom:", space(2), ";padding:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? `${space(1)} ${space(4)} ${space(1)} ${space(2)}` : `${space(1)} ${space(2)} ${space(1)} ${space(4)}`, ";" + ( true ? "" : 0));
 const ItemBaseUI = emotion_styled_base_browser_esm("li",  true ? {
   target: "eeiismy4"
+=======
+const GroupTitleUI = /*#__PURE__*/createStyled(heading_component,  true ? {
+  target: "ejwewyf5"
+} : 0)("min-height:", space(12), ";align-items:center;color:inherit;display:flex;justify-content:space-between;margin-bottom:", space(2), ";padding:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? `${space(1)} ${space(4)} ${space(1)} ${space(2)}` : `${space(1)} ${space(2)} ${space(1)} ${space(4)}`, ";" + ( true ? "" : 0));
+const ItemBaseUI = createStyled("li",  true ? {
+  target: "ejwewyf4"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)("border-radius:2px;color:inherit;margin-bottom:0;>button,>a.components-button,>a{width:100%;color:inherit;opacity:0.7;padding:", space(2), " ", space(4), ";", rtl({
   textAlign: 'left'
 }, {
   textAlign: 'right'
+<<<<<<< HEAD
 }), " &:hover,&:focus:not( [aria-disabled='true'] ):active,&:active:not( [aria-disabled='true'] ):active{color:inherit;opacity:1;}}&.is-active{background-color:", COLORS.theme.accent, ";color:", COLORS.white, ";>button,>a{color:", COLORS.white, ";opacity:1;}}>svg path{color:", COLORS.gray[600], ";}" + ( true ? "" : 0));
 const ItemUI = emotion_styled_base_browser_esm("div",  true ? {
   target: "eeiismy3"
@@ -67166,6 +69385,20 @@ const ItemBadgeUI = emotion_styled_base_browser_esm("span",  true ? {
 } : 0)("margin-left:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? '0' : space(2), ";margin-right:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? space(2) : '0', ";display:inline-flex;padding:", space(1), " ", space(3), ";border-radius:2px;animation:fade-in 250ms ease-out;@keyframes fade-in{from{opacity:0;}to{opacity:1;}}", reduceMotion('animation'), ";" + ( true ? "" : 0));
 const ItemTitleUI = /*#__PURE__*/emotion_styled_base_browser_esm(text_component,  true ? {
   target: "eeiismy0"
+=======
+}), " &:hover,&:focus:not( [aria-disabled='true'] ):active,&:active:not( [aria-disabled='true'] ):active{color:inherit;opacity:1;}}&.is-active{background-color:", COLORS.ui.theme, ";color:", COLORS.white, ";>button,>a{color:", COLORS.white, ";opacity:1;}}>svg path{color:", COLORS.gray[600], ";}" + ( true ? "" : 0));
+const ItemUI = createStyled("div",  true ? {
+  target: "ejwewyf3"
+} : 0)("display:flex;align-items:center;height:auto;min-height:40px;margin:0;padding:", space(1.5), " ", space(4), ";font-weight:400;line-height:20px;width:100%;color:inherit;opacity:0.7;" + ( true ? "" : 0));
+const ItemIconUI = createStyled("span",  true ? {
+  target: "ejwewyf2"
+} : 0)("display:flex;margin-right:", space(2), ";" + ( true ? "" : 0));
+const ItemBadgeUI = createStyled("span",  true ? {
+  target: "ejwewyf1"
+} : 0)("margin-left:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? '0' : space(2), ";margin-right:", () => (0,external_wp_i18n_namespaceObject.isRTL)() ? space(2) : '0', ";display:inline-flex;padding:", space(1), " ", space(3), ";border-radius:2px;animation:fade-in 250ms ease-out;@keyframes fade-in{from{opacity:0;}to{opacity:1;}}", reduceMotion('animation'), ";" + ( true ? "" : 0));
+const ItemTitleUI = /*#__PURE__*/createStyled(text_component,  true ? {
+  target: "ejwewyf0"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 } : 0)(() => (0,external_wp_i18n_namespaceObject.isRTL)() ? 'margin-left: auto;' : 'margin-right: auto;', " font-size:14px;line-height:20px;color:inherit;" + ( true ? "" : 0));
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/navigation/use-navigation-tree-nodes.js
@@ -73758,10 +75991,33 @@ const ToolbarGroupContainer = ({
  */
 
 
+<<<<<<< HEAD
 /**
  * Internal dependencies
  */
 
+=======
+const resize_tooltip_styles_Root = createStyled("div",  true ? {
+  target: "ekdag503"
+} : 0)( true ? {
+  name: "1cd7zoc",
+  styles: "bottom:0;box-sizing:border-box;left:0;pointer-events:none;position:absolute;right:0;top:0"
+} : 0);
+const TooltipWrapper = createStyled("div",  true ? {
+  target: "ekdag502"
+} : 0)( true ? {
+  name: "ajymcs",
+  styles: "align-items:center;box-sizing:border-box;display:inline-flex;justify-content:center;opacity:0;pointer-events:none;transition:opacity 120ms linear"
+} : 0);
+const resize_tooltip_styles_Tooltip = createStyled("div",  true ? {
+  target: "ekdag501"
+} : 0)("background:", COLORS.gray[900], ";border-radius:2px;box-sizing:border-box;font-size:12px;color:", COLORS.ui.textDark, ";padding:4px 8px;position:relative;" + ( true ? "" : 0)); // TODO: Resolve need to use &&& to increase specificity
+// https://github.com/WordPress/gutenberg/issues/18483
+
+const LabelText = /*#__PURE__*/createStyled(text_component,  true ? {
+  target: "ekdag500"
+} : 0)("&&&{color:", COLORS.ui.textDark, ";display:block;font-size:13px;line-height:1.4;white-space:nowrap;}" + ( true ? "" : 0));
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 function ToolbarGroupCollapsed({
@@ -74821,6 +77077,39 @@ const component_ToolsPanel = contextConnect(UnconnectedToolsPanel, 'ToolsPanel')
  */
 
 
+<<<<<<< HEAD
+=======
+const spinAnimation = emotion_react_browser_esm_keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+ `;
+const StyledSpinner = createStyled("svg",  true ? {
+  target: "ea4tfvq2"
+} : 0)("width:", config_values.spinnerSize, "px;height:", config_values.spinnerSize, "px;display:inline-block;margin:5px 11px 0;position:relative;color:", COLORS.ui.theme, ";overflow:visible;" + ( true ? "" : 0));
+const commonPathProps =  true ? {
+  name: "9s4963",
+  styles: "fill:transparent;stroke-width:1.5px"
+} : 0;
+const SpinnerTrack = createStyled("circle",  true ? {
+  target: "ea4tfvq1"
+} : 0)(commonPathProps, ";stroke:", COLORS.gray[300], ";" + ( true ? "" : 0));
+const SpinnerIndicator = createStyled("path",  true ? {
+  target: "ea4tfvq0"
+} : 0)(commonPathProps, ";stroke:currentColor;stroke-linecap:round;transform-origin:50% 50%;animation:1.4s linear infinite both ", spinAnimation, ";" + ( true ? "" : 0));
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/spinner/index.js
+
+
+
+/**
+ * External dependencies
+ */
+
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * Internal dependencies
@@ -75385,7 +77674,21 @@ function UnforwardedTreeGridRow({
 const TreeGridRow = (0,external_wp_element_namespaceObject.forwardRef)(UnforwardedTreeGridRow);
 /* harmony default export */ var tree_grid_row = (TreeGridRow);
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/tree-grid/roving-tab-index-item.js
+=======
+const StyledTextarea = createStyled("textarea",  true ? {
+  target: "e1w5nnrk0"
+} : 0)("width:100%;", inputControl, ";" + ( true ? "" : 0));
+
+;// CONCATENATED MODULE: ./node_modules/@wordpress/components/build-module/textarea-control/index.js
+
+
+
+/**
+ * External dependencies
+ */
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * WordPress dependencies
@@ -77459,7 +79762,37 @@ const $d3863c46a17e8a28$export$be92b6f5f03c0fe9 = (/* unused pure expression or 
 
 
 
+<<<<<<< HEAD
 ;// CONCATENATED MODULE: ./node_modules/@radix-ui/react-id/dist/index.module.js
+=======
+const ToolsPanelWithInnerWrapper = columns => {
+  return /*#__PURE__*/emotion_react_browser_esm_css(">div:not( :first-of-type ){display:grid;", toolsPanelGrid.columns(columns), " ", toolsPanelGrid.spacing, " ", toolsPanelGrid.item.fullWidth, ";}" + ( true ? "" : 0),  true ? "" : 0);
+};
+const ToolsPanelHiddenInnerWrapper =  true ? {
+  name: "huufmu",
+  styles: ">div:not( :first-of-type ){display:none;}"
+} : 0;
+const ToolsPanelHeader = /*#__PURE__*/emotion_react_browser_esm_css(toolsPanelGrid.item.fullWidth, " gap:", space(2), ";.components-dropdown-menu{margin:", space(-1), " 0;line-height:0;}&&&& .components-dropdown-menu__toggle{padding:0;min-width:", space(6), ";}" + ( true ? "" : 0),  true ? "" : 0);
+const ToolsPanelHeading =  true ? {
+  name: "1pmxm02",
+  styles: "font-size:inherit;font-weight:500;line-height:normal;&&{margin:0;}"
+} : 0;
+const ToolsPanelItem = /*#__PURE__*/emotion_react_browser_esm_css(toolsPanelGrid.item.fullWidth, "&>div,&>fieldset{padding-bottom:0;margin-bottom:0;max-width:100%;}&& ", base_control_styles_Wrapper, "{margin-bottom:0;", StyledField, ":last-child{margin-bottom:0;}}", StyledHelp, "{margin-bottom:0;}&& ", LabelWrapper, "{label{line-height:1.4em;}}" + ( true ? "" : 0),  true ? "" : 0);
+const ToolsPanelItemPlaceholder =  true ? {
+  name: "eivff4",
+  styles: "display:none"
+} : 0;
+const styles_DropdownMenu =  true ? {
+  name: "16gsvie",
+  styles: "min-width:200px"
+} : 0;
+const ResetLabel = createStyled("span",  true ? {
+  target: "ews648u0"
+} : 0)("color:", COLORS.ui.themeDark10, ";font-size:11px;font-weight:500;line-height:1.4;", rtl({
+  marginLeft: space(3)
+}), " text-transform:uppercase;" + ( true ? "" : 0));
+const DefaultControlsItem = /*#__PURE__*/emotion_react_browser_esm_css("color:", COLORS.gray[900], ";&&[aria-disabled='true']{color:", COLORS.gray[700], ";opacity:1;&:hover{color:", COLORS.gray[700], ";}", ResetLabel, "{opacity:0.3;}}" + ( true ? "" : 0),  true ? "" : 0);
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 
@@ -79503,6 +81836,48 @@ ReactRemoveScroll.classNames = RemoveScroll.classNames;
 
 
 
+<<<<<<< HEAD
+=======
+const ZStackView = createStyled("div",  true ? {
+  target: "ebn2ljm1"
+} : 0)( true ? {
+  name: "5ob2ly",
+  styles: "display:flex;position:relative"
+} : 0);
+const ZStackChildView = createStyled("div",  true ? {
+  target: "ebn2ljm0"
+} : 0)(_ref => {
+  let {
+    isLayered,
+    offsetAmount
+  } = _ref;
+  return isLayered ? /*#__PURE__*/emotion_react_browser_esm_css(rtl({
+    marginLeft: offsetAmount
+  })(),  true ? "" : 0,  true ? "" : 0) : /*#__PURE__*/emotion_react_browser_esm_css(rtl({
+    right: offsetAmount * -1
+  })(),  true ? "" : 0,  true ? "" : 0);
+}, " ", _ref2 => {
+  let {
+    isLayered
+  } = _ref2;
+  return isLayered ? positionAbsolute : positionRelative;
+}, " ", _ref3 => {
+  let {
+    zIndex
+  } = _ref3;
+  return /*#__PURE__*/emotion_react_browser_esm_css({
+    zIndex
+  },  true ? "" : 0,  true ? "" : 0);
+}, ";" + ( true ? "" : 0));
+const positionAbsolute =  true ? {
+  name: "a4hmbt",
+  styles: "position:absolute"
+} : 0;
+const positionRelative =  true ? {
+  name: "bjn8wh",
+  styles: "position:relative"
+} : 0;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 

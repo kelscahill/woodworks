@@ -2,6 +2,10 @@
 
 namespace Yoast\WP\SEO\Builders;
 
+<<<<<<< HEAD
+=======
+use wpdb;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 use Yoast\WP\SEO\Exceptions\Indexable\Post_Type_Not_Built_Exception;
 use Yoast\WP\SEO\Helpers\Options_Helper;
 use Yoast\WP\SEO\Helpers\Post_Helper;
@@ -39,6 +43,16 @@ class Indexable_Post_Type_Archive_Builder {
 
 	/**
 	 * Holds the post type helper instance.
+<<<<<<< HEAD
+=======
+	 *
+	 * @var Post_Type_Helper
+	 */
+	protected $post_type_helper;
+
+	/**
+	 * The WPDB instance.
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 *
 	 * @var Post_Type_Helper
 	 */
@@ -51,17 +65,30 @@ class Indexable_Post_Type_Archive_Builder {
 	 * @param Indexable_Builder_Versions $versions         The latest version of each Indexable builder.
 	 * @param Post_Helper                $post_helper      The post helper.
 	 * @param Post_Type_Helper           $post_type_helper The post type helper.
+<<<<<<< HEAD
+=======
+	 * @param wpdb                       $wpdb             The WPDB instance.
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 */
 	public function __construct(
 		Options_Helper $options,
 		Indexable_Builder_Versions $versions,
 		Post_Helper $post_helper,
+<<<<<<< HEAD
 		Post_Type_Helper $post_type_helper
+=======
+		Post_Type_Helper $post_type_helper,
+		wpdb $wpdb
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	) {
 		$this->options          = $options;
 		$this->version          = $versions->get_latest_version_for_type( 'post-type-archive' );
 		$this->post_helper      = $post_helper;
 		$this->post_type_helper = $post_type_helper;
+<<<<<<< HEAD
+=======
+		$this->wpdb             = $wpdb;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	}
 
 	/**

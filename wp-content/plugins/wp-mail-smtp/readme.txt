@@ -2,8 +2,13 @@
 Contributors: wpforms, jaredatch, smub, slaFFik, capuderg
 Tags: smtp, wp mail smtp, wordpress smtp, gmail smtp, sendgrid smtp, mailgun smtp, mail, mailer, phpmailer, wp_mail, email, mailgun, sengrid, gmail, sendinblue, brevo, wp smtp
 Requires at least: 5.2
+<<<<<<< HEAD
 Tested up to: 6.4
 Stable tag: 3.11.0
+=======
+Tested up to: 6.2
+Stable tag: 3.8.2
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 Requires PHP: 7.2
 
 Make email delivery easy for WordPress. Connect with SMTP, Gmail, Outlook, SendGrid, Mailgun, SES, Zoho, + more. Rated #1 WordPress SMTP Email plugin.
@@ -380,6 +385,7 @@ By all means please contact us to discuss features or options you'd like to see 
 
 == Changelog ==
 
+<<<<<<< HEAD
 = 3.11.0 - 2023-12-13 =
 - Added: Filter to customize the capability required for managing the plugin.
 - Changed: Hide test tab movement notice for new users.
@@ -403,6 +409,9 @@ By all means please contact us to discuss features or options you'd like to see 
 - Fixed: Conflict with other plugins (Alt Manager) that made the WP Plugins install page unusable.
 
 = 3.8.2 - 2023-07-20 =
+=======
+= 3.8.2 - 2023-07-19 =
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 - Changed: Improved notifications formatting and styles.
 - Changed: Sendinblue rebranded to Brevo.
 - Fixed: Explicitly set "Content-Type" header for the HTML test email.

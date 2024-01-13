@@ -116,7 +116,11 @@
  *
  * Example:
  *
+<<<<<<< HEAD
  *     if ( $tags->next_tag( array( 'class_name' => 'wp-group-block' ) ) ) {
+=======
+ *     if ( $tags->next_tag( array( 'class' => 'wp-group-block' ) ) ) {
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
  *         $tags->set_attribute( 'title', 'This groups the contained content.' );
  *         $tags->remove_attribute( 'data-test-id' );
  *     }
@@ -862,7 +866,11 @@ class WP_HTML_Tag_Processor {
 	 *
 	 * @see https://html.spec.whatwg.org/multipage/parsing.html#rcdata-state
 	 *
+<<<<<<< HEAD
 	 * @param string $tag_name The uppercase tag name which will close the RCDATA region.
+=======
+	 * @param string $tag_name The lowercase tag name which will close the RCDATA region.
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 * @return bool Whether an end to the RCDATA region was found before the end of the document.
 	 */
 	private function skip_rcdata( $tag_name ) {
@@ -1164,7 +1172,11 @@ class WP_HTML_Tag_Processor {
 					 *
 					 * See https://html.spec.whatwg.org/#parse-error-incorrectly-closed-comment
 					 */
+<<<<<<< HEAD
 					--$closer_at; // Pre-increment inside condition below reduces risk of accidental infinite looping.
+=======
+					$closer_at--; // Pre-increment inside condition below reduces risk of accidental infinite looping.
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 					while ( ++$closer_at < strlen( $html ) ) {
 						$closer_at = strpos( $html, '--', $closer_at );
 						if ( false === $closer_at ) {
@@ -1245,7 +1257,11 @@ class WP_HTML_Tag_Processor {
 			 * See https://html.spec.whatwg.org/#parse-error-missing-end-tag-name
 			 */
 			if ( '>' === $html[ $at + 1 ] ) {
+<<<<<<< HEAD
 				++$at;
+=======
+				$at++;
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 				continue;
 			}
 
@@ -1424,12 +1440,20 @@ class WP_HTML_Tag_Processor {
 	 */
 	private function after_tag() {
 		$this->get_updated_html();
+<<<<<<< HEAD
 		$this->tag_name_starts_at   = null;
 		$this->tag_name_length      = null;
 		$this->tag_ends_at          = null;
 		$this->is_closing_tag       = null;
 		$this->attributes           = array();
 		$this->duplicate_attributes = null;
+=======
+		$this->tag_name_starts_at = null;
+		$this->tag_name_length    = null;
+		$this->tag_ends_at        = null;
+		$this->is_closing_tag     = null;
+		$this->attributes         = array();
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	}
 
 	/**
@@ -1440,6 +1464,11 @@ class WP_HTML_Tag_Processor {
 	 *
 	 * @see WP_HTML_Tag_Processor::$lexical_updates
 	 * @see WP_HTML_Tag_Processor::$classname_updates
+<<<<<<< HEAD
+=======
+	 *
+	 * @return void
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 */
 	private function class_name_updates_to_attributes_updates() {
 		if ( count( $this->classname_updates ) === 0 ) {
@@ -1579,7 +1608,10 @@ class WP_HTML_Tag_Processor {
 	 *
 	 * @since 6.2.0
 	 * @since 6.2.1 Accumulates shift for internal cursor and passed pointer.
+<<<<<<< HEAD
 	 * @since 6.3.0 Invalidate any bookmarks whose targets are overwritten.
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 *
 	 * @param int $shift_this_point Accumulate and return shift for this position.
 	 * @return int How many bytes the given pointer moved in response to the updates.
@@ -1667,6 +1699,7 @@ class WP_HTML_Tag_Processor {
 		$this->lexical_updates = array();
 
 		return $accumulated_shift_for_given_point;
+<<<<<<< HEAD
 	}
 
 	/**
@@ -1679,6 +1712,8 @@ class WP_HTML_Tag_Processor {
 	 */
 	public function has_bookmark( $bookmark_name ) {
 		return array_key_exists( $bookmark_name, $this->bookmarks );
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	}
 
 	/**
@@ -2098,7 +2133,11 @@ class WP_HTML_Tag_Processor {
 			 *
 			 *     Result: <div id="new"/>
 			 */
+<<<<<<< HEAD
 			$existing_attribute                        = $this->attributes[ $comparable_name ];
+=======
+			$existing_attribute = $this->attributes[ $comparable_name ];
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 			$this->lexical_updates[ $comparable_name ] = new WP_HTML_Text_Replacement(
 				$existing_attribute->start,
 				$existing_attribute->end,
@@ -2270,7 +2309,10 @@ class WP_HTML_Tag_Processor {
 	 *
 	 * @since 6.2.0
 	 * @since 6.2.1 Shifts the internal cursor corresponding to the applied updates.
+<<<<<<< HEAD
 	 * @since 6.4.0 No longer calls subclass method `next_tag()` after updating HTML.
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 *
 	 * @return string The processed HTML.
 	 */
@@ -2317,6 +2359,7 @@ class WP_HTML_Tag_Processor {
 		 *                 ↑  │ back up by the length of the tag name plus the opening <
 		 *                 └←─┘ back up by strlen("em") + 1 ==> 3
 		 */
+<<<<<<< HEAD
 		$this->bytes_already_parsed = $before_current_tag;
 		$this->parse_next_tag();
 		// Reparse the attributes.
@@ -2327,6 +2370,20 @@ class WP_HTML_Tag_Processor {
 		$tag_ends_at                = strpos( $this->html, '>', $this->bytes_already_parsed );
 		$this->tag_ends_at          = $tag_ends_at;
 		$this->bytes_already_parsed = $tag_ends_at;
+=======
+
+		// Store existing state so it can be restored after reparsing.
+		$previous_parsed_byte_count = $this->bytes_already_parsed;
+		$previous_query             = $this->last_query;
+
+		// Reparse attributes.
+		$this->bytes_already_parsed = $before_current_tag;
+		$this->next_tag();
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
+
+		// Restore previous state.
+		$this->bytes_already_parsed = $previous_parsed_byte_count;
+		$this->parse_query( $previous_query );
 
 		return $this->html;
 	}

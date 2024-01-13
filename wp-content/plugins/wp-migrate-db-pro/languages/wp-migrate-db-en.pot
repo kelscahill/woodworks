@@ -8,7 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-migrate-db-pro\n"
 "Report-Msgid-Bugs-To: nom@deliciousbrains.com\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2023-08-29 09:07-0400\n"
+=======
+"POT-Creation-Date: 2023-07-10 10:45-0400\n"
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +74,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Replace.php:677
 #: src/wp-migrate-db-pro/class/Common/Replace.php:679
 #: src/wp-migrate-db-pro/class/Common/Replace.php:690
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Replace.php:714
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "WP Migrate - Failed to instantiate object for replacement. If the serialized "
@@ -86,7 +93,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Replace.php:735
 #: src/wp-migrate-db-pro/class/Common/Replace.php:737
 #: src/wp-migrate-db-pro/class/Common/Replace.php:748
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Replace.php:772
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "Failed attempting to do the recursive unserialize replace. Please contact "
 "support."
@@ -120,7 +130,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/License.php:496
 #: src/wp-migrate-db-pro/class/SiteMigration/License.php:526
 #: src/wp-migrate-db-pro/class/Pro/License.php:553
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Api.php:130
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<strong>Could not connect to api.deliciousbrains.com</strong> &mdash; You "
@@ -142,7 +155,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/License.php:497
 #: src/wp-migrate-db-pro/class/SiteMigration/License.php:527
 #: src/wp-migrate-db-pro/class/Pro/License.php:554
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Api.php:130
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Temporarily disable SSL for connections to api.deliciousbrains.com"
 msgstr ""
 
@@ -157,7 +173,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/License.php:504
 #: src/wp-migrate-db-pro/class/SiteMigration/License.php:534
 #: src/wp-migrate-db-pro/class/Pro/License.php:561
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Api.php:138
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "We've detected that <code>WP_HTTP_BLOCK_EXTERNAL</code> is enabled and the "
@@ -603,10 +622,13 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/License.php:724
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:50
 #: src/wp-migrate-db-pro/class/SiteMigration/Plugin/PluginManager.php:27
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/SiteMigration/Plugin/PluginManager.php:28
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:52
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:258
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:562
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgctxt "Plugin configuration and preferences"
 msgid "Settings"
 msgstr ""
@@ -1006,7 +1028,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:829
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:827
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:844
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:845
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "<h3>Output prevented download. </h3> %s"
 msgstr ""
@@ -1021,7 +1046,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:832
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:830
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:847
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:848
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Could not find the file to download:"
 msgstr ""
 
@@ -1171,7 +1199,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:115
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:129
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:130
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:132
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Unable to finalize the migration, migration state empty."
 msgstr ""
 
@@ -1180,7 +1211,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:332
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:333
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:369
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:381
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<p><strong>Export Failed</strong> — We can't save your export to the "
@@ -1387,18 +1421,24 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:386
 #: src/wp-migrate-db-pro/class/Common/Plugin/Menu.php:124
 #: src/wp-migrate-db-pro/class/Common/Plugin/Menu.php:163
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/php-checker.php:37
 #: src/wp-migrate-db-pro/php-checker.php:66
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:396
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:388
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:645
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "WP Migrate"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:176
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:184
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:185
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:187
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<strong>Uploads directory not writable</strong> &mdash; the following "
@@ -1411,8 +1451,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:264
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:275
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:276
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:277
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:278
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "WP Migrate Lite and WP Migrate cannot both be active. We've automatically "
 "deactivated WP Migrate Lite."
@@ -1421,8 +1464,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:266
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:277
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:278
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:286
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:280
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "WP Migrate Lite and WP Migrate cannot both be active. We've automatically "
 "deactivated WP Migrate."
@@ -1431,8 +1477,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:355
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:366
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:367
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:377
 #: src/wp-migrate-db-pro/class/Common/Plugin/PluginManagerBase.php:369
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "AJAX request failed"
 msgstr ""
 
@@ -1524,7 +1573,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:742
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:835
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:871
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:872
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "Failed to retrieve table structure for table '%s', please ensure your "
@@ -1537,7 +1589,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:815
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:912
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:948
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:949
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Error creating temporary table. Table \"%s\" does not exist."
 msgstr ""
@@ -1548,7 +1603,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:866
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:967
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1003
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1004
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Delete any existing table %s"
 msgstr ""
@@ -1559,7 +1617,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:877
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:978
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1014
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1015
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Table structure of table %s"
 msgstr ""
@@ -1570,7 +1631,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:885
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:986
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1022
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1023
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "Failed to generate the create table query, please ensure your database is "
 "online. (#126)"
@@ -1582,7 +1646,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:943
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1045
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1081
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1082
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Data contents of table %s"
 msgstr ""
@@ -1594,7 +1661,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1070
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1176
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1212
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1213
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Failed to write the gzipped SQL data to the file. (#127)"
 msgstr ""
 
@@ -1605,7 +1675,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1077
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1183
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1219
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1220
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Failed to write the SQL data to the file. (#128)"
 msgstr ""
 
@@ -1616,7 +1689,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1149
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1267
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1303
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1304
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "The imported table `%1s` contains characters which are invalid in the target "
@@ -1633,7 +1709,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1152
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1277
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1313
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1314
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "The table `%1s` contains characters which are invalid in the target "
@@ -1650,8 +1729,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1958
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1994
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2000
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2001
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2002
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "End of data contents of table %s"
 msgstr ""
@@ -1665,8 +1747,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2110
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2146
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2152
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2153
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2154
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "WordPress MySQL database migration"
 msgstr ""
 
@@ -1679,8 +1764,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2112
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2148
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2154
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2155
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2156
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Generated: %s"
 msgstr ""
@@ -1694,8 +1782,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2113
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2149
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2155
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2156
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2157
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Hostname: %s"
 msgstr ""
@@ -1709,8 +1800,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2114
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2150
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2156
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2157
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:2158
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Database: %s"
 msgstr ""
@@ -1775,16 +1869,22 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:557
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:49
 #: src/wp-migrate-db-pro/class/SiteMigration/Plugin/PluginManager.php:26
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/SiteMigration/Plugin/PluginManager.php:27
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:51
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:561
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Migrate"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:84
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:51
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:53
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Free/Plugin/PluginManager.php:55
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Upgrade"
 msgstr ""
 
@@ -1793,9 +1893,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:261
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:289
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:255
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:294
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:290
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:295
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Scope: %s()."
 msgstr ""
@@ -1805,9 +1908,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:262
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:290
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:256
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:295
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:291
 #: src/wp-migrate-db-pro/class/Common/Util/Util.php:296
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "WPMDB Error: Data cannot be unserialized. %s"
 msgstr ""
@@ -1920,7 +2026,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:185
 #: src/wp-migrate-db-pro/class/Common/MF/MediaFilesAddon.php:93
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:161
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:163
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Downloading files"
 msgstr ""
 
@@ -1932,7 +2041,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:184
 #: src/wp-migrate-db-pro/class/Common/MF/MediaFilesAddon.php:94
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:160
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:162
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Uploading files"
 msgstr ""
 
@@ -2044,11 +2156,14 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Queue/Cron.php:86
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:385
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:431
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:436
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:440
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:439
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:445
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:448
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
@@ -2082,7 +2197,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:171
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:172
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:148
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:150
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Themes"
 msgstr ""
 
@@ -2091,7 +2209,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:172
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:173
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:149
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:151
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Plugins"
 msgstr ""
 
@@ -2104,7 +2225,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:174
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:175
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:151
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:153
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "(active)"
 msgstr ""
 
@@ -2113,7 +2237,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:175
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:176
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:152
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:154
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Please select themes for migration."
 msgstr ""
 
@@ -2122,7 +2249,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:176
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:177
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:153
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:155
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Please select plugins for migration."
 msgstr ""
 
@@ -2131,7 +2261,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:177
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:178
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:154
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:156
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "remote"
 msgstr ""
 
@@ -2140,7 +2273,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:178
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:179
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:155
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:157
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "local"
 msgstr ""
 
@@ -2149,7 +2285,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:179
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:180
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:156
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:158
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Failed to transfer file."
 msgstr ""
 
@@ -2162,7 +2301,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:181
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:182
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:158
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:160
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Loading transfer queue"
 msgstr ""
 
@@ -2171,7 +2313,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:182
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:183
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:159
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:161
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Transferring: "
 msgstr ""
 
@@ -2226,7 +2371,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:194
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:191
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:220
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:216
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Invalid folder list supplied (invalid array)"
 msgstr ""
 
@@ -2832,7 +2980,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:181
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:185
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:180
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:178
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<b>Version Mismatch</b> &mdash; We've detected you have version %1$s of WP "
@@ -2844,7 +2995,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:191
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:195
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:190
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:188
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<b>Version Mismatch</b> &mdash; We've detected you have version %1$s of WP "
@@ -2855,7 +3009,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:201
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:205
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:200
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:198
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<b>Version Mismatch</b> &mdash; We've detected you have version %1$s of WP "
@@ -2867,7 +3024,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:242
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:246
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:241
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:239
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid ""
 "<b>Activate Remote License</b> &mdash; Looks like you don't have a WP "
@@ -2878,7 +3038,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:260
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:264
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:259
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:257
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The connection succeeded but the remote site is configured to reject pull "
 "connections. You can change this in the \"settings\" tab on the remote site. "
@@ -2889,7 +3052,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:265
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:269
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:264
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:262
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The connection succeeded but the remote site is configured to reject push "
 "connections. You can change this in the \"settings\" tab on the remote site. "
@@ -2903,7 +3069,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:415
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:419
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:414
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:412
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The connection succeeded but the remote site is configured to reject pull "
 "connections. You can change this in the \"settings\" tab on the remote site. "
@@ -2917,7 +3086,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:418
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:422
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:417
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Migration/Connection/Remote.php:415
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The connection succeeded but the remote site is configured to reject push "
 "connections. You can change this in the \"settings\" tab on the remote site. "
@@ -2960,9 +3132,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:351
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:663
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:355
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:665
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:666
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:668
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Theme not found on source server: %s"
 msgstr ""
@@ -2974,9 +3149,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:437
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:751
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:441
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:754
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:755
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:757
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Plugin not found on source server: %s"
 msgstr ""
@@ -3006,8 +3184,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Transfers/Files/FileProcessor.php:328
 #: src/wp-migrate-db-pro/class/Common/Transfers/Files/FileProcessor.php:329
 #: src/wp-migrate-db-pro/class/Common/Transfers/Files/FileProcessor.php:333
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Transfers/Files/FileProcessor.php:336
 #: src/wp-migrate-db-pro/class/Common/Transfers/Files/FileProcessor.php:340
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "File %s does not exist"
 msgstr ""
@@ -3192,7 +3373,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:173
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:174
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:150
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:152
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Themes & Plugins"
 msgstr ""
 
@@ -3200,7 +3384,10 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:180
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:181
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:157
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:159
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Themes & Plugins Transfer Error"
 msgstr ""
 
@@ -3236,9 +3423,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:514
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:830
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:518
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:813
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:814
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:816
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Must-Use Plugin not found on source server: %s"
 msgstr ""
@@ -3249,9 +3439,12 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:574
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:889
 #: src/wp-migrate-db-pro/class/Pro/TPF/Cli/ThemePluginFilesCli.php:578
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:872
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:873
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:875
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Other file not found on source server: %s"
 msgstr ""
@@ -3324,8 +3517,11 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1856
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1892
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1898
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1899
 #: src/wp-migrate-db-pro/class/Common/Sql/Table.php:1900
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Error moving SQL file into ZIP archive"
 msgstr ""
 
@@ -3450,15 +3646,21 @@ msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:120
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:125
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:130
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:134
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "The action to perform, one of \"start\", \"cancel\", \"pause_resume\"."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:128
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:133
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:138
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:142
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The type of migration to perform the action on, e.g. \"export\", "
 "\"find_replace\" etc."
@@ -3466,73 +3668,97 @@ msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:136
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:141
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:146
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:150
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid ""
 "The ID of the current migration, only required when starting a migration."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:191
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:198
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:203
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:207
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Action not supplied."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:202
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:209
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:214
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:218
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Type not supplied."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:312
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:358
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:363
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:367
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:366
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:370
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Invalid migration type \"%s\" supplied."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:322
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:368
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:373
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:377
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:376
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:380
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Invalid action supplied."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:344
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:267
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:390
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:272
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:395
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:276
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:399
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:398
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:402
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Migration ID not supplied."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:352
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:398
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:403
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:407
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:406
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:410
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Data for Migration ID could not be loaded."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:383
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:429
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:434
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:438
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:437
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:443
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:446
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Every Minute"
 msgstr ""
 
@@ -3549,15 +3775,21 @@ msgid "Could not load current migration"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:801
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Filesystem/Filesystem.php:802
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "<h3>Could not get filename to download. </h3> %s"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:242
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:243
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:247
 #: src/wp-migrate-db-pro/class/Common/Migration/FinalizeMigration.php:245
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Table \"%s\" missing."
 msgstr ""
@@ -3567,34 +3799,49 @@ msgid "Array of application state branches."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:948
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:931
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:932
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesAddon.php:934
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Core file not found on source server: %s"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:456
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:453
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:449
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Missing current migration details."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:462
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:459
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:455
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Missing theme and plugin details."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:470
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:467
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:463
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 msgid "Missing remote site details."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:551
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:548
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/TPF/ThemePluginFilesLocal.php:544
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Invalid stage \"%s\" supplied to file transfer initialization."
 msgstr ""
@@ -3609,24 +3856,34 @@ msgid "Could not verify file is from payload. File name: %s"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Pro/Transfers/Files/TransferManager.php:141
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Pro/Transfers/Files/TransferManager.php:144
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Payload transfer failed with code %1$s: %2$s"
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:441
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Migration/InitiateMigration.php:453
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Unexpected enqueuing result returned for %s stage."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/Migration/MigrationManager.php:652
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/Migration/MigrationManager.php:653
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 #, php-format
 msgid "Unexpected processing result returned for %s stage."
 msgstr ""
 
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:160
+<<<<<<< HEAD
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:165
 #: src/wp-migrate-db-pro/class/Common/BackgroundMigration/BackgroundMigrationManager.php:169
 msgid "The ID of the migration to be dismissed."
@@ -3716,3 +3973,7 @@ msgstr ""
 #: src/wp-migrate-db-pro/class/Pro/Plugin/ProPluginManager.php:760
 msgid "Feedback"
 msgstr ""
+=======
+msgid "The ID of the migration to be dismissed."
+msgstr ""
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6

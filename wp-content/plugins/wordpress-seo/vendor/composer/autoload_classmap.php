@@ -287,8 +287,11 @@ return array(
     'WPSEO_WordPress_Integration' => $baseDir . '/inc/interface-wpseo-wordpress-integration.php',
     'WPSEO_Yoast_Columns' => $baseDir . '/admin/class-yoast-columns.php',
     'Wincher_Dashboard_Widget' => $baseDir . '/admin/class-wincher-dashboard-widget.php',
+<<<<<<< HEAD
     'YoastSEO_Vendor\\GuzzleHttp\\BodySummarizer' => $baseDir . '/vendor_prefixed/guzzlehttp/guzzle/src/BodySummarizer.php',
     'YoastSEO_Vendor\\GuzzleHttp\\BodySummarizerInterface' => $baseDir . '/vendor_prefixed/guzzlehttp/guzzle/src/BodySummarizerInterface.php',
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     'YoastSEO_Vendor\\GuzzleHttp\\Client' => $baseDir . '/vendor_prefixed/guzzlehttp/guzzle/src/Client.php',
     'YoastSEO_Vendor\\GuzzleHttp\\ClientInterface' => $baseDir . '/vendor_prefixed/guzzlehttp/guzzle/src/ClientInterface.php',
     'YoastSEO_Vendor\\GuzzleHttp\\ClientTrait' => $baseDir . '/vendor_prefixed/guzzlehttp/guzzle/src/ClientTrait.php',
@@ -617,7 +620,10 @@ return array(
     'Yoast\\WP\\SEO\\Conditionals\\Updated_Importer_Framework_Conditional' => $baseDir . '/src/conditionals/updated-importer-framework-conditional.php',
     'Yoast\\WP\\SEO\\Conditionals\\User_Can_Manage_Wpseo_Options_Conditional' => $baseDir . '/src/conditionals/user-can-manage-wpseo-options-conditional.php',
     'Yoast\\WP\\SEO\\Conditionals\\User_Can_Publish_Posts_And_Pages_Conditional' => $baseDir . '/src/conditionals/user-can-publish-posts-and-pages-conditional.php',
+<<<<<<< HEAD
     'Yoast\\WP\\SEO\\Conditionals\\User_Profile_Conditional' => $baseDir . '/src/conditionals/user-profile-conditional.php',
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     'Yoast\\WP\\SEO\\Conditionals\\WP_CRON_Enabled_Conditional' => $baseDir . '/src/conditionals/wp-cron-enabled-conditional.php',
     'Yoast\\WP\\SEO\\Conditionals\\WP_Robots_Conditional' => $baseDir . '/src/conditionals/wp-robots-conditional.php',
     'Yoast\\WP\\SEO\\Conditionals\\Web_Stories_Conditional' => $baseDir . '/src/conditionals/web-stories-conditional.php',
@@ -992,6 +998,7 @@ return array(
     'Yoast\\WP\\SEO\\Presenters\\Webmaster\\Google_Presenter' => $baseDir . '/src/presenters/webmaster/google-presenter.php',
     'Yoast\\WP\\SEO\\Presenters\\Webmaster\\Pinterest_Presenter' => $baseDir . '/src/presenters/webmaster/pinterest-presenter.php',
     'Yoast\\WP\\SEO\\Presenters\\Webmaster\\Yandex_Presenter' => $baseDir . '/src/presenters/webmaster/yandex-presenter.php',
+<<<<<<< HEAD
     'Yoast\\WP\\SEO\\Promotions\\Application\\Promotion_Manager' => $baseDir . '/src/promotions/application/promotion-manager.php',
     'Yoast\\WP\\SEO\\Promotions\\Application\\Promotion_Manager_Interface' => $baseDir . '/src/promotions/application/promotion-manager-interface.php',
     'Yoast\\WP\\SEO\\Promotions\\Domain\\Abstract_Promotion' => $baseDir . '/src/promotions/domain/abstract-promotion.php',
@@ -999,6 +1006,8 @@ return array(
     'Yoast\\WP\\SEO\\Promotions\\Domain\\Black_Friday_Promotion' => $baseDir . '/src/promotions/domain/black-friday-promotion.php',
     'Yoast\\WP\\SEO\\Promotions\\Domain\\Promotion_Interface' => $baseDir . '/src/promotions/domain/promotion-interface.php',
     'Yoast\\WP\\SEO\\Promotions\\Domain\\Time_Interval' => $baseDir . '/src/promotions/domain/time-interval.php',
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     'Yoast\\WP\\SEO\\Repositories\\Indexable_Cleanup_Repository' => $baseDir . '/src/repositories/indexable-cleanup-repository.php',
     'Yoast\\WP\\SEO\\Repositories\\Indexable_Hierarchy_Repository' => $baseDir . '/src/repositories/indexable-hierarchy-repository.php',
     'Yoast\\WP\\SEO\\Repositories\\Indexable_Repository' => $baseDir . '/src/repositories/indexable-repository.php',

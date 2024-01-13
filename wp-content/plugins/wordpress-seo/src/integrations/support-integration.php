@@ -8,7 +8,10 @@ use Yoast\WP\SEO\Conditionals\User_Can_Manage_Wpseo_Options_Conditional;
 use Yoast\WP\SEO\Helpers\Current_Page_Helper;
 use Yoast\WP\SEO\Helpers\Product_Helper;
 use Yoast\WP\SEO\Helpers\Short_Link_Helper;
+<<<<<<< HEAD
 use Yoast\WP\SEO\Promotions\Application\Promotion_Manager;
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * Class Support_Integration.
@@ -131,9 +134,12 @@ class Support_Integration implements Integration_Interface {
 		\remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 		$this->asset_manager->enqueue_script( 'support' );
 		$this->asset_manager->enqueue_style( 'support' );
+<<<<<<< HEAD
 		if ( YoastSEO()->classes->get( Promotion_Manager::class )->is( 'black-friday-2023-promotion' ) ) {
 			$this->asset_manager->enqueue_style( 'black-friday-banner' );
 		}
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		$this->asset_manager->localize_script( 'support', 'wpseoScriptData', $this->get_script_data() );
 	}
 
@@ -156,17 +162,27 @@ class Support_Integration implements Integration_Interface {
 	 */
 	public function get_script_data() {
 		return [
+<<<<<<< HEAD
 			'preferences'   => [
 				'isPremium'      => $this->product_helper->is_premium(),
 				'isRtl'          => \is_rtl(),
 				'promotions'     => YoastSEO()->classes->get( Promotion_Manager::class )->get_current_promotions(),
+=======
+			'preferences' => [
+				'isPremium'      => $this->product_helper->is_premium(),
+				'isRtl'          => \is_rtl(),
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 				'pluginUrl'      => \plugins_url( '', \WPSEO_FILE ),
 				'upsellSettings' => [
 					'actionId'     => 'load-nfd-ctb',
 					'premiumCtbId' => 'f6a84663-465f-4cb5-8ba5-f7a6d72224b2',
 				],
 			],
+<<<<<<< HEAD
 			'linkParams'    => $this->shortlink_helper->get_query_params(),
+=======
+			'linkParams'  => $this->shortlink_helper->get_query_params(),
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		];
 	}
 }

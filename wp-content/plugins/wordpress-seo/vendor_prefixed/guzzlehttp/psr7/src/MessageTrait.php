@@ -178,6 +178,12 @@ trait MessageTrait
         if (!\is_string($header)) {
             throw new \InvalidArgumentException(\sprintf('Header name must be a string but %s provided.', \is_object($header) ? \get_class($header) : \gettype($header)));
         }
+<<<<<<< HEAD
+=======
+        if ($header === '') {
+            throw new \InvalidArgumentException('Header name can not be empty.');
+        }
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
         if (!\preg_match('/^[a-zA-Z0-9\'`#$%&*+.^_|~!-]+$/D', $header)) {
             throw new \InvalidArgumentException(\sprintf('"%s" is not valid header name.', $header));
         }

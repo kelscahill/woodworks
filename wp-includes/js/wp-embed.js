@@ -69,6 +69,7 @@
 				}
 
 				source.height = height;
+<<<<<<< HEAD
 			} else if ( 'link' === data.message ) {
 				/* Link to a specific URL on request. */
 				sourceURL = new URL( source.getAttribute( 'src' ) );
@@ -80,6 +81,28 @@
 					document.activeElement === source
 				) {
 					window.top.location.href = data.value;
+=======
+			}
+
+			/* Link to a specific URL on request. */
+			if ( 'link' === data.message ) {
+				sourceURL = document.createElement( 'a' );
+				targetURL = document.createElement( 'a' );
+
+				sourceURL.href = source.getAttribute( 'src' );
+				targetURL.href = data.value;
+
+				/* Only follow link if the protocol is in the allow list. */
+				if ( ! allowedProtocols.test( targetURL.protocol ) ) {
+					continue;
+				}
+
+				/* Only continue if link hostname matches iframe's hostname. */
+				if ( targetURL.host === sourceURL.host ) {
+					if ( document.activeElement === source ) {
+						window.top.location.href = data.value;
+					}
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 				}
 			}
 		}

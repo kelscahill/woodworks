@@ -229,6 +229,7 @@ function get_the_block_template_html() {
 	$content = $wp_embed->autoembed( $content );
 	$content = shortcode_unautop( $content );
 	$content = do_shortcode( $content );
+<<<<<<< HEAD
 
 	/*
 	 * Most block themes omit the `core/query` and `core/post-template` blocks in their singular content templates.
@@ -263,6 +264,9 @@ function get_the_block_template_html() {
 		$content = do_blocks( $content );
 	}
 
+=======
+	$content = do_blocks( $content );
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	$content = wptexturize( $content );
 	$content = convert_smilies( $content );
 	$content = wp_filter_content_tags( $content, 'template' );

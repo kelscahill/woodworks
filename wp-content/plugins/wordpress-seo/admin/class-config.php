@@ -8,7 +8,10 @@
 use Yoast\WP\SEO\Integrations\Academy_Integration;
 use Yoast\WP\SEO\Integrations\Settings_Integration;
 use Yoast\WP\SEO\Integrations\Support_Integration;
+<<<<<<< HEAD
 use Yoast\WP\SEO\Conditionals\WooCommerce_Conditional;
+=======
+>>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * Class WPSEO_Admin_Pages.
