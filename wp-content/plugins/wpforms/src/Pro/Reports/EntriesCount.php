@@ -3,6 +3,7 @@
 namespace WPForms\Pro\Reports;
 
 use DateTime;
+use WPForms\Pro\AntiSpam\SpamEntry;
 
 /**
  * Generate form submissions reports.
@@ -83,12 +84,18 @@ class EntriesCount {
 		$table_name = wpforms()->get( 'entry' )->table_name;
 		$forms      = $this->get_allowed_forms( $form_id );
 
+		$access_obj = wpforms()->get( 'access' );
+
+		if ( $access_obj ) {
+			$forms = $access_obj->filter_forms_by_current_user_capability( $forms, 'view_entries_form_single' );
+		}
+
 		if ( empty( $forms ) ) {
 			return [];
 		}
 
 		$sql = $wpdb->prepare(
-			"SELECT CAST(DATE_ADD(date, INTERVAL %d MINUTE) AS DATE) as day, COUNT(entry_id) as count FROM {$table_name}", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			"SELECT CAST(DATE_ADD(date, INTERVAL %d MINUTE) AS DATE) as day, COUNT( entry_id ) as count FROM $table_name", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			(float) get_option( 'gmt_offset' ) * 60
 		);
 
@@ -125,10 +132,10 @@ class EntriesCount {
 			return [];
 		}
 
-		$sql = "SELECT form_id, COUNT(entry_id) as count FROM {$table_name}";
+		$sql = "SELECT form_id, COUNT( entry_id ) as count FROM $table_name";
 
 		$sql .= $this->prepare_where_conditions( $forms, $utc_date_start, $utc_date_end );
-		$sql .= 'GROUP BY form_id ORDER BY count DESC;';
+		$sql .= ' GROUP BY form_id ORDER BY count DESC;';
 
 		$results = (array) $wpdb->get_results( $sql, OBJECT_K ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 
@@ -197,7 +204,7 @@ class EntriesCount {
 
 		$format        = 'Y-m-d H:i:s';
 		$placeholders  = $forms;
-		$sql           = ' WHERE form_id IN (' . implode( ', ', array_fill( 0, count( $forms ), '%d' ) ) . ')';
+		$sql           = ' WHERE form_id IN ( ' . implode( ', ', array_fill( 0, count( $forms ), '%d' ) ) . ' )';
 		$modify_offset = (float) get_option( 'gmt_offset' ) * 60 . ' minutes';
 
 		if ( $utc_date_start !== null ) {
@@ -219,6 +226,11 @@ class EntriesCount {
 
 			$placeholders[] = $utc_date_end->format( $format );
 		}
+
+		// Exclude spam entries.
+		$sql           .= ' AND status NOT IN ( %s, %s )';
+		$placeholders[] = SpamEntry::ENTRY_STATUS;
+		$placeholders[] = 'trash';
 
 		return $wpdb->prepare( $sql, $placeholders ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}

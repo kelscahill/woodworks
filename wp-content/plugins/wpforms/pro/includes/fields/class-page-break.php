@@ -1,11 +1,25 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Pagebreak field.
  *
  * @since 1.0.0
  */
 class WPForms_Field_Page_Break extends WPForms_Field {
+
+	/**
+	 * Default indicator color.
+	 *
+	 * @since 1.8.1
+	 */
+	const DEFAULT_INDICATOR_COLOR = [
+		'classic' => '#72b239',
+		'modern'  => '#066aab',
+	];
 
 	/**
 	 * Pages information.
@@ -24,11 +38,12 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 	public function init() {
 
 		// Define field type information.
-		$this->name  = esc_html__( 'Page Break', 'wpforms' );
-		$this->type  = 'pagebreak';
-		$this->icon  = 'fa-files-o';
-		$this->order = 160;
-		$this->group = 'fancy';
+		$this->name     = esc_html__( 'Page Break', 'wpforms' );
+		$this->keywords = esc_html__( 'progress bar, multi step, multi part', 'wpforms' );
+		$this->type     = 'pagebreak';
+		$this->icon     = 'fa-files-o';
+		$this->order    = 160;
+		$this->group    = 'fancy';
 
 		$this->hooks();
 	}
@@ -96,8 +111,8 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 	 *
 	 * @since 1.2.0
 	 *
-	 * @param string $css
-	 * @param array $field
+	 * @param string $css   CSS classes.
+	 * @param array  $field Field data and settings.
 	 *
 	 * @return string
 	 */
@@ -128,27 +143,21 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 	 */
 	public function display_page_indicator( $form_data ) {
 
-		$top = ! empty( wpforms()->frontend->pages['top'] ) ? wpforms()->frontend->pages['top'] : false;
+		$top = ! empty( wpforms()->get( 'frontend' )->pages['top'] ) ? wpforms()->get( 'frontend' )->pages['top'] : false;
 
 		if ( empty( $top['indicator'] ) ) {
 			return;
 		}
 
-		$pagebreak = array(
+		$pagebreak = [
 			'indicator' => sanitize_html_class( $top['indicator'] ),
 			'color'     => wpforms_sanitize_hex_color( $top['indicator_color'] ),
-			'pages'     => array_merge( array( wpforms()->frontend->pages['top'] ), wpforms()->frontend->pages['pages'] ),
+			'pages'     => array_merge( [ wpforms()->get( 'frontend' )->pages['top'] ], wpforms()->get( 'frontend' )->pages['pages'] ),
 			'scroll'    => empty( $top['scroll_disabled'] ),
-		);
+		];
 		$p         = 1;
 
-		printf(
-			'<div class="wpforms-page-indicator %s" data-indicator="%s" data-indicator-color="%s" data-scroll="%d">',
-			esc_attr( $pagebreak['indicator'] ),
-			esc_attr( $pagebreak['indicator'] ),
-			esc_attr( $pagebreak['color'] ),
-			(int) $pagebreak['scroll']
-		);
+		$this->frontend_obj->open_page_indicator_container( $pagebreak );
 
 		if ( 'circles' === $pagebreak['indicator'] ) {
 
@@ -227,7 +236,7 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 				'<span class="wpforms-page-indicator-page-title-sep" %s> - </span>',
 				empty( $p1 ) ? 'style="display:none;"' : ''
 			);
-			printf( /* translators: %1$s - current step in multi-page form; %2$d - total number of pages. */
+			printf( /* translators: %1$s - current step in multi-page form, %2$d - total number of pages. */
 				'<span class="wpforms-page-indicator-steps">' . esc_html__( 'Step %1$s of %2$d', 'wpforms' ) . '</span>',
 				'<span class="wpforms-page-indicator-steps-current">1</span>',
 				count( $pagebreak['pages'] )
@@ -298,12 +307,12 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			$prev = ! empty( $form_data['settings']['pagebreak_prev'] ) ? $form_data['settings']['pagebreak_prev'] : esc_html__( 'Previous', 'wpforms' );
 
 			echo '<div class="wpforms-field wpforms-field-pagebreak">';
-				printf(
-					'<button class="wpforms-page-button wpforms-page-prev" data-action="prev" data-page="%d" data-formid="%d">%s</button>',
-					absint( wpforms()->get( 'frontend' )->pages['current'] + 1 ),
-					absint( $form_data['id'] ),
-					esc_html( $prev )
-				);
+			printf(
+				'<button class="wpforms-page-button wpforms-page-prev" data-action="prev" data-page="%d" data-formid="%d">%s</button>',
+				absint( wpforms()->get( 'frontend' )->pages['current'] + 1 ),
+				absint( $form_data['id'] ),
+				esc_html( $prev )
+			);
 			echo '</div>';
 		}
 
@@ -390,72 +399,72 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 		$position_class = ! empty( $field['position'] ) ? 'wpforms-pagebreak-' . $position : '';
 
 		// Hidden field indicating the position.
-		$this->field_element( 'text', $field, array(
+		$this->field_element( 'text', $field, [
 			'type'  => 'hidden',
 			'slug'  => 'position',
 			'value' => $position,
 			'class' => 'position',
-		) );
+		] );
 
 		/*
 		 * Basic field options.
 		 */
 
 		// Options open markup.
-		$this->field_option( 'basic-options', $field, array(
+		$this->field_option( 'basic-options', $field, [
 			'markup' => 'open',
 			'class'  => $position_class,
-		) );
+		] );
 
 		// Options specific to the top pagebreak.
 		if ( 'top' === $position ) {
 
 			// Indicator theme.
-			$themes = array(
+			$themes = [
 				'progress'  => esc_html__( 'Progress Bar', 'wpforms' ),
 				'circles'   => esc_html__( 'Circles', 'wpforms' ),
 				'connector' => esc_html__( 'Connector', 'wpforms' ),
 				'none'      => esc_html__( 'None', 'wpforms' ),
-			);
+			];
 			$lbl    = $this->field_element(
 				'label',
 				$field,
-				array(
+				[
 					'slug'    => 'indicator',
 					'value'   => esc_html__( 'Progress Indicator', 'wpforms' ),
 					'tooltip' => esc_html__( 'Select theme for Page Indicator which is displayed at the top of the form.', 'wpforms' ),
-				),
+				],
 				false
 			);
 			$fld    = $this->field_element(
 				'select',
 				$field,
-				array(
+				[
 					'slug'    => 'indicator',
 					'value'   => ! empty( $field['indicator'] ) ? esc_attr( $field['indicator'] ) : 'progress',
 					'options' => apply_filters( 'wpforms_pagebreak_indicator_themes', $themes ),
-				),
+				],
 				false
 			);
-			$this->field_element( 'row', $field, array(
+			$this->field_element( 'row', $field, [
 				'slug'    => 'indicator',
 				'content' => $lbl . $fld,
-			) );
+			] );
 
 			// Indicator color picker.
 			$lbl = $this->field_element(
 				'label',
 				$field,
-				array(
+				[
 					'slug'    => 'indicator_color',
 					'value'   => esc_html__( 'Page Indicator Color', 'wpforms' ),
 					'tooltip' => esc_html__( 'Select the primary color for the Page Indicator theme.', 'wpforms' ),
-				),
+				],
 				false
 			);
 
 			$indicator_color = isset( $field['indicator_color'] ) ? wpforms_sanitize_hex_color( $field['indicator_color'] ) : '';
-			$indicator_color = empty( $indicator_color ) ? '#72b239' : $indicator_color;
+			$indicator_color = empty( $indicator_color ) ? $this->get_default_indicator_color() : $indicator_color;
 
 			$fld = $this->field_element(
 				'color',
@@ -470,11 +479,11 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 				false
 			);
 
-			$this->field_element( 'row', $field, array(
+			$this->field_element( 'row', $field, [
 				'slug'    => 'indicator_color',
 				'content' => $lbl . $fld,
 				'class'   => 'color-picker-row',
-			) );
+			] );
 		} // End if().
 
 		// Page Title, don't display for bottom pagebreaks.
@@ -482,26 +491,26 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			$lbl = $this->field_element(
 				'label',
 				$field,
-				array(
+				[
 					'slug'    => 'title',
 					'value'   => esc_html__( 'Page Title', 'wpforms' ),
 					'tooltip' => esc_html__( 'Enter text for the page title.', 'wpforms' ),
-				),
+				],
 				false
 			);
 			$fld = $this->field_element(
 				'text',
 				$field,
-				array(
+				[
 					'slug'  => 'title',
 					'value' => ! empty( $field['title'] ) ? esc_attr( $field['title'] ) : '',
-				),
+				],
 				false
 			);
-			$this->field_element( 'row', $field, array(
+			$this->field_element( 'row', $field, [
 				'slug'    => 'title',
 				'content' => $lbl . $fld,
-			) );
+			] );
 		}
 
 		// Next label.
@@ -509,26 +518,26 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			$lbl = $this->field_element(
 				'label',
 				$field,
-				array(
+				[
 					'slug'    => 'next',
 					'value'   => esc_html__( 'Next Label', 'wpforms' ),
 					'tooltip' => esc_html__( 'Enter text for Next page navigation button.', 'wpforms' ),
-				),
+				],
 				false
 			);
 			$fld = $this->field_element(
 				'text',
 				$field,
-				array(
+				[
 					'slug'  => 'next',
 					'value' => ! empty( $field['next'] ) ? esc_attr( $field['next'] ) : esc_html__( 'Next', 'wpforms' ),
-				),
+				],
 				false
 			);
-			$this->field_element( 'row', $field, array(
+			$this->field_element( 'row', $field, [
 				'slug'    => 'next',
 				'content' => $lbl . $fld,
-			) );
+			] );
 		}
 
 		// Options not available to top pagebreaks.
@@ -561,33 +570,33 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			$lbl = $this->field_element(
 				'label',
 				$field,
-				array(
+				[
 					'slug'    => 'prev',
 					'value'   => esc_html__( 'Previous Label', 'wpforms' ),
 					'tooltip' => esc_html__( 'Enter text for Previous page navigation button.', 'wpforms' ),
-				),
+				],
 				false
 			);
 			$fld = $this->field_element(
 				'text',
 				$field,
-				array(
+				[
 					'slug'  => 'prev',
 					'value' => ! empty( $field['prev'] ) ? esc_attr( $field['prev'] ) : '',
-				),
+				],
 				false
 			);
-			$this->field_element( 'row', $field, array(
+			$this->field_element( 'row', $field, [
 				'slug'    => 'prev',
 				'content' => $lbl . $fld,
 				'class'   => empty( $field['prev_toggle'] ) ? 'wpforms-hidden' : '',
-			) );
+			] );
 		} // End if().
 
 		// Options close markup.
-		$this->field_option( 'basic-options', $field, array(
+		$this->field_option( 'basic-options', $field, [
 			'markup' => 'close',
-		) );
+		] );
 
 		/*
 		 * Advanced field options.
@@ -597,41 +606,41 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 		if ( 'bottom' !== $position ) {
 
 			// Options open markup.
-			$this->field_option( 'advanced-options', $field, array(
+			$this->field_option( 'advanced-options', $field, [
 				'markup' => 'open',
 				'class'  => $position_class,
-			) );
+			] );
 
 			// Navigation alignment, only available to the top.
 			if ( 'top' === $position ) {
 				$lbl = $this->field_element(
 					'label',
 					$field,
-					array(
+					[
 						'slug'    => 'nav_align',
 						'value'   => esc_html__( 'Page Navigation Alignment', 'wpforms' ),
 						'tooltip' => esc_html__( 'Select the alignment for the Next/Previous page navigation buttons', 'wpforms' ),
-					),
+					],
 					false
 				);
 				$fld = $this->field_element(
 					'select', $field,
-					array(
+					[
 						'slug'    => 'nav_align',
 						'value'   => ! empty( $field['nav_align'] ) ? esc_attr( $field['nav_align'] ) : '',
-						'options' => array(
+						'options' => [
 							'left'  => esc_html__( 'Left', 'wpforms' ),
 							'right' => esc_html__( 'Right', 'wpforms' ),
 							''      => esc_html__( 'Center', 'wpforms' ),
 							'split' => esc_html__( 'Split', 'wpforms' ),
-						),
-					),
+						],
+					],
 					false
 				);
-				$this->field_element( 'row', $field, array(
+				$this->field_element( 'row', $field, [
 					'slug'    => 'nav_align',
 					'content' => $lbl . $fld,
-				) );
+				] );
 
 				// Scroll animation toggle.
 				$fld = $this->field_element(
@@ -660,9 +669,9 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			$this->field_option( 'css', $field );
 
 			// Options close markup.
-			$this->field_option( 'advanced-options', $field, array(
+			$this->field_option( 'advanced-options', $field, [
 				'markup' => 'close',
-			) );
+			] );
 		} // End if().
 	}
 
@@ -690,16 +699,19 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 		 *
 		 * @since 1.7.9
 		 *
-		 * @param array $form_data  Form data and settings.
-		 * @param array $field      Field data.
+		 * @param array $form_data Form data and settings.
+		 * @param array $field     Field data.
 		 */
 		do_action( 'wpforms_field_page_break_field_preview_before', $this->form_data, $field );
 
 		if ( 'top' !== $position ) {
 			if ( empty( $this->form_data ) ) {
-				$this->form_data = wpforms()->form->get( $this->form_id, array(
-					'content_only' => true,
-				) );
+				$this->form_data = wpforms()->get( 'form' )->get(
+					$this->form_id,
+					[
+						'content_only' => true,
+					]
+				);
 			}
 
 			if ( empty( $this->pagebreak ) ) {
@@ -711,38 +723,38 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 			}
 
 			echo '<div class="wpforms-pagebreak-buttons ' . sanitize_html_class( $nav_align ) . '">';
+			printf(
+				'<button class="wpforms-pagebreak-button wpforms-pagebreak-prev %s">%s</button>',
+				sanitize_html_class( $prev_class ),
+				esc_html( $prev )
+			);
+
+			if ( $position !== 'bottom' ) {
 				printf(
-					'<button class="wpforms-pagebreak-button wpforms-pagebreak-prev %s">%s</button>',
-					sanitize_html_class( $prev_class ),
-					esc_html( $prev )
+					'<button class="wpforms-pagebreak-button wpforms-pagebreak-next %s">%s</button>',
+					sanitize_html_class( $next_class ),
+					esc_html( $next )
 				);
 
-				if ( $position !== 'bottom' ) {
-					printf(
-						'<button class="wpforms-pagebreak-button wpforms-pagebreak-next %s">%s</button>',
-						sanitize_html_class( $next_class ),
-						esc_html( $next )
-					);
+				if ( $next_class !== 'wpforms-hidden' ) {
 
-					if ( $next_class !== 'wpforms-hidden' ) {
-
-						/** This action is documented in includes/class-frontend.php. */
-						do_action( 'wpforms_display_submit_after', $this->form_data, 'next' ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
-					}
+					/** This action is documented in includes/class-frontend.php. */
+					do_action( 'wpforms_display_submit_after', $this->form_data, 'next' ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 				}
+			}
 			echo '</div>';
 		}
 
 		// Visual divider.
 		echo '<div class="wpforms-pagebreak-divider">';
-			if ( $position !== 'bottom' ) {
-				printf(
-					'<span class="pagebreak-label">%s <span class="wpforms-pagebreak-title">%s</span></span>',
-					esc_html( $label ),
-					esc_html( $title )
-				);
-			}
-			echo '<span class="line"></span>';
+		if ( $position !== 'bottom' ) {
+			printf(
+				'<span class="pagebreak-label">%s <span class="wpforms-pagebreak-title">%s</span></span>',
+				esc_html( $label ),
+				esc_html( $title )
+			);
+		}
+		echo '<span class="line"></span>';
 		echo '</div>';
 
 		/**
@@ -750,8 +762,8 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 		 *
 		 * @since 1.7.9
 		 *
-		 * @param array $form_data  Form data and settings.
-		 * @param array $field      Field data.
+		 * @param array $form_data Form data and settings.
+		 * @param array $field     Field data.
 		 */
 		do_action( 'wpforms_field_page_break_field_preview_after', $this->form_data, $field );
 	}
@@ -802,9 +814,9 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 		$filtered_field = apply_filters( 'wpforms_pagedivider_field_display', $field, $field_atts, $form_data );
 		$field          = wpforms_list_intersect_key( (array) $filtered_field, $field );
 
-		$total   = wpforms()->frontend->pages['total'];
-		$current = wpforms()->frontend->pages['current'];
-		$top     = wpforms()->frontend->pages['top'];
+		$total   = wpforms()->get( 'frontend' )->pages['total'];
+		$current = wpforms()->get( 'frontend' )->pages['current'];
+		$top     = wpforms()->get( 'frontend' )->pages['top'];
 		$next    = ! empty( $field['next'] ) ? $field['next'] : '';
 		$prev    = ! empty( $field['prev'] ) ? $field['prev'] : '';
 		$align   = 'wpforms-pagebreak-center';
@@ -848,6 +860,20 @@ class WPForms_Field_Page_Break extends WPForms_Field {
 	 * @param array $form_data    Form data and settings.
 	 */
 	public function format( $field_id, $field_submit, $form_data ) {
+	}
+
+	/**
+	 * Get default indicator color.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @return string
+	 */
+	public function get_default_indicator_color() {
+
+		$render_engine = wpforms_get_render_engine();
+
+		return array_key_exists( $render_engine, self::DEFAULT_INDICATOR_COLOR ) ? self::DEFAULT_INDICATOR_COLOR[ $render_engine ] : self::DEFAULT_INDICATOR_COLOR['modern'];
 	}
 }
 

@@ -130,6 +130,7 @@ class Export {
 			return;
 		}
 
+		$this->hooks();
 		$this->init_args();
 		$this->init_settings();
 		$this->init_form_data();
@@ -151,7 +152,7 @@ class Export {
 			'entry_id'   => esc_html__( 'Entry ID', 'wpforms' ),
 			'date'       => esc_html__( 'Entry Date', 'wpforms' ),
 			'notes'      => esc_html__( 'Entry Notes', 'wpforms' ),
-			'status'     => esc_html__( 'Entry Status', 'wpforms' ),
+			'status'     => esc_html__( 'Type', 'wpforms' ),
 			'viewed'     => esc_html__( 'Viewed', 'wpforms' ),
 			'starred'    => esc_html__( 'Starred', 'wpforms' ),
 			'user_agent' => esc_html__( 'User Agent', 'wpforms' ),
@@ -183,6 +184,8 @@ class Export {
 			$this->export_options_fields['xlsx'] = esc_html__( 'Export in Microsoft Excel (.xlsx)', 'wpforms' );
 		}
 
+		$this->export_options_fields['dynamic_columns'] = esc_html__( 'Separate dynamic choices into individual columns', 'wpforms' );
+
 		// Export options fields.
 		$this->export_options_fields = apply_filters(
 			'wpforms_pro_admin_entries_export_options_fields',
@@ -191,16 +194,16 @@ class Export {
 
 		// Error strings.
 		$this->errors = [
-			'common'            => esc_html__( 'There were problems while preparing your export file. Please recheck export settings and try again.', 'wpforms' ),
-			'security'          => esc_html__( 'You don\'t have enough capabilities to complete this request.', 'wpforms' ),
-			'unknown_form_id'   => esc_html__( 'Incorrect form ID has been specified.', 'wpforms' ),
-			'unknown_entry_id'  => esc_html__( 'Incorrect entry ID has been specified.', 'wpforms' ),
-			'form_data'         => esc_html__( 'Specified form seems to be broken.', 'wpforms' ),
-			'unknown_request'   => esc_html__( 'Unknown request.', 'wpforms' ),
-			'file_not_readable' => esc_html__( 'Export file cannot be retrieved from a file system.', 'wpforms' ),
-			'file_empty'        => esc_html__( 'Export file is empty.', 'wpforms' ),
-			'form_empty'        => esc_html__( 'The form does not have any fields for export.', 'wpforms' ),
-			'no_direct_access'  => esc_html__( 'We need direct access to the filesystem for export.', 'wpforms' ),
+			'common'                     => esc_html__( 'There were problems while preparing your export file. Please recheck export settings and try again.', 'wpforms' ),
+			'security'                   => esc_html__( 'You don\'t have enough capabilities to complete this request.', 'wpforms' ),
+			'unknown_form_id'            => esc_html__( 'Incorrect form ID has been specified.', 'wpforms' ),
+			'unknown_entry_id'           => esc_html__( 'Incorrect entry ID has been specified.', 'wpforms' ),
+			'form_data'                  => esc_html__( 'Specified form seems to be broken.', 'wpforms' ),
+			'unknown_request'            => esc_html__( 'Unknown request.', 'wpforms' ),
+			'file_not_readable'          => esc_html__( 'Export file cannot be retrieved from a file system.', 'wpforms' ),
+			'file_empty'                 => esc_html__( 'Export file is empty.', 'wpforms' ),
+			'form_empty'                 => esc_html__( 'The form does not have any fields for export.', 'wpforms' ),
+			'file_system_not_configured' => esc_html__( 'File system is not configured.', 'wpforms' ),
 		];
 
 		// Strings to localize.
@@ -252,7 +255,7 @@ class Export {
 
 			$this->configuration['csv_export_separator'] = (string) apply_filters_deprecated(
 				'wpforms_csv_export_separator',
-				array( $this->configuration['csv_export_separator'] ),
+				[ $this->configuration['csv_export_separator'] ],
 				'1.5.5 of the WPForms plugin',
 				'wpforms_pro_admin_entries_export_configuration'
 			);
@@ -273,14 +276,24 @@ class Export {
 	 */
 	public function get_localized_data() {
 
-		return array(
+		return [
 			'nonce'       => wp_create_nonce( 'wpforms-tools-entries-export-nonce' ),
 			'lang_code'   => sanitize_key( wpforms_get_language_code() ),
 			'export_page' => esc_url( admin_url( 'admin.php?page=wpforms-tools&view=export' ) ),
 			'i18n'        => $this->i18n,
 			'form_id'     => ! empty( $this->data['form_data'] ) ? $this->data['get_args']['form_id'] : 0,
 			'dates'       => $this->data['get_args']['dates'],
-		);
+		];
+	}
+
+	/**
+	 * Init hooks.
+	 *
+	 * @since 1.8.5
+	 */
+	private function hooks() {
+
+		add_filter( 'wpforms_pro_admin_entries_export_form_data', [ $this, 'filter_form_data' ] );
 	}
 
 	/**
@@ -363,6 +376,21 @@ class Export {
 			}
 		}
 
+		// Entry statuses.
+		$args['status'] = [];
+
+		if ( ! empty( $req['statuses'] ) ) {
+			$args['status'] = array_map(
+				static function ( $status ) {
+
+					$status = sanitize_key( wp_unslash( $status ) );
+
+					return $status === 'published' ? '' : $status; // published is empty string in the database.
+				},
+				$req['statuses']
+			);
+		}
+
 		// Search.
 		$args['search'] = [
 			'field'      => 'any',
@@ -399,13 +427,81 @@ class Export {
 	 */
 	protected function init_form_data() {
 
-		$this->data['form_data'] = wpforms()->form->get(
-			$this->data['get_args']['form_id'],
-			array(
-				'content_only' => true,
-				'cap'          => 'view_entries_form_single',
-			)
+		$form = wpforms()->get( 'form' );
+		$data = $form ?
+			$form->get(
+				$this->data['get_args']['form_id'],
+				[
+					'content_only' => true,
+					'cap'          => 'view_entries_form_single',
+				]
+			) :
+			[];
+
+		/**
+		 * Filter entries during form data init.
+		 *
+		 * @since 1.8.2
+		 *
+		 * @param array $form_data Form data.
+		 */
+		$this->data['form_data'] = apply_filters(
+			'wpforms_pro_admin_entries_export_form_data',
+			$data
 		);
+	}
+
+	/**
+	 * Filter form data.
+	 *
+	 * @since 1.8.5
+	 *
+	 * @param array $form_data Form data.
+	 *
+	 * @return array
+	 */
+	public function filter_form_data( $form_data ) {
+
+		$fields = isset( $form_data['fields'] ) ? $form_data['fields'] : [];
+
+		if ( empty( $fields ) ) {
+			return $form_data;
+		}
+
+		$disallowed_fields = $this->configuration['disallowed_fields'];
+		$payment_fields    = wpforms_get_payments_fields();
+
+		// Remove disallowed fields.
+		$allowed_fields = array_filter(
+			$fields,
+			static function ( $field ) use ( $disallowed_fields ) {
+
+				return ! in_array( $field['type'], $disallowed_fields, true );
+			}
+		);
+
+		// Retrieve payment fields.
+		$form_payment_fields = array_filter(
+			$allowed_fields,
+			static function ( $field ) use ( $payment_fields ) {
+
+				return in_array( $field['type'], $payment_fields, true );
+			}
+		);
+
+		// Remove payment fields.
+		$allowed_fields = array_filter(
+			$allowed_fields,
+			static function ( $field ) use ( $payment_fields ) {
+
+				return ! in_array( $field['type'], $payment_fields, true );
+			}
+		);
+
+		$form_data['fields']         = $allowed_fields;
+		$form_data['payment_fields'] = $form_payment_fields;
+
+		return $form_data;
 	}
 
 	/**

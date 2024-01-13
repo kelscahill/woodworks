@@ -6,6 +6,10 @@
  * @noinspection PhpPropertyOnlyWrittenInspection
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use WPForms\Pro\Forms\Fields\Layout\Builder;
 use WPForms\Pro\Forms\Fields\Layout\Frontend;
 
@@ -33,15 +37,6 @@ class WPForms_Field_Layout extends WPForms_Field {
 	 * @var Builder
 	 */
 	private $builder_obj;
-
-	/**
-	 * Instance of the Frontend class for Layout Field.
-	 *
-	 * @since 1.7.7
-	 *
-	 * @var Frontend
-	 */
-	private $frontend_obj;
 
 	/**
 	 * Layout presets.
@@ -82,11 +77,12 @@ class WPForms_Field_Layout extends WPForms_Field {
 	public function init() {
 
 		// Define field type information.
-		$this->name  = esc_html__( 'Layout', 'wpforms' );
-		$this->type  = 'layout';
-		$this->icon  = 'fa-columns';
-		$this->order = 150;
-		$this->group = 'fancy';
+		$this->name     = esc_html__( 'Layout', 'wpforms' );
+		$this->keywords = esc_html__( 'column, row', 'wpforms' );
+		$this->type     = 'layout';
+		$this->icon     = 'fa-columns';
+		$this->order    = 150;
+		$this->group    = 'fancy';
 
 		// Default settings.
 		$this->defaults = [
@@ -122,8 +118,9 @@ class WPForms_Field_Layout extends WPForms_Field {
 	private function hooks() {
 
 		add_filter( 'wpforms_field_new_default', [ $this, 'field_new_default' ] );
-		add_filter( 'wpforms_entry_single_data', [ $this, 'filter_fields_remove_layout' ], PHP_INT_MAX, 3 );
+		add_filter( 'wpforms_entry_single_data', [ $this, 'filter_fields_remove_layout' ], 1000, 3 );
 		add_filter( "wpforms_pro_admin_entries_edit_is_field_displayable_{$this->type}", '__return_false' );
+		add_filter( 'wpforms_pro_admin_entries_print_preview_fields', [ $this, 'filter_entries_print_preview_fields' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'gutenberg_enqueues' ] );
 		add_filter( 'register_block_type_args', [ $this, 'register_block_type_args' ], 20, 2 );
 		add_filter( 'wpforms_conversational_form_detected', [ $this, 'cf_frontend_hooks' ], 10, 2 );
@@ -301,6 +298,39 @@ class WPForms_Field_Layout extends WPForms_Field {
 			}
 
 			unset( $fields[ $id ] );
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Filter fields data. Add the fields from the columns to the fields list.
+	 *
+	 * @since 1.8.1.2
+	 *
+	 * @param array $fields Fields data.
+	 *
+	 * @return array
+	 */
+	public function filter_entries_print_preview_fields( $fields ) { // phpcs:ignore Generic.Metrics.NestingLevel.MaxExceeded
+
+		foreach ( $fields as $key => $field ) {
+			if ( $field['type'] !== $this->type ) {
+				continue;
+			}
+
+			foreach ( $field['columns'] as $column_index => $column ) {
+				foreach ( $column['fields'] as $layout_field_index => $layout_field_id ) {
+					if ( empty( $fields[ $layout_field_id ] ) ) {
+						unset( $fields[ $key ]['columns'][ $column_index ]['fields'][ $layout_field_index ] );
+						continue;
+					}
+
+					$fields[ $key ]['columns'][ $column_index ]['fields'][ $layout_field_index ] = $fields[ $layout_field_id ];
+
+					unset( $fields[ $layout_field_id ] );
+				}
+			}
 		}
 
 		return $fields;

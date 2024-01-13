@@ -123,10 +123,7 @@ class Elementor implements Integration_Interface {
 	 * @param WPSEO_Admin_Asset_Manager $asset_manager The asset manager.
 	 * @param Options_Helper            $options       The options helper.
 	 * @param Capability_Helper         $capability    The capability helper.
-<<<<<<< HEAD
 	 * @param Promotion_Manager         $promotion_manager The promotion manager.
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	 */
 	public function __construct(
 		WPSEO_Admin_Asset_Manager $asset_manager,

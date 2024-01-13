@@ -4,13 +4,8 @@ Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
-<<<<<<< HEAD
 Tested up to: 6.4
 Stable tag: 21.8
-=======
-Tested up to: 6.2
-Stable tag: 20.12
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 Requires PHP: 7.2.5
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -176,16 +171,7 @@ When you choose Yoast SEO, you're never alone in your journey. We're with you ev
 
 #### EXPAND YOUR SEO KNOWLEDGE WITH ONLINE COURSES
 
-<<<<<<< HEAD
 With [Yoast SEO academy](https://yoa.st/3ri), learning SEO becomes accessible and engaging. Whether you're starting fresh or looking to sharpen your skills, our free courses provide a solid foundation in WordPress and SEO.
-=======
-* A **redirect manager** that prevents “404: page not found” errors
-* Optimize without worrying about over-optimization with **intelligent word form recognition** available in multiple languages.
-* **Internal linking blocks** to structure your site easily.
-* **Internal linking suggestions** while you’re writing.
-* Preview your content to see what it will look like in the search results and when shared on social media using the **Google preview** and **social preview**.
-* **Cornerstone content checks** that point search engines to your most important pages.
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 Investing in [Yoast SEO Premium](https://yoa.st/1v8) gives you FULL access to all courses, from SEO copywriting, ecommerce SEO, and technical SEO to Local SEO. These courses equip you with more advanced knowledge, skills, and tips to help your website grow and succeed. Get two great products for a single price and become a master of SEO with Yoast SEO Premium and the Yoast SEO academy!
 
@@ -201,7 +187,6 @@ Not only do you get many additional benefits by upgrading to [Yoast SEO Premium]
 
 * Get internal linking suggestions in real-time. Yoast SEO Premium enhances your article's depth and authority by recommending related posts to link to.
 
-<<<<<<< HEAD
 * Gain precise control over your page's appearance on social networks like Facebook and Twitter with Social Previews in Yoast SEO Premium. Customize your social presence and entice users to engage with your content effectively.
 
 * Simplify your SEO workflows and get guidance to work on time-consuming SEO tasks, like finding unlinked content, with the Yoast SEO workouts.
@@ -227,15 +212,6 @@ Take your WordPress SEO to new heights with these powerful Yoast SEO add-ons:
 * [Yoast News SEO](https://yoa.st/1uv): Amplify your visibility and performance in Google News, allowing your news website to reach a broader audience.
 
 * [Yoast WooCommerce SEO](https://yoa.st/3rh): Enhance your online shop's discoverability with extra tools and functionality designed specifically for online stores, helping you drive more targeted traffic and dominate the search results for your products. Comes with generative AI tools to help you write great titles and meta descriptions for your products! Also, use WooCommerce SEO to easily import and export global identifiers like GTIN8, UPC, and ISBN for your products.
-=======
-* The [WordPress block editor](https://wordpress.org/support/article/wordpress-editor/) (or ‘Gutenberg’ editor).
-* The official [AMP](https://wordpress.org/plugins/amp/) plugin, which changes your templates to use the ‘AMP’ HTML format.
-* Google’s [Web Stories](https://wordpress.org/plugins/web-stories/) plugin, which helps you to create ‘[web stories](https://amp.dev/about/stories/)’.
-* The [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin, when you also activate the [ACF Content Analysis for Yoast SEO](https://wordpress.org/plugins/acf-content-analysis-for-yoast-seo/) plugin.
-* The [Elementor](https://wordpress.org/plugins/elementor/) website builder.
-* [Algolia](https://wordpress.org/plugins/wp-search-with-algolia/) integration to improve the quality of your site search.
-* [WordProof](https://wordproof.com/), which helps you prove ownership by adding timestamps.
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 ### BUG REPORTS
 
@@ -366,7 +342,6 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-<<<<<<< HEAD
 = 21.8 =
 
 Release date: 2024-01-09
@@ -394,64 +369,25 @@ We've just released Yoast SEO 21.8. In this release, we've focused on general en
 Release date: 2023-12-12
 
 Yoast SEO 21.7 is out now. In this release, we bring an improved first-time configuration, making it easier for people to get started. Also, we fixed several bugs and added some enhancements. Find out more about what's new in Yoast SEO 21.7 in [our release post](https://yoa.st/release-12-12-23)!
-=======
-= 20.12 =
-
-Release date: 2023-07-25
-
-We've just released Yoast SEO 20.12! This release includes fixes and enhancements that strengthen the stability of our plugin and enhance your SEO efforts. Find out more about what's new in Yoast SEO 20.12 in [our release post](https://yoa.st/release-25-7-23)!
 
 #### Enhancements
 
-* Adds `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid` and `gtm_debug` to the default allowlist for the "Remove unregistered URL parameters" setting.
+* Removes a superfluous warning in the first time configuration when the site environment is non-production.
 
 #### Bugfixes
 
-* Fixes a bug where an error would appear in `debug.log` when saving a draft or updating a post in Elementor.
-* Fixes a bug where the controls for the _FAQ_ and _how-to_ blocks would be not shown when running Gutenberg versions >= 15.2.
-* Fixes a bug where the duration text of the _how-to_ block would be output in the user language instead of the site language.
-
-#### Other
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
-
-* Updates the verification link to the Google Search Console in the Site connections section in Settings.
-* Improves the copy in the final step of the first time configuration.
-* Updates copy of our free webinar notification.
-
-<<<<<<< HEAD
-* Removes a superfluous warning in the first time configuration when the site environment is non-production.
-=======
-= 20.11 =
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
-
-Release date: 2023-07-11
-
-<<<<<<< HEAD
 * Fixes a bug where an additional `Organization, Person` schema piece would be wrongly generated for author pages when a website representing an organization was set to represent a person different from the author.
 * Fixes a bug where the initial state for the website name would be empty when saving the site representation step in the first time configuration.
 * Fixes a bug where modifications to the analysis data would not be included in the Insights analysis.
 * Fixes a bug where the "view" button for tracking SEO performance would have the wrong size when editing a post in Elementor and Classic editor.
-=======
-Time for another release, time for Yoast SEO 20.11. This latest release includes fixes and enhancements, plus a new notification that pops up when you add a new content type. This reminds you to optimize these. Find out more about what's new in Yoast SEO 20.11 in [our release post](https://yoa.st/release-11-7-23)!
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
-#### Enhancements
+#### Other
 
-* Adds badges to new content types in the settings page.
-* Adds a notification in the settings whenever there is a new content type.
-* Adds a notification for new content in the notification center and removes it once it was reviewed.
-
-#### Bugfixes
-
-<<<<<<< HEAD
 * Adds checks to ensure that the plugin has no known incompatibilities with PHP 8.3.
 * Improves the discoverability of the security policy.
 * Improves the instructions in the first-time configuration so that they're easier to follow.
 * Improves the new installation screen layout and design.
 * Provides a filter to add a list of shortcodes so they can be parsed and then included in our content analysis in Classic editor.
-=======
-* Fixes a bug where placeholders would be displayed in the wrong color in the Yoast SEO settings and the First-time configuration.
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

@@ -6,6 +6,8 @@ use Exception;
 // phpcs:ignore WPForms.PHP.UseStatement.UnusedUseStatement
 use WP_Filesystem_Base;
 use WPForms\Helpers\Transient;
+use WPForms\Vendor\XLSXWriter;
+use WPForms\Pro\Admin\Entries\Export\Traits\Export as ExportTrait;
 
 /**
  * File-related routines.
@@ -13,6 +15,8 @@ use WPForms\Helpers\Transient;
  * @since 1.5.5
  */
 class File {
+
+	use ExportTrait;
 
 	/**
 	 * Instance of Export Class.
@@ -62,10 +66,6 @@ class File {
 
 		$export_file = $this->get_tmpfname( $request_data );
 
-		if ( empty( $export_file ) ) {
-			return;
-		}
-
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
 		$f         = fopen( 'php://temp', 'wb+' );
 		$enclosure = '"';
@@ -108,11 +108,7 @@ class File {
 
 		$export_file = $this->get_tmpfname( $request_data );
 
-		if ( empty( $export_file ) ) {
-			return;
-		}
-
-		$writer = new \XLSXWriter();
+		$writer = new XLSXWriter();
 
 		$writer->setTempDir( $this->get_tmpdir() );
 
@@ -182,15 +178,18 @@ class File {
 	 * Full pathname of the tmp file.
 	 *
 	 * @since 1.5.5
+	 * @since 1.8.0 Added exception.
 	 *
 	 * @param array $request_data Request data.
 	 *
 	 * @return string Temporary file full pathname.
+	 *
+	 * @throws Exception Unknown request.
 	 */
 	public function get_tmpfname( $request_data ) {
 
 		if ( empty( $request_data ) ) {
-			return '';
+			throw new Exception( $this->export->errors['unknown_request'] );
 		}
 
 		$export_dir  = $this->get_tmpdir();
@@ -234,32 +233,29 @@ class File {
 
 		$export_file = $this->get_tmpfname( $request_data );
 
-		if ( empty( $export_file ) ) {
-			throw new Exception( $this->export->errors['unknown_request'] );
-		}
-
 		clearstatcache( true, $export_file );
 
-		if ( ! is_readable( $export_file ) || is_dir( $export_file ) ) {
+		$filesystem = $this->get_filesystem();
+
+		if ( ! $filesystem->is_readable( $export_file ) || $filesystem->is_dir( $export_file ) ) {
 			throw new Exception( $this->export->errors['file_not_readable'] );
 		}
 
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
-		if ( @filesize( $export_file ) === 0 ) {
-			throw new Exception( $this->export->errors['file_empty'] );
+		if ( $filesystem->size( $export_file ) === 0 ) {
+			throw new Exception( $export_file . $this->export->errors['file_empty'] );
 		}
 
 		$entry_suffix = ! empty( $request_data['db_args']['entry_id'] ) ? '-entry-' . $request_data['db_args']['entry_id'] : '';
 
 		$file_name = 'wpforms-' . $request_data['db_args']['form_id'] . '-' . sanitize_file_name( get_the_title( $request_data['db_args']['form_id'] ) ) . $entry_suffix . '-' . current_time( 'Y-m-d-H-i-s' ) . '.' . $request_data['type'];
 
-		if ( defined( 'WPFORMS_SAVE_ENTRIES_PATH' ) ) {
-			$this->put_contents( WPFORMS_SAVE_ENTRIES_PATH . $file_name, file_get_contents( $export_file ) );
+		if ( defined( 'WPFORMS_SAVE_ENTRIES_PATH' ) && ! wpforms_is_empty_string( WPFORMS_SAVE_ENTRIES_PATH ) ) {
+			$this->put_contents( WPFORMS_SAVE_ENTRIES_PATH . $file_name, $filesystem->get_contents( $export_file ) );
 		} else {
 			$this->http_headers( $file_name );
 
-			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_readfile
-			readfile( $export_file );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $filesystem->get_contents( $export_file );
 		}
 
 		// Schedule clean up.
@@ -371,6 +367,8 @@ class File {
 
 			$this->export->ajax->request_data = $request_data;
 
+			$request_data = $this->exclude_unselected_choices( $request_data );
+
 			if ( empty( $request_data['type'] ) || $request_data['type'] === 'csv' ) {
 				$this->write_csv( $request_data );
 			} elseif ( $request_data['type'] === 'xlsx' ) {
@@ -389,6 +387,39 @@ class File {
 
 			\WPForms\Admin\Notice::error( $error );
 		}
+	}
+
+	/**
+	 * Exclude unselected choices from the export.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $request_data Request data array.
+	 *
+	 * @return array Request data array.
+	 */
+	private function exclude_unselected_choices( array $request_data ): array {
+
+		// Skip if not AJAX request.
+		if ( wpforms_is_ajax() ) {
+			return $request_data;
+		}
+
+		$entry = wpforms()->get( 'entry' )->get( $request_data['db_args']['entry_id'] );
+
+		$fields = $this->export->ajax->get_entry_fields_data( $entry );
+
+		foreach ( $request_data['columns_row'] as $col_id => $col_label ) {
+			if ( strpos( $col_id, 'multiple_field_' ) !== false ) {
+				$col_value = $this->export->ajax->get_multiple_row_value( $fields, $col_id );
+
+				if ( $this->is_skip_value( $col_value, $fields, $col_id ) ) {
+					unset( $request_data['columns_row'][ $col_id ] );
+				}
+			}
+		}
+
+		return $request_data;
 	}
 
 	/**
@@ -418,12 +449,12 @@ class File {
 	 */
 	public function remove_old_export_files() {
 
-		clearstatcache();
-
 		$files = glob( $this->get_tmpdir() . '/*' );
 		$now   = time();
 
 		foreach ( $files as $file ) {
+			clearstatcache( true, $file );
+
 			if (
 				is_file( $file ) &&
 				pathinfo( $file, PATHINFO_BASENAME ) !== 'index.html' &&
@@ -480,12 +511,7 @@ class File {
 	 */
 	private function put_contents( $export_file, $file_contents ) {
 
-		// @todo Add support for other filesystems.
-		$filesystem = $this->get_filesystem_direct();
-
-		if ( ! $filesystem ) {
-			throw new Exception( $this->export->errors['no_direct_access'] );
-		}
+		$filesystem = $this->get_filesystem();
 
 		$filesystem->put_contents(
 			$export_file,
@@ -494,36 +520,39 @@ class File {
 	}
 
 	/**
-	 * Get direct filesystem.
+	 * Get current filesystem.
 	 *
-	 * @since 1.7.4
+	 * @since 1.8.0
 	 *
-	 * @return WP_Filesystem_Base|null
+	 * @return WP_Filesystem_Base
+	 *
+	 * @throws Exception File system isn't configured as well.
 	 */
-	private function get_filesystem_direct() {
+	private function get_filesystem() {
 
 		global $wp_filesystem;
 
-		if ( ! $wp_filesystem && ! WP_Filesystem() ) {
-			return null;
-		}
+		// We have to start the buffer to prevent form output
+		// when the file system is ssh/FTP but not configured.
+		ob_start();
 
-		/**
-		 * Filter methods which need credentials.
-		 *
-		 * @since 1.7.9
-		 *
-		 * @param array $cred_methods Methods requesting credentials.
-		 */
-		$cred_methods = (array) apply_filters(
-			'wpforms_pro_admin_entries_export_file_cred_methods',
-			[ 'ssh2', 'ftpext', 'ftpsockets' ]
+		$url = add_query_arg(
+			[
+				'page' => 'wpforms-tools',
+				'view' => 'export',
+			],
+			admin_url( 'admin.php' )
 		);
 
-		if ( in_array( $wp_filesystem->method, $cred_methods, true ) ) {
-			// We cannot get credentials properly during the ajax call.
-			return null;
+		$credentials = request_filesystem_credentials( $url, '', false, false, null );
+
+		ob_clean();
+
+		if ( $credentials === false ) {
+			throw new Exception( $this->export->errors['file_system_not_configured'] );
 		}
+
+		WP_Filesystem( $credentials );
 
 		return $wp_filesystem;
 	}

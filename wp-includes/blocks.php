@@ -1185,11 +1185,7 @@ function traverse_and_serialize_blocks( $blocks, $pre_callback = null, $post_cal
 function filter_block_content( $text, $allowed_html = 'post', $allowed_protocols = array() ) {
 	$result = '';
 
-<<<<<<< HEAD
 	if ( str_contains( $text, '<!--' ) && str_contains( $text, '--->' ) ) {
-=======
-	if ( false !== strpos( $text, '<!--' ) && false !== strpos( $text, '--->' ) ) {
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		$text = preg_replace_callback( '%<!--(.*?)--->%', '_filter_block_content_callback', $text );
 	}
 

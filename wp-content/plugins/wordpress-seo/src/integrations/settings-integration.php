@@ -25,11 +25,8 @@ use Yoast\WP\SEO\Helpers\User_Helper;
 use Yoast\WP\SEO\Helpers\Woocommerce_Helper;
 use Yoast\WP\SEO\Helpers\Options_Helper;
 use Yoast\WP\SEO\Content_Type_Visibility\Application\Content_Type_Visibility_Dismiss_Notifications;
-<<<<<<< HEAD
 use Yoast\WP\SEO\Promotions\Application\Promotion_Manager;
 
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * Class Settings_Integration.
@@ -93,12 +90,9 @@ class Settings_Integration implements Integration_Interface {
 			'deny_search_crawling',
 			'deny_wp_json_crawling',
 			'deny_adsbot_crawling',
-<<<<<<< HEAD
 			'deny_ccbot_crawling',
 			'deny_google_extended_crawling',
 			'deny_gptbot_crawling',
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		],
 	];
 

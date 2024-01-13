@@ -917,10 +917,7 @@ class Yoast_Form {
 							'<span aria-hidden="true" class="yoast-button--buy__caret"></span></a>';
 		}
 
-<<<<<<< HEAD
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- All variable output is escaped above.
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		echo '<a></a></div></fieldset><div class="clear"></div>' . $upsell_button . '</div>' . PHP_EOL . PHP_EOL;
 	}
 

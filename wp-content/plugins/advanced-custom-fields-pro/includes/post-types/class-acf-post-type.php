@@ -340,13 +340,13 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 				$post_id    = (int) acf_sanitize_request_args( $_POST['post_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
 				$matches    = array_filter(
 					$store->get_data(),
-					function ( $item ) use ( $post_type_key ) {
+					function( $item ) use ( $post_type_key ) {
 						return $item['post_type'] === $post_type_key && empty( $item['not_registered'] );
 					}
 				);
 				$duplicates = array_filter(
 					$matches,
-					function ( $item ) use ( $post_id ) {
+					function( $item ) use ( $post_id ) {
 						return $item['ID'] !== $post_id;
 					}
 				);
@@ -377,19 +377,17 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 		 *
 		 * @since 6.1
 		 *
-		 * @param  array   $post The main ACF post type settings array.
-		 * @param  boolean $escape_labels Determines if the label values should be escaped.
+		 * @param array $post The main ACF post type settings array.
 		 * @return array
 		 */
-		public function get_post_type_args( $post, $escape_labels = true ) {
+		public function get_post_type_args( $post ) {
 			$args = array();
 
 			// Make sure any provided labels are escaped strings and not empty.
 			$labels = array_filter( $post['labels'] );
 			$labels = array_map( 'strval', $labels );
-			if ( $escape_labels ) {
-				$labels = array_map( 'esc_html', $labels );
-			}
+			$labels = array_map( 'esc_html', $labels );
+
 			if ( ! empty( $labels ) ) {
 				$args['labels'] = $labels;
 			}
@@ -622,7 +620,7 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 
 			// Validate and prepare the post for export.
 			$post = $this->validate_post( $post );
-			$args = $this->get_post_type_args( $post, false );
+			$args = $this->get_post_type_args( $post );
 			$code = var_export( $args, true ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions -- Used for PHP export.
 
 			if ( ! $code ) {
@@ -846,6 +844,7 @@ if ( ! class_exists( 'ACF_Post_Type' ) ) {
 			// Import the post normally.
 			return $this->import_post( $acf_args );
 		}
+
 	}
 
 }

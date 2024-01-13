@@ -33,21 +33,21 @@ function wpforms_entry_list_star() {
 	$is_success = false;
 
 	if ( 'star' === $task ) {
-		$is_success = wpforms()->entry->update(
+		$is_success = wpforms()->get( 'entry' )->update(
 			$entry_id,
-			array(
+			[
 				'starred' => '1',
-			)
+			]
 		);
 
 		$note_data = esc_html__( 'Entry starred.', 'wpforms' );
 
 	} elseif ( 'unstar' === $task ) {
-		$is_success = wpforms()->entry->update(
+		$is_success = wpforms()->get( 'entry' )->update(
 			$entry_id,
-			array(
+			[
 				'starred' => '0',
-			)
+			]
 		);
 
 		$note_data = esc_html__( 'Entry unstarred.', 'wpforms' );
@@ -56,14 +56,14 @@ function wpforms_entry_list_star() {
 	if ( $is_success ) {
 
 		// Add an entry note about Star/Unstar action.
-		wpforms()->entry_meta->add(
-			array(
+		wpforms()->get( 'entry_meta' )->add(
+			[
 				'entry_id' => $entry_id,
 				'form_id'  => $form_id,
 				'user_id'  => $user_id,
 				'type'     => 'log',
 				'data'     => wpautop( sprintf( '<em>%s</em>', $note_data ) ),
-			),
+			],
 			'entry_meta'
 		);
 
@@ -103,21 +103,21 @@ function wpforms_entry_list_read() {
 	$note_data  = '';
 
 	if ( 'read' === $task ) {
-		$is_success = wpforms()->entry->update(
+		$is_success = wpforms()->get( 'entry' )->update(
 			$entry_id,
-			array(
+			[
 				'viewed' => '1',
-			)
+			]
 		);
 
 		$note_data = esc_html__( 'Entry read.', 'wpforms' );
 
 	} elseif ( 'unread' === $task ) {
-		$is_success = wpforms()->entry->update(
+		$is_success = wpforms()->get( 'entry' )->update(
 			$entry_id,
-			array(
+			[
 				'viewed' => '0',
-			)
+			]
 		);
 
 		$note_data = esc_html__( 'Entry unread.', 'wpforms' );
@@ -126,14 +126,14 @@ function wpforms_entry_list_read() {
 	if ( $is_success && ! empty( $note_data ) ) {
 
 		// Add an entry note about Star/Unstar action.
-		wpforms()->entry_meta->add(
-			array(
+		wpforms()->get( 'entry_meta' )->add(
+			[
 				'entry_id' => $entry_id,
 				'form_id'  => $form_id,
 				'user_id'  => $user_id,
 				'type'     => 'log',
 				'data'     => wpautop( sprintf( '<em>%s</em>', $note_data ) ),
-			),
+			],
 			'entry_meta'
 		);
 
@@ -157,7 +157,7 @@ function wpforms_verify_license() {
 
 	// Check for permissions.
 	if ( ! wpforms_current_user_can() ) {
-		wp_send_json_error();
+		wp_send_json_error( esc_html__( 'This feature requires an active license. Please contact the site administrator.', 'wpforms' ) );
 	}
 
 	// Check for license key.
@@ -263,7 +263,7 @@ function wpforms_builder_settings_block_state_save() {
 		empty( $form_id ) ||
 		empty( $block_id ) ||
 		empty( $block_type ) ||
-		( empty( $state ) || ! in_array( $state, array( 'opened', 'closed' ), true ) )
+		( empty( $state ) || ! in_array( $state, [ 'opened', 'closed' ], true ) )
 	) {
 		wp_send_json_error();
 	}
@@ -362,3 +362,38 @@ function wpforms_builder_settings_block_state_remove() {
 }
 
 add_action( 'wp_ajax_wpforms_builder_settings_block_state_remove', 'wpforms_builder_settings_block_state_remove' );
+
+/**
+ * Update single entry filter settings.
+ *
+ * @since 1.8.3
+ */
+function wpforms_update_single_entry_filter_settings() {
+
+	// Validate nonce.
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'wpforms-admin' ) ) {
+		return;
+	}
+
+	if ( ! isset( $_POST['wpforms_entry_view_settings'] ) ) {
+		return;
+	}
+
+	$settings = ! empty( $_POST['wpforms_entry_view_settings'] ) && is_array( $_POST['wpforms_entry_view_settings'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['wpforms_entry_view_settings'] ) ) : [];
+	$option   = WPForms_Entries_Single::get_entry_view_settings();
+
+	foreach ( $option['fields'] as $key => $value ) {
+		$option['fields'][ $key ]['value'] = (int) in_array( $key, $settings, true );
+	}
+
+	foreach ( $option['display'] as $key => $value ) {
+		$option['display'][ $key ]['value'] = (int) in_array( $key, $settings, true );
+	}
+
+	update_option( 'wpforms_entry_view_settings', $option );
+
+	wp_die();
+}
+
+// Ajax to save entry settings.
+add_action( 'wp_ajax_wpforms_update_single_entry_filter_settings', 'wpforms_update_single_entry_filter_settings' );

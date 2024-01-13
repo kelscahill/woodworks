@@ -13961,7 +13961,6 @@ function SidebarNavigationScreenDetailsPanelValue({
 
 
 
-<<<<<<< HEAD
 function SidebarNavigationScreenDetailsPanel({
   title,
   children,
@@ -13975,45 +13974,6 @@ function SidebarNavigationScreenDetailsPanel({
     level: 2
   }, title), children);
 }
-=======
-const DEFAULT_TEMPLATE_SLUGS = ['front-page', 'single', 'page', 'index', 'archive', 'author', 'category', 'date', 'tag', 'taxonomy', 'search', '404'];
-const TEMPLATE_ICONS = {
-  'front-page': library_home,
-  single: library_post,
-  page: library_page,
-  archive: library_archive,
-  search: library_search,
-  404: not_found,
-  index: library_list,
-  category: library_category,
-  author: post_author,
-  taxonomy: block_meta,
-  date: post_date,
-  tag: library_tag,
-  attachment: library_media
-};
-function NewTemplate(_ref) {
-  let {
-    postType,
-    toggleProps,
-    showIcon = true
-  } = _ref;
-  const [showCustomTemplateModal, setShowCustomTemplateModal] = (0,external_wp_element_namespaceObject.useState)(false);
-  const [showCustomGenericTemplateModal, setShowCustomGenericTemplateModal] = (0,external_wp_element_namespaceObject.useState)(false);
-  const [entityForSuggestions, setEntityForSuggestions] = (0,external_wp_element_namespaceObject.useState)({});
-  const [isCreatingTemplate, setIsCreatingTemplate] = (0,external_wp_element_namespaceObject.useState)(false);
-  const history = useHistory();
-  const {
-    saveEntityRecord
-  } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_coreData_namespaceObject.store);
-  const {
-    createErrorNotice,
-    createSuccessNotice
-  } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_notices_namespaceObject.store);
-  const {
-    setTemplate
-  } = unlock((0,external_wp_data_namespaceObject.useDispatch)(store_store));
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/edit-site/build-module/components/sidebar-navigation-screen-details-footer/index.js
@@ -14024,31 +13984,8 @@ function NewTemplate(_ref) {
 
 
 
-<<<<<<< HEAD
 
 
-=======
-      setTemplate(newTemplate.id, newTemplate.slug); // Navigate to the created template editor.
-
-      history.push({
-        postId: newTemplate.id,
-        postType: newTemplate.type,
-        canvas: 'edit'
-      });
-      createSuccessNotice((0,external_wp_i18n_namespaceObject.sprintf)( // translators: %s: Title of the created template e.g: "Category".
-      (0,external_wp_i18n_namespaceObject.__)('"%s" successfully created.'), title), {
-        type: 'snackbar'
-      });
-    } catch (error) {
-      const errorMessage = error.message && error.code !== 'unknown_error' ? error.message : (0,external_wp_i18n_namespaceObject.__)('An error occurred while creating the template.');
-      createErrorNotice(errorMessage, {
-        type: 'snackbar'
-      });
-    } finally {
-      setIsCreatingTemplate(false);
-    }
-  }
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 
 /**
@@ -14303,7 +14240,6 @@ function TemplatePartHint() {
 
 
 
-<<<<<<< HEAD
 
 
 function SidebarNavigationScreenMain() {
@@ -14318,61 +14254,6 @@ function SidebarNavigationScreenMain() {
   (0,external_wp_element_namespaceObject.useEffect)(() => {
     if (location?.path === '/') {
       setEditorCanvasContainerView(undefined);
-=======
-function NewTemplatePart(_ref) {
-  let {
-    postType,
-    showIcon = true,
-    toggleProps
-  } = _ref;
-  const history = useHistory();
-  const [isModalOpen, setIsModalOpen] = (0,external_wp_element_namespaceObject.useState)(false);
-  const {
-    createErrorNotice
-  } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_notices_namespaceObject.store);
-  const {
-    saveEntityRecord
-  } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_coreData_namespaceObject.store);
-  const existingTemplateParts = useExistingTemplateParts();
-
-  async function createTemplatePart(_ref2) {
-    let {
-      title,
-      area
-    } = _ref2;
-
-    if (!title) {
-      createErrorNotice((0,external_wp_i18n_namespaceObject.__)('Title is not defined.'), {
-        type: 'snackbar'
-      });
-      return;
-    }
-
-    try {
-      const uniqueTitle = getUniqueTemplatePartTitle(title, existingTemplateParts);
-      const cleanSlug = getCleanTemplatePartSlug(uniqueTitle);
-      const templatePart = await saveEntityRecord('postType', 'wp_template_part', {
-        slug: cleanSlug,
-        title: uniqueTitle,
-        content: '',
-        area
-      }, {
-        throwOnError: true
-      });
-      setIsModalOpen(false); // Navigate to the created template part editor.
-
-      history.push({
-        postId: templatePart.id,
-        postType: 'wp_template_part',
-        canvas: 'edit'
-      }); // TODO: Add a success notice?
-    } catch (error) {
-      const errorMessage = error.message && error.code !== 'unknown_error' ? error.message : (0,external_wp_i18n_namespaceObject.__)('An error occurred while creating the template part.');
-      createErrorNotice(errorMessage, {
-        type: 'snackbar'
-      });
-      setIsModalOpen(false);
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
     }
   }, [setEditorCanvasContainerView, location?.path]);
   return (0,external_wp_element_namespaceObject.createElement)(SidebarNavigationScreen, {
@@ -35967,30 +35848,11 @@ function DuplicateMenuItem({
     invalidateResolution
   } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_coreData_namespaceObject.store);
   const {
-<<<<<<< HEAD
     createErrorNotice,
     createSuccessNotice
   } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_notices_namespaceObject.store);
   const history = duplicate_menu_item_useHistory();
   const existingTemplateParts = useExistingTemplateParts();
-=======
-    isRequestingSite,
-    homepageId,
-    url
-  } = (0,external_wp_data_namespaceObject.useSelect)(select => {
-    const {
-      getSite,
-      getUnstableBase
-    } = select(external_wp_coreData_namespaceObject.store);
-    const siteData = getSite();
-    const base = getUnstableBase();
-    return {
-      isRequestingSite: !base,
-      homepageId: (siteData === null || siteData === void 0 ? void 0 : siteData.show_on_front) === 'page' ? siteData.page_on_front : null,
-      url: base === null || base === void 0 ? void 0 : base.home
-    };
-  }, []);
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
   const {
     patternCategories
   } = usePatternCategories();
@@ -36427,11 +36289,6 @@ function Pagination({
 
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 /**
  * Internal dependencies
  */
@@ -36557,7 +36414,6 @@ function PatternsList({
   }))))), (0,external_wp_element_namespaceObject.createElement)(external_wp_components_namespaceObject.__experimentalVStack, {
     className: "edit-site-patterns__section",
     justify: "flex-start",
-<<<<<<< HEAD
     spacing: 6
   }, syncFilter !== 'all' && (0,external_wp_element_namespaceObject.createElement)(external_wp_components_namespaceObject.__experimentalVStack, {
     className: "edit-site-patterns__section-header"
@@ -36625,27 +36481,6 @@ function usePatternSettings() {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/edit-site/build-module/components/page-patterns/index.js
-=======
-    className: "edit-site-site-hub__text-content",
-    spacing: "0"
-  }, (0,external_wp_element_namespaceObject.createElement)(external_wp_components_namespaceObject.__unstableMotion.div, {
-    className: "edit-site-site-hub__view-mode-toggle-container",
-    layout: true,
-    transition: {
-      type: 'tween',
-      duration: disableMotion ? 0 : HUB_ANIMATION_DURATION,
-      ease: 'easeOut'
-    }
-  }, (0,external_wp_element_namespaceObject.createElement)(external_wp_components_namespaceObject.Button, extends_extends({}, siteIconButtonProps, {
-    className: "edit-site-layout__view-mode-toggle"
-  }), (0,external_wp_element_namespaceObject.createElement)(site_icon, {
-    className: "edit-site-layout__view-mode-toggle-icon"
-  }))), showLabels && (0,external_wp_element_namespaceObject.createElement)("div", {
-    className: "edit-site-site-hub__site-title"
-  }, (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(siteTitle))));
-});
-/* harmony default export */ var site_hub = (SiteHub);
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 /**
  * WordPress dependencies

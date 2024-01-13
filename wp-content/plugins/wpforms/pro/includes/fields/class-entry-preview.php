@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Entry preview field.
  *
@@ -15,11 +19,12 @@ class WPForms_Entry_Preview extends WPForms_Field {
 	public function init() {
 
 		// Define field type information.
-		$this->name  = esc_html__( 'Entry Preview', 'wpforms' );
-		$this->type  = 'entry-preview';
-		$this->icon  = 'fa-file-text-o';
-		$this->order = 190;
-		$this->group = 'fancy';
+		$this->name     = esc_html__( 'Entry Preview', 'wpforms' );
+		$this->keywords = esc_html__( 'confirm', 'wpforms' );
+		$this->type     = 'entry-preview';
+		$this->icon     = 'fa-file-text-o';
+		$this->order    = 190;
+		$this->group    = 'fancy';
 
 		$this->hooks();
 	}
@@ -228,6 +233,22 @@ class WPForms_Entry_Preview extends WPForms_Field {
 
 		$is_current_range   = false;
 		$is_next_page_break = false;
+		$first_field        = reset( $form_data['fields'] );
+		$first_field_id     = absint( $first_field['id'] );
+
+		/**
+		 * Force showing all fields from the beginning of the form instead of
+		 * the fields between current and previous Entry Preview fields.
+		 *
+		 * @since 1.8.1
+		 *
+		 * @param bool  $force_all_fields       Whether to force all fields instead of a range between current and previous Entry Preview fields.
+		 * @param array $form_data              Form data and settings.
+		 * @param int   $end_with_page_break_id Last Page Break field ID.
+		 */
+		if ( apply_filters( 'wpforms_entry_preview_get_start_page_break_id_force_first', false, $form_data, $end_with_page_break_id ) ) {
+			return $first_field_id;
+		}
 
 		foreach ( array_reverse( (array) $form_data['fields'] ) as $field_properties ) {
 			$field_id   = absint( $field_properties['id'] );
@@ -250,9 +271,7 @@ class WPForms_Entry_Preview extends WPForms_Field {
 			}
 		}
 
-		$field = reset( $form_data['fields'] );
-
-		return absint( $field['id'] );
+		return $first_field_id;
 	}
 
 	/**
@@ -327,7 +346,8 @@ class WPForms_Entry_Preview extends WPForms_Field {
 			}
 		}
 
-		return $entry_preview_fields;
+		/** This filter is documented in wpforms/includes/class-process.php */
+		return apply_filters( 'wpforms_process_filter', $entry_preview_fields, $submitted_fields, $form_data ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 
 	/**
@@ -873,7 +893,7 @@ class WPForms_Entry_Preview extends WPForms_Field {
 
 		$is_new_field = wp_doing_ajax();
 		$notice       = ! empty( $field['preview-notice-enable'] ) && isset( $field['preview-notice'] ) && ! wpforms_is_empty_string( $field['preview-notice'] )
-			? $field['preview-notice'] : '';
+			? force_balance_tags( $field['preview-notice'] ) : '';
 		$notice       = $is_new_field || wpforms_is_empty_string( $notice ) ? self::get_default_notice() : $notice;
 		$is_disabled  = $is_new_field || ! empty( $field['preview-notice-enable'] );
 

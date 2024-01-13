@@ -43,11 +43,7 @@ class To_Be_Cleaned_Indexables_Collector implements WPSEO_Collection {
 			'indexables_for_non_publicly_viewable_post_type_archive_pages' => $this->indexable_cleanup_repository->count_indexables_for_non_publicly_post_type_archive_pages(),
 			'indexables_for_authors_archive_disabled'           => $this->indexable_cleanup_repository->count_indexables_for_authors_archive_disabled(),
 			'indexables_for_authors_without_archive'            => $this->indexable_cleanup_repository->count_indexables_for_authors_without_archive(),
-<<<<<<< HEAD
 			'indexables_for_object_type_and_source_table_users' => $this->indexable_cleanup_repository->count_indexables_for_orphaned_users(),
-=======
-			'indexables_for_object_type_and_source_table_users' => $this->indexable_cleanup_repository->count_indexables_for_object_type_and_source_table( 'users', 'ID', 'user' ),
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 			'indexables_for_object_type_and_source_table_posts' => $this->indexable_cleanup_repository->count_indexables_for_object_type_and_source_table( 'posts', 'ID', 'post' ),
 			'indexables_for_object_type_and_source_table_terms' => $this->indexable_cleanup_repository->count_indexables_for_object_type_and_source_table( 'terms', 'term_id', 'term' ),
 			'orphaned_from_table_indexable_hierarchy'           => $this->indexable_cleanup_repository->count_orphaned_from_table( 'Indexable_Hierarchy', 'indexable_id' ),

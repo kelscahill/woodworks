@@ -358,7 +358,6 @@ class Mailer extends MailerAbstract {
 		}
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Get a Sendinblue-specific response with a helpful error.
 	 *
@@ -367,11 +366,6 @@ class Mailer extends MailerAbstract {
 	 * @return string
 	 */
 	public function get_response_error() {
-=======
-			DebugEvents::add_debug(
-				esc_html__( 'An email request was sent to the Brevo API.', 'wp-mail-smtp' )
-			);
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 		$error_text = [];
 

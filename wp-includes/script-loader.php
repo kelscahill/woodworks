@@ -858,7 +858,6 @@ function wp_default_scripts( $scripts ) {
 	// Not used in core, replaced by Jcrop.js.
 	$scripts->add( 'cropper', '/wp-includes/js/crop/cropper.js', array( 'scriptaculous-dragdrop' ) );
 
-<<<<<<< HEAD
 	/*
 	 * jQuery.
 	 * The unminified jquery.js and jquery-migrate.js are included to facilitate debugging.
@@ -874,19 +873,6 @@ function wp_default_scripts( $scripts ) {
 	 * the source files were flattened and included with some modifications for AMD loading.
 	 * A notable change is that 'jquery-ui-core' now contains 'jquery-ui-position' and 'jquery-ui-widget'.
 	 */
-=======
-	// jQuery.
-	// The unminified jquery.js and jquery-migrate.js are included to facilitate debugging.
-	$scripts->add( 'jquery', false, array( 'jquery-core', 'jquery-migrate' ), '3.6.4' );
-	$scripts->add( 'jquery-core', "/wp-includes/js/jquery/jquery$suffix.js", array(), '3.6.4' );
-	$scripts->add( 'jquery-migrate', "/wp-includes/js/jquery/jquery-migrate$suffix.js", array(), '3.4.0' );
-
-	// Full jQuery UI.
-	// The build process in 1.12.1 has changed significantly.
-	// In order to keep backwards compatibility, and to keep the optimized loading,
-	// the source files were flattened and included with some modifications for AMD loading.
-	// A notable change is that 'jquery-ui-core' now contains 'jquery-ui-position' and 'jquery-ui-widget'.
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	$scripts->add( 'jquery-ui-core', "/wp-includes/js/jquery/ui/core$suffix.js", array( 'jquery' ), '1.13.2', 1 );
 	$scripts->add( 'jquery-effects-core', "/wp-includes/js/jquery/ui/effect$suffix.js", array( 'jquery' ), '1.13.2', 1 );
 

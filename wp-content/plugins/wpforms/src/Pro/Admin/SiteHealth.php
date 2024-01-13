@@ -48,7 +48,7 @@ class SiteHealth extends \WPForms\Admin\SiteHealth {
 	 */
 	public function license_check() {
 
-		$license = wpforms()->license;
+		$license = wpforms()->get( 'license' );
 
 		if ( empty( $license ) || ! $license->get() ) {
 			$status = __( 'not detected', 'wpforms' );
@@ -57,7 +57,7 @@ class SiteHealth extends \WPForms\Admin\SiteHealth {
 		}
 
 		$result = [
-			'label'       => sprintf( /* translators: %s license status */
+			'label'       => sprintf( /* translators: %s - license status. */
 				esc_html__( 'Your WPForms license is %s', 'wpforms' ),
 				$status
 			),

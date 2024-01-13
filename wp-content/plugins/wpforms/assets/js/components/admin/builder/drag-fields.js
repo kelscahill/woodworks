@@ -321,7 +321,7 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 						return;
 					}
 
-					prevFieldId = $field.prev( '.wpforms-field' ).data( 'field-id' );
+					prevFieldId = $field.prev( '.wpforms-field, .wpforms-alert' ).data( 'field-id' );
 					$prevFieldOption = $( `#wpforms-field-option-${prevFieldId}` );
 
 					if ( $prevFieldOption.length > 0 ) {
@@ -363,11 +363,18 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 						$target = $( e.target ),
 						$placeholder = $target.find( '.wpforms-field-drag-placeholder' ),
 						isColumn = $target.hasClass( 'wpforms-layout-column' ),
-						targetClass = isColumn ? ' wpforms-field-drag-to-column' : '',
 						helper = {
 							width: $target.outerWidth(),
 							height: $field.outerHeight(),
 						};
+
+					let targetClass = isColumn ? ' wpforms-field-drag-to-column' : '';
+
+					if ( isColumn ) {
+						const columnSize = $target.attr( 'class' ).match( /wpforms-layout-column-(\d+)/ )[ 1 ];
+
+						targetClass += ` wpforms-field-drag-to-column-${ columnSize }`;
+					}
 
 					fieldId = $field.data( 'field-id' );
 					fieldType = $field.data( 'field-type' ) || vars.fieldType;
@@ -414,7 +421,10 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 
 					$field
 						.removeClass( 'wpforms-field-drag-not-allowed' )
-						.removeClass( 'wpforms-field-drag-to-column' );
+						.removeClass( function( index, className ) {
+							// Remove all classes starting with `wpforms-field-drag-to-column`.
+							return ( className.match( /wpforms-field-drag-to-column(-\d+|)/g ) || [] ).join( ' ' );
+						} );
 
 					if ( vars.fieldReceived ) {
 						$field.attr( 'style', '' );
@@ -483,7 +493,6 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 						.append( WPFormsBuilder.settings.spinnerInline )
 						.css( 'width', '100%' );
 
-					el.$builder.find( '.wpforms-add-fields .wpforms-add-fields-button' ).prop( 'disabled', true );
 					el.$builder.find( '.no-fields-preview' ).remove();
 
 					WPFormsBuilder.fieldAdd(
@@ -571,25 +580,37 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 				opacity: 0.75,
 				appendTo: '#wpforms-panel-fields',
 				zindex: 10000,
-				helper: function() {
-
-					let $this = $( this ),
-						$el = $( '<div class="wpforms-field-drag-out wpforms-field-drag">' );
+				helper() {
+					const $this = $( this );
+					const $el = $( '<div class="wpforms-field-drag-out wpforms-field-drag">' );
 
 					vars.fieldType = $this.data( 'field-type' );
 
 					return $el.html( $this.html() );
 				},
 
-				start: function( e, ui ) {
-
-					let event = WPFormsUtils.triggerEvent(
+				start( e, ui ) {
+					const event = WPFormsUtils.triggerEvent(
 						el.$builder,
 						'wpformsFieldAddDragStart',
 						[ vars.fieldType, ui ]
 					);
 
 					// Allow callbacks on `wpformsFieldAddDragStart` to cancel dragging the field
+					// by triggering `event.preventDefault()`.
+					if ( event.isDefaultPrevented() ) {
+						return false;
+					}
+				},
+
+				stop( e, ui ) {
+					const event = WPFormsUtils.triggerEvent(
+						el.$builder,
+						'wpformsFieldAddDragStop',
+						[ vars.fieldType, ui ]
+					);
+
+					// Allow callbacks on `wpformsFieldAddDragStop` to cancel dragging the field
 					// by triggering `event.preventDefault()`.
 					if ( event.isDefaultPrevented() ) {
 						return false;

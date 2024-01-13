@@ -231,12 +231,9 @@ class WPSEO_Tracking_Settings_Data implements WPSEO_Collection {
 		'deny_search_crawling',
 		'deny_wp_json_crawling',
 		'deny_adsbot_crawling',
-<<<<<<< HEAD
 		'deny_ccbot_crawling',
 		'deny_google_extended_crawling',
 		'deny_gptbot_crawling',
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		'last_known_no_unindexed',
 	];
 

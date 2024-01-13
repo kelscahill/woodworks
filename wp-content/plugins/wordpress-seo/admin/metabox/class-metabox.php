@@ -9,10 +9,7 @@ use Yoast\WP\SEO\Actions\Alert_Dismissal_Action;
 use Yoast\WP\SEO\Conditionals\Third_Party\Jetpack_Boost_Active_Conditional;
 use Yoast\WP\SEO\Conditionals\Third_Party\Jetpack_Boost_Not_Premium_Conditional;
 use Yoast\WP\SEO\Conditionals\WooCommerce_Conditional;
-<<<<<<< HEAD
 use Yoast\WP\SEO\Introductions\Infrastructure\Wistia_Embed_Permission_Repository;
-=======
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 use Yoast\WP\SEO\Presenters\Admin\Alert_Presenter;
 use Yoast\WP\SEO\Presenters\Admin\Meta_Fields_Presenter;
 
@@ -868,11 +865,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$asset_manager->enqueue_style( 'metabox-css' );
 		$asset_manager->enqueue_style( 'scoring' );
 		$asset_manager->enqueue_style( 'monorepo' );
-<<<<<<< HEAD
 		$asset_manager->enqueue_style( 'ai-generator' );
-=======
-		$asset_manager->enqueue_style( 'tailwind' );
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 
 		$is_block_editor  = WP_Screen::get()->is_block_editor();
 		$post_edit_handle = 'post-edit';
@@ -941,15 +934,11 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'blackFridayBlockEditorUrl'  => ( YoastSEO()->classes->get( Yoast\WP\SEO\Promotions\Application\Promotion_Manager::class )->is( 'black-friday-2023-checklist' ) ) ? WPSEO_Shortlinker::get( 'https://yoa.st/black-friday-checklist' ) : '',
 			'isJetpackBoostActive'       => ( $is_block_editor ) ? YoastSEO()->classes->get( Jetpack_Boost_Active_Conditional::class )->is_met() : false,
 			'isJetpackBoostNotPremium'   => ( $is_block_editor ) ? YoastSEO()->classes->get( Jetpack_Boost_Not_Premium_Conditional::class )->is_met() : false,
-<<<<<<< HEAD
 			'isWooCommerceActive'        => $woocommerce_active,
 			'woocommerceUpsell'          => get_post_type( $post_id ) === 'product' && ! $woocommerce_seo_active && $woocommerce_active,
 			'linkParams'                 => WPSEO_Shortlinker::get_query_params(),
 			'pluginUrl'                  => \plugins_url( '', \WPSEO_FILE ),
 			'wistiaEmbedPermission'      => YoastSEO()->classes->get( Wistia_Embed_Permission_Repository::class )->get_value_for_user( \get_current_user_id() ),
-=======
-			'woocommerceUpsell'          => get_post_type( $post_id ) === 'product' && ! $woocommerce_seo_active && $woocommerce_active,
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		];
 
 		if ( post_type_supports( get_post_type(), 'thumbnail' ) ) {

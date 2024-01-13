@@ -42,11 +42,7 @@ class Content_Type_Visibility_Dismiss_Notifications {
 			$success          = $this->options->set( 'new_post_types', $new_needs_review );
 			$message          = ( $success ) ? __( 'Post type is no longer new.', 'wordpress-seo' ) : __( 'Error: Post type was not removed from new_post_types list.', 'wordpress-seo' );
 			if ( $success ) {
-<<<<<<< HEAD
 				$this->maybe_dismiss_notifications( [ 'new_post_types' => $new_needs_review ] );
-=======
-				$this->maybe_dismiss_notifications();
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 			}
 		}
 
@@ -76,11 +72,7 @@ class Content_Type_Visibility_Dismiss_Notifications {
 			$success          = $this->options->set( 'new_taxonomies', $new_needs_review );
 			$message          = ( $success ) ? __( 'Taxonomy is no longer new.', 'wordpress-seo' ) : __( 'Error: Taxonomy was not removed from new_taxonomies list.', 'wordpress-seo' );
 			if ( $success ) {
-<<<<<<< HEAD
 				$this->maybe_dismiss_notifications( [ 'new_taxonomies' => $new_needs_review ] );
-=======
-				$this->maybe_dismiss_notifications();
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 			}
 		}
 
@@ -96,7 +88,6 @@ class Content_Type_Visibility_Dismiss_Notifications {
 	/**
 	 * Checks if there are new content types or taxonomies.
 	 *
-<<<<<<< HEAD
 	 * @param array $new_content_types The new content types.
 	 * @return bool
 	 */
@@ -105,13 +96,6 @@ class Content_Type_Visibility_Dismiss_Notifications {
 		$post_types_needs_review = ( array_key_exists( 'new_post_types', $new_content_types ) ) ? $new_content_types['new_post_types'] : $this->options->get( 'new_post_types', [] );
 		$taxonomies_needs_review = ( array_key_exists( 'new_taxonomies', $new_content_types ) ) ? $new_content_types['new_taxonomies'] : $this->options->get( 'new_taxonomies', [] );
 
-=======
-	 * @return bool
-	 */
-	public function maybe_dismiss_notifications() {
-		$taxonomies_needs_review = $this->options->get( 'new_taxonomies', [] );
-		$post_types_needs_review = $this->options->get( 'new_post_types', [] );
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 		if ( $post_types_needs_review || $taxonomies_needs_review ) {
 			return;
 		}

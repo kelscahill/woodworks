@@ -187,7 +187,7 @@ class Locator {
 	private function hooks() {
 
 		// View hooks.
-		add_filter( 'wpforms_overview_table_columns', [ $this, 'add_column' ] );
+		add_filter( 'wpforms_admin_forms_table_facades_columns_data', [ $this, 'add_column_data' ] );
 		add_filter( 'wpforms_overview_table_column_value', [ $this, 'column_value' ], 10, 3 );
 		add_filter( 'wpforms_overview_row_actions', [ $this, 'row_actions_all' ], 10, 2 );
 		add_action( 'wpforms_overview_enqueue', [ $this, 'localize_overview_script' ] );
@@ -213,12 +213,16 @@ class Locator {
 	 * Add locations column to the view.
 	 *
 	 * @since 1.7.4
+	 * @deprecated 1.8.6
 	 *
 	 * @param array $columns Columns.
 	 *
 	 * @return array
 	 */
 	public function add_column( $columns ) {
+
+		// Deprecate this method since the Locations column data should be added via the `wpforms_admin_forms_table_facades_columns_data` filter.
+		_deprecated_function( __METHOD__, '1.8.6 of the WPForms plugin', __CLASS__ . '::add_column_data()' );
 
 		$columns[ self::COLUMN_NAME ] =
 			sprintf(
@@ -227,6 +231,31 @@ class Locator {
 				esc_html__( 'Locations', 'wpforms-lite' ),
 				esc_html__( 'Form locations', 'wpforms-lite' )
 			);
+
+		return $columns;
+	}
+
+	/**
+	 * Add locations' column to the table columns data.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array|mixed $columns Columns data.
+	 *
+	 * @return array
+	 */
+	public function add_column_data( $columns ): array {
+
+		$columns                      = (array) $columns;
+		$columns[ self::COLUMN_NAME ] = [
+			'label'      => esc_html__( 'Locations', 'wpforms-lite' ),
+			'label_html' => sprintf(
+				'<span class="wpforms-locations-column-title">%1$s</span>' .
+				'<span class="wpforms-locations-column-icon" title="%2$s"></span>',
+				esc_html__( 'Locations', 'wpforms-lite' ),
+				esc_html__( 'Form locations', 'wpforms-lite' )
+			),
+		];
 
 		return $columns;
 	}
@@ -665,7 +694,7 @@ class Locator {
 
 		$form_ids = $this->get_form_ids( $post->post_content );
 
-		$this->update_form_locations_metas( $post, [], $form_ids );
+		$this->update_form_locations_metas( null, $post, [], $form_ids );
 	}
 
 	/**
@@ -691,7 +720,7 @@ class Locator {
 		$form_ids_before = $this->get_form_ids( $post_before->post_content );
 		$form_ids_after  = $this->get_form_ids( $post_after->post_content );
 
-		$this->update_form_locations_metas( $post_after, $form_ids_before, $form_ids_after );
+		$this->update_form_locations_metas( $post_before, $post_after, $form_ids_before, $form_ids_after );
 	}
 
 	/**
@@ -707,7 +736,7 @@ class Locator {
 		$form_ids_before = $this->get_form_ids( $post->post_content );
 		$form_ids_after  = [];
 
-		$this->update_form_locations_metas( $post, $form_ids_before, $form_ids_after );
+		$this->update_form_locations_metas( null, $post, $form_ids_before, $form_ids_after );
 	}
 
 	/**
@@ -723,7 +752,7 @@ class Locator {
 		$form_ids_before = [];
 		$form_ids_after  = $this->get_form_ids( $post->post_content );
 
-		$this->update_form_locations_metas( $post, $form_ids_before, $form_ids_after );
+		$this->update_form_locations_metas( null, $post, $form_ids_before, $form_ids_after );
 	}
 
 	/**
@@ -1023,28 +1052,64 @@ class Locator {
 	 * Update form locations metas.
 	 *
 	 * @since 1.7.4
+	 * @since 1.8.2.3 Added `$post_before` parameter.
 	 *
-	 * @param WP_Post $post_after      Post after the update.
-	 * @param array   $form_ids_before Form ids before the update.
-	 * @param array   $form_ids_after  Form ids after the update.
+	 * @param WP_Post|null $post_before     The post before the update.
+	 * @param WP_Post      $post_after      The post after the update.
+	 * @param array        $form_ids_before Form IDs before the update.
+	 * @param array        $form_ids_after  Form IDs after the update.
 	 */
-	private function update_form_locations_metas( $post_after, $form_ids_before, $form_ids_after ) {
+	private function update_form_locations_metas( $post_before, $post_after, $form_ids_before, $form_ids_after ) {
 
-		$post_id = $post_after->ID;
-		$url     = get_permalink( $post_id );
-		$url     = ( $url === false || is_wp_error( $url ) ) ? '' : $url;
-		$url     = str_replace( $this->home_url, '', $url );
-
+		// Determine which locations to remove and which to add.
 		$form_ids_to_remove = array_diff( $form_ids_before, $form_ids_after );
 		$form_ids_to_add    = array_diff( $form_ids_after, $form_ids_before );
 
+		// Loop through each form ID to remove the locations meta.
 		foreach ( $form_ids_to_remove as $form_id ) {
-			$locations = $this->get_locations_without_current_post( $form_id, $post_id );
-
-			update_post_meta( $form_id, self::LOCATIONS_META, $locations );
+			update_post_meta(
+				$form_id,
+				self::LOCATIONS_META,
+				$this->get_locations_without_current_post( $form_id, $post_after->ID )
+			);
 		}
 
-		foreach ( $form_ids_to_add as $form_id ) {
+		// Determine the titles and slugs.
+		$old_title = $post_before ? $post_before->post_title : '';
+		$old_slug  = $post_before ? $post_before->post_name : '';
+		$new_title = $post_after->post_title;
+		$new_slug  = $post_after->post_name;
+
+		// If the title and slug are the same and there are no form IDs to add, bail.
+		if ( empty( $form_ids_to_add ) && $old_title === $new_title && $old_slug === $new_slug ) {
+			return;
+		}
+
+		// Merge the form IDs and remove duplicates.
+		$form_ids = array_unique( array_merge( $form_ids_to_add, $form_ids_after ) );
+
+		$this->save_location_meta( $form_ids, $post_after->ID, $post_after );
+	}
+
+	/**
+	 * Save the location meta.
+	 *
+	 * @since 1.8.2.3
+	 *
+	 * @param array   $form_ids   Form IDs.
+	 * @param int     $post_id    Post ID.
+	 * @param WP_Post $post_after Post after the update.
+	 */
+	private function save_location_meta( $form_ids, $post_id, $post_after ) {
+
+		// Build the URL.
+		$url = get_permalink( $post_id );
+		$url = ( $url === false || is_wp_error( $url ) ) ? '' : $url;
+		$url = str_replace( $this->home_url, '', $url );
+
+		// Loop through each Form ID and save the location meta.
+		foreach ( $form_ids as $form_id ) {
+
 			$locations = $this->get_locations_without_current_post( $form_id, $post_id );
 
 			$locations[] = [
@@ -1114,10 +1179,10 @@ class Locator {
 				 * Extract id from conventional wpforms shortcode or wpforms block.
 				 * Examples:
 				 * [wpforms id="32" title="true" description="true"]
-				 * <!-- wp:wpforms/form-selector {"formId":"32","displayTitle":true,"displayDesc":true} /-->
+				 * <!-- wp:wpforms/form-selector {"clientId":"b5f8e16a-fc28-435d-a43e-7c77719f074c", "formId":"32","displayTitle":true,"displayDesc":true} /-->
 				 * In both, we should find 32.
 				 */
-				'#\[\s*wpforms.+id\s*=\s*"(\d+?)".*]|<!-- wp:wpforms/form-selector {"formId":"(\d+?)".*?} /-->#',
+				'#\[\s*wpforms.+id\s*=\s*"(\d+?)".*]|<!-- wp:wpforms/form-selector {.*?"formId":"(\d+?)".*?} /-->#',
 				$content,
 				$matches
 			)

@@ -152,21 +152,8 @@ function determine_locale() {
 		$determined_locale = get_user_locale();
 	}
 
-<<<<<<< HEAD
 	if ( ! $determined_locale ) {
 		$determined_locale = get_locale();
-=======
-	$wp_lang = '';
-
-	if ( ! empty( $_GET['wp_lang'] ) ) {
-		$wp_lang = sanitize_locale_name( wp_unslash( $_GET['wp_lang'] ) );
-	} elseif ( ! empty( $_COOKIE['wp_lang'] ) ) {
-		$wp_lang = sanitize_locale_name( wp_unslash( $_COOKIE['wp_lang'] ) );
-	}
-
-	if ( ! empty( $wp_lang ) && ! empty( $GLOBALS['pagenow'] ) && 'wp-login.php' === $GLOBALS['pagenow'] ) {
-		$determined_locale = $wp_lang;
->>>>>>> 3cebceaef97f5cb5f1cce611cdd0496c54e2d3b6
 	}
 
 	/**
