@@ -5,7 +5,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
 Tested up to: 6.2
-Stable tag: 20.6
+Stable tag: 20.12
 Requires PHP: 7.2.5
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -87,7 +87,6 @@ Did you know that [Yoast SEO Premium](https://yoa.st/1v8) contains a lot of extr
 * **Internal linking suggestions** while you’re writing.
 * Preview your content to see what it will look like in the search results and when shared on social media using the **Google preview** and **social preview**.
 * **Cornerstone content checks** that point search engines to your most important pages.
-* Connect Yoast SEO to Zapier to easily **create zaps that instantly share your published posts** with 2000+ destinations like Twitter, Facebook, and much more.
 
 If you are serious about your WordPress SEO, install the [Yoast SEO Premium plugin](https://yoa.st/1v8)! **Costs a little, saves a lot of time!**
 
@@ -112,7 +111,6 @@ Yoast SEO integrates seamlessly into a range of themes and plugins. We work part
 * Google’s [Web Stories](https://wordpress.org/plugins/web-stories/) plugin, which helps you to create ‘[web stories](https://amp.dev/about/stories/)’.
 * The [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) plugin, when you also activate the [ACF Content Analysis for Yoast SEO](https://wordpress.org/plugins/acf-content-analysis-for-yoast-seo/) plugin.
 * The [Elementor](https://wordpress.org/plugins/elementor/) website builder.
-* [Zapier](https://zapier.com/apps/yoast-seo/integrations), which helps you automate your publishing flow.
 * [Algolia](https://wordpress.org/plugins/wp-search-with-algolia/) integration to improve the quality of your site search.
 * [WordProof](https://wordproof.com/), which helps you prove ownership by adding timestamps.
 
@@ -247,43 +245,43 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 20.6 =
+= 20.12 =
 
-Release date: 2023-04-26
+Release date: 2023-07-25
 
-Today's release of Yoast SEO 20.6 has enhancements and fixes to improve your SEO work. The update features a new readability analysis — a helpful addition alerting you whenever you use too much center-aligned text. Check out more details now! Find out more about what's new in Yoast SEO 20.6 in [our release post](https://yoa.st/release-26-4-23)!
-
-#### Enhancements
-
-* Improves performance when the SEO data optimization has not been completed. Props to @PypWalters.
-
-= 20.5 =
-
-Release date: 2023-04-11
-
-Our latest release, Yoast SEO 20.5, includes enhancements and fixes to elevate your SEO journey. One of the most exciting updates is our improved Google SERP preview, now aligned with Google's current styling for both mobile and desktop. This allows you to see how well your snippets are optimized for the search result pages. Read all about it! Find out more about what's new in Yoast SEO 20.5 in [our release post](https://yoa.st/release-11-4-23)!
+We've just released Yoast SEO 20.12! This release includes fixes and enhancements that strengthen the stability of our plugin and enhance your SEO efforts. Find out more about what's new in Yoast SEO 20.12 in [our release post](https://yoa.st/release-25-7-23)!
 
 #### Enhancements
 
-* Updates mobile and desktop Google snippet previews to be in line with Google's current styling.
-* Improves the recognition of keyphrases starting with a period (e.g., ".net developer") by the _keyphrase in title_ assessment.
-* Cleans up indexables that got orphaned because posts/terms/users got deleted while Yoast SEO was deactivated.
+* Adds `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid` and `gtm_debug` to the default allowlist for the "Remove unregistered URL parameters" setting.
 
 #### Bugfixes
 
-* Fixes a bug where a fatal error would be thrown when upgrading Yoast SEO while having Local SEO active but never executed.
-* Fixes a bug where, if a content pertaining to a deleted user is re-assigned to another user, the indexables related to the deleted user are not updated with the new `author_id`.
-* Fixes a bug where posts in Elementor would persistently require an update when a related keyphrase was added.
-* Fixes a bug where the Google preview would show a duplicate slug in the breadcrumbs when the slug included encoded characters.
-* Fixes a bug where the highlighting for the _passive voice_, _sentence length_, _transition words_, and _inclusive language_ assessments would not be applied to the first sentence of a paragraph if the paragraph contained a new line character.
-* Fixes a bug where the highlighting would not be applied in the image captions in Classic editor when the match was found in the first sentence.
-* Fixes a bug where the highlighting would not be applied to the first sentence in Classic editor when an image without caption was added at the beginning of a paragraph.
-* Fixes a bug where the _passive voice_ and _transition words_ assessments would show an incorrect percentage in the feedback when a new line character was used inside a paragraph.
+* Fixes a bug where an error would appear in `debug.log` when saving a draft or updating a post in Elementor.
+* Fixes a bug where the controls for the _FAQ_ and _how-to_ blocks would be not shown when running Gutenberg versions >= 15.2.
+* Fixes a bug where the duration text of the _how-to_ block would be output in the user language instead of the site language.
 
 #### Other
 
-* Changes the last step of the `First-time configuration` to highlight the free webinar availability.
-* Drops compatibility with PHP 5.6, 7.0 and 7.1.
+* Updates the verification link to the Google Search Console in the Site connections section in Settings.
+* Improves the copy in the final step of the first time configuration.
+* Updates copy of our free webinar notification.
+
+= 20.11 =
+
+Release date: 2023-07-11
+
+Time for another release, time for Yoast SEO 20.11. This latest release includes fixes and enhancements, plus a new notification that pops up when you add a new content type. This reminds you to optimize these. Find out more about what's new in Yoast SEO 20.11 in [our release post](https://yoa.st/release-11-7-23)!
+
+#### Enhancements
+
+* Adds badges to new content types in the settings page.
+* Adds a notification in the settings whenever there is a new content type.
+* Adds a notification for new content in the notification center and removes it once it was reviewed.
+
+#### Bugfixes
+
+* Fixes a bug where placeholders would be displayed in the wrong color in the Yoast SEO settings and the First-time configuration.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).
