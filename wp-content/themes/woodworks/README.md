@@ -1,3 +1,15 @@
+## Theme Setup
+
+Edit `app/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, and sidebars.
+
+### Theme development
+- Run `yarn setup`
+*Make sure your node version matches whats in the `.nvmrc` file
+
+### Build commands
+- `yarn start` — Compile assets when file changes are made, start Browsersync session
+- `yarn build` — Compile assets for production
+
 ## Theme structure
 
 ```sh
@@ -35,11 +47,23 @@ themes/your-site/         # → Root of your theme
 
 ## Troubleshooting
 
+## Kinsta Hosting
+
 For Kinsta hosting, if your blocks are not displaying, you'll need to add a fallback for the block template path. See the example below and make sure to update `your-site` to your theme name.
 
 ```
 $templates = array(
   '/wp-content/themes/your-site/resources/views/patterns/02-molecules/components/accordion/accordion.twig',
-  get_stylesheet_directory() . '/resources/views/patterns/02-molecules/components/accordion/accordion.twig',
+  get_stylesheet_directory() . '/resources/resources/views/patterns/02-molecules/components/accordion/accordion.twig',
 );
+```
+
+### PHP Version
+
+If you get a notice about the php versions not aligning, you'll need to add the following to your `.lando.yml` in the root folder. Once the php version is set in the lando config, run `lando rebuild`. Then you should be able to run `composer install` without any issues.
+
+```
+config:
+  webroot: .
+  php: '8.1'
 ```

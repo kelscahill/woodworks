@@ -7,17 +7,14 @@
     "resources/styles/**/*.scss"
   ],
   "rules": {
-    "indentation": [2],
     "color-no-invalid-hex": true,
-    "function-no-unknown": null,
     "no-empty-source": null,
-    "max-empty-lines": 2,
     "length-zero-no-unit": null,
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "no-missing-end-of-source-newline": null,
     "declaration-empty-line-before": null,
-    "value-no-vendor-prefix": null,
+    "declaration-block-no-redundant-longhand-properties": null,
     "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
     "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?(--([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
     "at-rule-empty-line-before": [

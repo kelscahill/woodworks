@@ -1,11 +1,8 @@
 node_modules
-vendor
-# public
-# public/entrypoints.json
-# public/manifest.json
 .env
 .budfiles
-npm-debug.log
-yarn-error.log
+*.log
 *.lock
 package-lock.json
+# vendor
+# public

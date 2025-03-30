@@ -1,51 +1,65 @@
-// @ts-check
-
 /**
- * Build configuration
+ * Compiler configuration
  *
- * @see {@link https://bud.js.org/guides/getting-started/configure}
- * @param {import('@roots/bud').Bud} app
+ * @see {@link https://roots.io/sage/docs sage documentation}
+ * @see {@link https://bud.js.org/learn/config bud.js configuration guide}
+ *
+ * @type {import('@roots/bud').Config}
  */
 export default async (app) => {
+  /**
+   * Register common paths
+   */
   app
-    /**
-     * Application entrypoints with globbing
-     */
-    .entry({
-      app: ["@scripts/app", "@styles/app", "views/patterns/**/*.{css,scss}"],
-      editor: ["@scripts/editor", "@styles/editor"],
-    })
+    .setPath("@scripts", "resources/scripts")
+    .setPath("@styles", "resources/styles")
+    .setPath("@patterns", "resources/views/patterns");
 
-    /**
-     * Directory contents to be included in the compilation
-     */
-    .assets(["images"])
+  /**
+   * Application assets & entrypoints
+   *
+   * @see {@link https://bud.js.org/reference/bud.entry}
+   * @see {@link https://bud.js.org/reference/bud.assets}
+   */
+  app
+    .entry(
+      "app",
+      await app.glob([
+        "@scripts/app.js",
+        "@styles/app.scss",
+        "@patterns/**/*.{scss, css}",
+      ]),
+    )
+    .entry("editor", ["@scripts/editor", "@styles/editor"])
+    .assets(["images", "fonts"]);
 
-    /**
-     * Matched files trigger a page reload when modified
-     */
-    .watch(["resources/**/*", "app/**/*"])
+  /**
+   * Set public path
+   *
+   * @see {@link https://bud.js.org/reference/bud.setPublicPath}
+   */
+  app.setPublicPath("../");
 
-    /**
-     * Proxy origin (`WP_HOME`)
-     */
-    .proxy("http://woodworks.local.host/")
+  /**
+   * Development server settings
+   *
+   * @see {@link https://bud.js.org/reference/bud.setUrl}
+   * @see {@link https://bud.js.org/reference/bud.setProxyUrl}
+   * @see {@link https://bud.js.org/reference/bud.watch}
+   */
+  app
+    .setUrl("http://0.0.0.0:3005")
+    .setProxyUrl("https://woodworks-construction.local")
+    .watch(app.globSync(["resources/**/*", "app/**/*"]));
 
-    /**
-     * Development origin
-     */
-    .serve("http://localhost:56174")
-
-    /**
-     * URI of the `public` directory
-     */
-    .setPublicPath("/wp-content/themes/woodworks/public/");
-
+  /**
+   * Set global styles
+   */
   app.sass.importGlobal([
-    '@styles/_variables',
-    '@styles/_breakpoints',
-    '@styles/_mixins',
-    '@styles/_grid',
-    '@styles/_overrides',
-  ])
+    "@styles/_variables",
+    "@styles/_breakpoints",
+    "@styles/_mixins",
+    "@styles/_grid",
+    "@styles/_overrides",
+  ]);
 };

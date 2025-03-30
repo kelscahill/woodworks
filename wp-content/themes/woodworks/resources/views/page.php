@@ -22,7 +22,7 @@
  */
 
 $context = Timber::get_context();
-$post = new TimberPost();
+$post = Timber::get_post();
 $context['post'] = $post;
 $context['password_protected'] = post_password_required();
 Timber::render( array( '05-pages/page-' . $post->post_name . '.twig', '05-pages/page.twig' ), $context );

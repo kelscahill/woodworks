@@ -9,7 +9,7 @@
                 "text": item.title,
                 "url": item.url,
                 "target": item.target,
-                "classes": "c-footer-nav__link" ~ item.classes|join(' '),
+                "classes": "c-footer-nav__link " ~ item.classes|join(' '),
               }
             } %}
             {% if item.children %}
@@ -21,7 +21,7 @@
                         "text": item.title,
                         "url": item.url,
                         "target": item.target,
-                        "classes": "c-footer-nav__link" ~ item.classes|join(' '),
+                        "classes": "c-footer-nav__link " ~ item.classes|join(' '),
                       }
                     } %}
                     </li>

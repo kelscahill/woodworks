@@ -159,7 +159,7 @@ const main = async (err) => {
   galleryBlocks();
   jQuery(document).on('sf:ajaxfinish', () => {
     galleryBlocks();
-    // All the gallery filter hash to the url when the search and filter is udpated
+    // All the gallery filter hash to the url when the search and filter is updated
     window.history.pushState(null, null, '#gallery-filter');
 
     galleryFiltered();
@@ -168,7 +168,7 @@ const main = async (err) => {
   function galleryFiltered() {
     // If the results are filtered, add a class to the section
     if (document.querySelector('#gallery-filter')) {
-      if (window.location.search.includes('?_sft_category')) {
+      if (window.location.search.includes('?_category')) {
         document.querySelector('#gallery-filter').classList.add('is-filtered');
       } else {
         document.querySelector('#gallery-filter').classList.remove('is-filtered');
@@ -231,7 +231,9 @@ const main = async (err) => {
       const sectionID = entry.target.getAttribute('ID');
       if (sectionID !== null && entry.isIntersecting) {
         /* 3 */
-        document.querySelector('.js-primary-nav-link[href="/#'+sectionID+'"]').classList.add('this-is-active');
+        if (document.querySelector('.js-primary-nav-link[href="/#'+sectionID+'"]')) {
+          document.querySelector('.js-primary-nav-link[href="/#'+sectionID+'"]').classList.add('this-is-active');
+        }
         if (currentActive && currentActive !== entry.target) {
           /* 4 */
           const currentActiveID = currentActive.getAttribute('ID');
@@ -328,20 +330,19 @@ const main = async (err) => {
 
   /**
    * On DOM content loaded
-   * 1) If the url has ?_sft_category or ?sf_paged, then scroll to the gallery section, else scroll to the hash
-   * 2) If the url has ?_sft_category or ?sf_paged, then set the is-filtered class
+   * 1) If the url has ?_category or ?sf_paged, then scroll to the gallery section, else scroll to the hash
+   * 2) If the url has ?_category or ?sf_paged, then set the is-filtered class
    */
-  document.addEventListener('DOMContentLoaded', function() {
-    /* 1 */
-    if (window.location.href.indexOf('?_sft_category') !== -1 || window.location.href.indexOf('sf_paged') !== -1) {
-      //setScrollToHash();
-      document.getElementById('gallery-filter').scrollIntoView();
-    } else if (window.location.hash) {
-      setScrollToHash();
-    }
-    /* 2 */
-    galleryFiltered()
-  });
+  /* 1 */
+  if (window.location.search.includes('?_category') || window.location.pathname.includes('/page/')) {
+    //setScrollToHash();
+    document.getElementById('gallery-filter').scrollIntoView();
+  } else if (window.location.hash) {
+    setScrollToHash();
+  }
+  /* 2 */
+  galleryFiltered()
+
 
   /**
    * Remove active primary nav classes

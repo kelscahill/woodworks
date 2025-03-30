@@ -10,7 +10,7 @@
  */
 
 $context = Timber::context();
-$context['posts'] = new Timber\PostQuery($query);
+$context['posts'] = Timber::get_posts($query);
 
 $templates = array(
   '/wp-content/themes/woodworks/resources/views/patterns/02-molecules/navigation/pagination/pagination.twig',

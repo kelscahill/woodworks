@@ -1,106 +1,78 @@
 <?php
 /**
- * Fired when the plugin is uninstalled.
+ *  Uninstall functions, remove S&F data if the option is set
  *
- * Search & Filter Pro
- * 
- * @package   Search_Filter
- * @author    Ross Morsali
- * @link      https://searchandfilter.com
- * @copyright 2018 Search & Filter
+ * @link       https://searchandfilter.com
+ * @since      3.0.0
+ *
+ * @package    Search_Filter_Pro
  */
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
-// If uninstall not called from WordPress, then exit
+// If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
-if ( ! class_exists( 'Search_Filter_Wp_Cache' ) )
-{
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-search-filter-wp-cache.php' );
-}
-if ( ! class_exists( 'Search_Filter_Wp_Data' ) )
-{
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-search-filter-wp-data.php' );
-}
-if ( ! class_exists( 'Search_Filter_Helper' ) )
-{
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-search-filter-helper.php' );
-}
-if ( ! class_exists( 'Search_Filter_Shared' ) )
-{
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-search-filter-shared.php' );
-}
-if ( ! class_exists( 'Search_Filter_Third_Party' ) )
-{
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-search-filter-third-party.php' );
-}
 global $wpdb;
-
 if ( is_multisite() ) {
-	// store the current blog id
-    $current_blog = $wpdb->blogid;
-    
-    // Get all blogs in the network and activate plugin on each one
-    $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
-    foreach ( $blog_ids as $blog_id ) {
-        switch_to_blog( $blog_id );
-        uninstall_search_filter_pro();
-        restore_current_blog();
-    }
-
-}
-else
-{
-
-	//check for existence of caching database, if not install it
-	uninstall_search_filter_pro();
+	// Get all blogs in the network and deactivate plugin on each one.
+	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+	foreach ( $blog_ids as $next_blog_id ) {
+		switch_to_blog( $next_blog_id );
+		search_filter_pro_uninstall();
+		restore_current_blog();
+	}
+} else {
+	search_filter_pro_uninstall();
 }
 
-function uninstall_search_filter_pro()
-{	
 
+/**
+ * Uninstall the plugin.
+ *
+ * @since    3.0.0
+ */
+function search_filter_pro_uninstall() {
 	global $wpdb;
 
-    $remove_all_data = Search_Filter_Helper::get_option( 'remove_all_data' );
+	// We can't load most of our plugin here because we inherit a lot of
+	// dependencies from the free version, and its possible that is not
+	// enabled or installed at point of uninstall...
 
-    if($remove_all_data == 1) {
+	// Look for the option name `features` in the `search_filter_options` table.
 
-        delete_option( "search-filter-cache" );
-        delete_option( 'search_filter_cache_speed' );
-        delete_option( 'search_filter_cache_use_manual' );
-        delete_option( 'search_filter_cache_use_background_processes' );
-        delete_option( 'search_filter_cache_use_transients' );
-        delete_option( 'search_filter_load_jquery_i18n' );
-        delete_option( 'search_filter_lazy_load_js' );
-        delete_option( 'search_filter_load_js_css' );
-        delete_option( 'search_filter_combobox_script' );
-        delete_option( 'search_filter_remove_all_data' );
+	// Check if the table search_filter_options exists first.
+	$remove_all_data = false;
+	// If the table doesn't exist, we can assume that free version has been removed before the pro.
+	if ( $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}search_filter_options'" ) ) {
+		$options_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}search_filter_options WHERE name = %s", 'features' ) );
+		if ( count( $options_result ) === 0 ) {
+			// The setting was probably not init, so lets use the default of not removing all data.
+			$remove_all_data = false;
+		} else {
+			$features        = json_decode( $options_result[0]->value, true );
+			$remove_all_data = isset( $features['removeDataOnUninstall'] ) ? $features['removeDataOnUninstall'] : false;
+		}
+	}
 
-        $cache_table_name = $wpdb->prefix . 'search_filter_cache';
-        $term_results_table_name = $wpdb->prefix . 'search_filter_term_results';
+	// Don't proceed if remove all data is not enabled.
+	if ( ! $remove_all_data ) {
+		return;
+	}
 
-        $wpdb->query("DROP TABLE IF EXISTS $cache_table_name");
-        $wpdb->query("DROP TABLE IF EXISTS $term_results_table_name");
+	$tables_to_remove = array(
+		'index',
+		'index_cache',
+		'tasks',
+		'taskmeta',
+	);
 
-        $post_status = array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash');
+	foreach ( $tables_to_remove as $table ) {
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}search_filter_{$table}" );
+		// Delete version info in the options table.
+		delete_option( "search_filter_pro_{$table}_table_version", );
+	}
 
-        $search_form_query = new WP_Query('post_type=search-filter-widget&post_status=' . implode(",", $post_status) . '&posts_per_page=-1');
-        $search_forms = $search_form_query->get_posts();
-        foreach ($search_forms as $search_form) {
-            wp_delete_post($search_form->ID, true);
-        }
-
-	    Search_Filter_Wp_Cache::purge_all_transients();
-    }
-
-	// flush rewrite rules in order to remove the rewrite rule
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
-
 }
-

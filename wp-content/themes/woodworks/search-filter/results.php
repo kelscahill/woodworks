@@ -1,16 +1,20 @@
 <?php
-  global $searchandfilter;
-  $searchandfilterId = $query->query['search_filter_id'];
-  $sf_current_query = $searchandfilter->get($searchandfilterId)->current_query();
-  // $pagination_type = $sf_current_query->form_settings['pagination_type'];
+  global $search_filter_query;
+  $searchandfilterId = $query->query['search_filter_query_id'];
+  $sf_current_query = \Search_Filter\Queries\Query::find( array(
+    'id' => $searchandfilterId
+  ) );
+  $pagination_type = $sf_current_query->get_attributes()['resultsPaginationType'];
 ?>
-<div class="c-posts" data-bp="grid 6@sm 4@lg">
+<div id="search-filter-<?php echo $searchandfilterId; ?>" class="c-search-filter u-spacing--double">
   <?php if ($query->have_posts()) : ?>
-    <?php while ($query->have_posts()): $query->the_post(); $post_id = get_the_ID(); ?>
-      <?php include locate_template('resources/views/blocks/block.php'); ?>
-    <?php endwhile; ?>
-  <?php else: ?>
-    <p data-search-filter-action='infinite-scroll-end'></p>
+    <div class="c-posts" data-bp="grid 6@sm 4@lg">
+      <?php while ($query->have_posts()): $query->the_post(); ?>
+        <?php include locate_template('resources/views/blocks/block.php'); ?>
+      <?php endwhile; wp_reset_postdata(); ?>
+    </div>
+  <?php endif; ?>
+  <?php if ($pagination_type == 'default') : ?>
+    <?php include locate_template('resources/views/blocks/pagination.php'); ?>
   <?php endif; ?>
 </div>
-<?php include locate_template('resources/views/blocks/pagination.php'); ?>

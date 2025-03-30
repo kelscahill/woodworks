@@ -15,7 +15,7 @@
                   "text": item.title,
                   "url": item.url,
                   "target": item.target,
-                  "classes": "c-primary-nav__link js-primary-nav-link" ~ item.classes|join(' ') ~ (item.children ? ' has-children'),
+                  "classes": "c-primary-nav__link js-primary-nav-link " ~ item.classes|join(' ') ~ (item.children ? ' has-children'),
                 }
               } %}
               {% if item.children %}
@@ -35,7 +35,7 @@
                         "text": item.title,
                         "url": item.url,
                         "target": item.target,
-                        "classes": "c-primary-nav__link js-primary-nav-link" ~ item.classes|join(' '),
+                        "classes": "c-primary-nav__link js-primary-nav-link " ~ item.classes|join(' '),
                       }
                     } %}
                     </li>

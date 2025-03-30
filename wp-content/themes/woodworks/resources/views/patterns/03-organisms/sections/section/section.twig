@@ -45,10 +45,10 @@
           {% elseif section.content_type == 'gallery' %}
             <div id="gallery-filter" class="c-section__gallery">
               <div class="c-section__gallery__filter">
-                {% filter shortcodes %}[searchandfilter id="127"]{% endfilter %}
+                {% apply shortcodes %}[searchandfilter field="Gallery Filter"]{% endapply %}
               </div>
               <div class="c-section__gallery__results">
-                {% filter shortcodes %}[searchandfilter id="127" show="results"]{% endfilter %}
+                {% apply shortcodes %}[searchandfilter query="1" action="show-results"]{% endapply %}
               </div>
             </div>
           {% elseif section.content_type == 'testimonials' %}

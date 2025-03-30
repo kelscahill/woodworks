@@ -10,8 +10,8 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-$context = Timber::get_context();
-$post = new TimberPost($query->post);
+$context = Timber::context();
+$post = Timber::get_post($query->post);
 $context['post'] = $post;
 
 $templates = array(

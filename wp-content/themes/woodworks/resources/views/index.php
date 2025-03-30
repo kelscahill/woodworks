@@ -16,7 +16,7 @@
  $context = Timber::get_context();
  $context['posts'] = Timber::get_posts();
  $post = Timber::query_post();
- $context['post'] = new TimberPost();
+ $context['post'] = Timber::get_post();
  $templates = array( '05-pages/index.twig' );
  if ( is_home() ) {
    array_unshift( $templates, '05-pages/index.twig' );
