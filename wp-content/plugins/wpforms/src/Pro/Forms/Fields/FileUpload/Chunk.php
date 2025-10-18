@@ -3,10 +3,9 @@
 namespace WPForms\Pro\Forms\Fields\FileUpload;
 
 use InvalidArgumentException;
-use WPForms_Field_File_Upload;
 
 /**
- * Chunk class
+ * Chunk class.
  *
  * This class handles all the chunk file uploading logic.
  *
@@ -42,7 +41,7 @@ class Chunk {
 	protected $offset;
 
 	/**
-	 * Information about each chunk
+	 * Information about each chunk.
 	 *
 	 * @since 1.6.2
 	 *
@@ -55,7 +54,7 @@ class Chunk {
 	 *
 	 * @since 1.6.2
 	 *
-	 * @var WPForms_Field_File_Upload
+	 * @var Field
 	 */
 	protected $field;
 
@@ -64,12 +63,12 @@ class Chunk {
 	 *
 	 * @since 1.6.2
 	 *
-	 * @param array                     $metadata Metadata about the chunk.
-	 * @param WPForms_Field_File_Upload $field    Field.
+	 * @param array $metadata Metadata about the chunk.
+	 * @param Field $field    Field.
 	 *
 	 * @throws InvalidArgumentException Invalid UUID.
 	 */
-	public function __construct( array $metadata, WPForms_Field_File_Upload $field ) {
+	public function __construct( array $metadata, Field $field ) {
 
 		$metadata = array_merge(
 			[
@@ -128,7 +127,7 @@ class Chunk {
 	 */
 	public function get_file_name() {
 
-		return isset( $this->metadata['name'] ) ? $this->metadata['name'] : '';
+		return $this->metadata['name'] ?? '';
 	}
 
 	/**
@@ -140,7 +139,7 @@ class Chunk {
 	 */
 	public function get_file_user_name() {
 
-		return isset( $this->metadata['file_user_name'] ) ? $this->metadata['file_user_name'] : '';
+		return $this->metadata['file_user_name'] ?? '';
 	}
 
 	/**
@@ -158,18 +157,19 @@ class Chunk {
 	/**
 	 * Create a Chunk object from the current request.
 	 *
-	 * If validation failed FALSE is returned instead.
+	 * If validation failed, FALSE is returned instead.
 	 *
 	 * @since 1.6.2
 	 *
-	 * @param WPForms_Field_File_Upload $field File field instance.
+	 * @param Field $field File field instance.
 	 *
 	 * @return bool|Chunk False or the instance of this class.
 	 */
-	public static function from_current_request( WPForms_Field_File_Upload $field ) {
+	public static function from_current_request( Field $field ) {
 
 		$field_name = $field->get_input_name();
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( isset( $_FILES[ $field_name ]['name'] ) ) {
 			// The current upload has a file attached to it. We should check that DropZone
 			// included the following required information about this current upload.
@@ -190,15 +190,13 @@ class Chunk {
 				'file_user_name' => sanitize_text_field( wp_unslash( $_FILES[ $field_name ]['name'] ) ),
 			];
 		} else {
-			// No file attached, most likely this is a initialization Ajax call, in that scenario
-			// we require fewer fields.
+			// No file attached, most likely this is an initialization Ajax call.
+			// In that scenario, we require fewer fields.
 			$required = [
 				'dzuuid'          => 'uuid',
 				'dztotalfilesize' => 'file_size',
 				'name'            => 'file_user_name',
 			];
-
-			// phpcs:disable WordPress.Security.NonceVerification.Missing
 
 			if ( isset( $_POST['name'] ) ) {
 				$settings = [
@@ -210,9 +208,8 @@ class Chunk {
 			if ( ! empty( $_POST['dztotalchunkcount'] ) ) {
 				$settings['chunk_total'] = absint( $_POST['dztotalchunkcount'] );
 			}
-
-			// phpcs:enable WordPress.Security.NonceVerification.Missing
 		}
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 
 		foreach ( $required as $field_name => $alias ) {
 			if ( ! array_key_exists( $field_name, $_POST ) ) { // phpcs:ignore WordPress.Security.NonceVerification
@@ -254,10 +251,11 @@ class Chunk {
 
 		$this->metadata = array_merge(
 			$this->metadata,
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			json_decode( file_get_contents( $this->get_metadata_file_path() ), true )
 		);
 
-		// When the upload is initialized the total chunks count is unknown yet and the default value is 0.
+		// When the upload is initialized, the total chunks count is unknown yet and the default value is 0.
 		// We need to make sure we update the count when it's available.
 		if ( $chunk_total ) {
 			$this->metadata['chunk_total'] = $chunk_total;
@@ -272,6 +270,7 @@ class Chunk {
 	 * @since 1.6.2
 	 *
 	 * @return bool
+	 * @noinspection NonSecureUniqidUsageInspection
 	 */
 	public function create_metadata() {
 
@@ -281,9 +280,11 @@ class Chunk {
 		$tmp                          = $this->path . '-' . uniqid();
 		$this->metadata['chunk_size'] = $this->field->get_chunk_size();
 
-		file_put_contents( $tmp, wp_json_encode( $this->metadata ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		file_put_contents( $tmp, wp_json_encode( $this->metadata ) );
 
-		return @rename( $tmp, $this->get_metadata_file_path() ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.rename_rename
+		return @rename( $tmp, $this->get_metadata_file_path() );
 	}
 
 	/**
@@ -297,16 +298,19 @@ class Chunk {
 
 		$field_name = $this->field->get_input_name();
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		return isset( $_FILES[ $field_name ]['tmp_name'] ) && is_readable( $_FILES[ $field_name ]['tmp_name'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			? $_FILES[ $field_name ] // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			: false;
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
 	}
 
 	/**
 	 * Verify the chunk size and offset.
 	 *
-	 * This function is very strict for security. The exact amount of bytes are expected, anything above
-	 * or bellow that will be rejected. Only the latest chunk is allowed to maybe be smaller.
+	 * This function is very strict for security
+	 * The exact number of bytes is expected, anything above or bellow that will be rejected.
+	 * Only the latest chunk is allowed to maybe be smaller.
 	 *
 	 * @since 1.6.2
 	 *
@@ -331,7 +335,7 @@ class Chunk {
 	/**
 	 * Whether the current chunk is the last chunk of the file or not.
 	 *
-	 * The last chunk by their offset position.
+	 * The last chunk is determined by their offset position.
 	 *
 	 * @since 1.6.2
 	 *
@@ -361,8 +365,7 @@ class Chunk {
 	/**
 	 * Move the uploaded file to the temporary storage.
 	 *
-	 * No further check are performed, all the validations are performed
-	 * once al the chunks has been uploaded.
+	 * No further check is performed, all the validations are performed once al the chunks have been uploaded.
 	 *
 	 * @since 1.6.2
 	 *
@@ -371,6 +374,7 @@ class Chunk {
 	public function write() {
 
 		$file = $this->get_file_upload_array();
+
 		if ( ! $file || ! $this->verify_chunk_size_and_offset() ) {
 			return false;
 		}
@@ -378,7 +382,8 @@ class Chunk {
 		$path_to   = $this->path . $this->offset . '.chunk';
 		$path_from = $file['tmp_name'];
 
-		return @move_uploaded_file( $path_from, $path_to ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, Generic.PHP.ForbiddenFunctions.Found
+		return @move_uploaded_file( $path_from, $path_to );
 	}
 
 	/**
@@ -401,7 +406,7 @@ class Chunk {
 
 	/**
 	 * Check if all the chunks have been uploaded.
-	 * This must be TRUE in order to finalize the upload.
+	 * This must be TRUE to finalize the upload.
 	 *
 	 * @since 1.6.2
 	 *
@@ -420,7 +425,7 @@ class Chunk {
 				return false;
 			}
 
-			$next = isset( $chunks[ $id + 1 ] ) ? $chunks[ $id + 1 ] : null;
+			$next = $chunks[ $id + 1 ] ?? null;
 
 			if ( $next && $chunk['end'] !== $next['start'] ) {
 				return false;
@@ -474,29 +479,34 @@ class Chunk {
 	 *
 	 * @since 1.6.2
 	 */
-	protected function delete_temporary_files() {
+	protected function delete_temporary_files(): void {
 
 		foreach ( $this->get_chunks() as $chunk ) {
-			@unlink( $chunk['file'] ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink
+			@unlink( $chunk['file'] );
 		}
 
 		$this->chunks = [];
-		@unlink( $this->get_metadata_file_path() ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink
+		@unlink( $this->get_metadata_file_path() );
 	}
 
 	/**
 	 * Attempt to finalize the uploading.
 	 *
-	 * This function should be called at most once. This will verify that all the chunks has been uploaded
-	 * successfully and will attempt to merge all those chunks in a single file.
+	 * This function should be called at most once.
+	 * This will verify that all the chunks have been uploaded successfully
+	 * and will attempt to merge all those chunks in a single file.
 	 *
 	 * @since 1.6.2
+	 * @since 1.9.2 $file_name parameter added.
 	 *
-	 * @param string $path Path where the file will be assembled.
+	 * @param string $path      Path where the file will be assembled.
+	 * @param string $file_name File name.
 	 *
 	 * @return bool
 	 */
-	public function finalize( $path ) {
+	public function finalize( string $path, string $file_name = '' ): bool {
 
 		if ( ! $this->validate_chunks() ) {
 			$this->delete_temporary_files();
@@ -504,11 +514,11 @@ class Chunk {
 			return false;
 		}
 
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 		$dest = @fopen( $path, 'w+b' );
 
 		foreach ( $this->get_chunks() as $chunk ) {
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 			$source = @fopen( $chunk['file'], 'rb' );
 
 			$bytes = stream_copy_to_stream( $source, $dest );
@@ -519,12 +529,22 @@ class Chunk {
 				return false;
 			}
 
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fclose
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 			@fclose( $source );
 		}
 
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fclose
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		@fclose( $dest );
+
+		/**
+		 * Hook triggered when a Modern uploader finishes storing temporary files.
+		 *
+		 * @since 1.9.2
+		 *
+		 * @param string $path      Path where the file will be assembled.
+		 * @param string $file_name File name.
+		 */
+		do_action( 'wpforms_pro_forms_fields_file_upload_chunk_finalize_saved', $path, $file_name );
 
 		$this->delete_temporary_files();
 

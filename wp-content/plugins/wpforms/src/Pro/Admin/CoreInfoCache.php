@@ -12,6 +12,15 @@ use WPForms\Helpers\CacheBase;
 class CoreInfoCache extends CacheBase {
 
 	/**
+	 * Remote source URL.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @var string
+	 */
+	const REMOTE_SOURCE = 'https://wpformsapi.com/feeds/v1/core/';
+
+	/**
 	 * Determine if the class is allowed to load.
 	 *
 	 * @since 1.8.6
@@ -19,7 +28,7 @@ class CoreInfoCache extends CacheBase {
 	 * @return bool
 	 */
 	protected function allow_load(): bool {
-		// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement
+
 		return is_admin() || wp_doing_cron() || wpforms_doing_wp_cli();
 	}
 
@@ -31,11 +40,11 @@ class CoreInfoCache extends CacheBase {
 	 * @return array Settings array.
 	 */
 	protected function setup(): array {
-		// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement
+
 		return [
 
 			// Remote source URL.
-			'remote_source' => 'https://wpforms.com/wp-content/core.json',
+			'remote_source' => self::REMOTE_SOURCE,
 
 			// Addons cache file name.
 			'cache_file'    => 'core.json',

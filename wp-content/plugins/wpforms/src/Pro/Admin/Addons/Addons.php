@@ -3,6 +3,7 @@
 namespace WPForms\Pro\Admin\Addons;
 
 use WPForms\Helpers\Transient;
+use WPForms\Requirements\Requirements;
 
 /**
  * Addons data handler for Pro.
@@ -49,11 +50,12 @@ class Addons extends \WPForms\Admin\Addons\Addons {
 	 */
 	protected function get_status( $slug ) {
 
-		$slug   = 'wpforms-' . str_replace( 'wpforms-', '', $slug );
-		$plugin = sprintf( '%1$s/%1$s.php', sanitize_key( $slug ) );
+		$slug      = str_replace( 'wpforms-', '', $slug );
+		$full_slug = 'wpforms-' . $slug;
+		$plugin    = sprintf( '%1$s/%1$s.php', sanitize_key( $full_slug ) );
 
 		if ( is_plugin_active( $plugin ) ) {
-			return 'active';
+			return wpforms_is_addon_initialized( $slug ) ? 'active' : 'incompatible';
 		}
 
 		$plugins = get_plugins();
@@ -72,32 +74,42 @@ class Addons extends \WPForms\Admin\Addons\Addons {
 	 *
 	 * @param array $addon Addon data.
 	 *
-	 * @return array|bool
+	 * @return array
 	 */
 	protected function prepare_addon_data( $addon ) {
 
 		$addon = parent::prepare_addon_data( $addon );
 
-		$addon['status'] = $this->get_status( $addon['slug'] );
+		$addon['message'] = '';
+		$addon['status']  = $this->get_status( $addon['slug'] );
 
-		if ( $addon['status'] === 'active' && $addon['plugin_allow'] ) {
+		if ( ! $addon['plugin_allow'] ) {
+			$addon['action'] = ! $this->license['type'] ? 'license' : 'upgrade';
+
+			return $addon;
+		}
+
+		if ( $addon['status'] === 'active' ) {
 			$addon['action'] = '';
 
 			return $addon;
 		}
 
-		if ( $addon['status'] === 'installed' && $addon['plugin_allow'] ) {
+		if ( $addon['status'] === 'installed' ) {
 			$addon['action'] = 'activate';
-		} else {
-			if ( ! $this->license['type'] ) {
-				$addon['action'] = 'license';
-			} elseif ( $addon['plugin_allow'] ) {
-				$addon['action'] = 'install';
-				$addon['url']    = $this->get_url( $addon['slug'] );
-			} else {
-				$addon['action'] = 'upgrade';
-			}
+
+			return $addon;
 		}
+
+		if ( $addon['status'] === 'incompatible' ) {
+			$addon['action']  = 'incompatible';
+			$addon['message'] = Requirements::get_instance()->get_notice( $addon['path'] );
+
+			return $addon;
+		}
+
+		$addon['action'] = 'install';
+		$addon['url']    = $this->get_url( $addon['slug'] );
 
 		return $addon;
 	}
@@ -153,7 +165,11 @@ class Addons extends \WPForms\Admin\Addons\Addons {
 			return $this->get_remote_urls();
 		}
 
-		$urls = Transient::get( 'addons_urls' );
+		static $urls = null;
+
+		if ( $urls === null ) {
+			$urls = Transient::get( 'addons_urls' );
+		}
 
 		// We store an empty array if the request isn't valid to prevent spam requests.
 		if ( is_array( $urls ) ) {
@@ -172,7 +188,7 @@ class Addons extends \WPForms\Admin\Addons\Addons {
 	 */
 	protected function get_remote_urls() {
 
-		$addons = wpforms()->get( 'license' )->get_addons();
+		$addons = wpforms()->obj( 'license' )->get_addons();
 
 		// If there was an API error, set transient for only 10 minutes.
 		if ( empty( $addons ) ) {
@@ -190,7 +206,7 @@ class Addons extends \WPForms\Admin\Addons\Addons {
 		}
 
 		// Otherwise, our request worked. Save the data and return it.
-		Transient::set( 'addons_urls', $urls, DAY_IN_SECONDS );
+		Transient::set( 'addons_urls', $urls, 12 * HOUR_IN_SECONDS );
 
 		return $urls;
 	}

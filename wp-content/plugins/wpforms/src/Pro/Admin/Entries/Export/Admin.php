@@ -65,6 +65,8 @@ class Admin {
 
 			<p><?php esc_html_e( 'Select a form to export entries, then select the fields you would like to include. You can also define search and date filters to further personalize the list of entries you want to retrieve. WPForms will generate a downloadable CSV/XLSX file of your entries.', 'wpforms' ); ?></p>
 
+			<?php $this->display_export_notice(); ?>
+
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=wpforms-tools&view=export' ) ); ?>" id="wpforms-tools-entries-export">
 				<input type="hidden" name="action" value="wpforms_tools_entries_export_step">
 				<?php
@@ -141,6 +143,73 @@ class Admin {
 	}
 
 	/**
+	 * Display export notice.
+	 *
+	 * @since 1.9.6.1
+	 */
+	private function display_export_notice(): void {
+
+		if ( ! wpforms()->obj( 'addons' )->get_addon( 'entry-automation' ) ) {
+			return;
+		}
+
+		$dismissed_notices = get_user_meta( get_current_user_id(), 'wpforms_admin_notices', true );
+
+		if ( ! empty( $dismissed_notices['wpforms-tools-entries-export-notice'] ) ) {
+			return;
+		}
+
+		$this->enqueue_script();
+
+		$notice = sprintf(
+			wp_kses( /* translators: %1$s - link to the WPForms.com doc article. */
+				__( 'If you need to export entries on a regular basis, you can now automate this process. <a href="%1$s" target="_blank" rel="noopener noreferrer">Learn More</a>', 'wpforms' ),
+				[
+					'a' => [
+						'href'   => [],
+						'rel'    => [],
+						'target' => [],
+					],
+				]
+			),
+			esc_url( wpforms_utm_link( 'https://wpforms.com/docs/entry-automation-addon/', 'Tools - Export', 'Learn More - Entry Automation Documentation' ) )
+		);
+
+		printf(
+			'<div id="wpforms-tools-entries-export-notice" class="wpforms-notice" style="display: block;"><p>%1$s</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">%2$s</span></button></div>',
+			$notice, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			esc_html__( 'Dismiss this notice.', 'wpforms' )
+		);
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @since 1.9.6.1
+	 */
+	private function enqueue_script(): void {
+
+		$min = wpforms_get_min_suffix();
+
+		wp_enqueue_script(
+			'wpforms-admin-notices',
+			WPFORMS_PLUGIN_URL . "assets/js/admin/notices{$min}.js",
+			[ 'jquery' ],
+			WPFORMS_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'wpforms-admin-notices',
+			'wpforms_admin_notices',
+			[
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'wpforms-admin' ),
+			]
+		);
+	}
+
+	/**
 	 * Forms field block HTML.
 	 *
 	 * @since 1.5.5
@@ -148,7 +217,7 @@ class Admin {
 	public function display_form_selection_block() {
 
 		// Retrieve available forms.
-		$forms = wpforms()->get( 'form' )->get(
+		$forms = wpforms()->obj( 'form' )->get(
 			'',
 			[
 				'orderby' => 'title',
@@ -233,7 +302,7 @@ class Admin {
 	 *
 	 * @param bool $is_payment_fields Whether to display payment fields.
 	 */
-	public function display_fields_selection_block( $is_payment_fields = false ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	public function display_fields_selection_block( $is_payment_fields = false ) {
 
 		$form_data = $this->export->data['form_data'];
 		$fields    = $this->export->data['get_args']['fields'];
@@ -374,13 +443,14 @@ class Admin {
 		$search           = $this->export->data['get_args']['search'];
 		$form_data        = $this->export->data['form_data'];
 		$advanced_options = Helpers::get_search_fields_advanced_options();
+		$form_fields      = $form_data['fields'] ?? [];
+		$payment_fields   = $form_data['payment_fields'] ?? [];
 		?>
 		<select name="search[field]" class="wpforms-search-box-field" id="wpforms-tools-entries-export-options-search-field">
-			<optgroup label="<?php esc_attr_e( 'Form fields', 'wpforms' ); ?>">
-				<option value="any" <?php selected( 'any', $search['field'], true ); ?>><?php esc_html_e( 'Any form field', 'wpforms' ); ?></option>
+			<optgroup label="<?php esc_attr_e( 'Form fields', 'wpforms' ); ?>" data-type="form-fields">
+				<option value="any" <?php selected( 'any', $search['field'] ); ?>><?php esc_html_e( 'Any form field', 'wpforms' ); ?></option>
 				<?php
-				if ( ! empty( $form_data['fields'] ) ) {
-					foreach ( $form_data['fields'] as $id => $field ) {
+					foreach ( $form_fields as $id => $field ) {
 						if ( in_array( $field['type'], $this->export->configuration['disallowed_fields'], true ) ) {
 							continue;
 						}
@@ -398,7 +468,33 @@ class Admin {
 							esc_html( $name )
 						);
 					}
-				}
+				?>
+			</optgroup>
+			<optgroup label="<?php esc_attr_e( 'Payment fields', 'wpforms' ); ?>" data-type="payment-fields">
+				<?php
+					// If no payment fields found, display a disabled option with placeholder text.
+					if ( empty( $payment_fields ) ) {
+						printf(
+							'<option value="" disabled>%s</option>',
+							esc_html__( 'No payment fields found', 'wpforms' )
+						);
+					}
+
+					foreach ( $payment_fields as $id => $field ) {
+						$name = ! empty( $field['label'] ) ?
+							wp_strip_all_tags( $field['label'] ) :
+							sprintf( /* translators: %d - field ID. */
+								esc_html__( 'Field #%d', 'wpforms' ),
+								(int) $id
+							);
+
+						printf(
+							'<option value="%d" %s>%s</option>',
+							(int) $id,
+							esc_attr( selected( $id, $search['field'], false ) ),
+							esc_html( $name )
+						);
+					}
 				?>
 			</optgroup>
 			<?php if ( ! empty( $advanced_options ) ) : ?>
@@ -465,7 +561,7 @@ class Admin {
 
 		wp_register_script(
 			'wpforms-tools-entries-export',
-			WPFORMS_PLUGIN_URL . "assets/pro/js/admin/tools-entries-export{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/pro/js/admin/entries/tools-entries-export{$min}.js",
 			[ 'jquery', 'wpforms-flatpickr' ],
 			WPFORMS_VERSION,
 			true

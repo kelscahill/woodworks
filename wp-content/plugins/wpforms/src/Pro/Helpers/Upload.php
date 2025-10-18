@@ -20,7 +20,8 @@ class Upload {
 
 		$stat = stat( dirname( $path ) );
 
-		@chmod( $path, $stat['mode'] & 0000666 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_operations_chmod
+		@chmod( $path, $stat['mode'] & 0000666 );
 	}
 
 	/**
@@ -44,6 +45,7 @@ class Upload {
 	public function process_file( $file, $field_id, $form_data, $is_media_integrated ) {
 
 		$file_name     = sanitize_file_name( $file['name'] );
+		$file_name     = str_replace( '^', '', $file_name ); // Remove ^ since sanitize_file_name() allows it, but esc_url_raw() will strip it when saving the URL, causing mismatches.
 		$file_ext      = pathinfo( $file_name, PATHINFO_EXTENSION );
 		$file_base     = $this->get_file_basename( $file_name, $file_ext );
 		$file_name_new = sprintf( '%s-%s.%s', $file_base, wp_hash( wp_rand() . microtime() . $form_data['id'] . $field_id ), strtolower( $file_ext ) );
@@ -58,21 +60,23 @@ class Upload {
 			return $this->process_media_storage( $file_details, $file, $field_id, $form_data );
 		}
 
-		return $this->process_wpforms_storage( $file_details, $file, $form_data );
+		return $this->process_wpforms_storage( $file_details, $file, $form_data, $field_id );
 	}
 
 	/**
 	 * Process a file when WPForms storage is used.
 	 *
 	 * @since 1.7.0
+	 * @since 1.9.4 Added the `$field_id` argument.
 	 *
 	 * @param array $file_details Array of file detail data.
 	 * @param array $file         File data.
 	 * @param array $form_data    Form data and settings.
+	 * @param int   $field_id     Field ID.
 	 *
 	 * @return array  Array of file data.
 	 */
-	private function process_wpforms_storage( $file_details, $file, $form_data ) {
+	private function process_wpforms_storage( $file_details, $file, $form_data, $field_id ) {
 
 		$form_id          = $form_data['id'];
 		$upload_dir       = wpforms_upload_dir();
@@ -86,7 +90,8 @@ class Upload {
 		wpforms_create_index_html_file( $upload_path );
 		wpforms_create_index_html_file( $upload_path_form );
 
-		$move_new_file = @rename( $file['tmp_name'], $file_new ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.rename_rename
+		$move_new_file = @rename( $file['tmp_name'], $file_new );
 
 		if ( $move_new_file === false ) {
 			wpforms_log(
@@ -107,7 +112,28 @@ class Upload {
 		$file_details['upload_path']   = $upload_path_form;
 		$file_details['file_url']      = $file_url;
 
+		if ( $this->is_file_protected( $field_id, $form_data ) ) {
+			$file_details['protection_hash'] = wp_hash( $file_url );
+		}
+
 		return $file_details;
+	}
+
+	/**
+	 * Check if the file is protected.
+	 *
+	 * @since 1.9.4
+	 *
+	 * @param int   $field_id  Field ID.
+	 * @param array $form_data Form data.
+	 *
+	 * @return bool
+	 */
+	private function is_file_protected( $field_id, $form_data ): bool {
+
+		$field = $form_data['fields'][ $field_id ] ?? [];
+
+		return ! empty( $field['is_restricted'] );
 	}
 
 	/**
@@ -212,6 +238,7 @@ class Upload {
 				'post_content'   => $this->get_wp_media_file_desc( $file, $field_data ),
 				'post_status'    => 'publish',
 				'post_mime_type' => $file['type'],
+				'guid'           => $this->get_attachment_guid( $upload_file ),
 			],
 			$upload_file
 		);
@@ -235,6 +262,27 @@ class Upload {
 		);
 
 		return $attachment_id;
+	}
+
+	/**
+	 * Get attachment GUID.
+	 *
+	 * @since 1.9.7
+	 *
+	 * @param string $upload_file Data from the side-loaded file.
+	 *
+	 * @return string
+	 */
+	private function get_attachment_guid( string $upload_file ): string {
+
+		$upload_dir = wp_get_upload_dir();
+		$upload_url = trailingslashit( $upload_dir['url'] );
+
+		if ( ! empty( $upload_dir['error'] ) || empty( $upload_dir['url'] ) ) {
+			return '';
+		}
+
+		return $upload_url . wp_basename( $upload_file );
 	}
 
 	/**

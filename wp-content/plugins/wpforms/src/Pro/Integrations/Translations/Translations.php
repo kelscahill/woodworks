@@ -6,6 +6,7 @@ use stdClass;
 use Language_Pack_Upgrader;
 use Automatic_Upgrader_Skin;
 use WPForms\Integrations\IntegrationInterface;
+use WPForms\Admin\Addons\AddonsCache;
 
 /**
  * Main Translations library.
@@ -156,10 +157,26 @@ class Translations implements IntegrationInterface {
 	private function is_wpforms_plugin( $slug ) {
 
 		if ( empty( $this->addons ) ) {
-			$this->addons = wpforms()->get( 'addons_cache' )->get();
+			$this->addons = $this->get_addons();
 		}
 
 		return array_key_exists( $slug, $this->addons ) || $slug === 'wpforms';
+	}
+
+	/**
+	 * Get a list of all WPForms addons.
+	 *
+	 * @since 1.8.7
+	 *
+	 * @return array List of addons.
+	 */
+	private function get_addons(): array {
+
+		$addons = new AddonsCache();
+
+		$addons->init();
+
+		return $addons->get();
 	}
 
 	/**
@@ -380,13 +397,13 @@ class Translations implements IntegrationInterface {
 	 *
 	 * @since 1.6.5
 	 *
-	 * @param object $value Value of the `update_plugins` transient option.
+	 * @param object|mixed $value Value of the `update_plugins` transient option.
 	 *
 	 * @return stdClass
 	 */
 	public function register_t15s_translations( $value ) {
 
-		if ( ! $value ) {
+		if ( ! is_object( $value ) ) {
 			$value = new stdClass();
 		}
 
@@ -431,7 +448,9 @@ class Translations implements IntegrationInterface {
 	public function clear_translations_cache() {
 
 		foreach ( $this->get_wpforms_plugins() as $slug ) {
-			delete_site_transient( $this->get_cache_key( $slug ) );
+			if ( get_site_transient( $this->get_cache_key( $slug ) ) ) {
+				delete_site_transient( $this->get_cache_key( $slug ) );
+			}
 		}
 	}
 

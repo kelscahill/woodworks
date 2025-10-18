@@ -38,7 +38,7 @@ class Chart {
 	 *
 	 * @return array
 	 */
-	public static function process_chart_dataset_data( $query, $start_date, $end_date ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	public static function process_chart_dataset_data( $query, $start_date, $end_date ) {
 
 		// Bail early if the given query contains no records to iterate.
 		if ( ! is_array( $query ) || empty( $query ) ) {
@@ -46,7 +46,7 @@ class Chart {
 		}
 
 		$dataset        = [];
-		$timezone       = wpforms_get_timezone(); // Retrieve the timezone object for the site.
+		$timezone       = wp_timezone(); // Retrieve the timezone object for the site.
 		$mysql_timezone = timezone_open( 'UTC' ); // In the database, all datetime are stored in UTC.
 
 		foreach ( $query as $row ) {

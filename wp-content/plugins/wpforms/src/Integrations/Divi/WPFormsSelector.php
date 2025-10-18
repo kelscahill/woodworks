@@ -44,14 +44,14 @@ class WPFormsSelector extends ET_Builder_Module {
 	 */
 	public function get_fields(): array {
 
-		$forms         = wpforms()->get( 'form' )->get( '', [ 'order' => 'DESC' ] );
+		$forms         = wpforms()->obj( 'form' )->get( '', [ 'order' => 'DESC' ] );
 		$default_value = '';
 
 		if ( ! empty( $forms ) ) {
 			$forms         = wp_list_pluck( $forms, 'post_title', 'ID' );
 			$forms         = array_map(
-				function ( $form ) {
-					// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement
+				static function ( $form ) {
+
 					return htmlspecialchars_decode( $form, ENT_QUOTES );
 				},
 				$forms

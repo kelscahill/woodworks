@@ -23,7 +23,7 @@ class Loader {
 	 *
 	 * @since 1.5.8
 	 */
-	public function init() {
+	public function init(): void {
 
 		$this->populate_classes();
 
@@ -35,11 +35,12 @@ class Loader {
 	 *
 	 * @since 1.5.8
 	 */
-	protected function populate_classes() {
+	protected function populate_classes(): void {
 
 		$this->populate_common();
 		$this->populate_frontend();
 		$this->populate_admin();
+		$this->populate_caches();
 		$this->populate_fields();
 		$this->populate_forms_overview();
 		$this->populate_entries();
@@ -61,11 +62,15 @@ class Loader {
 	 *
 	 * @since 1.8.6
 	 */
-	private function populate_common() {
+	private function populate_common(): void {
 
 		$this->classes[] = [
 			'name' => 'API',
 			'id'   => 'api',
+		];
+
+		$this->classes[] = [
+			'name' => 'Emails\Summaries',
 		];
 	}
 
@@ -74,7 +79,7 @@ class Loader {
 	 *
 	 * @since 1.6.2
 	 */
-	private function populate_forms() {
+	private function populate_forms(): void {
 
 		$this->classes[] = [
 			'name' => 'Forms\Preview',
@@ -112,14 +117,24 @@ class Loader {
 			'name' => 'Forms\IconChoices',
 			'id'   => 'icon_choices',
 		];
+
+		$this->classes[] = [
+			'name' => 'Forms\AntiSpam',
+			'id'   => 'anti_spam',
+		];
 	}
 
 	/**
-	 * Populate Frontend related classes.
+	 * Populate Frontend-related classes.
 	 *
 	 * @since 1.8.1
 	 */
-	private function populate_frontend() {
+	private function populate_frontend(): void {
+
+		$this->classes[] = [
+			'name' => 'Frontend\Address',
+			'id'   => 'address',
+		];
 
 		$this->classes[] = [
 			'name' => 'Frontend\Amp',
@@ -153,11 +168,11 @@ class Loader {
 	}
 
 	/**
-	 * Populate Admin related classes.
+	 * Populate Admin-related classes.
 	 *
 	 * @since 1.6.0
 	 */
-	private function populate_admin() {
+	private function populate_admin(): void {
 
 		array_push(
 			$this->classes,
@@ -191,9 +206,6 @@ class Loader {
 				'id'   => 'notifications',
 			],
 			[
-				'name' => 'Admin\Notifications\EventDriven',
-			],
-			[
 				'name' => 'Admin\Entries\Handler',
 				'hook' => 'admin_init',
 			],
@@ -201,6 +213,14 @@ class Loader {
 				'name' => 'Admin\Pages\Templates',
 				'id'   => 'templates_page',
 				'hook' => 'admin_init',
+			],
+			[
+				'name' => 'Admin\Forms\UserTemplates',
+				'id'   => 'user_templates',
+			],
+			[
+				'name' => 'Admin\Forms\Page',
+				'id'   => 'forms_overview',
 			],
 			[
 				'name' => 'Admin\Challenge',
@@ -260,6 +280,10 @@ class Loader {
 				'hook' => 'admin_init',
 			],
 			[
+				'name' => 'Admin\Pages\PrivacyCompliance',
+				'hook' => 'admin_init',
+			],
+			[
 				'name' => 'Forms\Fields\Richtext\EntryViewContent',
 			],
 			[
@@ -276,7 +300,43 @@ class Loader {
 			],
 			[
 				'name' => 'Admin\PluginList',
+				'id'   => 'plugin_list',
 				'hook' => 'admin_init',
+			],
+			[
+				'name' => 'Admin\Splash\SplashScreen',
+				'id'   => 'splash_screen',
+				'hook' => 'admin_init',
+			],
+			[
+				'name' => 'Admin\Splash\SplashCache',
+				'id'   => 'splash_cache',
+				'hook' => 'plugins_loaded',
+			],
+			[
+				'name' => 'Admin\Splash\SplashUpgrader',
+				'id'   => 'splash_upgrader',
+				'hook' => 'plugins_loaded',
+			]
+		);
+	}
+
+	/**
+	 * Populate Caches related classes.
+	 *
+	 * @since 1.8.7
+	 */
+	private function populate_caches(): void {
+
+		array_push(
+			$this->classes,
+			[
+				'name' => 'LicenseApi\PluginUpdateCache',
+				'id'   => 'license_api_plugin_update_cache',
+			],
+			[
+				'name' => 'LicenseApi\ValidateKeyCache',
+				'id'   => 'license_api_validate_key_cache',
 			]
 		);
 	}
@@ -286,8 +346,124 @@ class Loader {
 	 *
 	 * @since 1.8.2
 	 */
-	private function populate_fields() {
+	private function populate_fields(): void {
 
+		// Fancy fields.
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Address\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Content\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\DateTime\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Divider\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\FileUpload\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Hidden\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Html\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Phone\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\EntryPreview\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Password\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\CreditCard\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Rating\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Url\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Richtext\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Pagebreak\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\CustomCaptcha\Field',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Layout\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Layout\Process',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Layout\Notifications',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Repeater\Field',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Camera\Field',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Repeater\Process',
+			'id'   => 'repeater_process',
+			'hook' => 'init',
+		];
+
+		$this->classes[] = [
+			'name' => 'Forms\Fields\Repeater\Notifications',
+			'hook' => 'init',
+		];
+
+		// Payment fields.
 		$this->classes[] = [
 			'name' => 'Forms\Fields\PaymentCheckbox\Field',
 			'hook' => 'init',
@@ -312,6 +488,31 @@ class Loader {
 			'name' => 'Forms\Fields\PaymentTotal\Field',
 			'hook' => 'init',
 		];
+
+		// Addon fields in Lite.
+		$this->classes[] = [
+			'name'        => 'Forms\Fields\Addons\Coupon\Field',
+			'addon_class' => 'WPFormsCoupons\Field',
+			'addon_slug'  => 'coupons',
+		];
+
+		$this->classes[] = [
+			'name'        => 'Forms\Fields\Addons\Signature\Field',
+			'addon_class' => 'WPFormsSignatures\Fields\Signature',
+			'addon_slug'  => 'signatures',
+		];
+
+		$this->classes[] = [
+			'name'        => 'Forms\Fields\Addons\LikertScale\Field',
+			'addon_class' => 'WPFormsSurveys\Fields\LikertScale\Field',
+			'addon_slug'  => 'surveys-polls',
+		];
+
+		$this->classes[] = [
+			'name'        => 'Forms\Fields\Addons\NetPromoterScore\Field',
+			'addon_class' => 'WPFormsSurveys\Fields\NetPromoterScore\Field',
+			'addon_slug'  => 'surveys-polls',
+		];
 	}
 
 	/**
@@ -319,7 +520,7 @@ class Loader {
 	 *
 	 * @since 1.7.5
 	 */
-	private function populate_forms_overview() {
+	private function populate_forms_overview(): void {
 
 		if ( ! wpforms_is_admin_page( 'overview' ) && ! wpforms_is_admin_ajax() ) {
 			return;
@@ -327,10 +528,6 @@ class Loader {
 
 		array_push(
 			$this->classes,
-			[
-				'name' => 'Admin\Forms\Page',
-				'id'   => 'forms_overview',
-			],
 			[
 				'name' => 'Admin\Forms\Ajax\Columns',
 				'id'   => 'forms_columns_ajax',
@@ -363,7 +560,7 @@ class Loader {
 	 *
 	 * @since 1.8.6
 	 */
-	private function populate_entries() {
+	private function populate_entries(): void {
 
 		array_push(
 			$this->classes,
@@ -378,7 +575,7 @@ class Loader {
 			],
 			[
 				'name' => 'Admin\Entries\Overview\Page',
-				'hook' => 'admin_init',
+				'id'   => 'entries_overview',
 			],
 			[
 				'name'      => 'Admin\Entries\Overview\Ajax',
@@ -397,6 +594,8 @@ class Loader {
 			],
 			[
 				'name' => 'Admin\Entries\Export\Export',
+				'id'   => 'entries_export',
+				'hook' => 'init',
 			],
 			[
 				'name' => 'Admin\Entries\DefaultScreen',
@@ -410,7 +609,7 @@ class Loader {
 	 *
 	 * @since 1.6.8
 	 */
-	private function populate_builder() {
+	private function populate_builder(): void {
 
 		array_push(
 			$this->classes,
@@ -442,12 +641,22 @@ class Loader {
 				'hook' => 'wpforms_builder_init',
 			],
 			[
+				'name' => 'Admin\Builder\Settings\Themes',
+				'hook' => 'wpforms_builder_init',
+			],
+			[
 				'name' => 'Admin\Builder\Notifications\Advanced\EmailTemplate',
 				'hook' => 'wpforms_builder_init',
 			],
 			[
 				'name' => 'Admin\Builder\ContextMenu',
 				'hook' => 'wpforms_builder_init',
+				'id'   => 'context_menu',
+			],
+			[
+				'name' => 'Admin\Builder\ImageUpload',
+				'hook' => 'wpforms_builder_init',
+				'id'   => 'image_upload',
 			],
 			[
 				'name' => 'Admin\Builder\Notifications\Advanced\Settings',
@@ -460,6 +669,18 @@ class Loader {
 			],
 			[
 				'name' => 'Admin\Builder\Ajax\PanelLoader',
+			],
+			[
+				'name' => 'Admin\Builder\Addons',
+			],
+			[
+				'name' => 'Admin\Builder\Ajax\SaveForm',
+				'id'   => 'builder_save_form',
+			],
+			[
+				'name' => 'Admin\Builder\Payments',
+				'hook' => 'wpforms_builder_init',
+				'id'   => 'builder_payments',
 			]
 		);
 	}
@@ -469,28 +690,41 @@ class Loader {
 	 *
 	 * @since 1.8.2
 	 */
-	private function populate_db() {
+	private function populate_db(): void {
 
-		$this->classes[] = [
-			'name' => 'Db\Payments\Payment',
-			'id'   => 'payment',
-			'hook' => false,
-			'run'  => false,
-		];
-
-		$this->classes[] = [
-			'name' => 'Db\Payments\Meta',
-			'id'   => 'payment_meta',
-			'hook' => false,
-			'run'  => false,
-		];
-
-		$this->classes[] = [
-			'name' => 'Db\Payments\Queries',
-			'id'   => 'payment_queries',
-			'hook' => false,
-			'run'  => false,
-		];
+		array_push(
+			$this->classes,
+			[
+				'name' => 'Db\Payments\Payment',
+				'id'   => 'payment',
+				'hook' => false,
+				'run'  => false,
+			],
+			[
+				'name' => 'Db\Payments\Meta',
+				'id'   => 'payment_meta',
+				'hook' => false,
+				'run'  => false,
+			],
+			[
+				'name' => 'Db\Payments\Queries',
+				'id'   => 'payment_queries',
+				'hook' => false,
+				'run'  => false,
+			],
+			[
+				'name' => 'Db\Files\ProtectedFiles',
+				'id'   => 'protected_files',
+				'hook' => false,
+				'run'  => false,
+			],
+			[
+				'name' => 'Db\Files\Restrictions',
+				'id'   => 'file_restrictions',
+				'hook' => false,
+				'run'  => false,
+			]
+		);
 	}
 
 	/**
@@ -498,7 +732,7 @@ class Loader {
 	 *
 	 * @since 1.5.9
 	 */
-	private function populate_migrations() {
+	private function populate_migrations(): void {
 
 		$this->classes[] = [
 			'name' => 'Migrations\Migrations',
@@ -511,7 +745,7 @@ class Loader {
 	 *
 	 * @since 1.5.8
 	 */
-	private function populate_capabilities() {
+	private function populate_capabilities(): void {
 
 		array_push(
 			$this->classes,
@@ -522,6 +756,11 @@ class Loader {
 			],
 			[
 				'name' => 'Access\Integrations',
+			],
+			[
+				'name'      => 'Access\File',
+				'hook'      => 'init',
+				'condition' => ! is_admin(),
 			],
 			[
 				'name'      => 'Admin\Settings\Access',
@@ -535,7 +774,7 @@ class Loader {
 	 *
 	 * @since 1.5.9
 	 */
-	private function populate_tasks() {
+	private function populate_tasks(): void {
 
 		array_push(
 			$this->classes,
@@ -558,7 +797,7 @@ class Loader {
 	 *
 	 * @since 1.6.7
 	 */
-	private function populate_smart_tags() {
+	private function populate_smart_tags(): void {
 
 		$this->classes[] = [
 			'name' => 'SmartTags\SmartTags',
@@ -568,11 +807,11 @@ class Loader {
 	}
 
 	/**
-	 * Populate logger loaded classes.
+	 * Populate logger-loaded classes.
 	 *
 	 * @since 1.6.3
 	 */
-	private function populate_logger() {
+	private function populate_logger(): void {
 
 		$this->classes[] = [
 			'name' => 'Logger\Log',
@@ -583,14 +822,24 @@ class Loader {
 	}
 
 	/**
-	 * Populate education related classes.
+	 * Populate education-related classes.
 	 *
 	 * @since 1.6.6
 	 */
-	private function populate_education() {
+	private function populate_education(): void {
 
 		// Kill switch.
-		if ( ! (bool) apply_filters( 'wpforms_admin_education', true ) ) {
+
+		/**
+		 * Filters admin education status.
+		 *
+		 * @since 1.6.6
+		 *
+		 * @param bool $status Current admin education status.
+		 *
+		 * @return bool
+		 */
+		if ( ! apply_filters( 'wpforms_admin_education', true ) ) { // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 			return;
 		}
 
@@ -620,6 +869,15 @@ class Loader {
 			[
 				'name' => 'Admin\Education\Admin\EditPost',
 				'hook' => 'load-post.php',
+			],
+			[
+				'name' => 'Admin\Education\Admin\EditPost',
+				'hook' => 'load-site-editor.php',
+			],
+			[
+				'name'     => 'Admin\Education\Pointers\Payment',
+				'hook'     => 'admin_init',
+				'priority' => 20,
 			]
 		);
 
@@ -636,6 +894,7 @@ class Loader {
 			'Builder\Geolocation',
 			'Builder\Confirmations',
 			'Builder\Notifications',
+			'Builder\PDF',
 			'Admin\DidYouKnow',
 			'Admin\Settings\Integrations',
 			'Admin\Settings\Geolocation',
@@ -656,7 +915,7 @@ class Loader {
 	 *
 	 * @since 1.7.0
 	 */
-	private function populate_robots() {
+	private function populate_robots(): void {
 
 		$this->classes[] = [
 			'name' => 'Robots',
@@ -669,20 +928,23 @@ class Loader {
 	 *
 	 * @since 1.7.8
 	 */
-	private function populate_anti_spam() {
+	private function populate_anti_spam(): void {
 
 		array_push(
 			$this->classes,
 			[
 				'name' => 'AntiSpam\CountryFilter',
+				'id'   => 'antispam_country_filter',
 				'hook' => 'init',
 			],
 			[
 				'name' => 'AntiSpam\KeywordFilter',
+				'id'   => 'antispam_keyword_filter',
 				'hook' => 'init',
 			],
 			[
 				'name' => 'AntiSpam\SpamEntry',
+				'id'   => 'spam_entry',
 				'hook' => 'init',
 			]
 		);

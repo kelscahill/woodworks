@@ -61,10 +61,14 @@ WPForms.Admin.Builder.Filters = WPForms.Admin.Builder.Filters || ( function( doc
 		 */
 		ready: function() {
 
-			app.setup();
-			app.events();
-			app.initCountryList();
-			app.loadStates();
+			el.$builder = $( '#wpforms-builder' );
+
+			el.$builder.on( 'wpformsBuilderConfirmationsReady', function() {
+				app.setup();
+				app.events();
+				app.initCountryList();
+				app.loadStates();
+			} );
 		},
 
 		/**
@@ -76,7 +80,7 @@ WPForms.Admin.Builder.Filters = WPForms.Admin.Builder.Filters || ( function( doc
 
 			// Cache DOM elements.
 			el = {
-				$builder: $( '#wpforms-builder' ),
+				...el,
 				$panelToggle: $( '.wpforms-panel-field-toggle-next-field' ),
 				$keywordsList: $( '.wpforms-panel-field-keyword-keywords textarea' ),
 				$keywordsListContainer: $( '.wpforms-panel-field-keyword-filter-keywords-container' ),
@@ -108,7 +112,7 @@ WPForms.Admin.Builder.Filters = WPForms.Admin.Builder.Filters || ( function( doc
 				.on( 'click', '.wpforms-btn-keyword-filter-reformat', app.reformatKeywords )
 				.on( 'change keyup paste cut', '.wpforms-panel-field-keyword-keywords textarea', app.updateKeywordsCount )
 				.on( 'paste keyup', '.wpforms-panel-field-keyword-keywords textarea', app.showReformatWarning )
-				.on( 'change', '#wpforms-panel-field-anti_spam-country_filter-country_codes',  app.changeCountryCodes )
+				.on( 'change', '#wpforms-panel-field-anti_spam-country_filter-country_codes', app.changeCountryCodes )
 				.on( 'wpformsSaved', app.saveKeywords );
 		},
 
@@ -142,25 +146,20 @@ WPForms.Admin.Builder.Filters = WPForms.Admin.Builder.Filters || ( function( doc
 
 			el.$countryCodes.data( 'choicesjs', new Choices( el.$countryCodes[0], {
 				shouldSort: false,
+				allowHTML: false, // TODO: Remove after next Choices.js release.
 				removeItemButton: true,
-				fuseOptions:{
-					'threshold':  0.1,
-					'distance': 1000,
+				fuseOptions: {
+					threshold: 0.1,
+					distance: 1000,
 				},
-				callbackOnInit: function() {
-
+				callbackOnInit() {
 					wpf.initMultipleSelectWithSearch( this );
+					wpf.showMoreButtonForChoices( this.containerOuter.element );
 				},
 			} ) );
 
 			// Update hidden input value.
 			app.changeCountryCodes( null );
-
-			// Update form state when hidden input is updated.
-			// This will prevent a please-save-prompt to appear without doing any changes anywhere.
-			if ( wpf.initialSave === true ) {
-				wpf.savedState = wpf.getFormState( '#wpforms-builder-form' );
-			}
 		},
 
 		/**
@@ -217,6 +216,10 @@ WPForms.Admin.Builder.Filters = WPForms.Admin.Builder.Filters || ( function( doc
 						vars.keywordList = res.data.keywords.join( '\r\n' );
 
 						el.$keywordsList.val( vars.keywordList );
+
+						// We must use `$field.val()` to keep consistency with the `wpf._getCurrentFormState()` method.
+						wpf.savedFormState.keywordFilter = el.$keywordsList.val();
+
 						app.updateKeywordsCount();
 					}
 				}

@@ -6,6 +6,8 @@ use Exception;
 // phpcs:ignore WPForms.PHP.UseStatement.UnusedUseStatement
 use WP_Filesystem_Base;
 use WPForms\Helpers\Transient;
+use WPForms\Vendor\Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use WPForms\Vendor\Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use WPForms\Vendor\XLSXWriter;
 use WPForms\Pro\Admin\Entries\Export\Traits\Export as ExportTrait;
 
@@ -57,29 +59,33 @@ class File {
 	 * Export helper. Write data to a temporary .csv file.
 	 *
 	 * @since 1.5.5
+	 * @since 1.9.6.1 Added the `$return_path` parameter.
 	 *
 	 * @param array $request_data Request data array.
+	 * @param bool  $return_path  Whether to return the path of the file.
 	 *
 	 * @throws Exception Exception.
+	 *
+	 * @return string|void Temporary file full pathname.
 	 */
-	public function write_csv( $request_data ) {
+	public function write_csv( $request_data, $return_path = false ) {
 
 		$export_file = $this->get_tmpfname( $request_data );
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
-		$f         = fopen( 'php://temp', 'wb+' );
 		$enclosure = '"';
 
-		fputcsv( $f, $request_data['columns_row'], $this->export->configuration['csv_export_separator'], $enclosure );
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$f = fopen( 'php://temp', 'wb+' );
 
-		$entry_handler = wpforms()->get( 'entry' );
+		fputcsv( $f, $request_data['columns_row'], $this->export->configuration['csv_export_separator'], $enclosure, '\\' );
 
-		for ( $i = 1; $i <= $request_data['total_steps']; $i ++ ) {
+		$entry_handler = wpforms()->obj( 'entry' );
 
+		for ( $i = 1; $i <= $request_data['total_steps']; $i++ ) {
 			$entries = $entry_handler->get_entries( $request_data['db_args'] );
 
 			foreach ( $this->export->ajax->get_entry_data( $entries ) as $entry ) {
-				fputcsv( $f, $entry, $this->export->configuration['csv_export_separator'], $enclosure );
+				fputcsv( $f, $entry, $this->export->configuration['csv_export_separator'], $enclosure, '\\' );
 			}
 
 			$request_data['db_args']['offset'] = $i * $this->export->configuration['entries_per_step'];
@@ -89,22 +95,74 @@ class File {
 
 		$file_contents = stream_get_contents( $f );
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		fclose( $f );
 
 		$this->put_contents( $export_file, $file_contents );
+
+		if ( $return_path ) {
+			return $export_file;
+		}
+	}
+
+	/**
+	 * Append data to a existing CSV file.
+	 *
+	 * @since 1.9.6.1
+	 *
+	 * @param string $file_path    File path.
+	 * @param array  $request_data Request data array.
+	 *
+	 * @throws Exception Exception.
+	 *
+	 * @return string Returned file path.
+	 */
+	public function append_csv( string $file_path, array $request_data ): string {
+
+		$enclosure = '"';
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$f = fopen( $file_path, 'ab' );
+
+		$entry_handler = wpforms()->obj( 'entry' );
+
+		for ( $i = 1; $i <= $request_data['total_steps']; $i++ ) {
+			$entries = $entry_handler->get_entries( $request_data['db_args'] );
+
+			foreach ( $this->export->ajax->get_entry_data( $entries ) as $entry ) {
+				fputcsv( $f, $entry, $this->export->configuration['csv_export_separator'], $enclosure, '\\' );
+			}
+
+			$request_data['db_args']['offset'] = $i * $this->export->configuration['entries_per_step'];
+		}
+
+		rewind( $f );
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$file_contents = file_get_contents( $file_path );
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		fclose( $f );
+
+		$this->put_contents( $file_path, $file_contents );
+
+		return $file_path;
 	}
 
 	/**
 	 * Write data to .xlsx file.
 	 *
 	 * @since 1.6.5
+	 * @since 1.9.6.1 Added the `$return_path` parameter.
 	 *
 	 * @param array $request_data Request data array.
+	 * @param bool  $return_path  Whether to return the path of the file.
 	 *
 	 * @throws Exception Exception.
+	 *
+	 * @return string|void Temporary file full pathname.
 	 */
-	public function write_xlsx( $request_data ) {
+	public function write_xlsx( $request_data, $return_path = false ) {
 
 		$export_file = $this->get_tmpfname( $request_data );
 
@@ -124,10 +182,9 @@ class File {
 
 		$writer->writeSheetHeader( $sheet_name, array_fill_keys( $request_data['columns_row'], 'string' ), [ 'widths' => $widths ] );
 
-		$entry_handler = wpforms()->get( 'entry' );
+		$entry_handler = wpforms()->obj( 'entry' );
 
-		for ( $i = 1; $i <= $request_data['total_steps']; $i ++ ) {
-
+		for ( $i = 1; $i <= $request_data['total_steps']; $i++ ) {
 			$entries = $entry_handler->get_entries( $request_data['db_args'] );
 
 			foreach ( $this->export->ajax->get_entry_data( $entries ) as $entry ) {
@@ -141,6 +198,113 @@ class File {
 		$file_contents = $writer->writeToString();
 
 		$this->put_contents( $export_file, $file_contents );
+
+		if ( $return_path ) {
+			return $export_file;
+		}
+	}
+
+	/**
+	 * Append data to a existing XLSX file.
+	 *
+	 * @since 1.9.6.1
+	 *
+	 * @param string $existing_file_path Existing file path.
+	 * @param array  $request_data       Request data array.
+	 *
+	 * @throws Exception Exception.
+	 *
+	 * @return string Returned file path.
+	 */
+	public function append_xlsx( string $existing_file_path, array $request_data ): string {
+
+		// Get existing data from the file.
+		$existing_data = $this->read_xlsx( $existing_file_path );
+
+		$writer = WriterEntityFactory::createXLSXWriter();
+
+		$writer->openToFile( $existing_file_path );
+
+		foreach ( $existing_data as $row_data ) {
+			$row = WriterEntityFactory::createRowFromArray( $row_data );
+
+			$writer->addRow( $row );
+		}
+
+		$entry_handler = wpforms()->obj( 'entry' );
+
+		for ( $i = 1; $i <= $request_data['total_steps']; $i++ ) {
+			$entries = $entry_handler->get_entries( $request_data['db_args'] );
+
+			foreach ( $this->export->ajax->get_entry_data( $entries ) as $entry ) {
+				$row = WriterEntityFactory::createRowFromArray( $entry );
+
+				$writer->addRow( $row );
+			}
+			$request_data['db_args']['offset'] = $i * $this->export->configuration['entries_per_step'];
+		}
+
+		$writer->close();
+
+		return $existing_file_path;
+	}
+
+	/**
+	 * Read data from an existing XLSX file.
+	 *
+	 * @since 1.9.6.1
+	 *
+	 * @param string $existing_file_path Existing file path.
+	 *
+	 * @throws Exception Exception.
+	 *
+	 * @return array Data read from the XLSX file.
+	 */
+	private function read_xlsx( string $existing_file_path ): array {
+
+		$existing_data = [];
+
+		if ( ! file_exists( $existing_file_path ) ) {
+			return [];
+		}
+
+		$reader = ReaderEntityFactory::createXLSXReader();
+
+		$reader->open( $existing_file_path );
+
+		// Break after the first sheet to avoid reading all sheets.
+		// We only need the first sheet for appending data.
+		foreach ( $reader->getSheetIterator() as $sheet ) {
+			$this->process_sheet_rows( $sheet, $existing_data );
+			break;
+		}
+
+		$reader->close();
+
+		return $existing_data;
+	}
+
+	/**
+	 * Process rows of a sheet and populate existing data.
+	 *
+	 * @since 1.9.6.1
+	 *
+	 * @param object $sheet          Sheet object.
+	 * @param array  &$existing_data Reference to existing data array.
+	 */
+	private function process_sheet_rows( $sheet, array &$existing_data ): void {
+
+		foreach ( $sheet->getRowIterator() as $row ) {
+			$cells = $row->getCells();
+
+			$existing_data[] = array_map(
+				static function ( $cell ) {
+
+					return $cell->getValue();
+				},
+				$cells
+			);
+		}
 	}
 
 	/**
@@ -189,12 +353,14 @@ class File {
 	public function get_tmpfname( $request_data ) {
 
 		if ( empty( $request_data ) ) {
-			throw new Exception( $this->export->errors['unknown_request'] );
+			throw new Exception( esc_html( $this->export->errors['unknown_request'] ) );
 		}
 
 		$export_dir  = $this->get_tmpdir();
-		$export_file = $export_dir . '/' . sanitize_key( $request_data['request_id'] ) . '.tmp';
+		$extension   = $request_data['extension'] ?? 'tmp';
+		$export_file = $export_dir . '/' . sanitize_file_name( $request_data['request_id'] ) . '.' . $extension;
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_touch
 		touch( $export_file );
 
 		return $export_file;
@@ -238,11 +404,11 @@ class File {
 		$filesystem = $this->get_filesystem();
 
 		if ( ! $filesystem->is_readable( $export_file ) || $filesystem->is_dir( $export_file ) ) {
-			throw new Exception( $this->export->errors['file_not_readable'] );
+			throw new Exception( esc_html( $this->export->errors['file_not_readable'] ) );
 		}
 
 		if ( $filesystem->size( $export_file ) === 0 ) {
-			throw new Exception( $export_file . $this->export->errors['file_empty'] );
+			throw new Exception( esc_html( $export_file . $this->export->errors['file_empty'] ) );
 		}
 
 		$entry_suffix = ! empty( $request_data['db_args']['entry_id'] ) ? '-entry-' . $request_data['db_args']['entry_id'] : '';
@@ -405,7 +571,7 @@ class File {
 			return $request_data;
 		}
 
-		$entry = wpforms()->get( 'entry' )->get( $request_data['db_args']['entry_id'] );
+		$entry = wpforms()->obj( 'entry' )->get( $request_data['db_args']['entry_id'] );
 
 		$fields = $this->export->ajax->get_entry_fields_data( $entry );
 
@@ -429,7 +595,7 @@ class File {
 	 */
 	public function schedule_remove_old_export_files() {
 
-		$tasks = wpforms()->get( 'tasks' );
+		$tasks = wpforms()->obj( 'tasks' );
 
 		if ( $tasks->is_scheduled( Export::TASK_CLEANUP ) !== false ) {
 			return;
@@ -460,6 +626,7 @@ class File {
 				pathinfo( $file, PATHINFO_BASENAME ) !== 'index.html' &&
 				( $now - filemtime( $file ) ) > $this->export->configuration['request_data_ttl']
 			) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
 				unlink( $file );
 			}
 		}
@@ -549,7 +716,7 @@ class File {
 		ob_clean();
 
 		if ( $credentials === false ) {
-			throw new Exception( $this->export->errors['file_system_not_configured'] );
+			throw new Exception( esc_html( $this->export->errors['file_system_not_configured'] ) );
 		}
 
 		WP_Filesystem( $credentials );

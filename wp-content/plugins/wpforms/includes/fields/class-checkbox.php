@@ -51,6 +51,10 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			],
 		];
 
+		$this->default_settings = [
+			'choices' => $this->defaults,
+		];
+
 		$this->hooks();
 	}
 
@@ -82,11 +86,11 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 	 *
 	 * @return array
 	 */
-	public function field_properties( $properties, $field, $form_data ) {
+	public function field_properties( $properties, $field, $form_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 
 		// Define data.
 		$form_id  = absint( $form_data['id'] );
-		$field_id = absint( $field['id'] );
+		$field_id = wpforms_validate_field_id( $field['id'] );
 		$choices  = $field['choices'];
 		$dynamic  = wpforms_get_field_dynamic_choices( $field, $form_id, $form_data );
 
@@ -95,8 +99,8 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			$field['show_values'] = true;
 		}
 
-		// Remove primary input.
-		unset( $properties['inputs']['primary'] );
+		// Remove primary input, unset for attribute for label.
+		unset( $properties['inputs']['primary'], $properties['label']['attr']['for'] );
 
 		// Set input container (ul) properties.
 		$properties['input_container'] = [
@@ -106,8 +110,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			'id'    => "wpforms-{$form_id}-field_{$field_id}",
 		];
 
-		$field['choice_limit'] = empty( $field['choice_limit'] ) ? 0 : (int) $field['choice_limit'];
-		if ( $field['choice_limit'] > 0 ) {
+		$is_choice_limit_set = ! empty( $field['choice_limit'] ) && (int) $field['choice_limit'] > 0;
+
+		if ( $is_choice_limit_set ) {
 			$properties['input_container']['data']['choice-limit'] = $field['choice_limit'];
 		}
 
@@ -162,7 +167,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			];
 
 			// Rule for validator only if needed.
-			if ( $field['choice_limit'] > 0 ) {
+			if ( $is_choice_limit_set ) {
 				$properties['inputs'][ $key ]['data']['rule-check-limit'] = 'true';
 			}
 		}
@@ -186,7 +191,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 				}
 			}
 		} elseif ( ! $dynamic && ! empty( $field['choices_icons'] ) ) {
-			$properties = wpforms()->get( 'icon_choices' )->field_properties( $properties, $field );
+			$properties = wpforms()->obj( 'icon_choices' )->field_properties( $properties, $field );
 		}
 
 		// Custom properties for disclaimer format display.
@@ -232,6 +237,16 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 		// Choices.
 		$this->field_option( 'choices', $field );
+
+		// AI Feature.
+		$this->field_option(
+			'ai_modal_button',
+			$field,
+			[
+				'value' => esc_html__( 'Generate Choices', 'wpforms-lite' ),
+				'type'  => 'choices',
+			]
+		);
 
 		// Choices Images.
 		$this->field_option( 'choices_images', $field );
@@ -326,36 +341,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		$this->field_option( 'input_columns', $field );
 
 		// Choice Limit.
-		$field['choice_limit'] = empty( $field['choice_limit'] ) ? 0 : (int) $field['choice_limit'];
-		$this->field_element(
-			'row',
-			$field,
-			[
-				'slug'    => 'choice_limit',
-				'content' =>
-					$this->field_element(
-						'label',
-						$field,
-						[
-							'slug'    => 'choice_limit',
-							'value'   => esc_html__( 'Choice Limit', 'wpforms-lite' ),
-							'tooltip' => esc_html__( 'Limit the number of checkboxes a user can select. Leave empty for unlimited.', 'wpforms-lite' ),
-						],
-						false
-					) . $this->field_element(
-						'text',
-						$field,
-						[
-							'slug'  => 'choice_limit',
-							'value' => $field['choice_limit'] > 0 ? $field['choice_limit'] : '',
-							'type'  => 'number',
-						],
-						false
-					),
-			]
-		);
+		$this->field_option( 'choice_limit', $field );
 
-			// Dynamic choice auto-populating toggle.
+		// Dynamic choice auto-populating toggle.
 		$this->field_option( 'dynamic_choices', $field );
 
 		// Dynamic choice source.
@@ -474,7 +462,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		);
 
 			foreach ( $choices as $key => $choice ) {
-				$label = $this->get_choices_label( $choice['label']['text'] ?? '', $key );
+				$label = $this->get_choices_label( $choice['label']['text'] ?? '', $key, $field );
 
 				if ( wpforms_is_amp() && ( $using_image_choices || $using_icon_choices ) ) {
 					$choice['container']['attr']['[class]'] = sprintf(
@@ -516,6 +504,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 								wp_json_encode( $choice['id'] )
 							);
 							$choice['label']['attr']['role'] = 'button';
+						}
+						if ( is_array( $choice['label']['class'] ) && wpforms_is_empty_string( $label ) ) {
+							$choice['label']['class'][] = 'wpforms-field-label-inline-empty';
 						}
 
 						// Image choices.
@@ -576,7 +567,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 						}
 
 						// Icon Choices.
-						wpforms()->get( 'icon_choices' )->field_display( $field, $choice, 'checkbox' );
+						wpforms()->obj( 'icon_choices' )->field_display( $field, $choice, 'checkbox' );
 
 					} else {
 
@@ -615,27 +606,22 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 	 * @since 1.5.2
 	 *
 	 * @param int   $field_id     Field ID.
-	 * @param array $field_submit Submitted field value (selected option).
+	 * @param array $field_submit Submitted field value (raw data).
 	 * @param array $form_data    Form data.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
 
-		$field = $form_data['fields'][ $field_id ];
+		$field_id = (int) $field_id;
+		$field    = $form_data['fields'][ $field_id ];
 
 		// Skip validation if field is dynamic and choices are empty.
 		if ( $this->is_dynamic_choices_empty( $field, $form_data ) ) {
 			return;
 		}
 
-		$field_submit  = (array) $field_submit;
-		$choice_limit  = empty( $form_data['fields'][ $field_id ]['choice_limit'] ) ? 0 : (int) $form_data['fields'][ $field_id ]['choice_limit'];
-		$count_choices = count( $field_submit );
+		$field_submit = (array) $field_submit;
 
-		if ( $choice_limit > 0 && $count_choices > $choice_limit ) {
-			// Generating the error.
-			$error = wpforms_setting( 'validation-check-limit', esc_html__( 'You have exceeded the number of allowed selections: {#}.', 'wpforms-lite' ) );
-			$error = str_replace( '{#}', $choice_limit, $error );
-		}
+		$this->validate_field_choice_limit( $field_id, $field_submit, $form_data );
 
 		// Basic required check - If field is marked as required, check for entry data.
 		if (
@@ -652,7 +638,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		}
 
 		if ( ! empty( $error ) ) {
-			wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = $error;
+			wpforms()->obj( 'process' )->errors[ $form_data['id'] ][ $field_id ] = $error;
 		}
 	}
 
@@ -677,7 +663,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			'name'      => $name,
 			'value'     => '',
 			'value_raw' => $value_raw,
-			'id'        => absint( $field_id ),
+			'id'        => wpforms_validate_field_id( $field_id ),
 			'type'      => $this->type,
 		];
 
@@ -734,7 +720,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 				foreach ( $field_submit as $item ) {
 					foreach ( $field['choices'] as $key => $choice ) {
-						if ( $item === $choice['value'] || ( empty( $choice['value'] ) && (int) str_replace( 'Choice ', '', $item ) === $key ) ) {
+						// Check if the submitted value is the same as the choice value or if the value is empty and the key matches.
+						// Skip if the submitted value is empty.
+						if ( ( ! empty( $item ) && $item === $choice['value'] ) || ( empty( $choice['value'] ) && (int) str_replace( 'Choice ', '', $item ) === $key ) ) {
 							$value[]       = $choice['label'];
 							$choice_keys[] = $key;
 
@@ -774,7 +762,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		}
 
 		// Push field details to be saved.
-		wpforms()->get( 'process' )->fields[ $field_id ] = $data;
+		wpforms()->obj( 'process' )->fields[ $field_id ] = $data;
 	}
 }
 

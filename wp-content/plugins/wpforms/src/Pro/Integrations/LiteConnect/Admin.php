@@ -142,6 +142,22 @@ final class Admin {
 	}
 
 	/**
+	 * Verify nonce for Lite Connect actions.
+	 *
+	 * @since 1.9.5
+	 *
+	 * @return bool
+	 */
+	private function verify_nonce(): bool {
+
+		if ( ! isset( $_GET['_wpnonce'] ) ) {
+			return false;
+		}
+
+		return wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'wpforms_lite_connect_action' );
+	}
+
+	/**
 	 * Display an admin notice with a status of Entries Restore.
 	 *
 	 * @since 1.7.4
@@ -178,10 +194,10 @@ final class Admin {
 			// Do not display an admin notice if.
 			if (
 				// license key is not active.
-				! wpforms()->get( 'license' )->is_active() ||
+				! wpforms()->obj( 'license' )->is_active() ||
 
 				// AS engine is not ready to use.
-				! wpforms()->get( 'tasks' )->is_usable() ||
+				! wpforms()->obj( 'tasks' )->is_usable() ||
 
 				// there are no new entries are available to import.
 				(int) $this->new_entries_count <= 0
@@ -197,7 +213,12 @@ final class Admin {
 					'title'     => esc_html__( 'Restore Your Form Entries', 'wpforms' ),
 					'desc'      => $this->get_since_info_html(),
 					'btn_title' => esc_html__( 'Restore Entries Now', 'wpforms' ),
-					'btn_url'   => add_query_arg( [ 'wpforms_lite_connect_action' => 'import' ] ),
+					'btn_url'   => add_query_arg(
+                        [
+							'wpforms_lite_connect_action' => 'import',
+							'_wpnonce'                    => wp_create_nonce( 'wpforms_lite_connect_action' ),
+                        ]
+                    ),
 				],
 				true
 			);
@@ -372,9 +393,9 @@ final class Admin {
 	 *
 	 * @since 1.7.4
 	 */
-	public function maybe_start_import_process() {
+	public function maybe_start_import_process(): void {
 
-		if ( $this->action !== 'import' ) {
+		if ( $this->action !== 'import' || ! $this->verify_nonce() ) {
 			return;
 		}
 
@@ -388,9 +409,9 @@ final class Admin {
 	 *
 	 * @since 1.7.4
 	 */
-	public function maybe_reset_import() {
+	public function maybe_reset_import(): void {
 
-		if ( $this->action !== 'reset' ) {
+		if ( $this->action !== 'reset' || ! $this->verify_nonce() ) {
 			return;
 		}
 
@@ -406,9 +427,9 @@ final class Admin {
 	 *
 	 * @since 1.7.4
 	 */
-	public function maybe_refresh_entries_count() {
+	public function maybe_refresh_entries_count(): void {
 
-		if ( $this->action !== 'count' ) {
+		if ( $this->action !== 'count' || ! $this->verify_nonce() ) {
 			return;
 		}
 
@@ -421,9 +442,9 @@ final class Admin {
 	 *
 	 * @since 1.7.4
 	 */
-	public function maybe_restart_import_flag() {
+	public function maybe_restart_import_flag(): void {
 
-		if ( $this->action !== 'restart' ) {
+		if ( $this->action !== 'restart' || ! $this->verify_nonce() ) {
 			return;
 		}
 
@@ -487,12 +508,12 @@ final class Admin {
 		}
 
 		// Do not display the import notice if the license key is not active.
-		if ( ! wpforms()->get( 'license' )->is_active() ) {
+		if ( ! wpforms()->obj( 'license' )->is_active() ) {
 			return $content;
 		}
 
 		// Do not display the import notice if AS engine is not ready to use.
-		if ( ! wpforms()->get( 'tasks' )->is_usable() ) {
+		if ( ! wpforms()->obj( 'tasks' )->is_usable() ) {
 			return $content;
 		}
 

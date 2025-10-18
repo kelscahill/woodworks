@@ -136,7 +136,7 @@ class Ajax {
 	 *
 	 * @throws Exception Try-catch.
 	 */
-	public function ajax_export_step() {// phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	public function ajax_export_step() {
 
 		try {
 
@@ -229,15 +229,26 @@ class Ajax {
 		}
 
 		// Count total entries.
-		$count = wpforms()->get( 'entry' )->get_entries( $db_args, true );
+		$count = wpforms()->obj( 'entry' )->get_entries( $db_args, true );
 
 		// Retrieve form data.
-		$form_data = wpforms()->get( 'form' )->get(
+		$form_data = wpforms()->obj( 'form' )->get(
 			$args['form_id'],
 			[
 				'content_only' => true,
 			]
 		);
+
+		/**
+		 * Filter the form data before exporting.
+		 *
+		 * @since 1.8.8
+		 * @since 1.8.9 Added the $entry_id parameter.
+		 *
+		 * @param array $form_data Form data.
+		 * @param int   $entry_id  Entry ID.
+		 */
+		$form_data = apply_filters( 'wpforms_pro_admin_entries_export_ajax_form_data', $form_data, $args['entry_id'] );
 
 		// Prepare get entries args for further steps.
 		unset( $db_args['select'] );
@@ -331,6 +342,8 @@ class Ajax {
 
 			$columns_labels = wp_list_pluck( $fields, 'label', 'id' );
 
+			$entry_id = $request_data['db_args']['entry_id'] ?? 0;
+
 			foreach ( $request_data['fields'] as $field_id ) {
 				if ( ! isset( $columns_labels[ $field_id ] ) ) {
 					continue;
@@ -358,12 +371,16 @@ class Ajax {
 					foreach ( $columns as $key => $column ) {
 						$is_modified = $column['modified'] ?? false;
 
-						$columns_row[ "multiple_field_{$field_id}_{$key}" ] = sprintf(
-							'%s: %s%s',
-							$columns_labels[ $field_id ],
-							trim( $column['label'] ),
-							$is_modified ? __( ' (modified)', 'wpforms' ) : ''
-						);
+						// Skip modified columns if export single entry.
+						if ( $is_modified && ! empty( $entry_id ) ) {
+							continue;
+						}
+
+						$label        = $columns_labels[ $field_id ];
+						$modified     = $is_modified ? __( ' (modified)', 'wpforms' ) : '';
+						$column_label = empty( $field['single_row'] ) ? ': ' . trim( $column['label'] ) : '';
+
+						$columns_row[ "multiple_field_{$field_id}_{$key}" ] = "{$label}{$column_label}{$modified}";
 					}
 				} else {
 					$columns_row[ $field_id ] = $columns_labels[ $field_id ];
@@ -401,7 +418,7 @@ class Ajax {
 	 *
 	 * @return Generator
 	 */
-	public function get_entry_data( $entries ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded, Generic.Metrics.NestingLevel.MaxExceeded
+	public function get_entry_data( $entries ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh, Generic.Metrics.NestingLevel.MaxExceeded
 
 		$no_fields  = empty( $this->request_data['form_data']['fields'] );
 		$del_fields = in_array( 'del_fields', $this->request_data['additional_info'], true );
@@ -414,7 +431,7 @@ class Ajax {
 
 			foreach ( $this->request_data['columns_row'] as $col_id => $col_label ) {
 
-				if ( is_numeric( $col_id ) ) {
+				if ( is_numeric( $col_id ) || wpforms_is_repeater_child_field( $col_id ) ) {
 					$row[ $col_id ] = isset( $fields[ $col_id ]['value'] ) ? $fields[ $col_id ]['value'] : '';
 				} elseif ( strpos( $col_id, 'del_field_' ) !== false ) {
 					$f_id           = str_replace( 'del_field_', '', $col_id );
@@ -476,7 +493,7 @@ class Ajax {
 	 *
 	 * @return string
 	 */
-	public function get_multiple_row_value( $fields, $col_id ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh,Generic.Metrics.CyclomaticComplexity.MaxExceeded
+	public function get_multiple_row_value( $fields, $col_id ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		$row_value = '';
 
@@ -491,6 +508,10 @@ class Ajax {
 
 		// The First element is field id.
 		$multiple_field_id = $multiple_key[0];
+
+		if ( wpforms_is_repeater_child_field( $id ) && count( $multiple_key ) > 2 ) {
+			$multiple_field_id .= '_' . $multiple_key[1];
+		}
 
 		// Second element is value id.
 		$multiple_value_id = (int) end( $multiple_key );
@@ -513,27 +534,7 @@ class Ajax {
 			$this->request_data['dynamic_columns']
 		);
 
-		/**
-		 * If field has only one choice, set label to 'Checked'.
-		 *
-		 * See field_properties method.
-		 * includes/fields/class-checkbox.php
-		 * src/Forms/Fields/PaymentCheckbox/Field.php
-		 */
-		if ( count( $choices ) === 1 ) {
-			$choices = array_map(
-				static function ( $choice ) {
-
-					$choice['label'] = __( 'Checked', 'wpforms' );
-
-					return $choice;
-				},
-				$choices
-			);
-		}
-
-		// Make sure that values array has the same length as choices array.
-		$values = array_pad( $values, count( $choices ), '' );
+		$values = $this->adjust_values_number( $values, $choices );
 
 		// Add each value to the separate column in the row.
 		foreach ( $values as $index => $value ) {
@@ -549,6 +550,11 @@ class Ajax {
 				continue;
 			}
 
+			// Get row value for field with quantity enabled.
+			if ( isset( $field['quantity'], $values[ $multiple_value_id ] ) ) {
+				return $values[ $multiple_value_id ];
+			}
+
 			$labels = array_column( $choices, 'label' );
 
 			// Try to find value index in choices array.
@@ -556,7 +562,7 @@ class Ajax {
 
 			// For Likert Scale field search value index by key.
 			if ( $type === 'likert_scale' ) {
-				$value_index = array_search( $index, array_column( $choices, 'label' ), true );
+				$value_index = array_search( (string) $index, array_column( $choices, 'label' ), true );
 
 				// Try to find modified value index.
 				if ( $value_index === false ) {
@@ -585,6 +591,17 @@ class Ajax {
 
 			// Set value.
 			if ( isset( $choices[ $value_index ] ) ) {
+				/**
+				 * If field has only one choice, set label to 'Checked'.
+				 *
+				 * See field_properties method.
+				 * includes/fields/class-checkbox.php
+				 * src/Forms/Fields/PaymentCheckbox/Field.php
+				 */
+				if ( count( $choices ) === 1 ) {
+					$choices[ $value_index ]['label'] = __( 'Checked', 'wpforms' );
+				}
+
 				$row_value = $choices[ $value_index ]['label'];
 
 				if ( $field['type'] === 'payment-checkbox' ) {
@@ -606,6 +623,31 @@ class Ajax {
 	}
 
 	/**
+	 * Adjust values number.
+	 *
+	 * Make sure that values array has the same length as choices array.
+	 * If values array is shorter than choices array, add empty values to it.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param array $values  Values.
+	 * @param array $choices Choices.
+	 *
+	 * @return array Adjusted values.
+	 */
+	private function adjust_values_number( array $values, array $choices ): array {
+
+		$count         = count( $values );
+		$count_choices = count( $choices );
+
+		for ( $i = $count + 1; $i <= $count_choices; $i++ ) {
+			$values[] = '';
+		}
+
+		return $values;
+	}
+
+	/**
 	 * Get entry field values.
 	 *
 	 * @since 1.8.5
@@ -617,7 +659,16 @@ class Ajax {
 	private function get_field_values( $field ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		// Get field value.
-		$value = $field['value'] ?? '';
+		$value  = $field['value'] ?? '';
+		$values = [];
+
+		// For Quantity enabled field.
+		if ( isset( $field['quantity'] ) ) {
+			$values[] = $field['value'];
+			$values[] = ! empty( $field['value'] ) ? $field['quantity'] : '';
+
+			return $values;
+		}
 
 		// For Payment Checkbox field.
 		if ( isset( $field['value_choice'] ) ) {
@@ -672,7 +723,7 @@ class Ajax {
 			return $address_values;
 		}
 
-		// Prepare values for Likert Scale field.
+		// Prepare values for the Likert Scale field.
 		if ( $type === 'likert_scale' ) {
 			return $this->get_likert_scale_field_value( $values );
 		}
@@ -690,6 +741,17 @@ class Ajax {
 	 * @return array
 	 */
 	private function get_likert_scale_field_value( $values ) {
+
+		// If a single-row rating scale is selected.
+		if ( count( $values ) === 1 ) {
+			$values = $values[0];
+			$values = explode( ',', $values );
+			$values = array_map( 'trim', $values );
+
+			// Using Single Row as a key to map single row values
+			// to the column without changing the previous logic.
+			return [ 'Single Row' => implode( ', ', $values ) ];
+		}
 
 		// Get only odd values for rows.
 		$rows = array_filter(
@@ -734,7 +796,7 @@ class Ajax {
 		// Prepare an array with columns as keys and rows as values.
 		foreach ( $rows as $index => $row ) {
 			foreach ( $row as $row_label ) {
-				$field_value[ $row_label ][] = $columns[ $index - 1 ];
+				$field_value[ $columns[ $index - 1 ] ][] = $row_label;
 			}
 		}
 
@@ -801,7 +863,7 @@ class Ajax {
 				break;
 
 			default:
-				$val = $entry[ $col_id ];
+				$val = $entry[ $col_id ] ?? '';
 		}
 
 		/**
@@ -811,7 +873,7 @@ class Ajax {
 		 *
 		 * @param string $val    The value.
 		 * @param string $col_id Column id.
-		 * @param object $entry  Entry object.
+		 * @param array  $entry  Entry object.
 		 */
 		return apply_filters( 'wpforms_pro_admin_entries_export_ajax_get_additional_info_value', $val, $col_id, $entry );
 	}
@@ -827,7 +889,7 @@ class Ajax {
 	 */
 	public function get_additional_info_notes_value( $entry ) {
 
-		$entry_meta_obj = wpforms()->get( 'entry_meta' );
+		$entry_meta_obj = wpforms()->obj( 'entry_meta' );
 		$entry_notes    = $entry_meta_obj ?
 			$entry_meta_obj->get_meta(
 				[
@@ -888,7 +950,7 @@ class Ajax {
 	 */
 	public function get_additional_info_geodata_value( $entry ) {
 
-		$entry_meta_obj = wpforms()->get( 'entry_meta' );
+		$entry_meta_obj = wpforms()->obj( 'entry_meta' );
 		$location       = $entry_meta_obj ?
 			$entry_meta_obj->get_meta(
 				[
@@ -1002,7 +1064,7 @@ class Ajax {
 		}
 
 		// Maybe get payment status from payments table.
-		$payment = wpforms()->get( 'payment' )->get_by( 'entry_id', $entry['entry_id'] );
+		$payment = wpforms()->obj( 'payment' )->get_by( 'entry_id', $entry['entry_id'] );
 
 		if ( ! isset( $payment->status ) ) {
 			return esc_html__( 'N/A', 'wpforms' );
@@ -1023,7 +1085,7 @@ class Ajax {
 	public function get_additional_info_pginfo_value( $entry ) {
 
 		// Maybe get payment status from payments table.
-		$payment_table_data = wpforms()->get( 'payment' )->get_by( 'entry_id', $entry['entry_id'] );
+		$payment_table_data = wpforms()->obj( 'payment' )->get_by( 'entry_id', $entry['entry_id'] );
 
 		if ( empty( $payment_table_data ) ) {
 			return '';
@@ -1046,19 +1108,27 @@ class Ajax {
 
 		global $wpdb;
 
-		$table_name = wpforms()->get( 'entry_fields' )->table_name;
+		$table_name = wpforms()->obj( 'entry_fields' )->table_name;
+
+		$field_ids        = wp_list_pluck( $existing_fields, 'id' );
+		$quoted_field_ids = array_map(
+			function ( $id ) {
+				return "'" . esc_sql( $id ) . "'";
+			},
+			$field_ids
+		);
+		$ids_string       = implode( ',', $quoted_field_ids );
 
 		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 		$sql = $wpdb->prepare(
-			"SELECT DISTINCT field_id FROM $table_name WHERE `form_id` = %d AND `field_id` NOT IN ( " .
-			implode( ',', wp_list_pluck( $existing_fields, 'id' ) ) . ' )',
+			"SELECT DISTINCT field_id FROM $table_name WHERE `form_id` = %d AND `field_id` NOT IN ( $ids_string )",
 			(int) $request_data['db_args']['form_id']
 		);
 		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 
 		$deleted_fields_columns = [];
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$db_result = $wpdb->get_col( $sql );
 
 		foreach ( $db_result as $id ) {
@@ -1098,40 +1168,17 @@ class Ajax {
 				continue;
 			}
 
-			$fields_by_id[ $field['id'] ] = $field;
+			/**
+			 * Filters the entry field data.
+			 *
+			 * @since 1.9.4
+			 *
+			 * @param array $field Field data.
+			 */
+			$fields_by_id[ $field['id'] ] = apply_filters( 'wpforms_pro_admin_entries_export_ajax_get_entry_fields_data_field', $field );
 		}
 
 		return $fields_by_id;
-	}
-
-	/**
-	 * Get date format.
-	 *
-	 * @since 1.5.5
-	 * @deprecated 1.8.5
-	 */
-	public function date_format() {
-
-		_deprecated_function( __METHOD__, '1.8.5 of the WPForms plugin' );
-
-		$this->export->data['date_format'] = empty( $this->export->data['date_format'] ) ? sprintf( '%s %s', get_option( 'date_format' ), get_option( 'time_format' ) ) : $this->export->data['date_format'];
-
-		return $this->export->data['date_format'];
-	}
-
-	/**
-	 * Get GMT offset in seconds.
-	 *
-	 * @since 1.5.5
-	 * @deprecated 1.8.5
-	 */
-	public function gmt_offset_sec() {
-
-		_deprecated_function( __METHOD__, '1.8.5 of the WPForms plugin' );
-
-		$this->export->data['gmt_offset_sec'] = empty( $this->export->data['gmt_offset_sec'] ) ? get_option( 'gmt_offset' ) * 3600 : $this->export->data['gmt_offset_sec'];
-
-		return $this->export->data['gmt_offset_sec'];
 	}
 
 	/**
@@ -1195,7 +1242,7 @@ class Ajax {
 		];
 
 		// Get meta data for payment.
-		$meta = wpforms()->get( 'payment_meta' )->get_all( $payment_table_data->id );
+		$meta = wpforms()->obj( 'payment_meta' )->get_all( $payment_table_data->id );
 
 		if ( empty( $meta ) ) {
 			return $value;
@@ -1277,16 +1324,18 @@ class Ajax {
 	 *
 	 * @return array
 	 */
-	private function get_multiple_choices_columns( $field, $form_data, $is_dynamic_columns = false ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	private function get_multiple_choices_columns( $field, $form_data, $is_dynamic_columns = false ) {
 
 		$type = $field['type'];
 
 		if ( in_array( $type, [ 'select', 'checkbox', 'payment-checkbox' ], true ) ) {
+			$field_choices = $field['choices'];
+
 			if ( $this->is_dynamic_choices( $field ) && $is_dynamic_columns ) {
-				return wpforms_get_field_dynamic_choices( $field, $form_data['id'], $form_data );
+				$field_choices = wpforms_get_field_dynamic_choices( $field, $form_data['id'], $form_data );
 			}
 
-			return $this->get_choices( $form_data['id'], $field );
+			return $this->get_choices( $form_data['id'], $field, $field_choices );
 		}
 
 		if ( $type === 'file-upload' ) {
@@ -1342,6 +1391,13 @@ class Ajax {
 			];
 		}
 
+		if ( in_array( $type, [ 'payment-single', 'payment-select' ], true ) ) {
+			return [
+				[ 'label' => __( 'Value', 'wpforms' ) ],
+				[ 'label' => __( 'Quantity', 'wpforms' ) ],
+			];
+		}
+
 		return [];
 	}
 
@@ -1359,6 +1415,17 @@ class Ajax {
 
 		if ( isset( $this->values[ $field['id'] ] ) ) {
 			return $this->values[ $field['id'] ];
+		}
+
+		// Single row values should be in a one column.
+		if ( ! empty( $field['single_row'] ) ) {
+			$columns = [
+				[ 'label' => 'Single Row' ],
+			];
+
+			$this->values[ $field['id'] ] = $columns;
+
+			return $columns;
 		}
 
 		// Get all values from database.
@@ -1382,7 +1449,7 @@ class Ajax {
 		$keys = array_unique( $keys );
 
 		// Get modified columns.
-		$modified_columns = array_diff( $keys, $field['columns'] );
+		$modified_columns = array_diff( $keys, $field['rows'] );
 
 		// Add (modified) to column label.
 		$modified_columns = array_map(
@@ -1394,14 +1461,14 @@ class Ajax {
 		);
 
 		// Add modified columns to columns array.
-		$field['columns'] = array_merge( $field['columns'], $modified_columns );
+		$field['rows'] = array_merge( $field['rows'], $modified_columns );
 
 		$columns = array_map(
 			static function ( $column ) {
 
 				return [ 'label' => $column ];
 			},
-			$field['columns']
+			$field['rows']
 		);
 
 		$columns = array_values( $columns );
@@ -1415,16 +1482,17 @@ class Ajax {
 	 * Get field choices.
 	 *
 	 * @since 1.8.5
+	 * @since 1.8.7 Add $field_choices parameter.
 	 *
-	 * @param int   $form_id Form ID.
-	 * @param array $field   Field data.
+	 * @param int   $form_id       Form ID.
+	 * @param array $field         Field data.
+	 * @param array $field_choices Field choices.
 	 *
 	 * @return array Choices.
 	 */
-	private function get_choices( $form_id, $field ) {
+	private function get_choices( $form_id, $field, $field_choices ) {
 
-		$field_choices = $field['choices'];
-		$field_id      = $field['id'];
+		$field_id = $field['id'];
 
 		foreach ( $field_choices as $key => $choice ) {
 			// Check if choice label not empty.
@@ -1442,10 +1510,18 @@ class Ajax {
 		}
 
 		$labels = array_column( $field_choices, 'label' );
+		$labels = array_map( 'trim', $labels );
 
 		$choices = $this->get_all_existing_choices( $form_id, $field_id, $field['type'] );
 
+		$is_ajax = wp_doing_ajax();
+
 		foreach ( $choices as $choice ) {
+			// Skip modified choices for single entry export.
+			if ( ! $is_ajax ) {
+				continue;
+			}
+
 			$label = $choice['label'] ?? $choice;
 			// Check if choice already exists.
 			if ( in_array( $label, $labels, true ) ) {
@@ -1468,13 +1544,13 @@ class Ajax {
 	 *
 	 * @since 1.8.5
 	 *
-	 * @param int    $form_id  Form ID.
-	 * @param int    $field_id Field ID.
-	 * @param string $type     Field type.
+	 * @param int        $form_id  Form ID.
+	 * @param int|string $field_id Field ID.
+	 * @param string     $type     Field type.
 	 *
 	 * @return array Choices.
 	 */
-	private function get_all_existing_choices( int $form_id, int $field_id, string $type ): array {
+	private function get_all_existing_choices( int $form_id, $field_id, string $type ): array {
 
 		if ( isset( $this->values[ $field_id ] ) ) {
 			return $this->values[ $field_id ];
@@ -1530,7 +1606,7 @@ class Ajax {
 			$entry_id = $row_value['entry_id'];
 
 			// Get entry for current Payment Checkbox field value.
-			$entry = wpforms()->get( 'entry' )->get( $entry_id );
+			$entry = wpforms()->obj( 'entry' )->get( $entry_id );
 
 			// Get field values for current entry.
 			$entry_fields_data = $this->get_entry_fields_data( $entry );
@@ -1628,19 +1704,19 @@ class Ajax {
 
 		global $wpdb;
 
-		$table_name = wpforms()->get( 'entry_fields' )->table_name;
+		$table_name = wpforms()->obj( 'entry_fields' )->table_name;
 
 		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 		$sql = $wpdb->prepare(
-			"SELECT DISTINCT `value`, `entry_id` FROM $table_name WHERE `form_id` = %d AND `field_id` = %d",
+			"SELECT DISTINCT `value`, `entry_id` FROM $table_name WHERE `form_id` = %d AND `field_id` = %s",
 			$form_id,
 			$field_id
 		);
 		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		return $wpdb->get_results( $sql, ARRAY_A );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**

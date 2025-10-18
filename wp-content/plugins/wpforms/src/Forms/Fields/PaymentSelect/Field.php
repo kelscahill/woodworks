@@ -2,12 +2,14 @@
 
 namespace WPForms\Forms\Fields\PaymentSelect;
 
+use WPForms_Field;
+
 /**
  * Dropdown payment field.
  *
  * @since 1.8.2
  */
-class Field extends \WPForms_Field {
+class Field extends WPForms_Field {
 
 	/**
 	 * Classic (old) style.
@@ -16,7 +18,7 @@ class Field extends \WPForms_Field {
 	 *
 	 * @var string
 	 */
-	const STYLE_CLASSIC = 'classic';
+	public const STYLE_CLASSIC = 'classic';
 
 	/**
 	 * Modern style.
@@ -25,7 +27,7 @@ class Field extends \WPForms_Field {
 	 *
 	 * @var string
 	 */
-	const STYLE_MODERN = 'modern';
+	public const STYLE_MODERN = 'modern';
 
 	/**
 	 * Primary class constructor.
@@ -59,6 +61,10 @@ class Field extends \WPForms_Field {
 			],
 		];
 
+		$this->default_settings = [
+			'choices' => $this->defaults,
+		];
+
 		$this->hooks();
 	}
 
@@ -77,6 +83,9 @@ class Field extends \WPForms_Field {
 
 		// Form frontend JS enqueues.
 		add_action( 'wpforms_frontend_js', [ $this, 'enqueue_frontend_js' ] );
+
+		// Customize HTML field value.
+		add_filter( 'wpforms_html_field_value', [ $this, 'field_html_value' ], 10, 4 );
 	}
 
 	/**
@@ -143,7 +152,7 @@ class Field extends \WPForms_Field {
 			];
 		}
 
-		// Add class that changes the field size.
+		// Add a class that changes the field size.
 		if ( ! empty( $field['size'] ) ) {
 			$properties['input_container']['class'][] = 'wpforms-field-' . esc_attr( $field['size'] );
 		}
@@ -159,6 +168,10 @@ class Field extends \WPForms_Field {
 			in_array( $field['style'], [ self::STYLE_CLASSIC, self::STYLE_MODERN ], true )
 		) {
 			$properties['container']['class'][] = "wpforms-field-select-style-{$field['style']}";
+		}
+
+		if ( $this->is_payment_quantities_enabled( $field ) ) {
+			$properties['container']['class'][] = ' wpforms-payment-quantities-enabled';
 		}
 
 		return $properties;
@@ -179,7 +192,7 @@ class Field extends \WPForms_Field {
 	 */
 	protected function get_field_populated_single_property_value( $raw_value, $input, $properties, $field ) {
 		/*
-		 * When the form is submitted we get from Fallback only values (choice ID).
+		 * When the form is submitted, we get from Fallback only values (choice ID).
 		 * As payment-dropdown field doesn't support 'show_values' option -
 		 * we should transform value into label to check against using general logic in parent method.
 		 */
@@ -246,6 +259,9 @@ class Field extends \WPForms_Field {
 		];
 
 		$this->field_element( 'row', $field, $args );
+
+		// Quantity.
+		$this->field_option( 'quantity', $field );
 
 		// Description.
 		$this->field_option( 'description', $field );
@@ -340,6 +356,9 @@ class Field extends \WPForms_Field {
 		// Choices.
 		$this->field_preview_option( 'choices', $field, $args );
 
+		// Quantity.
+		$this->field_preview_option( 'quantity', $field );
+
 		// Description.
 		$this->field_preview_option( 'description', $field );
 	}
@@ -352,8 +371,9 @@ class Field extends \WPForms_Field {
 	 * @param array $field      Field data and settings.
 	 * @param array $deprecated Deprecated array of field attributes.
 	 * @param array $form_data  Form data and settings.
-	 */
-	public function field_display( $field, $deprecated, $form_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
+	 *
+	 * @noinspection HtmlUnknownAttribute*/
+	public function field_display( $field, $deprecated, $form_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		$container         = $field['properties']['input_container'];
 		$field_placeholder = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
@@ -387,13 +407,6 @@ class Field extends \WPForms_Field {
 			}
 		}
 
-		// Fake placeholder for Modern style.
-		if ( $is_modern && empty( $field_placeholder ) ) {
-			$first_choices      = reset( $choices );
-			$field_placeholder  = $first_choices['label']['text'];
-			$field_placeholder .= ! empty( $field['show_price_after_labels'] ) && isset( $first_choices['attr']['value'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $first_choices['attr']['value'] ), true ) : '';
-		}
-
 		// Preselect default if no other choices were marked as default.
 		printf(
 			'<select %s>',
@@ -401,7 +414,7 @@ class Field extends \WPForms_Field {
 		);
 
 		// Optional placeholder.
-		if ( ! empty( $field_placeholder ) ) {
+		if ( ! empty( $field_placeholder ) || $is_modern ) {
 			printf(
 				'<option value="" class="placeholder" disabled %s>%s</option>',
 				selected( false, $has_default, false ),
@@ -411,10 +424,8 @@ class Field extends \WPForms_Field {
 
 		// Format string for option.
 		if ( $is_modern ) {
-
-			// `data-custom-properties` - it's a Choices.js attribite and it store a copy of `data-amount` attribute.
+			// The `data-custom-properties` is a Choices.js attribute, and it stores a copy of `data-amount` attribute.
 			$option_format = '<option value="%1$s" data-amount="%2$s" data-custom-properties="%2$s" %3$s>%4$s</option>';
-
 		} else {
 			$option_format = '<option value="%1$s" data-amount="%2$s" %3$s>%4$s</option>';
 		}
@@ -422,9 +433,11 @@ class Field extends \WPForms_Field {
 		// Build the select options.
 		foreach ( $choices as $key => $choice ) {
 			$amount = wpforms_format_amount( wpforms_sanitize_amount( $choice['attr']['value'] ) );
-			$label  = isset( $choice['label']['text'] ) ? $choice['label']['text'] : '';
+			$label  = $choice['label']['text'] ?? '';
+
 			/* translators: %s - item number. */
-			$label  = $label !== '' ? $label : sprintf( esc_html__( 'Item %s', 'wpforms-lite' ), $key );
+			$label = $label !== '' ? $label : sprintf( esc_html__( 'Item %s', 'wpforms-lite' ), $key );
+
 			$label .= ! empty( $field['show_price_after_labels'] ) && isset( $choice['attr']['value'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $choice['attr']['value'] ), true ) : '';
 
 			printf(
@@ -437,15 +450,17 @@ class Field extends \WPForms_Field {
 		}
 
 		echo '</select>';
+
+		$this->display_quantity_dropdown( $field );
 	}
 
 	/**
-	 * Validate field on form submit.
+	 * Validate field on submitting the form.
 	 *
 	 * @since 1.8.2
 	 *
 	 * @param int    $field_id     Field ID.
-	 * @param string $field_submit Submitted field value (selected option).
+	 * @param string $field_submit Submitted field value (raw data).
 	 * @param array  $form_data    Form data and settings.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
@@ -453,13 +468,13 @@ class Field extends \WPForms_Field {
 		// Basic required check - If field is marked as required, check for entry data.
 		if ( ! empty( $form_data['fields'][ $field_id ]['required'] ) && empty( $field_submit ) ) {
 
-			wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = wpforms_get_required_label();
+			wpforms()->obj( 'process' )->errors[ $form_data['id'] ][ $field_id ] = wpforms_get_required_label();
 		}
 
 		// Validate that the option selected is real.
 		if ( ! empty( $field_submit ) && empty( $form_data['fields'][ $field_id ]['choices'][ $field_submit ] ) ) {
 
-			wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = esc_html__( 'Invalid payment option', 'wpforms-lite' );
+			wpforms()->obj( 'process' )->errors[ $form_data['id'] ][ $field_id ] = esc_html__( 'Invalid payment option', 'wpforms-lite' );
 		}
 	}
 
@@ -494,7 +509,7 @@ class Field extends \WPForms_Field {
 			$value        = $choice_label . ' - ' . $value;
 		}
 
-		wpforms()->get( 'process' )->fields[ $field_id ] = [
+		$field_data = [
 			'name'         => $name,
 			'value'        => $value,
 			'value_choice' => $choice_label,
@@ -505,6 +520,12 @@ class Field extends \WPForms_Field {
 			'id'           => absint( $field_id ),
 			'type'         => sanitize_key( $this->type ),
 		];
+
+		if ( $this->is_payment_quantities_enabled( $field ) ) {
+			$field_data['quantity'] = $this->get_submitted_field_quantity( $field, $form_data );
+		}
+
+		wpforms()->obj( 'process' )->fields[ $field_id ] = $field_data;
 	}
 
 	/**
@@ -526,14 +547,14 @@ class Field extends \WPForms_Field {
 			}
 		}
 
-		if ( $has_modern_select || wpforms()->get( 'frontend' )->assets_global() ) {
+		if ( $has_modern_select || wpforms()->obj( 'frontend' )->assets_global() ) {
 			$min = wpforms_get_min_suffix();
 
 			wp_enqueue_style(
 				'wpforms-choicesjs',
 				WPFORMS_PLUGIN_URL . "assets/css/choices{$min}.css",
 				[],
-				'9.0.1'
+				'10.2.0'
 			);
 		}
 	}
@@ -557,7 +578,7 @@ class Field extends \WPForms_Field {
 			}
 		}
 
-		if ( $has_modern_select || wpforms()->get( 'frontend' )->assets_global() ) {
+		if ( $has_modern_select || wpforms()->obj( 'frontend' )->assets_global() ) {
 			$this->enqueue_choicesjs_once( $forms );
 		}
 	}
@@ -577,11 +598,10 @@ class Field extends \WPForms_Field {
 		$is_field_style = false;
 
 		if ( empty( $form['fields'] ) ) {
-			return $is_field_style;
+			return false;
 		}
 
 		foreach ( (array) $form['fields'] as $field ) {
-
 			if (
 				! empty( $field['type'] ) &&
 				$field['type'] === $this->type &&
@@ -598,23 +618,27 @@ class Field extends \WPForms_Field {
 	}
 
 	/**
-	 * Get field name for ajax error message.
+	 * Get field name for an ajax error message.
 	 *
-	 * @since 1.8.2
+	 * @since        1.8.2
 	 *
-	 * @param string $name  Field name for error triggered.
-	 * @param array  $field Field settings.
-	 * @param array  $props List of properties.
-	 * @param string $error Error message.
+	 * @param string|mixed    $name  Field name for error triggered.
+	 * @param array           $field Field settings.
+	 * @param array           $props List of properties.
+	 * @param string|string[] $error Error message.
 	 *
 	 * @return string
+	 * @noinspection PhpMissingReturnTypeInspection
+	 * @noinspection ReturnTypeCanBeDeclaredInspection
 	 */
 	public function ajax_error_field_name( $name, $field, $props, $error ) {
+
+		$name = (string) $name;
 
 		if ( ! isset( $field['type'] ) || $field['type'] !== $this->type ) {
 			return $name;
 		}
 
-		return isset( $props['input_container']['attr']['name'] ) ? $props['input_container']['attr']['name'] : '';
+		return $props['input_container']['attr']['name'] ?? '';
 	}
 }
