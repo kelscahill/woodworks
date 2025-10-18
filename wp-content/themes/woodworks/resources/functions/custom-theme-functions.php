@@ -49,5 +49,3 @@ function mytheme_timber_context( $context ) {
 
   return $context;
 }
-
-add_theme_support('editor-styles');

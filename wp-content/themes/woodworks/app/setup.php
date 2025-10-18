@@ -100,4 +100,8 @@ add_action('after_setup_theme', function () {
     add_theme_support('customize-selective-refresh-widgets');
 
     add_theme_support('automatic-feed-links');
+
+    add_theme_support('editor-styles');
+    $relAppCssPath = asset('app.css')->relativePath(get_theme_file_path());
+    add_editor_style($relAppCssPath);
 }, 20);
