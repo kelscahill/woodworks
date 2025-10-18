@@ -4,7 +4,7 @@
       {% for image in gallery.images %}
         {% include "@atoms/images/image/responsive-image.twig" with {
           "image": {
-            "srcset": Image(image).src|resize(800, 800) ~ ' 768w, ' ~ Image(image).src|resize(1000, 1000) ~ ' 1024w',
+            "srcset": Image(image).src|resize(900, 900) ~ ' 768w, ' ~ Image(image).src|resize(1200, 1200) ~ ' 1024w',
             "src": Image(image).src,
             "alt": Image(image).alt,
           },

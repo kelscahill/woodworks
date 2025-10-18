@@ -28,7 +28,7 @@
           {% include "@atoms/images/image/figure.twig" with {
             "figure": {
               "image": {
-                "src": Image(thumbnail).src|resize(500, 500),
+                "src": Image(thumbnail).src|resize(600, 600),
                 "alt": Image(thumbnail).alt,
                 "classes": "c-block__image"
               }
@@ -57,7 +57,7 @@
       "modal": {
         "attributes": 'id="js-modal-' ~ post.id ~'"',
         "category": post.category,
-        "images": post.gallery,
+        "images": post.meta('gallery'),
         "content": post.content,
         "next_post_id": post.prev.id,
         "prev_post_id": post.next.id,
