@@ -81,6 +81,7 @@
       display: block;
       background-color: var(--color-tertiary);
       margin: 2.5px;
+      cursor: pointer;
 
       &.this-is-active {
         background-color: var(--color-white);

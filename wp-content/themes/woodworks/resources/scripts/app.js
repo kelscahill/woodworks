@@ -70,8 +70,9 @@ const main = async (err) => {
    * 6) Set the initial image & dot to active
    * 7) Add event listeners to the gallery next button
    * 8) Add event listeners to the gallery previous button
-   * 9) Add event listeners to the modal next button
-   * 10) Add event listeners to the modal previous button
+   * 9) Add event listeners to the gallery dots to change active image on click
+   * 10) Add event listeners to the modal next button
+   * 11) Add event listeners to the modal previous button
    */
   function galleryBlocks() {
     const galleryBlocks = document.querySelectorAll('.c-block');
@@ -133,9 +134,17 @@ const main = async (err) => {
               setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
             });
           }
+
+          /* 9 */
+          galleryDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+              galleryIndex = index;
+              setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
+            });
+          });
         }
 
-        /* 9 */
+        /* 10 */
         const modalNext = block.querySelector('.js-modal-next');
         if (modalNext) {
           if (!modalNext.hasAttribute('block-id')) {
@@ -147,7 +156,7 @@ const main = async (err) => {
           }
         }
 
-        /* 10 */
+        /* 11 */
         const modalPrev = block.querySelector('.js-modal-prev');
         if (modalPrev) {
           if (!modalPrev.hasAttribute('block-id')) {

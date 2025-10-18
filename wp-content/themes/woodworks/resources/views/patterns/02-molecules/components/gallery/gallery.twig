@@ -20,7 +20,7 @@
     {% if gallery.images|length > 1 %}
       <div class="c-gallery__dots">
         {% for image in gallery.images %}
-          <span class="c-gallery__dots-item js-gallery-dot{{ loop.index == 1 ? ' this-is-active' }}"></span>
+          <span class="c-gallery__dots-item js-gallery-dot{{ loop.index == 1 ? ' this-is-active' }}" tabindex="0"></span>
         {% endfor %}
       </div>
       <div class="c-gallery__controls">
@@ -32,7 +32,8 @@
               "classes": "o-icon--lg"
             },
             "variant": "bare",
-            "classes": "c-gallery__arrow c-gallery__arrow--previous js-gallery-prev"
+            "classes": "c-gallery__arrow c-gallery__arrow--previous js-gallery-prev",
+            "attributes": "tabindex='0'"
           }
         } %}
         {% include "@atoms/buttons/button.twig" with {
@@ -43,7 +44,8 @@
               "classes": "o-icon--lg"
             },
             "variant": "bare",
-            "classes": "c-gallery__arrow c-gallery__arrow--next js-gallery-next"
+            "classes": "c-gallery__arrow c-gallery__arrow--next js-gallery-next",
+            "attributes": "tabindex='0'"
           }
         } %}
       </div>
