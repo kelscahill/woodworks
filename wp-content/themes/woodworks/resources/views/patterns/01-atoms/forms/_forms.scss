@@ -205,57 +205,34 @@ div.wpforms-container-full .wpforms-form {
     }
   }
 
-  .search-filter-input-group {
-    display: inline-flex;
+  .search-filter-input-button-group {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
     width: 100%;
-    overflow: auto;
     z-index: 1;
-
-    &::before,
-    &::after {
-      content: "";
-      display: block;
-      width: 30px;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      z-index: 1;
-      pointer-events: none;
-
-      @include media(">large") {
-        display: none;
-      }
-    }
-
-    &::before {
-      left: 0;
-      background: linear-gradient(to right, rgb(255 255 255/ 100%) 0%, rgb(255 255 255/ 0%) 100%);
-    }
-
-    &::after {
-      right: 0;
-      background: linear-gradient(to left, rgb(255 255 255/ 100%) 0%, rgb(255 255 255/ 0%) 100%);
-    }
 
     @include media(">large") {
       flex-direction: column;
     }
   }
 
-  .search-filter-input-radio__control {
-    display: none;
-  }
-
-  .search-filter-input-radio__label {
+  .search-filter-input-button {
     display: inline-flex;
-    padding: 9px var(--space-sm) var(--space-xs) var(--space-sm);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 6px var(--space-sm) var(--space-xs) var(--space-sm);
     border-radius: var(--border-radius);
-    line-height: 1;
+    line-height: 1 !important;
     font-weight: 600;
     transition: var(--transition-all);
     white-space: nowrap;
     width: fit-content;
     color: var(--color-black);
+
+    @include u-font--xs;
 
     @include media(">large") {
       color: var(--color-white);
@@ -270,7 +247,7 @@ div.wpforms-container-full .wpforms-form {
     }
   }
 
-  .search-filter-input-radio--is-active .search-filter-input-radio__label {
+  .search-filter-input-button.search-filter-input-button--is-selected {
     background-color: var(--color-primary);
     z-index: 3;
     color: var(--color-white);
