@@ -1,7 +1,7 @@
 <?php
 // Before removing this file, please verify the PHP ini setting `auto_prepend_file` does not point to this.
 
-// This file was the current value of auto_prepend_file during the Wordfence WAF installation (Sat, 18 Oct 2025 00:58:22 +0000)
+// This file was the current value of auto_prepend_file during the Wordfence WAF installation (Sat, 18 Oct 2025 15:56:13 +0000)
 if (file_exists('/usr/share/kinsta_php_prepend/loader.php')) {
 	include_once '/usr/share/kinsta_php_prepend/loader.php';
 }
