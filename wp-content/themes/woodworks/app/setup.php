@@ -15,7 +15,7 @@ use function Roots\bundle;
  */
 add_action('wp_enqueue_scripts', function () {
     bundle('app')->enqueue();
-}, 100);
+}, 10);
 
 /**
  * Register the theme assets with the block editor.
@@ -23,7 +23,7 @@ add_action('wp_enqueue_scripts', function () {
  * @return void
  */
 add_action('enqueue_block_editor_assets', function () {
-  bundle('editor')->enqueue();
+    bundle('editor')->enqueue();
 }, 100);
 
 /**
@@ -45,8 +45,9 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-      'primary_navigation' => __('Primary Navigation', 'sage'),
-      'footer_navigation' => __('Footer Navigation', 'sage')
+      'primary_navigation' => __('Primary Navigation', 'northright'),
+      'secondary_navigation' => __('Secondary Navigation', 'northright'),
+      'footer_navigation' => __('Footer Navigation', 'northright')
     ]);
 
     /**
@@ -100,8 +101,4 @@ add_action('after_setup_theme', function () {
     add_theme_support('customize-selective-refresh-widgets');
 
     add_theme_support('automatic-feed-links');
-
-    add_theme_support('editor-styles');
-    $relAppCssPath = asset('app.css')->relativePath(get_theme_file_path());
-    add_editor_style($relAppCssPath);
 }, 20);
