@@ -21,14 +21,17 @@ const main = async (err) => {
   /**
    * Set the active gallery image
    * 1) Set the active gallery image and cooresponding dot to display
+   * 2) Update aria-current attribute for accessibility
    */
   function setActiveGalleryImage(images, index, dots) {
     for (let i = 0; i < images.length; i++) {
       images[i].classList.remove('this-is-active');
       dots[i].classList.remove('this-is-active');
+      dots[i].removeAttribute('aria-current');
     }
     images[index].classList.add('this-is-active');
     dots[index].classList.add('this-is-active');
+    dots[index].setAttribute('aria-current', 'true');
   }
 
   /**
@@ -141,6 +144,34 @@ const main = async (err) => {
               galleryIndex = index;
               setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
             });
+
+            // Keyboard accessibility for dots
+            dot.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                galleryIndex = index;
+                setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
+              }
+            });
+          });
+
+          // Arrow key navigation for gallery
+          block.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              galleryIndex++;
+              if (galleryIndex >= galleryImages.length) {
+                galleryIndex = 0;
+              }
+              setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
+            } else if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              galleryIndex--;
+              if (galleryIndex < 0) {
+                galleryIndex = galleryImages.length - 1;
+              }
+              setActiveGalleryImage(galleryImages, galleryIndex, galleryDots);
+            }
           });
         }
 

@@ -1,6 +1,6 @@
 {% if gallery.images %}
-  <div class="c-gallery{{ gallery.classes ? ' ' ~ gallery.classes }}">
-    <div class="c-gallery__images">
+  <div class="c-gallery{{ gallery.classes ? ' ' ~ gallery.classes }}" role="region" aria-label="Image gallery">
+    <div class="c-gallery__images" aria-live="polite" aria-atomic="true">
       {% for image in gallery.images %}
         {% set isFirstImage = loop.index == 1 %}
         {% set imageClasses = gallery.images|length > 1 ? "c-gallery__images-item js-gallery-image" : "c-gallery__images-item" %}
@@ -18,9 +18,9 @@
       {% endfor %}
     </div>
     {% if gallery.images|length > 1 %}
-      <div class="c-gallery__dots">
+      <div class="c-gallery__dots" role="group" aria-label="Gallery navigation">
         {% for image in gallery.images %}
-          <span class="c-gallery__dots-item js-gallery-dot{{ loop.index == 1 ? ' this-is-active' }}" tabindex="0"></span>
+          <span class="c-gallery__dots-item js-gallery-dot{{ loop.index == 1 ? ' this-is-active' }}" role="button" aria-label="Go to image {{ loop.index }}"{{ loop.index == 1 ? ' aria-current="true"' }} tabindex="0"></span>
         {% endfor %}
       </div>
       <div class="c-gallery__controls">
@@ -32,8 +32,7 @@
               "classes": "o-icon--lg"
             },
             "variant": "bare",
-            "classes": "c-gallery__arrow c-gallery__arrow--previous js-gallery-prev",
-            "attributes": "tabindex='0'"
+            "classes": "c-gallery__arrow c-gallery__arrow--previous js-gallery-prev"
           }
         } %}
         {% include "@atoms/buttons/button.twig" with {
@@ -44,8 +43,7 @@
               "classes": "o-icon--lg"
             },
             "variant": "bare",
-            "classes": "c-gallery__arrow c-gallery__arrow--next js-gallery-next",
-            "attributes": "tabindex='0'"
+            "classes": "c-gallery__arrow c-gallery__arrow--next js-gallery-next"
           }
         } %}
       </div>
