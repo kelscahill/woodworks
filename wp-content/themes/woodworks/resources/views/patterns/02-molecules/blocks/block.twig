@@ -1,9 +1,4 @@
 {% if post %}
-  {# {% if sf_current_query %}
-    {% set item = sf_current_query|filter(item => item.ID == post.id) %}
-    {% set nextKey = item|keys|first + 1 %}
-    {% set prevKey = item|keys|first > 0 ? item|keys|first - 1 %}
-  {% endif %} #}
   <div id="{{ post.id }}" class="c-block{{ post.classes ? ' ' ~ post.classes }} u-spacing">
     {% if post.meta('gallery') %}
       <div class="c-block__media">
@@ -11,7 +6,7 @@
           {% include "@atoms/text/tag/tag.twig" with {
             "tag": {
               "text": post.category.name,
-              "link": "?_sft_category=" ~ post.category.slug,
+              "link": "?_category=" ~ post.category.slug,
             }
           } %}
           {% if post.meta('gallery')|length > 1 %}

@@ -3,6 +3,8 @@
 \* ------------------------------------ */
 
 .c-content {
+  min-height: 100vh;
+
   &__logo {
     position: sticky;
     top: 70px;

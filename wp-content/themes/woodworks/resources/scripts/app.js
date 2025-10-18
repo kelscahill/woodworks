@@ -1,4 +1,5 @@
 import {domReady} from '@roots/sage/client';
+import jQuery from "jquery";
 
 /**
  * app.main
@@ -88,12 +89,16 @@ const main = async (err) => {
         });
 
         /* 4 */
-        block.querySelector('.c-modal').addEventListener('click', (event) => {
-          const isClickInside = block.querySelector('.c-modal__content').contains(event.target);
-          if (!isClickInside) {
-            modalRemoveActive(galleryBlockId);
-          }
-        });
+        const galleryModal = block.querySelector('.c-modal');
+        if (galleryModal) {
+          galleryModal.addEventListener('click', (event) => {
+            const isClickInside = block.querySelector('.c-modal__content').contains(event.target);
+            if (!isClickInside) {
+              modalRemoveActive(galleryBlockId);
+            }
+          });
+        }
+
 
         /* 5 */
         const galleryImages = block.querySelectorAll('.js-gallery-image');
@@ -175,36 +180,6 @@ const main = async (err) => {
       }
     }
   }
-
-  // jQuery(document).on('sf:ajaxfinish', function(event) {
-  //   console.log(event);
-  //   var search_query = event.detail.content.data.query;
-  //   // Set the main query arguments based on the filtered query
-  //   var args = {
-  //     post_type: search_query.post_type,
-  //     post_status: search_query.post_status,
-  //     orderby: search_query.orderby,
-  //     order: search_query.order,
-  //     posts_per_page: search_query.posts_per_page,
-  //     paged: search_query.paged,
-  //     s: search_query.s,
-  //     tax_query: search_query.tax_query,
-  //     meta_query: search_query.meta_query,
-  //   };
-
-  //   // Update the main query with the filtered query
-  //   jQuery.ajax({
-  //     type: "GET",
-  //     url: "/wp-admin/admin-ajax.php",
-  //     data: {
-  //       action: "update_main_query",
-  //       args: args,
-  //     },
-  //     success: function(response){
-  //       console.log(response);
-  //     },
-  //   });
-  // });
 
   /**
    * IntersectionObserver for page sections

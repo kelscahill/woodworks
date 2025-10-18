@@ -2,6 +2,9 @@
   <div class="c-gallery{{ gallery.classes ? ' ' ~ gallery.classes }}">
     <div class="c-gallery__images">
       {% for image in gallery.images %}
+        {% set isFirstImage = loop.index == 1 %}
+        {% set imageClasses = gallery.images|length > 1 ? "c-gallery__images-item js-gallery-image" : "c-gallery__images-item" %}
+        {% set imageClasses = isFirstImage ? imageClasses ~ " this-is-active" : imageClasses %}
         {% include "@atoms/images/image/responsive-image.twig" with {
           "image": {
             "srcset": Image(image).src|resize(900, 900) ~ ' 768w, ' ~ Image(image).src|resize(1200, 1200) ~ ' 1024w',
@@ -9,7 +12,7 @@
             "alt": Image(image).alt,
           },
           "picture": {
-            "classes": gallery.images|length > 1 ? "c-gallery__images-item js-gallery-image" : "c-gallery__images-item this-is-active",
+            "classes": imageClasses,
           }
         } %}
       {% endfor %}
@@ -17,7 +20,7 @@
     {% if gallery.images|length > 1 %}
       <div class="c-gallery__dots">
         {% for image in gallery.images %}
-          <span class="c-gallery__dots-item js-gallery-dot"></span>
+          <span class="c-gallery__dots-item js-gallery-dot{{ loop.index == 1 ? ' this-is-active' }}"></span>
         {% endfor %}
       </div>
       <div class="c-gallery__controls">

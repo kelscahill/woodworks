@@ -1,17 +1,19 @@
 {
   "app": {
     "js": [
-      "js/runtime.606f18.js",
-      "js/app.4b6643.js"
+      "js/runtime.0210de.js",
+      "js/app.bdf41e.js"
     ],
     "css": [
-      "css/app.11e2c9.css"
+      "css/app.223ec4.css"
     ],
-    "dependencies": []
+    "dependencies": [
+      "jquery"
+    ]
   },
   "editor": {
     "js": [
-      "js/runtime.606f18.js",
+      "js/runtime.0210de.js",
       "js/editor.ba9818.js"
     ],
     "css": [
