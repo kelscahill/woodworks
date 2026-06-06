@@ -123,7 +123,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 		<script type="text/html" id="tmpl-wpforms-providers-builder-content-connection-fields">
 			<div class="wpforms-builder-provider-connection-block wpforms-builder-provider-connection-fields">
 				<h4><?php esc_html_e( 'Custom Fields', 'wpforms-lite' ); ?></h4>
-				<table class="wpforms-builder-provider-connection-fields-table">
+				<table class="wpforms-builder-provider-connection-fields-table wpforms-undo-redo-container">
 					<thead>
 						<tr>
 							<th><?php esc_html_e( 'Custom Field Name', 'wpforms-lite' ); ?></th>
@@ -135,9 +135,14 @@ abstract class FormBuilder implements FormBuilderInterface {
 							<# _.each( data.connection.fields_meta, function( item, meta_id ) { #>
 								<tr class="wpforms-builder-provider-connection-fields-table-row">
 									<td>
-										<# if ( ! _.isEmpty( data.provider.fields ) ) { #>
+										<?php
+											// data.hideCustomMetaInput property is used when there are no registered custom fields,
+											// but select field should be shown instead of input.
+										?>
+										<# if ( data.hideCustomMetaInput || ! _.isEmpty( data.provider.fields ) ) { #>
 											<select class="wpforms-builder-provider-connection-field-name"
-												name="providers[{{ data.provider.slug }}][{{ data.connection.id }}][fields_meta][{{ meta_id }}][name]">
+												name="providers[{{ data.provider.slug }}][{{ data.connection.id }}][fields_meta][{{ meta_id }}][name]"
+												<# if ( _.isEmpty( data.provider.fields ) ) { #>disabled<# } #>>
 												<option value=""><# if ( ! _.isEmpty( data.provider.placeholder ) ) { #>{{ data.provider.placeholder }}<# } else { #><?php esc_html_e( '--- Select Field ---', 'wpforms-lite' ); ?><# } #></option>
 
 												<# _.each( data.provider.fields, function( field_name, field_id ) { #>
@@ -162,14 +167,14 @@ abstract class FormBuilder implements FormBuilderInterface {
 											name="providers[{{ data.provider.slug }}][{{ data.connection.id }}][fields_meta][{{ meta_id }}][field_id]">
 											<option value=""><?php esc_html_e( '--- Select Form Field ---', 'wpforms-lite' ); ?></option>
 
-											<# _.each( data.fields, function( field, key ) { #>
-												<# item.field_id = item.field_id.toString();
-												field.id = field.id.toString();
-												isSelected = field.id === item.field_id
+											<# _.each( data.fields, function( field, key ) {
+												const fieldId = field.id.toString();
+												const itemId  = item.field_id.toString();
+												isSelected    = fieldId === itemId
 													<?php // BC: Previously saved name fields don't have the `.full` suffix in DB. ?>
-													|| ( ! item.field_id.includes('.') && field.id === item.field_id + '.full' );
+													|| ( ! itemId.includes('.') && fieldId === itemId + '.full' );
 												#>
-												<option value="{{ field.id }}"<# if ( isSelected ) { #> selected="selected"<# } #>>
+												<option value="{{ fieldId }}"<# if ( isSelected ) { #> selected="selected"<# } #>>
 													<# if ( ! _.isUndefined( field.label ) && field.label.toString().trim() !== '' ) { #>
 														{{ field.label.toString().trim() }}
 													<# } else { #>
@@ -180,7 +185,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 										</select>
 									</td>
 									<td class="add">
-										<button class="button-secondary js-wpforms-builder-provider-connection-fields-add"
+										<button class="button-secondary js-wpforms-builder-provider-connection-fields-add <# if ( _.isEmpty( data.provider.fields ) ) { #>wpforms-disabled<# } #>"
 										        title="<?php esc_attr_e( 'Add Another', 'wpforms-lite' ); ?>">
 											<i class="fa fa-plus-circle"></i>
 										</button>
@@ -196,9 +201,10 @@ abstract class FormBuilder implements FormBuilderInterface {
 						<# } else { #>
 							<tr class="wpforms-builder-provider-connection-fields-table-row">
 								<td>
-									<# if ( ! _.isEmpty( data.provider.fields ) ) { #>
+									<# if ( data.hideCustomMetaInput || ! _.isEmpty( data.provider.fields ) ) { #>
 										<select class="wpforms-builder-provider-connection-field-name"
-											name="providers[{{ data.provider.slug }}][{{ data.connection.id }}][fields_meta][0][name]">
+											name="providers[{{ data.provider.slug }}][{{ data.connection.id }}][fields_meta][0][name]"
+											<# if ( _.isEmpty( data.provider.fields ) ) { #>disabled<# } #>>
 											<option value=""><# if ( ! _.isEmpty( data.provider.placeholder ) ) { #>{{ data.provider.placeholder }}<# } else { #><?php esc_html_e( '--- Select Field ---', 'wpforms-lite' ); ?><# } #></option>
 
 											<# _.each( data.provider.fields, function( field_name, field_id ) { #>
@@ -233,7 +239,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 									</select>
 								</td>
 								<td class="add">
-									<button class="button-secondary js-wpforms-builder-provider-connection-fields-add"
+									<button class="button-secondary js-wpforms-builder-provider-connection-fields-add <# if ( _.isEmpty( data.provider.fields ) ) { #>wpforms-disabled<# } #>"
 									        title="<?php esc_attr_e( 'Add Another', 'wpforms-lite' ); ?>">
 										<i class="fa fa-plus-circle"></i>
 									</button>
