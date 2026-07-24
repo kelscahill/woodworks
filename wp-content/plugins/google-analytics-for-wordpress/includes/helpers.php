@@ -1003,6 +1003,29 @@ function monsterinsights_get_country_list( $translated = false ) {
 function monsterinsights_get_api_url() {
 	return apply_filters( 'monsterinsights_get_api_url', 'api.monsterinsights.com/v2/' );
 }
+
+/**
+ * Builds the site identifier used for authentication requests.
+ *
+ * Lives here (an always-loaded file) rather than the admin-only common.php so
+ * that MonsterInsights_API_Auth::get_sitei() works when the onboarding URL is
+ * built from the frontend admin bar.
+ *
+ * @return string
+ */
+function monsterinsights_get_sitei() {
+	$auth_key        = defined( 'AUTH_KEY' ) ? AUTH_KEY : '';
+	$secure_auth_key = defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
+	$logged_in_key   = defined( 'LOGGED_IN_KEY' ) ? LOGGED_IN_KEY : '';
+
+	$sitei = $auth_key . $secure_auth_key . $logged_in_key;
+	$sitei = preg_replace( '/[^a-zA-Z0-9]/', '', $sitei );
+	$sitei = sanitize_text_field( $sitei );
+	$sitei = trim( $sitei );
+	$sitei = ( strlen( $sitei ) > 30 ) ? substr( $sitei, 0, 30 ) : $sitei;
+
+	return $sitei;
+}
 /**
  * Defines the new dynamic onboarding URL.
  *
@@ -1013,6 +1036,16 @@ function monsterinsights_get_onboarding_url() {
 	$base_url = apply_filters( 'monsterinsights_get_onboarding_url', 'https://connect.monsterinsights.com' );
 
 	$auth       = MonsterInsights()->api_auth;
+
+	// The API Auth object is only instantiated in admin/cron contexts, but this
+	// helper is also called from the frontend admin bar. Unlike `auth`/`license`
+	// it isn't lazy-loaded via __get (it's a declared property), so load it on
+	// demand to avoid a fatal when accessed on the frontend.
+	if ( empty( $auth ) ) {
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/admin/api-auth.php';
+		$auth = MonsterInsights()->api_auth = new MonsterInsights_API_Auth();
+	}
+
 	$is_network = is_network_admin();
 	$params = array(
 		'tt'                => $auth->get_tt(),
@@ -1038,12 +1071,29 @@ function monsterinsights_get_onboarding_url() {
  * @return string The onboarding key
  */
 function monsterinsights_get_onboarding_key() {
+	$ttl = 30 * MINUTE_IN_SECONDS;
 	$key = get_transient( 'monsterinsights_onboarding_key' );
+
 	if ( empty( $key ) ) {
+		// Expired or never set: generate a fresh key bound to the current user.
 		$key = wp_generate_password( 32, false );
-		set_transient( 'monsterinsights_onboarding_key', $key, 30 * MINUTE_IN_SECONDS );
-		set_transient( 'monsterinsights_onboarding_user_id', get_current_user_id(), 30 * MINUTE_IN_SECONDS );
+		set_transient( 'monsterinsights_onboarding_key', $key, $ttl );
+		set_transient( 'monsterinsights_onboarding_user_id', get_current_user_id(), $ttl );
+
+		return $key;
 	}
+
+	// Still valid: slide the window so an active admin session keeps a launch-ready
+	// key (the pre-generated wizard URL stays valid without an admin-ajax round-trip).
+	// Re-set BOTH transients together - preserving the original generator's user id -
+	// so the key and its associated user id always expire in step.
+	$user_id = get_transient( 'monsterinsights_onboarding_user_id' );
+	if ( empty( $user_id ) ) {
+		$user_id = get_current_user_id();
+	}
+	set_transient( 'monsterinsights_onboarding_key', $key, $ttl );
+	set_transient( 'monsterinsights_onboarding_user_id', $user_id, $ttl );
+
 	return $key;
 }
 
@@ -2253,6 +2303,28 @@ function monsterinsights_can_install_plugins( $user_id = null ) {
 		return false;
 	}
 	return true;
+}
+
+/**
+ * Returns the list of contextual promo notices the current user has dismissed.
+ *
+ * Dismissal is stored per-user so each admin dismisses independently. Used by
+ * the Universally product-education prompts (GH-3374) and reusable for any
+ * future contextual promo. Always returns an array.
+ *
+ * @since 11.1.0
+ *
+ * @param int|null $user_id User ID to check. Defaults to the current user.
+ * @return array Array of dismissed promo IDs.
+ */
+function monsterinsights_get_dismissed_promos( $user_id = null ) {
+	if ( empty( $user_id ) ) {
+		$user_id = get_current_user_id();
+	}
+
+	$dismissed = get_user_meta( $user_id, 'monsterinsights_dismissed_promos', true );
+
+	return is_array( $dismissed ) ? $dismissed : array();
 }
 
 /**

@@ -544,7 +544,7 @@ class MonsterInsights_SiteNotes_Controller {
 			$row = array(
 				$item['note_date'],
 				$item['note_title'],
-				!empty($item['category']) ? $item['category']['name'] : 'N/A',
+				!empty($item['category']['name']) ? $item['category']['name'] : 'N/A',
 				intval($item['important']),
 				$item_media
 			);
@@ -774,13 +774,16 @@ class MonsterInsights_SiteNotes_Controller {
 				)
 			);
 		}
-		// Check if response contains annotations data.
+		// Check if response contains annotations data. "Nothing to import" is a
+		// completed sync, not an error — persist the flag so the front-end stops
+		// re-running the import on every page load.
 		if (
 			empty( $response ) ||
 			! isset( $response['data']['annotations'] ) ||
 			empty( $response['data']['annotations'] )
 		) {
-			wp_send_json_error(
+			monsterinsights_update_option( 'site_notes_import_synced', 1 );
+			wp_send_json_success(
 				array(
 					'message' => __(
 						'No annotations found to import.',
@@ -823,6 +826,19 @@ class MonsterInsights_SiteNotes_Controller {
 					),
 					$ga4_annotation_id ?: 'unknown'
 				);
+				continue;
+			}
+
+			// Skip if a note with the same title + date already exists locally
+			// (created manually, or by a prior sync that didn't link the GA4 id).
+			// This stops the import from re-creating duplicates of notes it can't
+			// match by `_ga4_annotation_id` alone.
+			$existing_note_id = $this->find_note_by_title_date( $note_details['note'], $note_details['date'] );
+			if ( $existing_note_id ) {
+				if ( ! empty( $ga4_annotation_id ) && '' === (string) get_post_meta( $existing_note_id, '_ga4_annotation_id', true ) ) {
+					update_post_meta( $existing_note_id, '_ga4_annotation_id', $ga4_annotation_id );
+				}
+				$skipped_count++;
 				continue;
 			}
 
@@ -934,6 +950,44 @@ class MonsterInsights_SiteNotes_Controller {
 		return ! empty( $notes );
 	}
 
+	/**
+	 * Find an existing site note by title and date (Y-m-d).
+	 *
+	 * Used to dedupe imports: a note may already exist locally without a linked
+	 * GA4 annotation id (created manually, or by a prior sync), so matching on
+	 * `_ga4_annotation_id` alone is not enough to avoid duplicates.
+	 *
+	 * @param string $title The note title.
+	 * @param string $date  The note date in Y-m-d format.
+	 * @return int The matching note ID, or 0 if none.
+	 */
+	private function find_note_by_title_date( $title, $date ) {
+		$parts = explode( '-', (string) $date );
+		if ( count( $parts ) !== 3 ) {
+			return 0;
+		}
+
+		$query = new WP_Query(
+			array(
+				'post_type'      => 'monsterinsights_note',
+				'title'          => $title,
+				'post_status'    => array( 'publish', 'trash' ),
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'date_query'     => array(
+					array(
+						'year'  => intval( $parts[0] ),
+						'month' => intval( $parts[1] ),
+						'day'   => intval( $parts[2] ),
+					),
+				),
+			)
+		);
+
+		return ! empty( $query->posts ) ? intval( $query->posts[0] ) : 0;
+	}
+
 	public function add_categories_to_editor($vars) {
 		$args = array(
 			'per_page' => 0,
@@ -963,13 +1017,17 @@ class MonsterInsights_SiteNotes_Controller {
 			return;
 		}
 
+		$auth_callback = function ( $allowed, $meta_key, $object_id ) {
+			return current_user_can( 'edit_post', $object_id );
+		};
+
 		register_post_meta(
 			'',
 			'_monsterinsights_sitenote_active',
 			[
-				'auth_callback' => '__return_true',
+				'auth_callback' => $auth_callback,
 				'default'       => false,
-				'show_in_rest'  => true,
+				'show_in_rest'  => false,
 				'single'        => true,
 				'type'          => 'boolean',
 			]
@@ -979,9 +1037,9 @@ class MonsterInsights_SiteNotes_Controller {
 			'',
 			'_monsterinsights_sitenote_note',
 			[
-				'auth_callback' => '__return_true',
+				'auth_callback' => $auth_callback,
 				'default'       => '',
-				'show_in_rest'  => true,
+				'show_in_rest'  => false,
 				'single'        => true,
 				'type'          => 'string',
 			]
@@ -991,9 +1049,9 @@ class MonsterInsights_SiteNotes_Controller {
 			'',
 			'_monsterinsights_sitenote_category',
 			[
-				'auth_callback' => '__return_true',
+				'auth_callback' => $auth_callback,
 				'default'       => 0,
-				'show_in_rest'  => true,
+				'show_in_rest'  => false,
 				'single'        => true,
 				'type'          => 'integer',
 			]

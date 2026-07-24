@@ -558,7 +558,9 @@ class MonsterInsights_Popular_Posts {
 						if ( 'border' === $element || 'border' === $style_key ) {
 							$style_key = 'border-color';
 						}
-						$style_css .= $style_key . ':' . $atts[ $atts_key ] . ';';
+						$safe_value = wp_strip_all_tags( (string) $atts[ $atts_key ] );
+						$safe_value = str_replace( array( ';', '{', '}', '<', '>' ), '', $safe_value );
+						$style_css .= $style_key . ':' . $safe_value . ';';
 					}
 				}
 			}
@@ -642,7 +644,13 @@ class MonsterInsights_Popular_Posts {
 		}
 
 		if ( isset( $atts['className'] ) ) {
-			$classes[] = $atts['className'];
+			$raw_classes = preg_split( '/\s+/', (string) $atts['className'] );
+			foreach ( (array) $raw_classes as $raw_class ) {
+				$safe_class = sanitize_html_class( $raw_class );
+				if ( '' !== $safe_class ) {
+					$classes[] = $safe_class;
+				}
+			}
 		}
 
 		$classname = implode( ' ', $classes );

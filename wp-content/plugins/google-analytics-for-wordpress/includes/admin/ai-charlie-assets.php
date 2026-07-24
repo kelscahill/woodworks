@@ -131,9 +131,7 @@ class MonsterInsights_AI_Charlie_Assets {
 		$ai_chat_api_url = apply_filters( 'monsterinsights_ai_chat_api_url', 'https://ai-api.monsterinsights.com' );
 		$version_path    = monsterinsights_is_pro_version() ? 'pro' : 'lite';
 		$assets_url      = apply_filters( 'monsterinsights_vue3_assets_url', plugins_url( $version_path . '/assets/vue3', MONSTERINSIGHTS_PLUGIN_FILE ) );
-		$wizard_url      = is_network_admin()
-			? network_admin_url( 'index.php?page=monsterinsights-onboarding' )
-			: admin_url( 'index.php?page=monsterinsights-onboarding' );
+		$wizard_url      = monsterinsights_can_install_plugins() ? monsterinsights_get_onboarding_url() : '';
 		$settings_url    = is_network_admin()
 			? network_admin_url( 'admin.php?page=monsterinsights_network' )
 			: admin_url( 'admin.php?page=monsterinsights_settings' );
@@ -203,12 +201,9 @@ class MonsterInsights_AI_Charlie_Assets {
 			return '';
 		}
 
+		// Under SCRIPT_DEBUG the loaded manifest is manifest.dev.json, so this
+		// already points at the unminified build (see load_manifest_data).
 		$file = self::$manifest_data[ $entry_key ]['file'];
-
-		// Use unminified version when SCRIPT_DEBUG is enabled.
-		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			$file = str_replace( '.min.js', '.js', $file );
-		}
 
 		return $this->get_base_url() . ltrim( $file, '/' );
 	}
@@ -280,8 +275,15 @@ class MonsterInsights_AI_Charlie_Assets {
 			return;
 		}
 
-		$plugin_path   = plugin_dir_path( MONSTERINSIGHTS_PLUGIN_FILE );
-		$manifest_path = $plugin_path . $this->version_path . '/assets/vue3/manifest.json';
+		$plugin_path = plugin_dir_path( MONSTERINSIGHTS_PLUGIN_FILE );
+		$base        = $plugin_path . $this->version_path . '/assets/vue3/';
+
+		// Under SCRIPT_DEBUG prefer the unminified build's manifest.dev.json
+		// (its filenames hash differently from the production build, so they
+		// can't be derived from the .min names); fall back to manifest.json.
+		$manifest_path = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $base . 'manifest.dev.json' ) )
+			? $base . 'manifest.dev.json'
+			: $base . 'manifest.json';
 
 		if ( ! file_exists( $manifest_path ) ) {
 			self::$manifest_data = array();

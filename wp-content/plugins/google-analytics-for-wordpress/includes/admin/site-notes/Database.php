@@ -103,6 +103,11 @@ class MonsterInsights_Site_Notes_DB_Base
 		if (empty($data['note'])) {
 			return new WP_Error(400, __('Your Site Note Cannot be Empty', 'google-analytics-for-wordpress'));
 		}
+
+		if ( ! empty( $data['id'] ) && 'monsterinsights_note' !== get_post_type( $data['id'] ) ) {
+			return new WP_Error( 403, __( 'Invalid site note.', 'google-analytics-for-wordpress' ) );
+		}
+
 		$note_post = array(
 			'ID' => isset($data['id']) ? $data['id'] : null,
 			'post_title'    => sanitize_text_field($data['note']),
@@ -117,8 +122,12 @@ class MonsterInsights_Site_Notes_DB_Base
 			return $post_id;
 		}
 
-		// Create the note in GA4.
-		$this->create_note_in_ga4($post_id, $data);
+		// Create the note in GA4. Skipped during bulk operations such as settings
+		// import, where syncing each restored note to the relay individually would
+		// fire one synchronous request per note.
+		if (empty($data['skip_ga4_sync'])) {
+			$this->create_note_in_ga4($post_id, $data);
+		}
 
 		// Attach the note to the category.
 		if (!empty($data['category'])) {
@@ -421,6 +430,10 @@ class MonsterInsights_Site_Notes_DB_Base
 			return;
 		}
 
+		if ( 'monsterinsights_note' !== get_post_type( $note_id ) ) {
+			return;
+		}
+
 		return wp_trash_post($note_id);
 	}
 
@@ -429,6 +442,11 @@ class MonsterInsights_Site_Notes_DB_Base
 		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
 			return;
 		}
+
+		if ( 'monsterinsights_note' !== get_post_type( $note_id ) ) {
+			return;
+		}
+
 		return wp_untrash_post($note_id);
 	}
 	/**
@@ -443,6 +461,10 @@ class MonsterInsights_Site_Notes_DB_Base
 	public function delete_note( $note_id = 0 )
 	{
 		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+			return;
+		}
+
+		if ( 'monsterinsights_note' !== get_post_type( $note_id ) ) {
 			return;
 		}
 

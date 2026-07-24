@@ -91,10 +91,6 @@ function monsterinsights_is_own_admin_page() {
 		return true;
 	}
 
-	if ( 'dashboard_page_monsterinsights-getting-started' === get_current_screen()->id ) {
-		return true;
-	}
-
 	return false;
 }
 
@@ -206,7 +202,6 @@ function monsterinsights_remove_conflicting_asset_files() {
 		'wc_smartship_moment_js', // WooCommerce Posti SmartShip by markup.fi
 		'ecwid-admin-js', // Fixes Conflict for Ecwid Shopping Cart
 		'td-wp-admin-js', // Newspaper by tagDiv
-		'moment', // Screets Live Chat
 		'wpmf-base', //  WP Media Folder Fix
 		'wpmf-media-filters', //  WP Media Folder Fix
 		'wpmf-folder-tree', //  WP Media Folder Fix
@@ -706,20 +701,6 @@ function monsterinsights_yearinreview_dates() {
 		'next_year'   => $current_year,
 		'show_report' => apply_filters( 'monsterinsights_yearinreview_show_report', $show_report ),
 	);
-}
-
-function monsterinsights_get_sitei() {
-	$auth_key        = defined( 'AUTH_KEY' ) ? AUTH_KEY : '';
-	$secure_auth_key = defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
-	$logged_in_key   = defined( 'LOGGED_IN_KEY' ) ? LOGGED_IN_KEY : '';
-
-	$sitei = $auth_key . $secure_auth_key . $logged_in_key;
-	$sitei = preg_replace( '/[^a-zA-Z0-9]/', '', $sitei );
-	$sitei = sanitize_text_field( $sitei );
-	$sitei = trim( $sitei );
-	$sitei = ( strlen( $sitei ) > 30 ) ? substr( $sitei, 0, 30 ) : $sitei;
-
-	return $sitei;
 }
 
 /**

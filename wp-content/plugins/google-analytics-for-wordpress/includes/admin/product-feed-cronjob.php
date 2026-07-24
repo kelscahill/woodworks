@@ -167,6 +167,8 @@ class MonsterInsights_Product_Feed_Cronjob extends MonsterInsights_Notification_
 	 */
 	public function manual_check() {
 		// Security check
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
 		if ( ! current_user_can( 'monsterinsights_view_dashboard' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Insufficient permissions', 'google-analytics-for-wordpress' ) ) );
 		}

@@ -297,6 +297,7 @@ class MonsterInsights_Install {
 			'demographics'                             => 1,
 			'ignore_users'                             => array( 'administrator', 'editor' ),
 			'dashboards_disabled'                      => 0,
+			'hide_not_set_values_from_reports'         => 'on',
 			'anonymize_ips'                            => 0,
 			'extensions_of_files'                      => 'doc,pdf,ppt,zip,xls,docx,pptx,xlsx',
 			'subdomain_tracking'                       => '',

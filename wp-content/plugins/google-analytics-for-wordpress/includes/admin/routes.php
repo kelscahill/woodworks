@@ -63,6 +63,7 @@ class MonsterInsights_Rest_Routes {
 		add_action( 'wp_ajax_monsterinsights_vue_get_user_included_metrics', array( $this, 'get_user_included_metrics' ) );
 		add_action( 'wp_ajax_monsterinsights_vue_get_overview_bundle', array( $this, 'get_overview_bundle' ) );
 		add_action( 'wp_ajax_monsterinsights_vue_capture_last_used_report', array( $this, 'capture_last_used_report' ) );
+		add_action( 'wp_ajax_monsterinsights_vue_dismiss_promo', array( $this, 'dismiss_promo' ) );
 	}
 
 	/**
@@ -149,6 +150,14 @@ class MonsterInsights_Rest_Routes {
 			if ( ! isset( $options[ $array_field ] ) ) {
 				$options[ $array_field ] = array();
 			}
+		}
+
+		// "(not set)" rows are hidden by default. Existing installs predate this option,
+		// so default it to "on" here to keep the toggle and report behavior in sync.
+		// The value is stored as "on"/"off" (not a bool) so the off state survives
+		// monsterinsights_update_option(), which deletes options with an empty value.
+		if ( ! isset( $options['hide_not_set_values_from_reports'] ) ) {
+			$options['hide_not_set_values_from_reports'] = 'on';
 		}
 
 		//add email summaries options
@@ -899,6 +908,21 @@ class MonsterInsights_Rest_Routes {
 			);
 		}
 
+		// Universally. Promoted contextually across reports/settings (GH-3374);
+		// installed/active state drives whether those prompts render.
+		$parsed_addons['universally'] = array(
+			'active'    => defined( 'UNIVERSALLY_VERSION' ),
+			'icon'      => '',
+			'title'     => 'Universally',
+			'excerpt'   => __( 'Automatically translate your website into 110+ languages with AI to reach a global audience and grow international traffic.', 'google-analytics-for-wordpress' ),
+			'installed' => array_key_exists( 'universally-language-translation-multilingual-tool/universally.php', $installed_plugins ),
+			'basename'  => 'universally-language-translation-multilingual-tool/universally.php',
+			'slug'      => 'universally-language-translation-multilingual-tool',
+			// Universally's own settings screen (top-level menu slug `universally_settings`),
+			// so the Setup Checklist "installed" state links there instead of the MI Addons page.
+			'settings'  => admin_url( 'admin.php?page=universally_settings' ),
+		);
+
 		$parsed_addons = apply_filters('monsterinsights_parsed_addons', $parsed_addons);
 
 		if ( true !== $is_onboarding ) {
@@ -956,6 +980,11 @@ class MonsterInsights_Rest_Routes {
 		$manual_v4_code = monsterinsights_is_valid_v4_id( $manual_v4_code ); // Also sanitizes the string.
 
 		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
+			if ( ! current_user_can( 'manage_network_options' ) ) {
+				wp_send_json_error( array(
+					'error' => esc_html__( 'You do not have permission to update network settings.', 'google-analytics-for-wordpress' ),
+				) );
+			}
 			define( 'WP_NETWORK_ADMIN', true );
 		}
 		$manual_v4_code_old = is_network_admin() ? MonsterInsights()->auth->get_network_manual_v4_id() : MonsterInsights()->auth->get_manual_v4_id();
@@ -1008,6 +1037,11 @@ class MonsterInsights_Rest_Routes {
 		}
 
 		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
+			if ( ! current_user_can( 'manage_network_options' ) ) {
+				wp_send_json_error( array(
+					'error' => esc_html__( 'You do not have permission to update network settings.', 'google-analytics-for-wordpress' ),
+				) );
+			}
 			define( 'WP_NETWORK_ADMIN', true );
 		}
 
@@ -1089,7 +1123,9 @@ class MonsterInsights_Rest_Routes {
 			'monsterinsights_oauth_status',
 		);
 
-		$this->import_site_notes( $new_settings['site_notes'] );
+		if ( ! empty( $new_settings['site_notes'] ) ) {
+			$this->import_site_notes( $new_settings['site_notes'] );
+		}
 		unset( $new_settings['site_notes'] );
 
 		foreach ( $exclude as $e ) {
@@ -1180,12 +1216,11 @@ class MonsterInsights_Rest_Routes {
 		$site_auth = MonsterInsights()->auth->get_viewname();
 		$ms_auth   = is_multisite() && MonsterInsights()->auth->get_network_viewname();
 		if ( ! $site_auth && ! $ms_auth ) {
-			$url = admin_url( 'admin.php?page=monsterinsights-onboarding' );
+			// `monsterinsights_get_onboarding_url()` already builds the correct
+			// network-admin return URL when `is_network_admin()` is true, so a
+			// separate multisite fallback is no longer needed.
+			$url = monsterinsights_get_onboarding_url();
 
-			// Check for MS dashboard
-			if ( is_network_admin() ) {
-				$url = network_admin_url( 'admin.php?page=monsterinsights-onboarding' );
-			}
 			$message = sprintf(
 				/* translators: %1$s: Opening wizard link tag, %2$s: Closing wizard link tag. */
 				esc_html__( 'You need to authenticate into MonsterInsights before viewing reports. Please run our %1$ssetup wizard%2$s.', 'google-analytics-for-wordpress' ),
@@ -1404,6 +1439,10 @@ class MonsterInsights_Rest_Routes {
 	public function dismiss_notice() {
 
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+			wp_send_json_error();
+		}
 
 		$notice_id = empty( $_POST['notice'] ) ? false : sanitize_text_field( wp_unslash( $_POST['notice'] ) );
 		if ( ! $notice_id ) {
@@ -1725,22 +1764,30 @@ class MonsterInsights_Rest_Routes {
 		$notes_db = new MonsterInsights_Site_Notes_DB_Base();
 
 		// Import site-notes category.
-		foreach ( $site_notes['categories'] as $category ) {
-			$notes_db->create_category( array(
-				'name'             => $category['name'],
-				'background_color' => $category['color'],
-			) );
+		if ( ! empty( $site_notes['categories'] ) && is_array( $site_notes['categories'] ) ) {
+			foreach ( $site_notes['categories'] as $category ) {
+				$notes_db->create_category( array(
+					'name'             => $category['name'],
+					'background_color' => $category['color'],
+				) );
+			}
 		}
 
-		foreach ( $site_notes['notes'] as $notes ) {
-			$category = get_term_by( 'name', $notes['category_name'], 'monsterinsights_note_category' );
+		if ( ! empty( $site_notes['notes'] ) && is_array( $site_notes['notes'] ) ) {
+			foreach ( $site_notes['notes'] as $notes ) {
+				$category = get_term_by( 'name', $notes['category_name'], 'monsterinsights_note_category' );
 
-			$notes_db->create( array(
-				'note'      => $notes['note_title'],
-				'date'      => $notes['note_date'],
-				'important' => $notes['important'],
-				'category'  => intval( ( ! empty( $category ) && ! empty( $category->term_id ) ) ? $category->term_id : 0 ),
-			) );
+				$notes_db->create( array(
+					'note'         => $notes['note_title'],
+					'date'         => $notes['note_date'],
+					'important'    => $notes['important'],
+					'category'     => intval( ( ! empty( $category ) && ! empty( $category->term_id ) ) ? $category->term_id : 0 ),
+					// Restoring notes from a backup file must not push each note to
+					// the relay individually; that would fire one synchronous request
+					// per note and time the import request out.
+					'skip_ga4_sync' => true,
+				) );
+			}
 		}
 	}
 	/**
@@ -1789,6 +1836,47 @@ class MonsterInsights_Rest_Routes {
 
 		$user_included_metrics = $this->remove_premium_metrics( $user_included_metrics );
 		wp_send_json_success( $user_included_metrics );
+	}
+
+	/**
+	 * Records that the current user dismissed a contextual promo notice.
+	 *
+	 * Dismissal is stored per-user (not per-site) so each admin can dismiss
+	 * independently. Used by the Universally product-education prompts (GH-3374)
+	 * and reusable for any future contextual promo.
+	 *
+	 * @since 11.1.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function dismiss_promo() {
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		// Gate on the same capability that controls who can see these promos. The write
+		// only touches the current user's own meta, but this keeps parity with the view gate.
+		if ( ! current_user_can( 'monsterinsights_view_dashboard' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to do this.', 'google-analytics-for-wordpress' ) ) );
+
+			return;
+		}
+
+		$promo_id = isset( $_POST['promo_id'] ) ? sanitize_key( wp_unslash( $_POST['promo_id'] ) ) : '';
+
+		if ( empty( $promo_id ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Missing promo id.', 'google-analytics-for-wordpress' ) ) );
+
+			return;
+		}
+
+		$dismissed = monsterinsights_get_dismissed_promos();
+
+		if ( ! in_array( $promo_id, $dismissed, true ) ) {
+			$dismissed[] = $promo_id;
+			update_user_meta( get_current_user_id(), 'monsterinsights_dismissed_promos', $dismissed );
+		}
+
+		wp_send_json_success( $dismissed );
 	}
 
 	/**
@@ -1851,12 +1939,11 @@ class MonsterInsights_Rest_Routes {
 		$site_auth = MonsterInsights()->auth->get_viewname();
 		$ms_auth   = is_multisite() && MonsterInsights()->auth->get_network_viewname();
 		if ( ! $site_auth && ! $ms_auth ) {
-			$url = admin_url( 'admin.php?page=monsterinsights-onboarding' );
+			// `monsterinsights_get_onboarding_url()` already builds the correct
+			// network-admin return URL when `is_network_admin()` is true, so a
+			// separate multisite fallback is no longer needed.
+			$url = monsterinsights_get_onboarding_url();
 
-			// Check for MS dashboard.
-			if ( is_network_admin() ) {
-				$url = network_admin_url( 'admin.php?page=monsterinsights-onboarding' );
-			}
 			$message = sprintf(
 				/* translators: %1$s: Opening wizard link tag, %2$s: Closing wizard link tag. */
 				esc_html__( 'You need to authenticate into MonsterInsights before viewing reports. Please run our %1$ssetup wizard%2$s.', 'google-analytics-for-wordpress' ),

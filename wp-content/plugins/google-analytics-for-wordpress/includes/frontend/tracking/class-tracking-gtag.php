@@ -109,13 +109,21 @@ class MonsterInsights_Tracking_Gtag extends MonsterInsights_Tracking_Abstract {
 		if ( is_array( $cross_domains ) && ! empty( $cross_domains ) ) {
 			$linker_domains = [];
 			foreach ( $cross_domains as $cross_domain ) {
-				if ( ! empty( $cross_domain['domain'] ) ) {
-					$linker_domains[] = $cross_domain['domain'];
+				if ( empty( $cross_domain['domain'] ) ) {
+					continue;
 				}
+				$domain = str_replace( '!@#', '', (string) $cross_domain['domain'] );
+				$domain = preg_replace( '/[^A-Za-z0-9._-]/', '', $domain );
+				if ( '' === $domain ) {
+					continue;
+				}
+				$linker_domains[] = $domain;
 			}
-			$options['linker'] = [
-				'domains' => $linker_domains,
-			];
+			if ( ! empty( $linker_domains ) ) {
+				$options['linker'] = [
+					'domains' => $linker_domains,
+				];
+			}
 		}
 
 		if ( monsterinsights_is_debug_mode() ) {
@@ -222,7 +230,7 @@ class MonsterInsights_Tracking_Gtag extends MonsterInsights_Tracking_Abstract {
 		<?php if ( ! empty( $v4_id ) ) {
 			do_action( 'monsterinsights_tracking_gtag_frontend_before_script_tag' );
 			?>
-			<script src="<?php echo $src; // phpcs:ignore ?>" <?php echo $attr_string; // phpcs:ignore ?> <?php echo esc_attr( $gtag_async ); ?>></script>
+			<script src="<?php echo esc_url( $src ); ?>" <?php echo $attr_string; // phpcs:ignore ?> <?php echo esc_attr( $gtag_async ); ?>></script>
 			<script<?php echo $attr_string; // phpcs:ignore ?>>
 				var mi_version = '<?php echo MONSTERINSIGHTS_VERSION; // phpcs:ignore ?>';
 				var mi_track_user = <?php echo $track_user ? 'true' : 'false'; ?>;

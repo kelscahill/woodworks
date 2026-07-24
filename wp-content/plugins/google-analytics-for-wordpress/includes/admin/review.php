@@ -172,6 +172,7 @@ class MonsterInsights_Review {
 					}
 					$.post(ajaxurl, {
 						action: 'monsterinsights_review_dismiss',
+						nonce: '<?php echo esc_js( wp_create_nonce( 'monsterinsights-review-dismiss' ) ); ?>',
 						review_later: $(this).hasClass('monsterinsights-review-later')
 					});
 					$('.monsterinsights-review-notice').remove();
@@ -187,6 +188,13 @@ class MonsterInsights_Review {
 	 * @since 7.0.7
 	 */
 	public function review_dismiss() {
+
+		check_ajax_referer( 'monsterinsights-review-dismiss', 'nonce' );
+
+		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+			wp_die();
+		}
+
 		$review              = get_option( 'monsterinsights_review', array() );
 		$review['time']      = time();
 		$review['dismissed'] = true;

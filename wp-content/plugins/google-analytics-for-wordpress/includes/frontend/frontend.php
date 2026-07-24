@@ -302,6 +302,8 @@ function monsterinsights_frontend_admin_bar_scripts() {
 		'monsterinsights-vue-widget',
 		'monsterinsights-vue3-custom-dashboard',
 		'monsterinsights-vue3-reports',
+		'monsterinsights-vue3-settings',
+		'monsterinsights-vue3-widget',
 	);
 
 	foreach ( $competing_handles as $handle ) {
@@ -332,9 +334,9 @@ function monsterinsights_frontend_admin_bar_scripts() {
 			'is_admin'             => is_admin(),
 			'reports_url'          => $reports_url,
 			'authed'               => $site_auth || $ms_auth,
-			'auth_connect_url'     => is_network_admin() ? network_admin_url( 'index.php?page=monsterinsights-onboarding' ) : admin_url( 'index.php?page=monsterinsights-onboarding' ),
+			'auth_connect_url'     => monsterinsights_can_install_plugins() ? monsterinsights_get_onboarding_url() : '',
 			'getting_started_url'  => is_multisite() ? network_admin_url( 'admin.php?page=monsterinsights_network#/about/getting-started' ) : admin_url( 'admin.php?page=monsterinsights_settings#/about/getting-started' ),
-			'wizard_url'           => is_network_admin() ? network_admin_url( 'index.php?page=monsterinsights-onboarding' ) : admin_url( 'index.php?page=monsterinsights-onboarding' ),
+			'wizard_url'           => monsterinsights_can_install_plugins() ? monsterinsights_get_onboarding_url() : '',
 			'roles_manage_options' => monsterinsights_get_manage_options_roles(),
 			'user_roles'           => $current_user->roles,
 			'roles_view_reports'   => monsterinsights_get_option('view_reports'),
@@ -526,6 +528,10 @@ add_action( 'wp_footer', 'monsterinsights_administrator_tracking_notice', 300 );
 function monsterinsights_dismiss_tracking_notice() {
 
 	check_ajax_referer( 'monsterinsights-tracking-notice', 'nonce' );
+
+	if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+		wp_die();
+	}
 
 	update_option( 'monsterinsights_frontend_tracking_notice_viewed', 1 );
 

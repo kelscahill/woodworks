@@ -355,19 +355,14 @@ class MonsterInsights_Report {
 			}
 
 		} else {
-			$url = admin_url( 'admin.php?page=monsterinsights-onboarding' );
-
-			// Check for MS dashboard
-			if ( is_network_admin() ) {
-				$url = network_admin_url( 'admin.php?page=monsterinsights-onboarding' );
-			}
+			$url = monsterinsights_get_onboarding_url();
 
 			return array(
 				'success' => false,
 				'error'   => sprintf(
 					/* translators: Placeholders add a link to the Setup Wizard page. */
 					__( 'You must be properly authenticated with MonsterInsights to use our reports. Please use our %1$ssetup wizard%2$s to get started.', 'google-analytics-for-wordpress' ),
-					'<a href=" ' . $url . ' ">',
+					'<a href="' . esc_url( $url ) . '">',
 					'</a>'
 				),
 				'data'    => array(),

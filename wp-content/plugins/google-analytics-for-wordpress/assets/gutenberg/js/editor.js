@@ -979,8 +979,16 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.registerStore)('mo
   category: 'widgets',
   icon: _components_GUTENBERG_APP_THEME_InlineIcons__WEBPACK_IMPORTED_MODULE_0__["default"].inlinepop,
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Popular', "google-analytics-for-wordpress"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Posts', "google-analytics-for-wordpress"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Inline', "google-analytics-for-wordpress"), 'MonsterInsights'],
-  example: {},
+  example: {
+    attributes: {
+      preview: true
+    }
+  },
   attributes: {
+    preview: {
+      type: 'boolean',
+      default: false
+    },
     theme: {
       type: 'string'
     },
@@ -1025,6 +1033,7 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.registerStore)('mo
   })(props => {
     const {
       attributes: {
+        preview,
         theme,
         title_size,
         title_color,
@@ -1309,6 +1318,17 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.registerStore)('mo
       }
     };
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)();
+    if (preview) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+          src: MonsterInsightsVars.block_preview_urls.inline,
+          style: {
+            width: '100%'
+          },
+          alt: ""
+        })
+      }, "monsterinsights-popular-posts-inline-block-preview");
+    }
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InspectorControls, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
@@ -1810,8 +1830,16 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.registerStore)('mo
   category: 'widgets',
   icon: _components_GUTENBERG_APP_THEME_WidgetIcons__WEBPACK_IMPORTED_MODULE_6__["default"].widgetpop,
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Popular', "google-analytics-for-wordpress"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Posts', "google-analytics-for-wordpress"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Widget', "google-analytics-for-wordpress"), 'MonsterInsights'],
-  example: {},
+  example: {
+    attributes: {
+      preview: true
+    }
+  },
   attributes: {
+    preview: {
+      type: 'boolean',
+      default: false
+    },
     theme: {
       type: 'string'
     },
@@ -1880,6 +1908,7 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.registerStore)('mo
   })(props => {
     const {
       attributes: {
+        preview,
         theme,
         title_size,
         title_color,
@@ -2396,6 +2425,17 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.registerStore)('mo
       }
     };
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)();
+    if (preview) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+          src: MonsterInsightsVars.block_preview_urls.widget,
+          style: {
+            width: '100%'
+          },
+          alt: ""
+        })
+      }, "monsterinsights-popular-posts-widget-block-preview");
+    }
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
@@ -2430,6 +2470,2141 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.registerStore)('mo
     return null;
   }
 }));
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/block-toolbar.js"
+/*!********************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/block-toolbar.js ***!
+  \********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_headline_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/headline-api */ "./src/plugins/Headline-Analyzer/utils/headline-api.js");
+/* harmony import */ var _utils_headline_ownership__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/headline-ownership */ "./src/plugins/Headline-Analyzer/utils/headline-ownership.js");
+/* harmony import */ var _components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/HeadlineAISuggestions */ "./src/plugins/Headline-Analyzer/components/HeadlineAISuggestions.js");
+/* harmony import */ var _metabox_components_pro_badge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../metabox/components/pro-badge */ "./src/plugins/metabox/components/pro-badge.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
+
+
+
+
+
+
+
+
+const withHeadlineOptimize = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createHigherOrderComponent)(BlockEdit => {
+  return props => {
+    const toolVars = window.monsterinsights_gutenberg_tool_vars;
+    const licenseType = toolVars?.license_type ?? 'lite';
+    const upgradeUrl = toolVars?.upgrade_url ?? '';
+    // Mirrors the PHP proxy gate (license_can('plus') → plus, pro, master).
+    // Lite and Basic fall through to the upsell.
+    const canOptimize = ['plus', 'pro', 'master'].includes(licenseType);
+    // Roles without monsterinsights_view_dashboard can't get a bearer token, so
+    // the toolbar entry (and its upsell) is hidden for them — clicking it could
+    // only ever surface a misleading auth error. See HeadlineOptimizeButton.
+    const userCanOptimize = toolVars?.can_optimize_headline ?? false;
+    const [popoverOpen, setPopoverOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    const [aiSuggestions, setAiSuggestions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const [aiLoading, setAiLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    const [aiError, setAiError] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const [rateLimitCountdown, setRateLimitCountdown] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+    const abortRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+    // The Popover renders in the top document, but the heading block lives
+    // inside the editor canvas iframe — a plain document.querySelector for the
+    // block returns null there, leaving the Popover unanchored at the editor's
+    // corner. Anchor instead to the floating block toolbar (which IS in the top
+    // document) so the popover drops in just beneath it; if that toolbar isn't
+    // present (e.g. Top Toolbar mode), fall back to the block element and
+    // translate its iframe-relative rect into top-document coordinates.
+    const clientIdRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(props.clientId);
+    clientIdRef.current = props.clientId;
+    const popoverAnchorRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    if (!popoverAnchorRef.current) {
+      popoverAnchorRef.current = {
+        ownerDocument: document,
+        getBoundingClientRect() {
+          const toolbar = document.querySelector('.block-editor-block-contextual-toolbar');
+          if (toolbar) {
+            return toolbar.getBoundingClientRect();
+          }
+          const iframe = document.querySelector('iframe[name="editor-canvas"]');
+          const canvasDoc = iframe?.contentDocument ?? document;
+          const blockEl = canvasDoc.querySelector(`[data-block="${clientIdRef.current}"]`);
+          if (!blockEl) {
+            return new window.DOMRect();
+          }
+          const rect = blockEl.getBoundingClientRect();
+          if (iframe && canvasDoc !== document) {
+            const frame = iframe.getBoundingClientRect();
+            return new window.DOMRect(rect.left + frame.left, rect.top + frame.top, rect.width, rect.height);
+          }
+          return rect;
+        }
+      };
+    }
+
+    // Strip inline HTML from the heading attribute up front so both the API call
+    // and the suggestions list can read the same sanitized text.
+    const headlineText = (props.attributes?.content ?? '').replace(/<[^>]*>/g, '').trim();
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      if (!props.isSelected) {
+        setPopoverOpen(false);
+      }
+    }, [props.isSelected]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      if (rateLimitCountdown <= 0) {
+        return;
+      }
+      const t = setTimeout(() => setRateLimitCountdown(c => c - 1), 1000);
+      return () => clearTimeout(t);
+    }, [rateLimitCountdown]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      return () => {
+        if (abortRef.current) {
+          abortRef.current.abort();
+        }
+      };
+    }, []);
+    const handleOptimize = async () => {
+      // Open immediately with the loading state — results and errors render
+      // into the already-visible popover. If the user dismisses it (or
+      // deselects the block) mid-fetch, it stays closed rather than
+      // reappearing when the response lands.
+      setPopoverOpen(true);
+      if (abortRef.current) {
+        abortRef.current.abort();
+      }
+      abortRef.current = new AbortController();
+      setAiLoading(true);
+      setAiError(null);
+      setAiSuggestions(null);
+      try {
+        const result = await (0,_utils_headline_api__WEBPACK_IMPORTED_MODULE_6__.optimizeHeadline)({
+          headline: headlineText,
+          signal: abortRef.current.signal
+        });
+        if (!result?.suggestions?.length) {
+          throw {
+            type: 'unknown',
+            retryable: false,
+            meta: {}
+          };
+        }
+        setAiSuggestions(result);
+      } catch (err) {
+        const normalized = (0,_utils_headline_api__WEBPACK_IMPORTED_MODULE_6__.normalizeNetworkError)(err);
+        if (normalized.type === 'aborted') {
+          return;
+        }
+        setAiError(normalized);
+        if (normalized.type === 'rate_limited') {
+          setRateLimitCountdown(normalized.meta?.retryAfter ?? 60);
+        }
+      } finally {
+        setAiLoading(false);
+      }
+    };
+    const handleApply = headline => {
+      // Intentional: AI suggestions are plain text and replace the heading's
+      // RichText content wholesale. Existing inline <strong>/<em>/<a> in the
+      // user's heading is dropped on apply by design.
+      props.setAttributes({
+        content: headline
+      });
+      setPopoverOpen(false);
+    };
+    const handleMenuClick = () => {
+      if (!canOptimize) {
+        setPopoverOpen(true);
+        return;
+      }
+      handleOptimize();
+    };
+
+    // Early return AFTER hooks — Rules of Hooks require consistent hook order
+    // across renders for a given component instance.
+    if (props.name !== 'core/heading') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(BlockEdit, {
+        ...props
+      });
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(BlockEdit, {
+        ...props
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockSettingsMenuControls, {
+        children: ({
+          selectedClientIds,
+          onClose
+        }) => {
+          // SlotFill is global — gate so we only render the item for the
+          // currently-selected heading block, between Edit as HTML and Delete.
+          if (!userCanOptimize || !selectedClientIds || !selectedClientIds.includes(props.clientId)) {
+            return null;
+          }
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.MenuItem, {
+            disabled: canOptimize && (aiLoading || rateLimitCountdown > 0),
+            onClick: () => {
+              handleMenuClick();
+              onClose();
+            },
+            children: canOptimize && aiLoading ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Optimizing…', "google-analytics-for-wordpress") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Optimize this headline', "google-analytics-for-wordpress")
+          });
+        }
+      }), userCanOptimize && popoverOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Popover, {
+        anchor: popoverAnchorRef.current,
+        placement: "bottom-start",
+        onClose: () => setPopoverOpen(false),
+        className: "monsterinsights-headline-toolbar-popover",
+        children: !canOptimize ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            isLocked: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_metabox_components_pro_badge__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            license: "lite",
+            upgrade_url: upgradeUrl
+          })]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+          children: [aiLoading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+            className: "monsterinsights-ai-loading",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Optimizing your headline…', "google-analytics-for-wordpress")
+            })]
+          }), aiError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+            className: "monsterinsights-ai-error",
+            children: [aiError.type === 'rate_limited' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: rateLimitCountdown > 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.sprintf)(/* translators: %d: seconds remaining before retry. */
+              (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Too many requests. Try again in %ds.', "google-analytics-for-wordpress"), rateLimitCountdown) : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Too many requests. Please try again.', "google-analytics-for-wordpress")
+            }), aiError.type === 'auth' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("We couldn't verify your license with the AI service. Please check that your website is connected and your license is active.", "google-analytics-for-wordpress")
+            }), aiError.type === 'validation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Couldn't process this headline. Please try a different one.", "google-analytics-for-wordpress")
+            }), aiError.type === 'exhausted' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("p", {
+              children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("You've used all your AI credits for this month.", "google-analytics-for-wordpress"), /^https:\/\//i.test(upgradeUrl) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+                children: [' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
+                  href: upgradeUrl,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Upgrade', "google-analytics-for-wordpress")
+                })]
+              })]
+            }), aiError.type === 'server' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('AI service is temporarily unavailable. Please try again in a moment.', "google-analytics-for-wordpress")
+            }), aiError.type === 'network' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Couldn't reach the AI service. Check your connection and try again.", "google-analytics-for-wordpress")
+            }), aiError.type === 'unknown' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('An unexpected error occurred. Please try again.', "google-analytics-for-wordpress")
+            })]
+          }), aiSuggestions && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            suggestions: aiSuggestions.suggestions,
+            currentTitle: headlineText,
+            onReplace: () => {},
+            onApply: handleApply
+          })]
+        })
+      })]
+    });
+  };
+}, 'withHeadlineOptimize');
+if ('undefined' !== typeof monsterinsights_gutenberg_tool_vars && monsterinsights_gutenberg_tool_vars.allowed_post_types.includes(monsterinsights_gutenberg_tool_vars.current_post_type) && monsterinsights_gutenberg_tool_vars.is_headline_analyzer_enabled &&
+// Mirror the sidebar election: the non-owner bundle must not also register
+// the toolbar entry. See utils/headline-ownership.js.
+(0,_utils_headline_ownership__WEBPACK_IMPORTED_MODULE_7__.claimHeadlineAnalyzerOwnership)()) {
+  (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('editor.BlockEdit', 'monsterinsights/headline-optimize', withHeadlineOptimize, 10);
+}
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlineAISuggestionItem.js"
+/*!******************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlineAISuggestionItem.js ***!
+  \******************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+const InfoIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("svg", {
+  width: "15",
+  height: "15",
+  viewBox: "0 0 15 15",
+  fill: "none",
+  "aria-hidden": "true",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
+    d: "M7.41667 14.0833C11.0986 14.0833 14.0833 11.0986 14.0833 7.41667C14.0833 3.73477 11.0986 0.75 7.41667 0.75C3.73477 0.75 0.75 3.73477 0.75 7.41667C0.75 11.0986 3.73477 14.0833 7.41667 14.0833Z",
+    stroke: "#393F4C",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
+    d: "M7.41699 7.41666V10.0833",
+    stroke: "#393F4C",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("circle", {
+    cx: "7.41667",
+    cy: "4.75001",
+    r: "0.666667",
+    fill: "#393F4C"
+  })]
+});
+const LockIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("svg", {
+  width: "11",
+  height: "14",
+  viewBox: "0 0 11 14",
+  fill: "none",
+  "aria-hidden": "true",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M0.329492 6.38431H1.22773C1.29538 6.38431 1.35021 6.32947 1.35021 6.26183V4.22882C1.35021 3.06633 1.82596 2.0093 2.59148 1.24336C2.59172 1.24313 2.59185 1.24282 2.59185 1.24249C2.59185 1.24216 2.59198 1.24185 2.59221 1.24161C3.35826 0.475745 4.41552 0 5.57881 0C6.74137 0 7.79855 0.475895 8.56463 1.24198L8.56577 1.243C9.33151 2.00897 9.80741 3.06615 9.80741 4.22882V6.26183C9.80741 6.32947 9.86224 6.38431 9.92988 6.38431H10.6204C10.8016 6.38431 10.9499 6.53265 10.9499 6.71369V13.6706C10.9499 13.8517 10.8016 14 10.6204 14H0.329492C0.14834 14 0 13.8517 0 13.6706V6.71369C0 6.53265 0.14834 6.38431 0.329492 6.38431ZM2.99312 6.26195C2.99312 6.32953 3.0479 6.38431 3.11548 6.38431H8.04168C8.10932 6.38431 8.16416 6.32947 8.16416 6.26183V4.20535C8.16416 3.49455 7.87328 2.84786 7.4054 2.37928C7.40525 2.37913 7.40502 2.37912 7.40486 2.37925C7.4047 2.37938 7.40446 2.37936 7.40431 2.37922C6.93596 1.91065 6.28939 1.61966 5.57881 1.61966C4.86776 1.61966 4.22108 1.91064 3.75213 2.37902C3.28398 2.84762 2.99312 3.49442 2.99312 4.20535V6.26195ZM6.35205 9.45618C6.21671 10.0523 5.70559 10.6798 5.83505 11.2772L5.96741 11.888C6.04681 12.2544 5.76857 12.6009 5.39364 12.6025C5.02704 12.604 4.74791 12.2742 4.81006 11.9129L4.93373 11.194C5.03527 10.6037 4.56208 10.0074 4.45282 9.41849C4.44212 9.36082 4.43652 9.30136 4.43652 9.24059C4.43652 8.705 4.87061 8.27091 5.40643 8.27091C5.94168 8.27091 6.37611 8.705 6.37611 9.24059C6.37611 9.31469 6.36779 9.38684 6.35205 9.45618Z",
+    fill: "currentColor"
+  })
+});
+const HeadlineAISuggestionItem = ({
+  suggestion,
+  isSelected,
+  isLocked,
+  onReplace,
+  onApply
+}) => {
+  const {
+    editPost
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)('core/editor');
+  const [showReason, setShowReason] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const infoRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const score = Number.isFinite(suggestion?.score) ? suggestion.score : 0;
+  const color = (0,_utils_score_color__WEBPACK_IMPORTED_MODULE_5__.getScoreColor)(score);
+
+  // Locked preview shown to Lite users in place of real AI suggestions. Renders
+  // as a <div> with no interactive descendants so the row stays out of the tab
+  // order and assistive tech doesn't announce a fake action — the only call to
+  // action lives in the ProBadge below the list.
+  if (isLocked) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: `monsterinsights-ai-suggestion-item ${color.className} is-locked`,
+      "aria-hidden": "true",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "monsterinsights-ai-suggestion-item__primary",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+          className: "monsterinsights-ai-suggestion-item__score",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            barScore: score,
+            barColor: color.hex,
+            width: 40
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "monsterinsights-ai-suggestion-item__score-value",
+            children: score
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "monsterinsights-ai-suggestion-item__headline",
+          children: suggestion.headline
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "monsterinsights-ai-suggestion-item__lock",
+          "aria-hidden": "true",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(LockIcon, {})
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        className: "monsterinsights-ai-suggestion-item__info",
+        "aria-hidden": "true",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(InfoIcon, {})
+      })]
+    });
+  }
+  const handleReplace = () => {
+    if (onReplace) {
+      onReplace(suggestion.headline);
+    }
+    if (onApply) {
+      onApply(suggestion.headline);
+    } else {
+      editPost({
+        title: suggestion.headline
+      });
+    }
+  };
+
+  // The row click target is a real <button>, with the (i) info trigger as a
+  // sibling — never nested inside the row button. This keeps the ARIA tree valid
+  // (no nested interactive elements) and gets us native Space/Enter activation
+  // without a manual onKeyDown that would scroll the page on Space.
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: `monsterinsights-ai-suggestion-item ${color.className}${isSelected ? ' is-selected' : ''}`,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+      type: "button",
+      className: "monsterinsights-ai-suggestion-item__primary",
+      onClick: handleReplace,
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.sprintf)(/* translators: 1: headline text, 2: score out of 100. */
+      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('%1$s, score %2$d out of 100', "google-analytics-for-wordpress"), suggestion.headline, score),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+        className: "monsterinsights-ai-suggestion-item__score",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          barScore: score,
+          barColor: color.hex,
+          width: 40
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "monsterinsights-ai-suggestion-item__score-value",
+          children: score
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        className: "monsterinsights-ai-suggestion-item__headline",
+        children: suggestion.headline
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+      ref: infoRef,
+      type: "button",
+      className: "monsterinsights-ai-suggestion-item__info",
+      onMouseEnter: () => setShowReason(true),
+      onMouseLeave: () => setShowReason(false),
+      onFocus: () => setShowReason(true),
+      onBlur: () => setShowReason(false),
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Why this suggestion', "google-analytics-for-wordpress"),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(InfoIcon, {})
+    }), showReason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+      anchor: infoRef.current,
+      placement: "left",
+      focusOnMount: false,
+      className: "monsterinsights-ai-suggestion-item__reasoning-popover",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "monsterinsights-ai-suggestion-item__reasoning",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reason', "google-analytics-for-wordpress")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+          children: suggestion.reasoning
+        })]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineAISuggestionItem);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlineAISuggestions.js"
+/*!***************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlineAISuggestions.js ***!
+  \***************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HeadlineAISuggestionItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeadlineAISuggestionItem */ "./src/plugins/Headline-Analyzer/components/HeadlineAISuggestionItem.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const norm = s => (s ?? '').trim().toLowerCase();
+const LOCKED_PREVIEW_SCORES = [91, 91, 90, 90, 88];
+const HeadlineAISuggestions = ({
+  suggestions,
+  currentTitle = '',
+  isLocked = false,
+  onReplace,
+  onApply
+}) => {
+  if (isLocked) {
+    const placeholderHeadline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sample optimized headline preview', "google-analytics-for-wordpress");
+    const lockedSuggestions = LOCKED_PREVIEW_SCORES.map(score => ({
+      score,
+      headline: placeholderHeadline,
+      reasoning: ''
+    }));
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "monsterinsights-ai-suggestions",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+        className: "monsterinsights-ai-suggestions__heading",
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Suggested Improvements', "google-analytics-for-wordpress")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "monsterinsights-ai-suggestions__sub",
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a headline to replace current one', "google-analytics-for-wordpress")
+      }), lockedSuggestions.map((suggestion, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_HeadlineAISuggestionItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        suggestion: suggestion,
+        isLocked: true
+      }, index))]
+    });
+  }
+  if (!suggestions || suggestions.length === 0) {
+    return null;
+  }
+  const currentNorm = norm(currentTitle);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "monsterinsights-ai-suggestions",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+      className: "monsterinsights-ai-suggestions__heading",
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Suggested Improvements', "google-analytics-for-wordpress")
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "monsterinsights-ai-suggestions__sub",
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a headline to replace current one', "google-analytics-for-wordpress")
+    }), suggestions.map((suggestion, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_HeadlineAISuggestionItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      suggestion: suggestion,
+      isSelected: norm(suggestion.headline) === currentNorm,
+      onReplace: onReplace,
+      onApply: onApply
+    }, index))]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineAISuggestions);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlineOptimizeButton.js"
+/*!****************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlineOptimizeButton.js ***!
+  \****************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const SparkleIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
+  className: "monsterinsights-headline-optimize-button__icon",
+  width: "20",
+  height: "20",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  "aria-hidden": "true",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+    d: "M11.1429 4.71428C11.1429 9.21145 14.7885 12.8571 19.2857 12.8571C14.7885 12.8571 11.1429 16.5028 11.1429 21C11.1429 16.5028 7.49717 12.8571 3 12.8571C7.49717 12.8571 11.1429 9.21145 11.1429 4.71428Z",
+    fill: "currentColor"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+    d: "M17.1424 3C17.1424 4.89355 18.6774 6.42857 20.571 6.42857C18.6774 6.42857 17.1424 7.96358 17.1424 9.85714C17.1424 7.96358 15.6074 6.42857 13.7139 6.42857C15.6074 6.42857 17.1424 4.89355 17.1424 3Z",
+    fill: "currentColor"
+  })]
+});
+const HeadlineOptimizeButton = ({
+  isLoading,
+  onOptimize,
+  licenseType
+}) => {
+  // Plus, Pro, and Master can run the optimizer (mirrors the PHP
+  // license_can('plus') gate); Lite and Basic get the upsell button.
+  const canOptimize = ['plus', 'pro', 'master'].includes(licenseType);
+
+  // The server token gate needs monsterinsights_view_dashboard. Roles that lack
+  // it (e.g. Authors) would hit a misleading auth error on click, so hide the
+  // optimizer outright rather than showing a button — or a license upsell — that
+  // can never work for them. They keep the read-only analyzer panels.
+  const userCanOptimize = window.monsterinsights_gutenberg_tool_vars?.can_optimize_headline ?? false;
+  if (!userCanOptimize) {
+    return null;
+  }
+  if (!canOptimize) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "monsterinsights-headline-optimize-button-wrapper",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Tooltip, {
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro to optimize headlines', "google-analytics-for-wordpress"),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+          type: "button",
+          className: "monsterinsights-headline-optimize-button",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SparkleIcon, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Optimize This Headline', "google-analytics-for-wordpress")
+          })]
+        })
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "monsterinsights-headline-optimize-button-wrapper",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+      className: "monsterinsights-headline-optimize-button",
+      disabled: isLoading,
+      onClick: onOptimize,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SparkleIcon, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        children: isLoading ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Optimizing…', "google-analytics-for-wordpress") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Optimize This Headline', "google-analytics-for-wordpress")
+      })]
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineOptimizeButton);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelCharacterCount.js"
+/*!*********************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelCharacterCount.js ***!
+  \*********************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/Headline-Analyzer/icons.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+const HeadlinePanelCharacterCount = props => {
+  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Character Count', "google-analytics-for-wordpress");
+  const characterLength = props.data.result.length;
+  const barScore = characterLength >= 66 ? 100 : Math.round(characterLength * 1.51);
+  let classOnLength = '';
+  let statusOnLength = '';
+  let barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.green;
+  let descOnCharLength = '';
+  if (characterLength <= 19) {
+    classOnLength = 'red';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.red;
+  } else if (characterLength >= 20 && characterLength <= 34) {
+    classOnLength = 'orange';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.orange;
+  } else if (characterLength >= 35 && characterLength <= 66) {
+    classOnLength = 'green';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.green;
+  } else if (characterLength >= 67 && characterLength <= 79) {
+    classOnLength = 'orange';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.orange;
+  } else if (characterLength >= 80) {
+    classOnLength = 'red';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.red;
+  }
+  if (characterLength <= 34) {
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Short', "google-analytics-for-wordpress");
+    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You have space to add more keywords and power words to boost your rankings and click-through rate.', "google-analytics-for-wordpress");
+  } else if (characterLength >= 35 && characterLength <= 66) {
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Good', "google-analytics-for-wordpress");
+    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are about 55 characters long will display fully in search results and tend to get more clicks.', "google-analytics-for-wordpress");
+  } else if (characterLength >= 67) {
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Long', "google-analytics-for-wordpress");
+    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('At this length, it will get cut off in search results. Try reducing it to about 55 characters.', "google-analytics-for-wordpress");
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: textPanelTitle,
+      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-character-count', 'monsterinsights-headline-analyzer-panel-has-icon', classOnLength),
+      icon: 'green' === classOnLength ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: "monsterinsights-headline-analyzer-pie-chart-container",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-character-length', classOnLength),
+            children: characterLength
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            barScore: barScore,
+            barColor: barColor
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: "monsterinsights-headline-analyzer-status-on-character-length",
+            children: statusOnLength
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+          children: descOnCharLength
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelCharacterCount);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelSearchPreview.js"
+/*!********************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelSearchPreview.js ***!
+  \********************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+const HeadlinePanelSearchPreview = props => {
+  const panelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Preview', "google-analytics-for-wordpress");
+  const descText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Here is how your headline will look like in google search results page.', "google-analytics-for-wordpress");
+  const postUrl = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core/editor').getPermalink();
+  const postUrlAttribute = {
+    href: postUrl
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: panelTitle,
+      className: "monsterinsights-headline-analyzer-panel-search-preview",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+          children: props.data.sentence
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          className: "monsterinsights-headline-analyzer-post-url",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+            ...postUrlAttribute,
+            target: "_blank",
+            children: postUrl
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: descText
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelSearchPreview);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelSentiment.js"
+/*!****************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelSentiment.js ***!
+  \****************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/Headline-Analyzer/icons.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+const HeadlinePanelSentiment = props => {
+  const textNeutralSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a neutral sentiment.', "google-analytics-for-wordpress");
+  const textNeutralSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are strongly positive or negative tend to get more engagement then neutral ones.', "google-analytics-for-wordpress");
+  const textPositiveSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a positive sentiment.', "google-analytics-for-wordpress");
+  const textPositiveSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Positive headlines tend to get better engagement than neutral or negative ones.', "google-analytics-for-wordpress");
+  const textNegativeSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a negative sentiment.', "google-analytics-for-wordpress");
+  const textNegativeSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Negative headlines are attention-grabbing and tend to perform better than neutral ones.', "google-analytics-for-wordpress");
+  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sentiment', "google-analytics-for-wordpress");
+  const sentiment = 'neu' === props.data.result.sentiment ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Neutral', "google-analytics-for-wordpress") : 'pos' === props.data.result.sentiment ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Positive', "google-analytics-for-wordpress") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Negative', "google-analytics-for-wordpress");
+  const sentimentIcon = 'neu' === props.data.result.sentiment ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].neutral : 'pos' === props.data.result.sentiment ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].smile : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].negative;
+  const classOnSentiment = 'neu' === props.data.result.sentiment ? 'orange' : 'pos' === props.data.result.sentiment ? 'green' : 'red';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: textPanelTitle,
+      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-sentiment', 'monsterinsights-headline-analyzer-panel-has-icon', classOnSentiment),
+      icon: sentimentIcon,
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
+          children: sentiment
+        }), 'neu' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+          children: [textNeutralSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textNeutralSentimentGuideline]
+        }) : '', 'pos' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+          children: [textPositiveSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textPositiveSentimentGuideline]
+        }) : '', 'neg' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+          children: [textNegativeSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textNegativeSentimentGuideline]
+        }) : '']
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelSentiment);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelStartEndWords.js"
+/*!********************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelStartEndWords.js ***!
+  \********************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const HeadlinePanelStartEndWords = props => {
+  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Beginning & Ending Words', "google-analytics-for-wordpress");
+  const words = props.data.result.input_array_orig;
+  const guideLineText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Most readers only look at the first and last 3 words of a headline before deciding whether to click.', "google-analytics-for-wordpress");
+  let beginningWords = '';
+  let endingWords = '';
+  if (words.length >= 6) {
+    beginningWords = words.slice(0, 3).join(' ');
+    endingWords = words.slice(-3).join(' ');
+  } else if (words.length > 3 && words.length <= 5) {
+    beginningWords = words.slice(0, 3).join(' ');
+    endingWords = words.slice(3).join(' ');
+  } else {
+    beginningWords = words.slice(0, 3).join(' ');
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: textPanelTitle,
+      className: "monsterinsights-headline-analyzer-panel-beginning-ending-words",
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [beginningWords ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "monsterinsights-headline-analyzer-words beginning",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            children: beginningWords
+          })
+        }) : '', endingWords ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "monsterinsights-headline-analyzer-words ending",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            children: endingWords
+          })
+        }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          className: "monsterinsights-headline-analyzer-words-guideline",
+          children: guideLineText
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelStartEndWords);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelType.js"
+/*!***********************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelType.js ***!
+  \***********************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const HeadlinePanelType = props => {
+  const headlineTypes = props.data.result.headline_types.join(', ');
+  const panelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headline Type', "google-analytics-for-wordpress");
+  const typePanelTitle = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+    className: "monsterinsights-headline-analyzer-panel-types-title",
+    children: [panelTitle, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+      children: headlineTypes
+    })]
+  });
+  const typeLinkText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.sprintf)(/* translators: %1$s: HTML line break tags. %2$s: opening anchor tag. %3$s: closing anchor tag. */
+  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are lists and how-to get more engagement on average than other types of headlines. %1$sRead more about %2$sdifferent types of headlines here.%3$s', "google-analytics-for-wordpress"), '<br/><br/>', '<a href="https://optinmonster.com/why-these-21-headlines-went-viral-and-how-you-can-copy-their-success/" target="_blank" className="monsterinsights-headline-analyzer-link">', '</a>');
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: typePanelTitle,
+      className: "monsterinsights-headline-analyzer-panel-types",
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+          children: headlineTypes
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          dangerouslySetInnerHTML: {
+            __html: typeLinkText
+          }
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelType);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelWordBalance.js"
+/*!******************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelWordBalance.js ***!
+  \******************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/Headline-Analyzer/icons.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlineWordsBlock */ "./src/plugins/Headline-Analyzer/components/HeadlineWordsBlock.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+const HeadlinePanelWordBalance = props => {
+  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Word Balance', "google-analytics-for-wordpress");
+  const textGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Compare the percentages of your results to the goal for each category and adjust as necessary.', "google-analytics-for-wordpress");
+  const classOnScore = (0,_utils_score_color__WEBPACK_IMPORTED_MODULE_6__.getScoreColor)(props.data.score).className;
+  const classOnCommonWords = 0 === props.data.result.common_words_per ? 'red' : props.data.result.common_words_per < 0.2 ? 'orange' : 'green';
+  const classOnCommonWordsBg = 0 === props.data.result.common_words_per ? 'red-bg' : props.data.result.common_words_per < 0.2 ? 'orange-bg' : 'green-bg';
+  const textGetMoreClicks = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline would be more likely to get clicks if it had more uncommon words.', "google-analytics-for-wordpress");
+  const guideLineOnCommonWords = props.data.result.common_words_per < 0.2 ? textGetMoreClicks : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with 20–30% common words are more likely to get clicks.', "google-analytics-for-wordpress");
+  const classOnUnCommonWords = 0 === props.data.result.uncommon_words_per ? 'red' : props.data.result.uncommon_words_per < 0.1 ? 'orange' : 'green';
+  const classOnUnCommonWordsBg = 0 === props.data.result.uncommon_words_per ? 'red-bg' : props.data.result.uncommon_words_per < 0.1 ? 'orange-bg' : 'green-bg';
+  const guideLineOnUnCommonWords = props.data.result.uncommon_words_per < 0.1 ? textGetMoreClicks : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with uncommon words are more likely to get clicks.', "google-analytics-for-wordpress");
+  const classOnEmotionalWords = 0 === props.data.result.emotion_words_per ? 'red' : props.data.result.emotion_words_per < 0.1 ? 'orange' : 'green';
+  const classOnEmotionalWordsBg = 0 === props.data.result.emotion_words_per ? 'red-bg' : props.data.result.emotion_words_per < 0.1 ? 'orange-bg' : 'green-bg';
+  const guideLineOnEmotionalWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Emotionally triggered headlines are likely to drive more clicks.', "google-analytics-for-wordpress");
+  const classOnPowerWords = 0 === props.data.result.power_words.length ? 'orange' : 'green';
+  const classOnPowerWordsBg = 0 === props.data.result.power_words.length ? 'orange' : 'green-bg';
+  const guideLineOnPowerWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with Power Words are more likely to get clicks.', "google-analytics-for-wordpress");
+  const textCommonWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Common Words', "google-analytics-for-wordpress");
+  const textTwentyThirty = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('20–30%', "google-analytics-for-wordpress");
+  const textUncommonWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Uncommon Words', "google-analytics-for-wordpress");
+  const textTenTwenty = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('10–20%', "google-analytics-for-wordpress");
+  const textEmotionalWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Emotional Words', "google-analytics-for-wordpress");
+  const textTenFifteen = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('10–15%', "google-analytics-for-wordpress");
+  const textPowerWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Power Words', "google-analytics-for-wordpress");
+  const textLeastOne = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('At least one', "google-analytics-for-wordpress");
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: textPanelTitle,
+      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-word-balance', 'monsterinsights-headline-analyzer-panel-has-icon', classOnScore),
+      icon: 'green' === classOnScore ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
+          children: props.data.result.word_balance
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+          children: textGuideline
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: textCommonWords,
+          value: Math.round(props.data.result.common_words_per * 100),
+          goalValue: textTwentyThirty,
+          words: props.data.result.common_words,
+          guideLine: guideLineOnCommonWords,
+          classOnScore: classOnCommonWords,
+          classOnScoreBg: classOnCommonWordsBg
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: textUncommonWords,
+          value: Math.round(props.data.result.uncommon_words_per * 100),
+          goalValue: textTenTwenty,
+          words: props.data.result.uncommon_words,
+          guideLine: guideLineOnUnCommonWords,
+          classOnScore: classOnUnCommonWords,
+          classOnScoreBg: classOnUnCommonWordsBg
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: textEmotionalWords,
+          value: Math.round(props.data.result.emotion_words_per * 100),
+          goalValue: textTenFifteen,
+          words: props.data.result.emotion_words,
+          guideLine: guideLineOnEmotionalWords,
+          classOnScore: classOnEmotionalWords,
+          classOnScoreBg: classOnEmotionalWordsBg
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          title: textPowerWords,
+          value: Math.round(props.data.result.power_words_per * 100),
+          goalValue: textLeastOne,
+          words: props.data.result.power_words,
+          guideLine: guideLineOnPowerWords,
+          classOnScore: classOnPowerWords,
+          classOnScoreBg: classOnPowerWordsBg
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelWordBalance);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePanelWordCount.js"
+/*!****************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePanelWordCount.js ***!
+  \****************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/Headline-Analyzer/icons.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+const HeadlinePanelWordCount = props => {
+  const textWordCount = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Word Count', "google-analytics-for-wordpress");
+  const wordLength = props.data.result.word_count;
+  const barScore = wordLength >= 10 ? 100 : Math.round(wordLength * 10);
+  let classOnLength = '';
+  let statusOnLength = '';
+  let barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.green;
+  let descOnWordLength = '';
+  if (wordLength <= 4) {
+    classOnLength = 'red';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.red;
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Not Enough Words', "google-analytics-for-wordpress");
+    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline doesn’t use enough words. You have more space to add keywords and power words to improve your SEO and get more engagement.', "google-analytics-for-wordpress");
+  } else if (wordLength >= 5 && wordLength <= 9) {
+    classOnLength = 'green';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.green;
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Good', "google-analytics-for-wordpress");
+    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has the right amount of words. Headlines are more likely to be clicked on in search results if they have about 6 words.', "google-analytics-for-wordpress");
+  } else if (wordLength >= 10 && wordLength <= 11) {
+    classOnLength = 'orange';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.orange;
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reduce Word Count', "google-analytics-for-wordpress");
+  } else {
+    classOnLength = 'red';
+    barColor = _utils_score_color__WEBPACK_IMPORTED_MODULE_6__.SCORE_COLORS.red;
+    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Many Words', "google-analytics-for-wordpress");
+    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has too many words. Long headlines will get cut off in search results and won’t get as many clicks.', "google-analytics-for-wordpress");
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: textWordCount,
+      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-word-count', 'monsterinsights-headline-analyzer-panel-has-icon', classOnLength),
+      icon: 'green' === classOnLength ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: "monsterinsights-headline-analyzer-pie-chart-container",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-word-length', classOnLength),
+            children: wordLength
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            barScore: barScore,
+            barColor: barColor
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: "monsterinsights-headline-analyzer-status-on-word-length",
+            children: statusOnLength
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+          children: descOnWordLength
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelWordCount);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js"
+/*!**********************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js ***!
+  \**********************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const HeadlinePieChart = props => {
+  const score = props.barScore;
+  const width = props.width ? props.width + 'px' : '80px';
+  const rightDeg = score > 50 ? 0 : 180 - 360 / 100 * score;
+  const color = props.barColor;
+  const fragmentLeft = () => {
+    if (score > 50) {
+      const leftDeg = 180 + (score - 50) * 360 / 100;
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "monsterinsights-donut-section monsterinsights-donut-section-left",
+        style: {
+          transform: 'rotate(0deg)'
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "monsterinsights-donut-filler",
+          style: {
+            backgroundColor: color,
+            transform: 'rotate(' + leftDeg + 'deg)'
+          }
+        })
+      });
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "monsterinsights-donut-container",
+      style: {
+        flexDirection: 'column'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "monsterinsights-donut",
+        style: {
+          width,
+          paddingBottom: width,
+          backgroundColor: '#f2f2f2'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "monsterinsights-donut-sections",
+          style: {
+            transform: 'rotate(0deg)'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "monsterinsights-donut-section monsterinsights-donut-section-right",
+            style: {
+              transform: 'rotate(0deg)'
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "monsterinsights-donut-filler",
+              style: {
+                backgroundColor: color,
+                transform: 'rotate(-' + rightDeg + 'deg)'
+              }
+            })
+          }), fragmentLeft()]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "monsterinsights-donut-overlay",
+          style: {
+            height: '70%',
+            width: '70%',
+            top: 'calc(15%)',
+            left: 'calc(15%)',
+            backgroundColor: 'rgb(255, 255, 255)'
+          }
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePieChart);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlineTabCurrentScore.js"
+/*!*****************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlineTabCurrentScore.js ***!
+  \*****************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/Headline-Analyzer/components/HeadlinePieChart.js");
+/* harmony import */ var _HeadlineOptimizeButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HeadlineOptimizeButton */ "./src/plugins/Headline-Analyzer/components/HeadlineOptimizeButton.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+const labelForScore = score => {
+  if (score >= 90) {
+    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Excellent', "google-analytics-for-wordpress");
+  }
+  return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Could Be Better', "google-analytics-for-wordpress");
+};
+const HeadlineTabCurrentScore = ({
+  analyzer,
+  isLoading,
+  onOptimize,
+  licenseType
+}) => {
+  const textTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Title Optimization', "google-analytics-for-wordpress");
+  const currentScore = analyzer.currentHeadlineData.score;
+  // isLow stays gated at < 90 — it drives only the attention background and
+  // whether the Optimize button shows. The score color uses the shared
+  // 0–69 red / 70–79 orange / 80+ green scheme.
+  const isLow = currentScore < 90;
+  const {
+    className: classOnScore,
+    hex: barColor
+  } = (0,_utils_score_color__WEBPACK_IMPORTED_MODULE_5__.getScoreColor)(currentScore);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: textTitle,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('monsterinsights-headline-analyzer-current-score-tab', {
+          'is-low-score': isLow
+        }),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "monsterinsights-headline-analyzer-score-row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            className: "monsterinsights-headline-analyzer-pie-chart-container",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+              className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('monsterinsights-headline-analyzer-current-score', classOnScore),
+              children: currentScore
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              barScore: currentScore,
+              barColor: barColor,
+              width: 56
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('monsterinsights-headline-analyzer-score-label', classOnScore),
+            children: labelForScore(currentScore)
+          })]
+        }), isLow && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineOptimizeButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          isLoading: isLoading,
+          onOptimize: onOptimize,
+          licenseType: licenseType
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineTabCurrentScore);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/components/HeadlineWordsBlock.js"
+/*!************************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/components/HeadlineWordsBlock.js ***!
+  \************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const HeadlineWordsBlock = props => {
+  const textGoal = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Goal:', "google-analytics-for-wordpress");
+  const progressBarStyle = {
+    width: props.value + '%'
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "monsterinsights-headline-analyzer-words-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+      children: props.title
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "monsterinsights-headline-analyzer-words-block-data",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('monsterinsights-headline-analyzer-words-block-percentage', props.classOnScore),
+        children: [props.value, "%"]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+        className: "monsterinsights-headline-analyzer-words-block-goal",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+          children: textGoal
+        }), props.goalValue]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+        className: "monsterinsights-headline-analyzer-words-block-progressbar",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "monsterinsights-headline-analyzer-progressbar-bg"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('monsterinsights-headline-analyzer-progressbar-part', props.classOnScoreBg),
+          style: progressBarStyle
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+      className: "monsterinsights-headline-analyzer-words-tag-list",
+      children: props.words.length > 0 ? props.words.map((word, index) => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+          children: word
+        }, index);
+      }) : ''
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "monsterinsights-headline-analyzer-words-guideline",
+      children: props.guideLine
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineWordsBlock);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/icons.js"
+/*!************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/icons.js ***!
+  \************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const icons = {};
+icons.headline = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "15",
+  height: "14",
+  viewBox: "0 0 15 14",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M13.5 2V12H14.5C14.6458 12 14.7604 12.0521 14.8438 12.1562C14.9479 12.2396 15 12.3542 15 12.5V13.5C15 13.6458 14.9479 13.7604 14.8438 13.8438C14.7604 13.9479 14.6458 14 14.5 14H9.5C9.35417 14 9.22917 13.9479 9.125 13.8438C9.04167 13.7604 9 13.6458 9 13.5V12.5C9 12.3542 9.04167 12.2396 9.125 12.1562C9.22917 12.0521 9.35417 12 9.5 12H10.5V8H4.5V12H5.5C5.64583 12 5.76042 12.0521 5.84375 12.1562C5.94792 12.2396 6 12.3542 6 12.5V13.5C6 13.6458 5.94792 13.7604 5.84375 13.8438C5.76042 13.9479 5.64583 14 5.5 14H0.5C0.354167 14 0.229167 13.9479 0.125 13.8438C0.0416667 13.7604 0 13.6458 0 13.5V12.5C0 12.3542 0.0416667 12.2396 0.125 12.1562C0.229167 12.0521 0.354167 12 0.5 12H1.5V2H0.5C0.354167 2 0.229167 1.95833 0.125 1.875C0.0416667 1.77083 0 1.64583 0 1.5V0.5C0 0.354167 0.0416667 0.239583 0.125 0.15625C0.229167 0.0520833 0.354167 0 0.5 0H5.5C5.64583 0 5.76042 0.0520833 5.84375 0.15625C5.94792 0.239583 6 0.354167 6 0.5V1.5C6 1.64583 5.94792 1.77083 5.84375 1.875C5.76042 1.95833 5.64583 2 5.5 2H4.5V6H10.5V2H9.5C9.35417 2 9.22917 1.95833 9.125 1.875C9.04167 1.77083 9 1.64583 9 1.5V0.5C9 0.354167 9.04167 0.239583 9.125 0.15625C9.22917 0.0520833 9.35417 0 9.5 0H14.5C14.6458 0 14.7604 0.0520833 14.8438 0.15625C14.9479 0.239583 15 0.354167 15 0.5V1.5C15 1.64583 14.9479 1.77083 14.8438 1.875C14.7604 1.95833 14.6458 2 14.5 2H13.5Z",
+    fill: "white"
+  })
+});
+icons.headlineBlack = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "15",
+  height: "14",
+  viewBox: "0 0 15 14",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M13.5 2V12H14.5C14.6458 12 14.7604 12.0521 14.8438 12.1562C14.9479 12.2396 15 12.3542 15 12.5V13.5C15 13.6458 14.9479 13.7604 14.8438 13.8438C14.7604 13.9479 14.6458 14 14.5 14H9.5C9.35417 14 9.22917 13.9479 9.125 13.8438C9.04167 13.7604 9 13.6458 9 13.5V12.5C9 12.3542 9.04167 12.2396 9.125 12.1562C9.22917 12.0521 9.35417 12 9.5 12H10.5V8H4.5V12H5.5C5.64583 12 5.76042 12.0521 5.84375 12.1562C5.94792 12.2396 6 12.3542 6 12.5V13.5C6 13.6458 5.94792 13.7604 5.84375 13.8438C5.76042 13.9479 5.64583 14 5.5 14H0.5C0.354167 14 0.229167 13.9479 0.125 13.8438C0.0416667 13.7604 0 13.6458 0 13.5V12.5C0 12.3542 0.0416667 12.2396 0.125 12.1562C0.229167 12.0521 0.354167 12 0.5 12H1.5V2H0.5C0.354167 2 0.229167 1.95833 0.125 1.875C0.0416667 1.77083 0 1.64583 0 1.5V0.5C0 0.354167 0.0416667 0.239583 0.125 0.15625C0.229167 0.0520833 0.354167 0 0.5 0H5.5C5.64583 0 5.76042 0.0520833 5.84375 0.15625C5.94792 0.239583 6 0.354167 6 0.5V1.5C6 1.64583 5.94792 1.77083 5.84375 1.875C5.76042 1.95833 5.64583 2 5.5 2H4.5V6H10.5V2H9.5C9.35417 2 9.22917 1.95833 9.125 1.875C9.04167 1.77083 9 1.64583 9 1.5V0.5C9 0.354167 9.04167 0.239583 9.125 0.15625C9.22917 0.0520833 9.35417 0 9.5 0H14.5C14.6458 0 14.7604 0.0520833 14.8438 0.15625C14.9479 0.239583 15 0.354167 15 0.5V1.5C15 1.64583 14.9479 1.77083 14.8438 1.875C14.7604 1.95833 14.6458 2 14.5 2H13.5Z",
+    fill: "#000"
+  })
+});
+icons.warning = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "16",
+  height: "16",
+  viewBox: "0 0 16 16",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M16 8C16 6.58065 15.6129 5.22581 14.9032 4C14.1935 2.77419 13.2258 1.80645 12 1.09677C10.7742 0.387097 9.41936 0 8 0C6.54839 0 5.22581 0.387097 4 1.09677C2.77419 1.80645 1.77419 2.77419 1.06452 4C0.354839 5.22581 0 6.58065 0 8C0 9.45161 0.354839 10.7742 1.06452 12C1.77419 13.2258 2.77419 14.2258 4 14.9355C5.22581 15.6452 6.54839 16 8 16C9.41936 16 10.7742 15.6452 12 14.9355C13.2258 14.2258 14.1935 13.2258 14.9032 12C15.6129 10.7742 16 9.45161 16 8ZM8 9.6129C8.3871 9.6129 8.74194 9.77419 9.03226 10.0645C9.32258 10.3548 9.48387 10.7097 9.48387 11.0968C9.48387 11.5161 9.32258 11.871 9.03226 12.1613C8.74194 12.4516 8.3871 12.5806 8 12.5806C7.58065 12.5806 7.22581 12.4516 6.93548 12.1613C6.64516 11.871 6.51613 11.5161 6.51613 11.0968C6.51613 10.7097 6.64516 10.3548 6.93548 10.0645C7.22581 9.77419 7.58065 9.6129 8 9.6129ZM6.58065 4.29032C6.58065 4.16129 6.6129 4.06452 6.67742 4C6.74194 3.93548 6.83871 3.87097 6.96774 3.87097H9.03226C9.12903 3.87097 9.22581 3.93548 9.29032 4C9.35484 4.06452 9.41936 4.16129 9.41936 4.29032L9.16129 8.67742C9.16129 8.77419 9.09677 8.87097 9.03226 8.93548C8.96774 9 8.87097 9.03226 8.77419 9.03226H7.22581C7.09677 9.03226 7 9 6.93548 8.93548C6.87097 8.87097 6.83871 8.77419 6.83871 8.67742L6.58065 4.29032Z",
+    fill: _utils_score_color__WEBPACK_IMPORTED_MODULE_0__.SCORE_COLORS.orange
+  })
+});
+icons.smile = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "16",
+  height: "16",
+  viewBox: "0 0 16 16",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM11.2903 5.74194C11.0968 5.52688 10.8602 5.41935 10.5806 5.41935C10.3011 5.41935 10.0538 5.52688 9.83871 5.74194C9.64516 5.93548 9.54839 6.17204 9.54839 6.45161C9.54839 6.73118 9.64516 6.97849 9.83871 7.19355C10.0538 7.3871 10.3011 7.48387 10.5806 7.48387C10.8602 7.48387 11.0968 7.3871 11.2903 7.19355C11.5054 6.97849 11.6129 6.73118 11.6129 6.45161C11.6129 6.17204 11.5054 5.93548 11.2903 5.74194ZM6.12903 5.74194C5.93548 5.52688 5.69892 5.41935 5.41935 5.41935C5.13978 5.41935 4.89247 5.52688 4.67742 5.74194C4.48387 5.93548 4.3871 6.17204 4.3871 6.45161C4.3871 6.73118 4.48387 6.97849 4.67742 7.19355C4.89247 7.3871 5.13978 7.48387 5.41935 7.48387C5.69892 7.48387 5.93548 7.3871 6.12903 7.19355C6.34409 6.97849 6.45161 6.73118 6.45161 6.45161C6.45161 6.17204 6.34409 5.93548 6.12903 5.74194ZM11.7097 10.9032C11.7957 10.8172 11.8387 10.7204 11.8387 10.6129C11.8387 10.4839 11.8065 10.3871 11.7419 10.3226C11.6774 10.2366 11.5914 10.172 11.4839 10.129C11.3978 10.0645 11.3011 10.043 11.1935 10.0645C11.086 10.086 10.9892 10.1505 10.9032 10.2581C10.1505 11.1613 9.1828 11.6129 8 11.6129C6.8172 11.6129 5.84946 11.1613 5.09677 10.2581C5.01075 10.1505 4.91398 10.086 4.80645 10.0645C4.69892 10.043 4.5914 10.0645 4.48387 10.129C4.39785 10.172 4.32258 10.2366 4.25806 10.3226C4.19355 10.3871 4.16129 10.4839 4.16129 10.6129C4.16129 10.7204 4.2043 10.8172 4.29032 10.9032C5.25806 12.0645 6.49462 12.6452 8 12.6452C9.50538 12.6452 10.7419 12.0645 11.7097 10.9032Z",
+    fill: _utils_score_color__WEBPACK_IMPORTED_MODULE_0__.SCORE_COLORS.green
+  })
+});
+icons.neutral = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "16",
+  height: "16",
+  viewBox: "0 0 16 16",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM6.12903 5.74194C5.93548 5.52688 5.69892 5.41935 5.41935 5.41935C5.13978 5.41935 4.89247 5.52688 4.67742 5.74194C4.48387 5.93548 4.3871 6.17204 4.3871 6.45161C4.3871 6.73118 4.48387 6.97849 4.67742 7.19355C4.89247 7.3871 5.13978 7.48387 5.41935 7.48387C5.69892 7.48387 5.93548 7.3871 6.12903 7.19355C6.34409 6.97849 6.45161 6.73118 6.45161 6.45161C6.45161 6.17204 6.34409 5.93548 6.12903 5.74194ZM11.0968 11.6129C11.4409 11.6129 11.6129 11.4409 11.6129 11.0968C11.6129 10.7527 11.4409 10.5806 11.0968 10.5806H4.90323C4.55914 10.5806 4.3871 10.7527 4.3871 11.0968C4.3871 11.4409 4.55914 11.6129 4.90323 11.6129H11.0968ZM9.83871 7.19355C10.0538 7.3871 10.3011 7.48387 10.5806 7.48387C10.8602 7.48387 11.0968 7.3871 11.2903 7.19355C11.5054 6.97849 11.6129 6.73118 11.6129 6.45161C11.6129 6.17204 11.5054 5.93548 11.2903 5.74194C11.0968 5.52688 10.8602 5.41935 10.5806 5.41935C10.3011 5.41935 10.0538 5.52688 9.83871 5.74194C9.64516 5.93548 9.54839 6.17204 9.54839 6.45161C9.54839 6.73118 9.64516 6.97849 9.83871 7.19355Z",
+    fill: "#626D83"
+  })
+});
+icons.negative = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "16",
+  height: "16",
+  viewBox: "0 0 16 16",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM4.3871 7.48387C4.3871 7.76344 4.48387 8.01075 4.67742 8.22581C4.89247 8.41935 5.13978 8.51613 5.41935 8.51613C5.69892 8.51613 5.93548 8.41935 6.12903 8.22581C6.34409 8.01075 6.45161 7.76344 6.45161 7.48387C6.45161 7.44086 6.43011 7.35484 6.3871 7.22581C6.4086 7.22581 6.41935 7.22581 6.41935 7.22581C6.44086 7.22581 6.45161 7.22581 6.45161 7.22581C6.70968 7.22581 6.87097 7.10753 6.93548 6.87097C6.95699 6.78495 6.96774 6.70968 6.96774 6.64516C6.96774 6.58065 6.94624 6.52688 6.90323 6.48387C6.88172 6.41935 6.83871 6.36559 6.77419 6.32258C6.73118 6.27957 6.67742 6.24731 6.6129 6.22581L4.03226 5.45161C3.88172 5.4086 3.74194 5.41935 3.6129 5.48387C3.50538 5.54839 3.43011 5.64516 3.3871 5.77419C3.36559 5.86021 3.35484 5.93548 3.35484 6C3.37634 6.06452 3.39785 6.12903 3.41935 6.19355C3.44086 6.23656 3.47312 6.27957 3.51613 6.32258C3.58065 6.36559 3.65591 6.39785 3.74194 6.41935L4.70968 6.74194C4.49462 6.93548 4.3871 7.1828 4.3871 7.48387ZM9.80645 12.4516C9.93548 12.6237 10.0968 12.6882 10.2903 12.6452C10.4839 12.6021 10.6129 12.4946 10.6774 12.3226C10.7419 12.1505 10.7097 11.9785 10.5806 11.8065C9.91398 10.9892 9.05376 10.5806 8 10.5806C6.94624 10.5806 6.07527 10.9892 5.3871 11.8065C5.34409 11.871 5.31183 11.9462 5.29032 12.0323C5.26882 12.1183 5.26882 12.1935 5.29032 12.2581C5.31183 12.3226 5.34409 12.3871 5.3871 12.4516C5.43011 12.5161 5.48387 12.5699 5.54839 12.6129C5.6129 12.6344 5.67742 12.6559 5.74194 12.6774C5.82796 12.6774 5.90323 12.6667 5.96774 12.6452C6.05376 12.6021 6.12903 12.5376 6.19355 12.4516C6.64516 11.914 7.24731 11.6452 8 11.6452C8.75269 11.6452 9.35484 11.914 9.80645 12.4516ZM12.2903 6.41935C12.4194 6.37634 12.5161 6.30107 12.5806 6.19355C12.6452 6.06452 12.6559 5.92473 12.6129 5.77419C12.5914 5.68817 12.5484 5.6129 12.4839 5.54839C12.4194 5.48387 12.3441 5.45161 12.2581 5.45161C12.172 5.43011 12.086 5.43011 12 5.45161L9.41935 6.22581C9.26882 6.26882 9.16129 6.35484 9.09677 6.48387C9.03226 6.5914 9.02151 6.72043 9.06452 6.87097C9.12903 7.10753 9.29032 7.22581 9.54839 7.22581C9.56989 7.22581 9.5914 7.22581 9.6129 7.22581C9.56989 7.33333 9.54839 7.41935 9.54839 7.48387C9.54839 7.76344 9.64516 8.01075 9.83871 8.22581C10.0538 8.41935 10.3011 8.51613 10.5806 8.51613C10.8602 8.51613 11.0968 8.41935 11.2903 8.22581C11.5054 8.01075 11.6129 7.76344 11.6129 7.48387C11.6129 7.1828 11.5054 6.93548 11.2903 6.74194L12.2903 6.41935Z",
+    fill: "#626D83"
+  })
+});
+icons.check = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  width: "16",
+  height: "16",
+  viewBox: "0 0 16 16",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484ZM7.06452 12.2258L13 6.29032C13.2581 6.05376 13.2581 5.8172 13 5.58065L12.2903 4.83871C12.0323 4.60215 11.7849 4.60215 11.5484 4.83871L6.70968 9.67742L4.45161 7.41935C4.21505 7.1828 3.96774 7.1828 3.70968 7.41935L3 8.16129C2.74194 8.39785 2.74194 8.63441 3 8.87097L6.35484 12.2258C6.5914 12.4839 6.82796 12.4839 7.06452 12.2258Z",
+    fill: _utils_score_color__WEBPACK_IMPORTED_MODULE_0__.SCORE_COLORS.green
+  })
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (icons);
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/index.js"
+/*!************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/index.js ***!
+  \************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/plugins */ "@wordpress/plugins");
+/* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_headline_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/headline-api */ "./src/plugins/Headline-Analyzer/utils/headline-api.js");
+/* harmony import */ var _utils_score_color__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/score-color */ "./src/plugins/Headline-Analyzer/utils/score-color.js");
+/* harmony import */ var _utils_headline_ownership__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/headline-ownership */ "./src/plugins/Headline-Analyzer/utils/headline-ownership.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons */ "./src/plugins/Headline-Analyzer/icons.js");
+/* harmony import */ var _components_HeadlineTabCurrentScore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/HeadlineTabCurrentScore */ "./src/plugins/Headline-Analyzer/components/HeadlineTabCurrentScore.js");
+/* harmony import */ var _components_HeadlinePanelWordBalance__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/HeadlinePanelWordBalance */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelWordBalance.js");
+/* harmony import */ var _components_HeadlinePanelSentiment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/HeadlinePanelSentiment */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelSentiment.js");
+/* harmony import */ var _components_HeadlinePanelType__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/HeadlinePanelType */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelType.js");
+/* harmony import */ var _components_HeadlinePanelCharacterCount__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/HeadlinePanelCharacterCount */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelCharacterCount.js");
+/* harmony import */ var _components_HeadlinePanelWordCount__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/HeadlinePanelWordCount */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelWordCount.js");
+/* harmony import */ var _components_HeadlinePanelStartEndWords__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/HeadlinePanelStartEndWords */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelStartEndWords.js");
+/* harmony import */ var _components_HeadlinePanelSearchPreview__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/HeadlinePanelSearchPreview */ "./src/plugins/Headline-Analyzer/components/HeadlinePanelSearchPreview.js");
+/* harmony import */ var _components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/HeadlineAISuggestions */ "./src/plugins/Headline-Analyzer/components/HeadlineAISuggestions.js");
+/* harmony import */ var _metabox_components_pro_badge__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../metabox/components/pro-badge */ "./src/plugins/metabox/components/pro-badge.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class HeadlineAnalyzerErrorBoundary extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasError: false
+    };
+  }
+  static getDerivedStateFromError() {
+    return {
+      hasError: true
+    };
+  }
+  componentDidCatch(error, info) {
+    if (true) {
+      console.error('[HeadlineAnalyzer]', error, info);
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+        className: "monsterinsights-headline-analyzer-empty-title-warning",
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Something went wrong. Please reload the page.', "google-analytics-for-wordpress")
+      });
+    }
+    return this.props.children;
+  }
+}
+
+// The single-owner election (see utils/headline-ownership.js) guarantees only
+// one analyzer mounts even when MonsterInsights and ExactMetrics are both
+// active, so there is exactly one pinned "Headline Analyzer" button — no
+// cross-instance DOM-ownership dance is needed, just find that button.
+const scoreBadgeClass = 'monsterinsights-headline-analyzer-score-badge';
+const findPinnedButton = label => document.querySelector(`.components-button[aria-label='${label}']`);
+const MonsterInsightsHeadlineAnalyzer = () => {
+  const postTitle = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core/editor').getEditedPostAttribute('title'));
+  const textHeadlineAnalyzer = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headline Analyzer', "google-analytics-for-wordpress");
+  const emptyTitleWarning = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Write your post title to see the analyzer data. This Headline Analyzer tool enables you to write irresistible SEO headlines that drive traffic, shares, and rank better in search results.', "google-analytics-for-wordpress");
+  const notice = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.sprintf)(/* translators: %1s: opening anchor tag. %2s: closing anchor tag. */
+  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This headline analyzer is part of MonsterInsights to help you increase your traffic. See your %1swebsite traffic reports%2s.', "google-analytics-for-wordpress"), `<a href="${monsterinsights_gutenberg_tool_vars.reports_url}" class="monsterinsights-headline-analyzer-link">`, '</a>');
+  const toolVars = window.monsterinsights_gutenberg_tool_vars;
+  const licenseType = toolVars.license_type ?? 'lite';
+  const upgradeUrl = toolVars.upgrade_url ?? '';
+  // Plus, Pro, and Master can run the optimizer (mirrors the PHP
+  // license_can('plus') gate); Lite and Basic get the locked upsell.
+  const canOptimize = ['plus', 'pro', 'master'].includes(licenseType);
+  // Roles without monsterinsights_view_dashboard can't get a bearer token, so the
+  // optimizer (and its license upsell) is hidden for them — see HeadlineOptimizeButton.
+  const userCanOptimize = toolVars?.can_optimize_headline ?? false;
+
+  // MonsterInsights + ExactMetrics both active: only the elected owner renders
+  // this panel, but warn the user that duplicate analytics are loaded (which
+  // also means duplicate tracking on the front end). See headline-ownership.js.
+  const isDuplicate = (0,_utils_headline_ownership__WEBPACK_IMPORTED_MODULE_7__.hasDuplicateHeadlineAnalyzer)();
+  const [analyzer, setAnalyzer] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  const [aiSuggestions, setAiSuggestions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [aiError, setAiError] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [aiLoading, setAiLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [rateLimitCountdown, setRateLimitCountdown] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const debounceTimerRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const abortControllerRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const headlineFetchAbortRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const isReplacingRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(false);
+  const lastReplacedTitleRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const scoreTagRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const currentScore = analyzer.dataExist && analyzer.currentHeadlineData ? analyzer.currentHeadlineData.score : 0;
+  const hasData = 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed;
+
+  // Reuse this instance's badge, or create it inside the button this instance
+  // owns. Dedupe is anchored in the DOM (badge class lookup + pruning), not in
+  // the ref alone: a Gutenberg slot re-parent can detach and re-attach the
+  // pinned button, and a ref-only guard would insert a second span next to the
+  // survivor.
+  const ensureScoreBadge = () => {
+    const button = findPinnedButton(textHeadlineAnalyzer);
+    if (!button) {
+      return null;
+    }
+    let badge = scoreTagRef.current && button.contains(scoreTagRef.current) ? scoreTagRef.current : null;
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = scoreBadgeClass;
+      const pinnedIcon = button.querySelector('svg');
+      // parentNode can be transiently null during a Gutenberg re-render; swallow
+      // so the error boundary doesn't reset the sidebar over a DOM timing blip.
+      try {
+        pinnedIcon.parentNode.insertBefore(badge, pinnedIcon.nextSibling);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Prune any other badge in this button so a span that survived a
+    // remount can't double-render the score.
+    button.querySelectorAll(`.${scoreBadgeClass}`).forEach(el => {
+      if (el !== badge) {
+        el.remove();
+      }
+    });
+    scoreTagRef.current = badge;
+    return badge;
+  };
+
+  // Create score badge span on mount; always return cleanup so the node is removed on unmount
+  // even if the pinned icon was absent when this effect first ran.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    ensureScoreBadge();
+    return () => {
+      if (scoreTagRef.current) {
+        scoreTagRef.current.remove();
+        scoreTagRef.current = null;
+      }
+    };
+  }, [textHeadlineAnalyzer]);
+
+  // Update score badge text and color in place; lazily creates the badge if the
+  // creation effect ran while the pinned icon was not yet in the DOM.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const badge = ensureScoreBadge();
+    if (!badge) {
+      return;
+    }
+    const button = badge.closest('.components-button');
+    if (!button) {
+      return;
+    }
+    if (analyzer.dataExist && 'undefined' !== typeof analyzer.currentHeadlineData?.score) {
+      const score = parseInt(analyzer.currentHeadlineData.score, 10);
+      const colorClass = (0,_utils_score_color__WEBPACK_IMPORTED_MODULE_6__.getScoreColor)(score).className;
+      button.setAttribute('monsterinsights-button-color', colorClass);
+      badge.textContent = `${score}/100`;
+    } else {
+      button.setAttribute('monsterinsights-button-color', 'red');
+      badge.textContent = '00/100';
+    }
+  }, [analyzer.dataExist, currentScore, textHeadlineAnalyzer]);
+
+  // Hide panel toggle buttons inside the sidebar wrapper
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const wrapper = document.querySelector('.monsterinsights-headline-analyzer-wrapper');
+    if (!wrapper) {
+      return;
+    }
+    const headingElements = wrapper.parentNode.querySelectorAll('.components-panel__header');
+    if (headingElements) {
+      headingElements.forEach(element => {
+        const button = element.querySelector('[aria-pressed="true"]');
+        if (button && null !== button && null !== button.offsetParent) {
+          button.style.display = 'none';
+        }
+      });
+    }
+    return () => {
+      const w = document.querySelector('.monsterinsights-headline-analyzer-wrapper');
+      if (!w) {
+        return;
+      }
+      w.parentNode.querySelectorAll('.components-panel__header').forEach(element => {
+        const button = element.querySelector('[aria-pressed="true"]');
+        if (button) {
+          button.style.display = '';
+        }
+      });
+    };
+  }, [analyzer.dataExist]);
+
+  // Debounced fetch of headline score when post title changes
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      if (headlineFetchAbortRef.current) {
+        headlineFetchAbortRef.current.abort();
+      }
+      headlineFetchAbortRef.current = new AbortController();
+      const formData = new FormData();
+      formData.append('_ajax_nonce', monsterinsights_gutenberg_tool_vars.nonce);
+      formData.append('action', 'monsterinsights_gutenberg_headline_analyzer_get_results');
+      formData.append('dataType', 'json');
+      formData.append('q', postTitle);
+      fetch(monsterinsights_gutenberg_tool_vars.ajaxurl, {
+        method: 'POST',
+        body: formData,
+        signal: headlineFetchAbortRef.current.signal
+      }).then(res => {
+        if (!res.ok) {
+          throw new Error('HTTP error');
+        }
+        return res.json();
+      }).then(json => {
+        setAnalyzer(prev => {
+          const newData = {
+            dataExist: false
+          };
+          if (json?.data?.analysed) {
+            newData.currentHeadlineData = json.data;
+            newData.headlineData = json.data;
+            newData.dataExist = true;
+            if ('undefined' !== typeof prev.headlineData) {
+              const prevScores = 'undefined' !== typeof prev.previousHeadlinesData ? prev.previousHeadlinesData : [];
+              newData.previousHeadlinesData = [prev.headlineData, ...prevScores];
+            }
+          }
+          return {
+            ...prev,
+            ...newData
+          };
+        });
+      }).catch(error => {
+        if (error.name === 'AbortError') {
+          return;
+        }
+        setAnalyzer(prev => ({
+          ...prev,
+          dataExist: false
+        }));
+        console.error(error);
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(debounceTimerRef.current);
+      if (headlineFetchAbortRef.current) {
+        headlineFetchAbortRef.current.abort();
+      }
+    };
+  }, [postTitle]);
+
+  // Clear AI state and cancel in-flight request when title changes.
+  // Skip when the change was triggered by the Replace button — suggestions should persist.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (isReplacingRef.current && postTitle === lastReplacedTitleRef.current) {
+      // Clear the flag the moment the editor echoes our replaced title back so
+      // subsequent genuine edits are not ignored. Avoids the prior 100ms timer
+      // that was both racy on slow devices and overly long on fast ones.
+      isReplacingRef.current = false;
+      lastReplacedTitleRef.current = null;
+      return;
+    }
+    setAiSuggestions(null);
+    setAiError(null);
+    setAiLoading(false);
+    setRateLimitCountdown(0);
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+  }, [postTitle]);
+
+  // Cancel in-flight requests on unmount
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      if (headlineFetchAbortRef.current) {
+        headlineFetchAbortRef.current.abort();
+      }
+    };
+  }, []);
+
+  // Rate-limit countdown ticker
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (rateLimitCountdown <= 0) {
+      return;
+    }
+    const t = setTimeout(() => setRateLimitCountdown(c => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [rateLimitCountdown]);
+
+  // Called by HeadlineAISuggestionItem just before editPost — prevents the [postTitle]
+  // effect from clearing the suggestions list when the change came from Replace.
+  // The flag is cleared inside the [postTitle] effect on the first echo whose
+  // value matches the title we just wrote, not on a fixed timeout.
+  const handleReplaceTitle = newTitle => {
+    // Same-title replace produces no echo, so the effect-driven clear would
+    // never fire and the flag would stay dirty. Nothing to suppress here.
+    if (newTitle === postTitle) {
+      return;
+    }
+    isReplacingRef.current = true;
+    lastReplacedTitleRef.current = newTitle;
+  };
+  const handleOptimize = async () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    abortControllerRef.current = new AbortController();
+    setAiLoading(true);
+    setAiError(null);
+    setAiSuggestions(null);
+    try {
+      const result = await (0,_utils_headline_api__WEBPACK_IMPORTED_MODULE_5__.optimizeHeadline)({
+        headline: postTitle,
+        signal: abortControllerRef.current.signal
+      });
+      if (!result?.suggestions?.length) {
+        throw {
+          type: 'unknown',
+          retryable: false,
+          meta: {}
+        };
+      }
+      setAiSuggestions(result);
+    } catch (err) {
+      const normalized = (0,_utils_headline_api__WEBPACK_IMPORTED_MODULE_5__.normalizeNetworkError)(err);
+      if (normalized.type === 'aborted') {
+        return;
+      }
+      setAiError(normalized);
+      if (normalized.type === 'rate_limited') {
+        setRateLimitCountdown(normalized.meta?.retryAfter ?? 60);
+      }
+    } finally {
+      setAiLoading(false);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PluginSidebarMoreMenuItem, {
+      target: "monsterinsights-headline-analyzer",
+      children: textHeadlineAnalyzer
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(HeadlineAnalyzerErrorBoundary, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PluginSidebar, {
+        name: "monsterinsights-headline-analyzer",
+        title: textHeadlineAnalyzer,
+        className: "monsterinsights-headline-analyzer-wrapper",
+        icon: _icons__WEBPACK_IMPORTED_MODULE_8__["default"].headline,
+        children: [isDuplicate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("div", {
+          className: "monsterinsights-ai-error monsterinsights-headline-analyzer-duplicate-notice",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Duplicate analytics scripts have been found. Please ensure there is only one Google Analytics plugin active on your site.', "google-analytics-for-wordpress")
+          })
+        }), hasData ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlineTabCurrentScore__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          analyzer: analyzer,
+          isLoading: aiLoading || rateLimitCountdown > 0,
+          onOptimize: handleOptimize,
+          licenseType: licenseType
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+          className: "monsterinsights-headline-analyzer-empty-title-warning",
+          children: emptyTitleWarning
+        }), aiError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)("div", {
+          className: "monsterinsights-ai-error",
+          children: [aiError.type === 'rate_limited' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: rateLimitCountdown > 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.sprintf)(/* translators: %d: seconds remaining before retry. */
+            (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too many requests. Try again in %ds.', "google-analytics-for-wordpress"), rateLimitCountdown) : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too many requests. Please try again.', "google-analytics-for-wordpress")
+          }), aiError.type === 'auth' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("We couldn't verify your license with the AI service. Please check that your website is connected and your license is active.", "google-analytics-for-wordpress")
+          }), aiError.type === 'validation' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Couldn't process this headline. Please try a different one.", "google-analytics-for-wordpress")
+          }), aiError.type === 'exhausted' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)("p", {
+            children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You've used all your AI credits for this month.", "google-analytics-for-wordpress"), /^https:\/\//i.test(upgradeUrl) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.Fragment, {
+              children: [' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("a", {
+                href: upgradeUrl,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade', "google-analytics-for-wordpress")
+              })]
+            })]
+          }), aiError.type === 'server' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('AI service is temporarily unavailable. Please try again in a moment.', "google-analytics-for-wordpress")
+          }), aiError.type === 'network' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Couldn't reach the AI service. Check your connection and try again.", "google-analytics-for-wordpress")
+          }), aiError.type === 'unknown' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('An unexpected error occurred. Please try again.', "google-analytics-for-wordpress")
+          })]
+        }), aiSuggestions && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_17__["default"], {
+          suggestions: aiSuggestions.suggestions,
+          currentTitle: postTitle,
+          onReplace: handleReplaceTitle
+        }), userCanOptimize && !canOptimize && hasData && !aiSuggestions && !aiError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlineAISuggestions__WEBPACK_IMPORTED_MODULE_17__["default"], {
+            isLocked: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_metabox_components_pro_badge__WEBPACK_IMPORTED_MODULE_18__["default"], {
+            license: "lite",
+            upgrade_url: upgradeUrl
+          })]
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelWordBalance__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelSentiment__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelType__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelCharacterCount__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelWordCount__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelStartEndWords__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          data: analyzer.headlineData
+        }), hasData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_components_HeadlinePanelSearchPreview__WEBPACK_IMPORTED_MODULE_16__["default"], {
+          data: analyzer.headlineData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("div", {
+          className: "monsterinsights-headline-analyzer-bottom-notice",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("p", {
+            dangerouslySetInnerHTML: {
+              __html: notice
+            }
+          })
+        })]
+      })
+    })]
+  });
+};
+
+// register & render editor sidebar plugin for post_type `post` only
+if ('undefined' !== typeof monsterinsights_gutenberg_tool_vars && monsterinsights_gutenberg_tool_vars.allowed_post_types.includes(monsterinsights_gutenberg_tool_vars.current_post_type) && monsterinsights_gutenberg_tool_vars.is_headline_analyzer_enabled &&
+// Only the elected owner mounts the analyzer; a sibling analytics plugin
+// (MI/EM both active) backs off here. See utils/headline-ownership.js.
+(0,_utils_headline_ownership__WEBPACK_IMPORTED_MODULE_7__.claimHeadlineAnalyzerOwnership)()) {
+  (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__.registerPlugin)('monsterinsights-headline-analyzer', {
+    icon: _icons__WEBPACK_IMPORTED_MODULE_8__["default"].headlineBlack,
+    render: MonsterInsightsHeadlineAnalyzer
+  });
+}
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/utils/headline-api.js"
+/*!*************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/utils/headline-api.js ***!
+  \*************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   normalizeNetworkError: () => (/* binding */ normalizeNetworkError),
+/* harmony export */   optimizeHeadline: () => (/* binding */ optimizeHeadline)
+/* harmony export */ });
+// AI Headline Optimizer client. The browser no longer talks to the AI service —
+// instead it hits a server-side admin-ajax handler that holds the bearer token,
+// proxies to the AI service, and scores each suggestion before responding.
+// PHP wp_send_json_error already shapes failures as { type, message, retryable, meta },
+// so this module just forwards the envelope.
+
+async function optimizeHeadline({
+  headline,
+  context = '',
+  type = 'title',
+  signal
+} = {}) {
+  const vars = window.monsterinsights_gutenberg_tool_vars || {};
+  const fd = new FormData();
+  fd.append('action', 'monsterinsights_gutenberg_headline_analyzer_optimize');
+  fd.append('_ajax_nonce', vars.nonce);
+  fd.append('headline', headline);
+  fd.append('context', context);
+  fd.append('type', type);
+  const res = await fetch(vars.ajaxurl, {
+    method: 'POST',
+    body: fd,
+    signal,
+    credentials: 'same-origin'
+  });
+  let json = {};
+  try {
+    json = await res.json();
+  } catch (_) {}
+  if (!res.ok || !json?.success) {
+    // A non-JSON body (e.g. an Nginx/PHP-FPM 502/504 HTML page when the upstream
+    // AI service times out) leaves json = {}, so there's no shaped data to use.
+    // Derive the type from the status: 5xx is a transient, retryable gateway
+    // error and should surface as `server`, not the generic non-retryable `unknown`.
+    const err = json?.data || {
+      type: res.status >= 500 ? 'server' : 'unknown',
+      message: '',
+      retryable: res.status >= 500,
+      meta: {}
+    };
+    throw err;
+  }
+  return json.data; // { suggestions: [{ headline, type, reasoning, score }], credits }
+}
+
+// Catches raw thrown errors that don't already match the PHP envelope —
+// AbortError from cancellation, TypeError from network drop. Server-shaped
+// errors with a `type` field fall through unchanged so callers see the same
+// `{ type, ... }` shape regardless of where the failure originated.
+function normalizeNetworkError(err) {
+  if (err?.name === 'AbortError') {
+    return {
+      type: 'aborted',
+      message: '',
+      retryable: false,
+      meta: {}
+    };
+  }
+  if (err?.type) {
+    return err;
+  }
+  return {
+    type: 'network',
+    message: '',
+    retryable: true,
+    meta: {}
+  };
+}
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/utils/headline-ownership.js"
+/*!*******************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/utils/headline-ownership.js ***!
+  \*******************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   claimHeadlineAnalyzerOwnership: () => (/* binding */ claimHeadlineAnalyzerOwnership),
+/* harmony export */   hasDuplicateHeadlineAnalyzer: () => (/* binding */ hasDuplicateHeadlineAnalyzer)
+/* harmony export */ });
+/**
+ * Single-owner election for the Headline Analyzer.
+ *
+ * When MonsterInsights and ExactMetrics are both active, two editor bundles load
+ * (each product ships its own editor.js). Without coordination both would mount
+ * the analyzer: duplicate sidebar, two pinned toolbar buttons with the same
+ * aria-label, and stacked score badges (the "43/10043/100" bug). The first
+ * bundle to execute claims ownership; the second backs off entirely.
+ *
+ * The coordination tokens MUST be brand-neutral. robo rewrites
+ * monsterinsights -> exactmetrics across the ExactMetrics build, so a token like
+ * `monsterinsightsHeadlineOwner` would become `exactmetricsHeadlineOwner` in the
+ * EM bundle — the two bundles would read different globals and never dedupe.
+ * Names below contain no brand substring on purpose; do not "brand" them.
+ */
+
+// Shared across bundles (window). Neutral names — see file header.
+const OWNER_FLAG = '__wpHeadlineAnalyzerOwner';
+const COUNT_FLAG = '__wpHeadlineAnalyzerInstances';
+
+// Memoized per bundle: each editor.js gets its own module instance, so this
+// resolves once and both entry points (sidebar + block toolbar) in the same
+// bundle agree on the verdict.
+let isOwner = null;
+
+/**
+ * Claim ownership of the Headline Analyzer for this bundle.
+ *
+ * Idempotent: increments the cross-bundle instance count exactly once per
+ * bundle, sets the owner flag if unclaimed, and returns whether THIS bundle won.
+ * Call from each registration guard and only register when it returns true.
+ *
+ * @return {boolean} True if this bundle should mount the analyzer.
+ */
+const claimHeadlineAnalyzerOwnership = () => {
+  if (null !== isOwner) {
+    return isOwner;
+  }
+  const w = window;
+  w[COUNT_FLAG] = (w[COUNT_FLAG] || 0) + 1;
+  if (w[OWNER_FLAG]) {
+    // Another analytics plugin already mounted the analyzer.
+    isOwner = false;
+  } else {
+    w[OWNER_FLAG] = true;
+    isOwner = true;
+  }
+  return isOwner;
+};
+
+/**
+ * Whether more than one analytics plugin loaded the analyzer (MI + EM both
+ * active). Read at render time — by then every bundle's top-level registration
+ * guard has already run and incremented the count.
+ *
+ * @return {boolean} True when a duplicate analytics plugin is present.
+ */
+const hasDuplicateHeadlineAnalyzer = () => (window[COUNT_FLAG] || 0) > 1;
+
+/***/ },
+
+/***/ "./src/plugins/Headline-Analyzer/utils/score-color.js"
+/*!************************************************************!*\
+  !*** ./src/plugins/Headline-Analyzer/utils/score-color.js ***!
+  \************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SCORE_COLORS: () => (/* binding */ SCORE_COLORS),
+/* harmony export */   getScoreColor: () => (/* binding */ getScoreColor)
+/* harmony export */ });
+const SCORE_COLORS = {
+  red: '#D82F5A',
+  orange: '#F89655',
+  green: '#58CB92'
+};
+
+// 0–69 red, 70–79 orange, 80+ green. Single source of truth for the headline
+// score color, shared by the toolbar badge, the sidebar score tab, the AI
+// suggestion items, and the word-balance overall score so all four surfaces
+// stay in sync.
+const getScoreColor = score => {
+  const value = parseInt(score, 10) || 0;
+  const className = value < 70 ? 'red' : value <= 79 ? 'orange' : 'green';
+  return {
+    className,
+    hex: SCORE_COLORS[className]
+  };
+};
 
 /***/ },
 
@@ -2627,12 +4802,14 @@ const MonsterinsightsAddConversionEventControl = (0,_wordpress_compose__WEBPACK_
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GUTENBERG_APP_THEME_Headline_Analyzer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GUTENBERG_APP_THEME-Headline-Analyzer */ "./src/plugins/monsterinsights-Headline-Analyzer/index.js");
-/* harmony import */ var _metabox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./metabox */ "./src/plugins/metabox/index.js");
-/* harmony import */ var _conversion_event__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./conversion-event */ "./src/plugins/conversion-event/index.js");
+/* harmony import */ var _Headline_Analyzer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Headline-Analyzer */ "./src/plugins/Headline-Analyzer/index.js");
+/* harmony import */ var _Headline_Analyzer_block_toolbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Headline-Analyzer/block-toolbar */ "./src/plugins/Headline-Analyzer/block-toolbar.js");
+/* harmony import */ var _metabox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./metabox */ "./src/plugins/metabox/index.js");
+/* harmony import */ var _conversion_event__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./conversion-event */ "./src/plugins/conversion-event/index.js");
 /**
  * Import Sidebar Plugins
  */
+
 
 
 
@@ -3246,1355 +5423,6 @@ const MonsterInsightsMetabox = () => {
 
 /***/ },
 
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelCharacterCount.js"
-/*!*************************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelCharacterCount.js ***!
-  \*************************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-const HeadlinePanelCharacterCount = props => {
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Character Count', "google-analytics-for-wordpress");
-  const characterLength = props.data.result.length;
-  const barScore = characterLength >= 66 ? 100 : Math.round(characterLength * 1.51);
-  let classOnLength = '';
-  let statusOnLength = '';
-  let barColor = '#1EC185';
-  let descOnCharLength = '';
-  if (characterLength <= 19) {
-    classOnLength = 'red';
-    barColor = '#EB5757';
-  } else if (characterLength >= 20 && characterLength <= 34) {
-    classOnLength = 'orange';
-    barColor = '#F2994A';
-  } else if (characterLength >= 35 && characterLength <= 66) {
-    classOnLength = 'green';
-    barColor = '#1EC185';
-  } else if (characterLength >= 67 && characterLength <= 79) {
-    classOnLength = 'orange';
-    barColor = '#F2994A';
-  } else if (characterLength >= 80) {
-    classOnLength = 'red';
-    barColor = '#EB5757';
-  }
-  if (characterLength <= 34) {
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Short', "google-analytics-for-wordpress");
-    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You have space to add more keywords and power words to boost your rankings and click-through rate.', "google-analytics-for-wordpress");
-  } else if (characterLength >= 35 && characterLength <= 66) {
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Good', "google-analytics-for-wordpress");
-    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are about 55 characters long will display fully in search results and tend to get more clicks.', "google-analytics-for-wordpress");
-  } else if (characterLength >= 67) {
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Long', "google-analytics-for-wordpress");
-    descOnCharLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('At this length, it will get cut off in search results. Try reducing it to about 55 characters.', "google-analytics-for-wordpress");
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-character-count', 'monsterinsights-headline-analyzer-panel-has-icon', classOnLength),
-      icon: 'green' === classOnLength ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "monsterinsights-headline-analyzer-pie-chart-container",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-character-length', classOnLength),
-            children: characterLength
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            barScore: barScore,
-            barColor: barColor
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            className: "monsterinsights-headline-analyzer-status-on-character-length",
-            children: statusOnLength
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-          children: descOnCharLength
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelCharacterCount);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelNewScore.js"
-/*!*******************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelNewScore.js ***!
-  \*******************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-const HeadlineNewScorePanel = props => {
-  const postTitle = props.analyzer.currentHeadlineData.sentence;
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('New Score', "google-analytics-for-wordpress");
-  const textGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('A good score is between 40 and 60. For best results, you should strive for 70 and above.', "google-analytics-for-wordpress");
-  const textCurrentScore = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Current Score', "google-analytics-for-wordpress");
-  const newTitle = 'undefined' !== typeof props.analyzer.newHeadlineData ? props.analyzer.newHeadlineData.sentence : '';
-  const newScore = 'undefined' !== typeof props.analyzer.newHeadlineData ? props.analyzer.newHeadlineData.score : '';
-  const currentScore = 'undefined' !== typeof props.analyzer.currentHeadlineData.score ? props.analyzer.currentHeadlineData.score : '';
-  const classOnNewScore = newScore < 40 ? 'red' : newScore <= 60 ? 'orange' : 'green';
-  const barColor = 'red' === classOnNewScore ? '#EB5757' : 'orange' === classOnNewScore ? '#F2994A' : '#1EC185';
-  const classOnCurrentScore = currentScore < 40 ? 'red' : currentScore <= 60 ? 'orange' : 'green';
-  const classOnCurrentScoreBg = currentScore < 40 ? 'red-bg' : currentScore <= 60 ? 'orange-bg' : 'green-bg';
-  const scoreDifference = Math.abs(newScore - currentScore);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "monsterinsights-headline-analyzer-new-score-panel",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-            children: textGuideline
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h4", {
-            children: ["\u201C", newTitle, "\u201D"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "monsterinsights-headline-analyzer-pie-chart-container",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('monsterinsights-headline-analyzer-new-score', classOnNewScore),
-              children: newScore
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              barScore: newScore,
-              barColor: barColor
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "current-score",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
-              className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('monsterinsights-headline-analyzer-score-difference', classOnNewScore),
-              children: [newScore > currentScore ? '+ ' : newScore === currentScore ? '' : '- ', scoreDifference]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h5", {
-              children: textCurrentScore
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('monsterinsights-headline-analyzer-score', classOnCurrentScoreBg),
-              children: currentScore
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-              children: ["\u201C", postTitle, "\u201D"]
-            })]
-          })]
-        })
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineNewScorePanel);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelPreviousScores.js"
-/*!*************************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelPreviousScores.js ***!
-  \*************************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-const HeadlinePanelPreviousScores = props => {
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Previous Scores', "google-analytics-for-wordpress");
-  const previousScores = 'undefined' !== props.analyzer.previousHeadlinesData ? props.analyzer.previousHeadlinesData : [];
-  const sidebar = document.querySelector('.edit-post-sidebar');
-  const activeTab = 'undefined' !== props.analyzer.activeTab ? props.analyzer.activeTab : 'current-score';
-  const scrollPosition = 'current-score' === activeTab ? 390 : 300;
-  const setNewHeadlineData = index => {
-    props.setAnalyzer({
-      newHeadlineData: previousScores[index],
-      headlineData: previousScores[index],
-      newHeadline: previousScores[index].sentence,
-      isNewData: true
-    });
-    if (sidebar) {
-      sidebar.scrollTop = scrollPosition;
-    }
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
-          className: "monsterinsights-headline-analyzer-previous-scores",
-          children: previousScores.map((headlineData, index) => {
-            if (index < 10 && ('undefined' !== typeof headlineData.sentence || 'undefined' !== typeof headlineData.score)) {
-              const classOnScore = headlineData.score < 40 ? 'red-bg' : headlineData.score <= 60 ? 'orange-bg' : 'green-bg';
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
-                onClick: () => setNewHeadlineData(index),
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                  className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('monsterinsights-headline-analyzer-score', classOnScore),
-                  children: headlineData.score
-                }), headlineData.sentence]
-              }, index);
-            }
-          })
-        })
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelPreviousScores);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSearchPreview.js"
-/*!************************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSearchPreview.js ***!
-  \************************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-const HeadlinePanelSearchPreview = props => {
-  const panelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Preview', "google-analytics-for-wordpress");
-  const descText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Here is how your headline will look like in google search results page.', "google-analytics-for-wordpress");
-  const postUrl = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core/editor').getPermalink();
-  const postUrlAttribute = {
-    href: postUrl
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: panelTitle,
-      className: "monsterinsights-headline-analyzer-panel-search-preview",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
-          children: props.data.sentence
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-          className: "monsterinsights-headline-analyzer-post-url",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-            ...postUrlAttribute,
-            target: "_blank",
-            children: postUrl
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-          children: descText
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelSearchPreview);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSentiment.js"
-/*!********************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSentiment.js ***!
-  \********************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-const HeadlinePanelSentiment = props => {
-  const textNeutralSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a neutral sentiment.', "google-analytics-for-wordpress");
-  const textNeutralSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are strongly positive or negative tend to get more engagement then neutral ones.', "google-analytics-for-wordpress");
-  const textPositiveSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a positive sentiment.', "google-analytics-for-wordpress");
-  const textPositiveSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Positive headlines tend to get better engagement than neutral or negative ones.', "google-analytics-for-wordpress");
-  const textNegativeSentiment = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has a negative sentiment.', "google-analytics-for-wordpress");
-  const textNegativeSentimentGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Negative headlines are attention-grabbing and tend to perform better than neutral ones.', "google-analytics-for-wordpress");
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sentiment', "google-analytics-for-wordpress");
-  const sentiment = 'neu' === props.data.result.sentiment ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Neutral', "google-analytics-for-wordpress") : 'pos' === props.data.result.sentiment ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Positive', "google-analytics-for-wordpress") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Negative', "google-analytics-for-wordpress");
-  const sentimentIcon = 'neu' === props.data.result.sentiment ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].neutral : 'pos' === props.data.result.sentiment ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].smile : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].negative;
-  const classOnSentiment = 'neu' === props.data.result.sentiment ? 'orange' : 'pos' === props.data.result.sentiment ? 'green' : 'red';
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-sentiment', 'monsterinsights-headline-analyzer-panel-has-icon', classOnSentiment),
-      icon: sentimentIcon,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
-          children: sentiment
-        }), 'neu' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-          children: [textNeutralSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textNeutralSentimentGuideline]
-        }) : '', 'pos' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-          children: [textPositiveSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textPositiveSentimentGuideline]
-        }) : '', 'neg' === props.data.result.sentiment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-          children: [textNegativeSentiment, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), " ", textNegativeSentimentGuideline]
-        }) : '']
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelSentiment);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelStartEndWords.js"
-/*!************************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelStartEndWords.js ***!
-  \************************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-const HeadlinePanelStartEndWords = props => {
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Beginning & Ending Words', "google-analytics-for-wordpress");
-  const words = props.data.result.input_array_orig;
-  const guideLineText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Most readers only look at the first and last 3 words of a headline before deciding whether to click.', "google-analytics-for-wordpress");
-  let beginningWords = '';
-  let endingWords = '';
-  if (words.length >= 6) {
-    beginningWords = words.slice(0, 3).join(' ');
-    endingWords = words.slice(-3).join(' ');
-  } else if (words.length > 3 && words.length <= 5) {
-    beginningWords = words.slice(0, 3).join(' ');
-    endingWords = words.slice(3).join(' ');
-  } else {
-    beginningWords = words.slice(0, 3).join(' ');
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      className: "monsterinsights-headline-analyzer-panel-beginning-ending-words",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [beginningWords ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "monsterinsights-headline-analyzer-words beginning",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            children: beginningWords
-          })
-        }) : '', endingWords ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "monsterinsights-headline-analyzer-words ending",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            children: endingWords
-          })
-        }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          className: "monsterinsights-headline-analyzer-words-guideline",
-          children: guideLineText
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelStartEndWords);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelType.js"
-/*!***************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelType.js ***!
-  \***************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-const HeadlinePanelType = props => {
-  const headlineTypes = props.data.result.headline_types.join(', ');
-  const panelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headline Type', "google-analytics-for-wordpress");
-  const typePanelTitle = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-    className: "monsterinsights-headline-analyzer-panel-types-title",
-    children: [panelTitle, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-      children: headlineTypes
-    })]
-  });
-  const typeLinkText = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines that are lists and how-to get more engagement on average than other types of headlines. %1sRead more about %2sdifferent types of headlines here.%3s', "google-analytics-for-wordpress"), '<br/><br/>', '<a href="https://optinmonster.com/why-these-21-headlines-went-viral-and-how-you-can-copy-their-success/" target="_blank" className="monsterinsights-headline-analyzer-link">', '</a>');
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: typePanelTitle,
-      className: "monsterinsights-headline-analyzer-panel-types",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
-          children: headlineTypes
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          dangerouslySetInnerHTML: {
-            __html: typeLinkText
-          }
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelType);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordBalance.js"
-/*!**********************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordBalance.js ***!
-  \**********************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlineWordsBlock */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineWordsBlock.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-const HeadlinePanelWordBalance = props => {
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Word Balance', "google-analytics-for-wordpress");
-  const textGuideline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Compare the percentages of your results to the goal for each category and adjust as necessary.', "google-analytics-for-wordpress");
-  const classOnScore = props.data.score < 40 ? 'red' : props.data.score <= 60 ? 'orange' : 'green';
-  const classOnScoreBg = props.data.score < 40 ? 'red-bg' : props.data.score <= 60 ? 'orange-bg' : 'green-bg';
-  const classOnCommonWords = 0 === props.data.result.common_words_per ? 'red' : props.data.result.common_words_per < 0.2 ? 'orange' : 'green';
-  const classOnCommonWordsBg = 0 === props.data.result.common_words_per ? 'red-bg' : props.data.result.common_words_per < 0.2 ? 'orange-bg' : 'green-bg';
-  const textGetMoreClicks = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline would be more likely to get clicks if it had more uncommon words.', "google-analytics-for-wordpress");
-  const guideLineOnCommonWords = props.data.result.common_words_per < 0.2 ? textGetMoreClicks : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with 20–30% common words are more likely to get clicks.', "google-analytics-for-wordpress");
-  const classOnUnCommonWords = 0 === props.data.result.uncommon_words_per ? 'red' : props.data.result.uncommon_words_per < 0.1 ? 'orange' : 'green';
-  const classOnUnCommonWordsBg = 0 === props.data.result.uncommon_words_per ? 'red-bg' : props.data.result.uncommon_words_per < 0.1 ? 'orange-bg' : 'green-bg';
-  const guideLineOnUnCommonWords = props.data.result.uncommon_words_per < 0.1 ? textGetMoreClicks : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with uncommon words are more likely to get clicks.', "google-analytics-for-wordpress");
-  const classOnEmotionalWords = 0 === props.data.result.emotion_words_per ? 'red' : props.data.result.emotion_words_per < 0.1 ? 'orange' : 'green';
-  const classOnEmotionalWordsBg = 0 === props.data.result.emotion_words_per ? 'red-bg' : props.data.result.emotion_words_per < 0.1 ? 'orange-bg' : 'green-bg';
-  const guideLineOnEmotionalWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Emotionally triggered headlines are likely to drive more clicks.', "google-analytics-for-wordpress");
-  const classOnPowerWords = 0 === props.data.result.power_words.length ? 'orange' : 'green';
-  const classOnPowerWordsBg = 0 === props.data.result.power_words.length ? 'orange' : 'green-bg';
-  const guideLineOnPowerWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headlines with Power Words are more likely to get clicks.', "google-analytics-for-wordpress");
-  const textCommonWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Common Words', "google-analytics-for-wordpress");
-  const textTwentyThirty = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('20–30%', "google-analytics-for-wordpress");
-  const textUncommonWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Uncommon Words', "google-analytics-for-wordpress");
-  const textTenTwenty = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('10–20%', "google-analytics-for-wordpress");
-  const textEmotionalWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Emotional Words', "google-analytics-for-wordpress");
-  const textTenFifteen = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('10–15%', "google-analytics-for-wordpress");
-  const textPowerWords = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Power Words', "google-analytics-for-wordpress");
-  const textLeastOne = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('At least one', "google-analytics-for-wordpress");
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textPanelTitle,
-      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-word-balance', 'monsterinsights-headline-analyzer-panel-has-icon', classOnScore),
-      icon: 'green' === classOnScore ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
-          children: props.data.result.word_balance
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-          children: textGuideline
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          title: textCommonWords,
-          value: Math.round(props.data.result.common_words_per * 100),
-          goalValue: textTwentyThirty,
-          words: props.data.result.common_words,
-          guideLine: guideLineOnCommonWords,
-          classOnScore: classOnCommonWords,
-          classOnScoreBg: classOnCommonWordsBg
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          title: textUncommonWords,
-          value: Math.round(props.data.result.uncommon_words_per * 100),
-          goalValue: textTenTwenty,
-          words: props.data.result.uncommon_words,
-          guideLine: guideLineOnUnCommonWords,
-          classOnScore: classOnUnCommonWords,
-          classOnScoreBg: classOnUnCommonWordsBg
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          title: textEmotionalWords,
-          value: Math.round(props.data.result.emotion_words_per * 100),
-          goalValue: textTenFifteen,
-          words: props.data.result.emotion_words,
-          guideLine: guideLineOnEmotionalWords,
-          classOnScore: classOnEmotionalWords,
-          classOnScoreBg: classOnEmotionalWordsBg
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineWordsBlock__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          title: textPowerWords,
-          value: Math.round(props.data.result.power_words_per * 100),
-          goalValue: textLeastOne,
-          words: props.data.result.power_words,
-          guideLine: guideLineOnPowerWords,
-          classOnScore: classOnPowerWords,
-          classOnScoreBg: classOnPowerWordsBg
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelWordBalance);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordCount.js"
-/*!********************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordCount.js ***!
-  \********************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-const HeadlinePanelWordCount = props => {
-  const textWordCount = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Word Count', "google-analytics-for-wordpress");
-  const wordLength = props.data.result.word_count;
-  const barScore = wordLength >= 10 ? 100 : Math.round(wordLength * 10);
-  let classOnLength = '';
-  let statusOnLength = '';
-  let barColor = '#1EC185';
-  let descOnWordLength = '';
-  if (wordLength <= 4) {
-    classOnLength = 'red';
-    barColor = '#EB5757';
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Not Enough Words', "google-analytics-for-wordpress");
-    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline doesn’t use enough words. You have more space to add keywords and power words to improve your SEO and get more engagement.', "google-analytics-for-wordpress");
-  } else if (wordLength >= 5 && wordLength <= 9) {
-    classOnLength = 'green';
-    barColor = '#1EC185';
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Good', "google-analytics-for-wordpress");
-    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has the right amount of words. Headlines are more likely to be clicked on in search results if they have about 6 words.', "google-analytics-for-wordpress");
-  } else if (wordLength >= 10 && wordLength <= 11) {
-    classOnLength = 'orange';
-    barColor = '#F2994A';
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reduce Word Count', "google-analytics-for-wordpress");
-  } else {
-    classOnLength = 'red';
-    barColor = '#EB5757';
-    statusOnLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Too Many Words', "google-analytics-for-wordpress");
-    descOnWordLength = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Your headline has too many words. Long headlines will get cut off in search results and won’t get as many clicks.', "google-analytics-for-wordpress");
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textWordCount,
-      className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-panel-word-count', 'monsterinsights-headline-analyzer-panel-has-icon', classOnLength),
-      icon: 'green' === classOnLength ? _icons__WEBPACK_IMPORTED_MODULE_3__["default"].check : _icons__WEBPACK_IMPORTED_MODULE_3__["default"].warning,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "monsterinsights-headline-analyzer-pie-chart-container",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('monsterinsights-headline-analyzer-word-length', classOnLength),
-            children: wordLength
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            barScore: barScore,
-            barColor: barColor
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            className: "monsterinsights-headline-analyzer-status-on-word-length",
-            children: statusOnLength
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-          children: descOnWordLength
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePanelWordCount);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js"
-/*!**************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js ***!
-  \**************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-
-
-const HeadlinePieChart = props => {
-  const score = props.barScore;
-  const width = props.width ? props.width + 'px' : '80px';
-  const rightDeg = score > 50 ? 0 : 180 - 360 / 100 * score;
-  const color = props.barColor;
-  const fragmentLeft = () => {
-    if (score > 50) {
-      const leftDeg = 180 + (score - 50) * 360 / 100;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: "monsterinsights-donut-section monsterinsights-donut-section-left",
-        style: {
-          transform: 'rotate(0deg)'
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "monsterinsights-donut-filler",
-          style: {
-            backgroundColor: color,
-            transform: 'rotate(' + leftDeg + 'deg)'
-          }
-        })
-      });
-    }
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "monsterinsights-donut-container",
-      style: {
-        flexDirection: 'column'
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "monsterinsights-donut",
-        style: {
-          width,
-          paddingBottom: width,
-          backgroundColor: '#f2f2f2'
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          className: "monsterinsights-donut-sections",
-          style: {
-            transform: 'rotate(0deg)'
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "monsterinsights-donut-section monsterinsights-donut-section-right",
-            style: {
-              transform: 'rotate(0deg)'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "monsterinsights-donut-filler",
-              style: {
-                backgroundColor: color,
-                transform: 'rotate(-' + rightDeg + 'deg)'
-              }
-            })
-          }), fragmentLeft()]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "monsterinsights-donut-overlay",
-          style: {
-            height: '70%',
-            width: '70%',
-            top: 'calc(15%)',
-            left: 'calc(15%)',
-            backgroundColor: 'rgb(255, 255, 255)'
-          }
-        })]
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlinePieChart);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineSwitcher.js"
-/*!**************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineSwitcher.js ***!
-  \**************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _HeadlineTabCurrentScore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HeadlineTabCurrentScore */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabCurrentScore.js");
-/* harmony import */ var _HeadlineTabNewScore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HeadlineTabNewScore */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabNewScore.js");
-/* harmony import */ var _HeadlinePanelNewScore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HeadlinePanelNewScore */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelNewScore.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-const HeadlineSwitcher = props => {
-  const textCurrentScore = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Current Score', "google-analytics-for-wordpress");
-  const textNewHeadline = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Try New Headline', "google-analytics-for-wordpress");
-  const [activeTab, setActiveTab] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('current-score');
-  const activeCurrentScore = () => setActiveTab('current-score');
-  const activeNewHeadline = () => setActiveTab('new-headline');
-  const isNewData = 'undefined' !== typeof props.analyzer.isNewData ? props.analyzer.isNewData : false;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    props.setAnalyzer({
-      activeTab
-    });
-  }, [activeTab]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "monsterinsights-inline-buttons",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-        onClick: activeCurrentScore,
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('monsterinsights-switcher-button', {
-          active: 'current-score' === activeTab
-        }),
-        children: textCurrentScore
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-        onClick: activeNewHeadline,
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('monsterinsights-switcher-button', {
-          active: 'new-headline' === activeTab
-        }),
-        children: textNewHeadline
-      })]
-    }), 'new-headline' === activeTab ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineTabNewScore__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      analyzer: props.analyzer,
-      setAnalyzer: props.setAnalyzer
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlineTabCurrentScore__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      analyzer: props.analyzer
-    }), isNewData ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_HeadlinePanelNewScore__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      analyzer: props.analyzer
-    }) : '']
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineSwitcher);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabCurrentScore.js"
-/*!*********************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabCurrentScore.js ***!
-  \*********************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HeadlinePieChart */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePieChart.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-const HeadlineTabCurrentScore = props => {
-  const postTitle = props.analyzer.currentHeadlineData.sentence;
-  const textScore = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Score', "google-analytics-for-wordpress");
-  const textGuideLine = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('A good score is between 40 and 60. For best results, you should strive for 70 and above.', "google-analytics-for-wordpress");
-  const currentScore = props.analyzer.currentHeadlineData.score;
-  const classOnScore = currentScore < 40 ? 'red' : currentScore <= 60 ? 'orange' : 'green';
-  const barColor = 'red' === classOnScore ? '#EB5757' : 'orange' === classOnScore ? '#F2994A' : '#1EC185';
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: textScore,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "monsterinsights-headline-analyzer-current-score-tab",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h4", {
-            className: "monsterinsights-headline-analyzer-current-title",
-            children: ["\u201C", postTitle, "\u201D"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "monsterinsights-headline-analyzer-pie-chart-container",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: classnames__WEBPACK_IMPORTED_MODULE_3___default()('monsterinsights-headline-analyzer-current-score', classOnScore),
-              children: currentScore
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HeadlinePieChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              barScore: currentScore,
-              barColor: barColor
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-            children: textGuideLine
-          })]
-        })
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineTabCurrentScore);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabNewScore.js"
-/*!*****************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineTabNewScore.js ***!
-  \*****************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-const HeadlineTabNewScore = props => {
-  const textPanelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Try New Headline', "google-analytics-for-wordpress");
-  const textNewHeadlineInputLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter a different headline than your post title to see how it compares.', "google-analytics-for-wordpress");
-  const textAnalyze = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Analyze', "google-analytics-for-wordpress");
-  const newHeadline = 'undefined' !== typeof props.analyzer.newHeadline ? props.analyzer.newHeadline : '';
-  const previousScores = 'undefined' !== typeof props.analyzer.previousHeadlinesData ? props.analyzer.previousHeadlinesData : [];
-  const isDisabled = newHeadline ? false : true;
-  const fetchNewHeadlineData = value => {
-    const headline = value.trim();
-    if (!headline) {
-      return;
-    }
-    const formData = new FormData();
-    formData.append('_ajax_nonce', monsterinsights_gutenberg_tool_vars.nonce);
-    formData.append('action', 'monsterinsights_gutenberg_headline_analyzer_get_results');
-    formData.append('dataType', 'json');
-    formData.append('q', headline);
-    axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(monsterinsights_gutenberg_tool_vars.ajaxurl, formData).then(response => {
-      props.setAnalyzer({
-        newHeadlineData: response.data.data,
-        headlineData: response.data.data,
-        previousHeadlinesData: [props.analyzer.headlineData, ...previousScores],
-        isNewData: true
-      });
-    }).catch(error => {
-      props.setAnalyzer({
-        isNewData: false
-      });
-      console.log(error);
-    });
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-      title: textPanelTitle,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "monsterinsights-headline-analyzer-new-tab",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
-            onSubmit: e => {
-              e.preventDefault();
-              fetchNewHeadlineData(newHeadline);
-            },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-              label: textNewHeadlineInputLabel,
-              value: newHeadline,
-              onChange: newValue => {
-                if (' ' !== newValue) {
-                  props.setAnalyzer({
-                    newHeadline: newValue
-                  });
-                }
-              },
-              className: "monsterinsights-headline-analyzer-input-field",
-              __nextHasNoMarginBottom: true,
-              __next40pxDefaultSize: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-              className: "monsterinsights-headline-analyzer-button",
-              isPrimary: true,
-              onClick: () => {
-                fetchNewHeadlineData(newHeadline);
-              },
-              disabled: isDisabled,
-              children: textAnalyze
-            })]
-          })
-        })
-      })
-    })
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineTabNewScore);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineWordsBlock.js"
-/*!****************************************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineWordsBlock.js ***!
-  \****************************************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-const HeadlineWordsBlock = props => {
-  const textGoal = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Goal:', "google-analytics-for-wordpress");
-  const progressBarStyle = {
-    width: props.value + '%'
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "monsterinsights-headline-analyzer-words-block",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
-      children: props.title
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "monsterinsights-headline-analyzer-words-block-data",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('monsterinsights-headline-analyzer-words-block-percentage', props.classOnScore),
-        children: [props.value, "%"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
-        className: "monsterinsights-headline-analyzer-words-block-goal",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-          children: textGoal
-        }), props.goalValue]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
-        className: "monsterinsights-headline-analyzer-words-block-progressbar",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          className: "monsterinsights-headline-analyzer-progressbar-bg"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-          className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('monsterinsights-headline-analyzer-progressbar-part', props.classOnScoreBg),
-          style: progressBarStyle
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-      className: "monsterinsights-headline-analyzer-words-tag-list",
-      children: props.words.length > 0 ? props.words.map((word, index) => {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-          children: word
-        }, index);
-      }) : ''
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      className: "monsterinsights-headline-analyzer-words-guideline",
-      children: props.guideLine
-    })]
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeadlineWordsBlock);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js"
-/*!****************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/icons.js ***!
-  \****************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-
-const icons = {};
-icons.headline = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "15",
-  height: "14",
-  viewBox: "0 0 15 14",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M13.5 2V12H14.5C14.6458 12 14.7604 12.0521 14.8438 12.1562C14.9479 12.2396 15 12.3542 15 12.5V13.5C15 13.6458 14.9479 13.7604 14.8438 13.8438C14.7604 13.9479 14.6458 14 14.5 14H9.5C9.35417 14 9.22917 13.9479 9.125 13.8438C9.04167 13.7604 9 13.6458 9 13.5V12.5C9 12.3542 9.04167 12.2396 9.125 12.1562C9.22917 12.0521 9.35417 12 9.5 12H10.5V8H4.5V12H5.5C5.64583 12 5.76042 12.0521 5.84375 12.1562C5.94792 12.2396 6 12.3542 6 12.5V13.5C6 13.6458 5.94792 13.7604 5.84375 13.8438C5.76042 13.9479 5.64583 14 5.5 14H0.5C0.354167 14 0.229167 13.9479 0.125 13.8438C0.0416667 13.7604 0 13.6458 0 13.5V12.5C0 12.3542 0.0416667 12.2396 0.125 12.1562C0.229167 12.0521 0.354167 12 0.5 12H1.5V2H0.5C0.354167 2 0.229167 1.95833 0.125 1.875C0.0416667 1.77083 0 1.64583 0 1.5V0.5C0 0.354167 0.0416667 0.239583 0.125 0.15625C0.229167 0.0520833 0.354167 0 0.5 0H5.5C5.64583 0 5.76042 0.0520833 5.84375 0.15625C5.94792 0.239583 6 0.354167 6 0.5V1.5C6 1.64583 5.94792 1.77083 5.84375 1.875C5.76042 1.95833 5.64583 2 5.5 2H4.5V6H10.5V2H9.5C9.35417 2 9.22917 1.95833 9.125 1.875C9.04167 1.77083 9 1.64583 9 1.5V0.5C9 0.354167 9.04167 0.239583 9.125 0.15625C9.22917 0.0520833 9.35417 0 9.5 0H14.5C14.6458 0 14.7604 0.0520833 14.8438 0.15625C14.9479 0.239583 15 0.354167 15 0.5V1.5C15 1.64583 14.9479 1.77083 14.8438 1.875C14.7604 1.95833 14.6458 2 14.5 2H13.5Z",
-    fill: "white"
-  })
-});
-icons.headlineBlack = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "15",
-  height: "14",
-  viewBox: "0 0 15 14",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M13.5 2V12H14.5C14.6458 12 14.7604 12.0521 14.8438 12.1562C14.9479 12.2396 15 12.3542 15 12.5V13.5C15 13.6458 14.9479 13.7604 14.8438 13.8438C14.7604 13.9479 14.6458 14 14.5 14H9.5C9.35417 14 9.22917 13.9479 9.125 13.8438C9.04167 13.7604 9 13.6458 9 13.5V12.5C9 12.3542 9.04167 12.2396 9.125 12.1562C9.22917 12.0521 9.35417 12 9.5 12H10.5V8H4.5V12H5.5C5.64583 12 5.76042 12.0521 5.84375 12.1562C5.94792 12.2396 6 12.3542 6 12.5V13.5C6 13.6458 5.94792 13.7604 5.84375 13.8438C5.76042 13.9479 5.64583 14 5.5 14H0.5C0.354167 14 0.229167 13.9479 0.125 13.8438C0.0416667 13.7604 0 13.6458 0 13.5V12.5C0 12.3542 0.0416667 12.2396 0.125 12.1562C0.229167 12.0521 0.354167 12 0.5 12H1.5V2H0.5C0.354167 2 0.229167 1.95833 0.125 1.875C0.0416667 1.77083 0 1.64583 0 1.5V0.5C0 0.354167 0.0416667 0.239583 0.125 0.15625C0.229167 0.0520833 0.354167 0 0.5 0H5.5C5.64583 0 5.76042 0.0520833 5.84375 0.15625C5.94792 0.239583 6 0.354167 6 0.5V1.5C6 1.64583 5.94792 1.77083 5.84375 1.875C5.76042 1.95833 5.64583 2 5.5 2H4.5V6H10.5V2H9.5C9.35417 2 9.22917 1.95833 9.125 1.875C9.04167 1.77083 9 1.64583 9 1.5V0.5C9 0.354167 9.04167 0.239583 9.125 0.15625C9.22917 0.0520833 9.35417 0 9.5 0H14.5C14.6458 0 14.7604 0.0520833 14.8438 0.15625C14.9479 0.239583 15 0.354167 15 0.5V1.5C15 1.64583 14.9479 1.77083 14.8438 1.875C14.7604 1.95833 14.6458 2 14.5 2H13.5Z",
-    fill: "#000"
-  })
-});
-icons.warning = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "16",
-  height: "16",
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M16 8C16 6.58065 15.6129 5.22581 14.9032 4C14.1935 2.77419 13.2258 1.80645 12 1.09677C10.7742 0.387097 9.41936 0 8 0C6.54839 0 5.22581 0.387097 4 1.09677C2.77419 1.80645 1.77419 2.77419 1.06452 4C0.354839 5.22581 0 6.58065 0 8C0 9.45161 0.354839 10.7742 1.06452 12C1.77419 13.2258 2.77419 14.2258 4 14.9355C5.22581 15.6452 6.54839 16 8 16C9.41936 16 10.7742 15.6452 12 14.9355C13.2258 14.2258 14.1935 13.2258 14.9032 12C15.6129 10.7742 16 9.45161 16 8ZM8 9.6129C8.3871 9.6129 8.74194 9.77419 9.03226 10.0645C9.32258 10.3548 9.48387 10.7097 9.48387 11.0968C9.48387 11.5161 9.32258 11.871 9.03226 12.1613C8.74194 12.4516 8.3871 12.5806 8 12.5806C7.58065 12.5806 7.22581 12.4516 6.93548 12.1613C6.64516 11.871 6.51613 11.5161 6.51613 11.0968C6.51613 10.7097 6.64516 10.3548 6.93548 10.0645C7.22581 9.77419 7.58065 9.6129 8 9.6129ZM6.58065 4.29032C6.58065 4.16129 6.6129 4.06452 6.67742 4C6.74194 3.93548 6.83871 3.87097 6.96774 3.87097H9.03226C9.12903 3.87097 9.22581 3.93548 9.29032 4C9.35484 4.06452 9.41936 4.16129 9.41936 4.29032L9.16129 8.67742C9.16129 8.77419 9.09677 8.87097 9.03226 8.93548C8.96774 9 8.87097 9.03226 8.77419 9.03226H7.22581C7.09677 9.03226 7 9 6.93548 8.93548C6.87097 8.87097 6.83871 8.77419 6.83871 8.67742L6.58065 4.29032Z",
-    fill: "#F2994A"
-  })
-});
-icons.smile = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "16",
-  height: "16",
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM11.2903 5.74194C11.0968 5.52688 10.8602 5.41935 10.5806 5.41935C10.3011 5.41935 10.0538 5.52688 9.83871 5.74194C9.64516 5.93548 9.54839 6.17204 9.54839 6.45161C9.54839 6.73118 9.64516 6.97849 9.83871 7.19355C10.0538 7.3871 10.3011 7.48387 10.5806 7.48387C10.8602 7.48387 11.0968 7.3871 11.2903 7.19355C11.5054 6.97849 11.6129 6.73118 11.6129 6.45161C11.6129 6.17204 11.5054 5.93548 11.2903 5.74194ZM6.12903 5.74194C5.93548 5.52688 5.69892 5.41935 5.41935 5.41935C5.13978 5.41935 4.89247 5.52688 4.67742 5.74194C4.48387 5.93548 4.3871 6.17204 4.3871 6.45161C4.3871 6.73118 4.48387 6.97849 4.67742 7.19355C4.89247 7.3871 5.13978 7.48387 5.41935 7.48387C5.69892 7.48387 5.93548 7.3871 6.12903 7.19355C6.34409 6.97849 6.45161 6.73118 6.45161 6.45161C6.45161 6.17204 6.34409 5.93548 6.12903 5.74194ZM11.7097 10.9032C11.7957 10.8172 11.8387 10.7204 11.8387 10.6129C11.8387 10.4839 11.8065 10.3871 11.7419 10.3226C11.6774 10.2366 11.5914 10.172 11.4839 10.129C11.3978 10.0645 11.3011 10.043 11.1935 10.0645C11.086 10.086 10.9892 10.1505 10.9032 10.2581C10.1505 11.1613 9.1828 11.6129 8 11.6129C6.8172 11.6129 5.84946 11.1613 5.09677 10.2581C5.01075 10.1505 4.91398 10.086 4.80645 10.0645C4.69892 10.043 4.5914 10.0645 4.48387 10.129C4.39785 10.172 4.32258 10.2366 4.25806 10.3226C4.19355 10.3871 4.16129 10.4839 4.16129 10.6129C4.16129 10.7204 4.2043 10.8172 4.29032 10.9032C5.25806 12.0645 6.49462 12.6452 8 12.6452C9.50538 12.6452 10.7419 12.0645 11.7097 10.9032Z",
-    fill: "#1EC185"
-  })
-});
-icons.neutral = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "16",
-  height: "16",
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM6.12903 5.74194C5.93548 5.52688 5.69892 5.41935 5.41935 5.41935C5.13978 5.41935 4.89247 5.52688 4.67742 5.74194C4.48387 5.93548 4.3871 6.17204 4.3871 6.45161C4.3871 6.73118 4.48387 6.97849 4.67742 7.19355C4.89247 7.3871 5.13978 7.48387 5.41935 7.48387C5.69892 7.48387 5.93548 7.3871 6.12903 7.19355C6.34409 6.97849 6.45161 6.73118 6.45161 6.45161C6.45161 6.17204 6.34409 5.93548 6.12903 5.74194ZM11.0968 11.6129C11.4409 11.6129 11.6129 11.4409 11.6129 11.0968C11.6129 10.7527 11.4409 10.5806 11.0968 10.5806H4.90323C4.55914 10.5806 4.3871 10.7527 4.3871 11.0968C4.3871 11.4409 4.55914 11.6129 4.90323 11.6129H11.0968ZM9.83871 7.19355C10.0538 7.3871 10.3011 7.48387 10.5806 7.48387C10.8602 7.48387 11.0968 7.3871 11.2903 7.19355C11.5054 6.97849 11.6129 6.73118 11.6129 6.45161C11.6129 6.17204 11.5054 5.93548 11.2903 5.74194C11.0968 5.52688 10.8602 5.41935 10.5806 5.41935C10.3011 5.41935 10.0538 5.52688 9.83871 5.74194C9.64516 5.93548 9.54839 6.17204 9.54839 6.45161C9.54839 6.73118 9.64516 6.97849 9.83871 7.19355Z",
-    fill: "#626D83"
-  })
-});
-icons.negative = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "16",
-  height: "16",
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484ZM4.3871 7.48387C4.3871 7.76344 4.48387 8.01075 4.67742 8.22581C4.89247 8.41935 5.13978 8.51613 5.41935 8.51613C5.69892 8.51613 5.93548 8.41935 6.12903 8.22581C6.34409 8.01075 6.45161 7.76344 6.45161 7.48387C6.45161 7.44086 6.43011 7.35484 6.3871 7.22581C6.4086 7.22581 6.41935 7.22581 6.41935 7.22581C6.44086 7.22581 6.45161 7.22581 6.45161 7.22581C6.70968 7.22581 6.87097 7.10753 6.93548 6.87097C6.95699 6.78495 6.96774 6.70968 6.96774 6.64516C6.96774 6.58065 6.94624 6.52688 6.90323 6.48387C6.88172 6.41935 6.83871 6.36559 6.77419 6.32258C6.73118 6.27957 6.67742 6.24731 6.6129 6.22581L4.03226 5.45161C3.88172 5.4086 3.74194 5.41935 3.6129 5.48387C3.50538 5.54839 3.43011 5.64516 3.3871 5.77419C3.36559 5.86021 3.35484 5.93548 3.35484 6C3.37634 6.06452 3.39785 6.12903 3.41935 6.19355C3.44086 6.23656 3.47312 6.27957 3.51613 6.32258C3.58065 6.36559 3.65591 6.39785 3.74194 6.41935L4.70968 6.74194C4.49462 6.93548 4.3871 7.1828 4.3871 7.48387ZM9.80645 12.4516C9.93548 12.6237 10.0968 12.6882 10.2903 12.6452C10.4839 12.6021 10.6129 12.4946 10.6774 12.3226C10.7419 12.1505 10.7097 11.9785 10.5806 11.8065C9.91398 10.9892 9.05376 10.5806 8 10.5806C6.94624 10.5806 6.07527 10.9892 5.3871 11.8065C5.34409 11.871 5.31183 11.9462 5.29032 12.0323C5.26882 12.1183 5.26882 12.1935 5.29032 12.2581C5.31183 12.3226 5.34409 12.3871 5.3871 12.4516C5.43011 12.5161 5.48387 12.5699 5.54839 12.6129C5.6129 12.6344 5.67742 12.6559 5.74194 12.6774C5.82796 12.6774 5.90323 12.6667 5.96774 12.6452C6.05376 12.6021 6.12903 12.5376 6.19355 12.4516C6.64516 11.914 7.24731 11.6452 8 11.6452C8.75269 11.6452 9.35484 11.914 9.80645 12.4516ZM12.2903 6.41935C12.4194 6.37634 12.5161 6.30107 12.5806 6.19355C12.6452 6.06452 12.6559 5.92473 12.6129 5.77419C12.5914 5.68817 12.5484 5.6129 12.4839 5.54839C12.4194 5.48387 12.3441 5.45161 12.2581 5.45161C12.172 5.43011 12.086 5.43011 12 5.45161L9.41935 6.22581C9.26882 6.26882 9.16129 6.35484 9.09677 6.48387C9.03226 6.5914 9.02151 6.72043 9.06452 6.87097C9.12903 7.10753 9.29032 7.22581 9.54839 7.22581C9.56989 7.22581 9.5914 7.22581 9.6129 7.22581C9.56989 7.33333 9.54839 7.41935 9.54839 7.48387C9.54839 7.76344 9.64516 8.01075 9.83871 8.22581C10.0538 8.41935 10.3011 8.51613 10.5806 8.51613C10.8602 8.51613 11.0968 8.41935 11.2903 8.22581C11.5054 8.01075 11.6129 7.76344 11.6129 7.48387C11.6129 7.1828 11.5054 6.93548 11.2903 6.74194L12.2903 6.41935Z",
-    fill: "#626D83"
-  })
-});
-icons.check = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-  width: "16",
-  height: "16",
-  viewBox: "0 0 16 16",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-    d: "M13.6452 2.35484C15.2151 3.90323 16 5.78495 16 8C16 10.2151 15.2151 12.1075 13.6452 13.6774C12.0968 15.2258 10.2151 16 8 16C5.78495 16 3.89247 15.2258 2.32258 13.6774C0.774194 12.1075 0 10.2151 0 8C0 5.78495 0.774194 3.90323 2.32258 2.35484C3.89247 0.784946 5.78495 0 8 0C10.2151 0 12.0968 0.784946 13.6452 2.35484ZM7.06452 12.2258L13 6.29032C13.2581 6.05376 13.2581 5.8172 13 5.58065L12.2903 4.83871C12.0323 4.60215 11.7849 4.60215 11.5484 4.83871L6.70968 9.67742L4.45161 7.41935C4.21505 7.1828 3.96774 7.1828 3.70968 7.41935L3 8.16129C2.74194 8.39785 2.74194 8.63441 3 8.87097L6.35484 12.2258C6.5914 12.4839 6.82796 12.4839 7.06452 12.2258Z",
-    fill: "#1EC185"
-  })
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (icons);
-
-/***/ },
-
-/***/ "./src/plugins/monsterinsights-Headline-Analyzer/index.js"
-/*!****************************************************************!*\
-  !*** ./src/plugins/monsterinsights-Headline-Analyzer/index.js ***!
-  \****************************************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/plugins */ "@wordpress/plugins");
-/* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icons */ "./src/plugins/monsterinsights-Headline-Analyzer/icons.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var _components_HeadlineSwitcher__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/HeadlineSwitcher */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlineSwitcher.js");
-/* harmony import */ var _components_HeadlinePanelPreviousScores__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/HeadlinePanelPreviousScores */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelPreviousScores.js");
-/* harmony import */ var _components_HeadlinePanelWordBalance__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/HeadlinePanelWordBalance */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordBalance.js");
-/* harmony import */ var _components_HeadlinePanelSentiment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/HeadlinePanelSentiment */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSentiment.js");
-/* harmony import */ var _components_HeadlinePanelType__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/HeadlinePanelType */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelType.js");
-/* harmony import */ var _components_HeadlinePanelCharacterCount__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/HeadlinePanelCharacterCount */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelCharacterCount.js");
-/* harmony import */ var _components_HeadlinePanelWordCount__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/HeadlinePanelWordCount */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordCount.js");
-/* harmony import */ var _components_HeadlinePanelStartEndWords__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/HeadlinePanelStartEndWords */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelStartEndWords.js");
-/* harmony import */ var _components_HeadlinePanelSearchPreview__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/HeadlinePanelSearchPreview */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSearchPreview.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const MonsterInsightsHeadlineAnalyzer = props => {
-  const postTitle = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core/editor').getEditedPostAttribute('title'));
-  const textHeadlineAnalyzer = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Headline Analyzer', "google-analytics-for-wordpress");
-  const emptyTitleWarning = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Write your post title to see the analyzer data. This Headline Analyzer tool enables you to write irresistible SEO headlines that drive traffic, shares, and rank better in search results.', "google-analytics-for-wordpress");
-  const [analyzer, setAnalyzer] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-  const pinnedIcon = document.querySelector(`.components-button[aria-label='${textHeadlineAnalyzer}'] svg`);
-  const previousScores = 'undefined' !== typeof analyzer.previousHeadlinesData ? analyzer.previousHeadlinesData : [];
-  const notice = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This headline analyzer is part of MonsterInsights to help you increase your traffic. See your %1swebsite traffic reports%2s.', "google-analytics-for-wordpress"), `<a href="${monsterinsights_gutenberg_tool_vars.reports_url}" className="monsterinsights-headline-analyzer-link">`, '</a>');
-  const wrapper = document.querySelector('.monsterinsights-headline-analyzer-wrapper');
-  if (pinnedIcon) {
-    const scoreTag = document.createElement('span');
-    if (analyzer.dataExist && 'undefined' !== typeof analyzer.currentHeadlineData.score) {
-      const currentScore = analyzer.currentHeadlineData.score;
-      const classOnScore = currentScore < 40 ? 'red' : currentScore <= 60 ? 'orange' : 'green';
-      pinnedIcon.parentNode.setAttribute('monsterinsights-button-color', classOnScore);
-      if (!pinnedIcon.nextElementSibling) {
-        scoreTag.innerHTML = `${currentScore}/100`;
-        pinnedIcon.parentNode.insertBefore(scoreTag, pinnedIcon.nextSibling);
-      } else {
-        pinnedIcon.nextElementSibling.innerHTML = `${currentScore}/100`;
-      }
-    } else {
-      pinnedIcon.parentNode.setAttribute('monsterinsights-button-color', 'red');
-      if (!pinnedIcon.nextElementSibling) {
-        scoreTag.innerHTML = '00/100';
-        pinnedIcon.parentNode.insertBefore(scoreTag, pinnedIcon.nextSibling);
-      } else {
-        pinnedIcon.nextElementSibling.innerHTML = '00/100';
-      }
-    }
-  }
-  if (wrapper) {
-    const headingElements = wrapper.parentNode.querySelectorAll('.components-panel__header');
-    if (headingElements) {
-      headingElements.forEach(function (element) {
-        const button = element.querySelector('[aria-pressed="true"]');
-        if (button && null !== button && null !== button.offsetParent) {
-          button.style.display = 'none';
-        }
-      });
-    }
-  }
-  const updateAnalyzerData = data => {
-    setAnalyzer({
-      ...analyzer,
-      ...data
-    });
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    clearTimeout(window.HaPostTitleTimer);
-    window.HaPostTitleTimer = setTimeout(() => {
-      const formData = new FormData();
-      formData.append('_ajax_nonce', monsterinsights_gutenberg_tool_vars.nonce);
-      formData.append('action', 'monsterinsights_gutenberg_headline_analyzer_get_results');
-      formData.append('dataType', 'json');
-      formData.append('q', postTitle);
-      axios__WEBPACK_IMPORTED_MODULE_6__["default"].post(monsterinsights_gutenberg_tool_vars.ajaxurl, formData).then(response => {
-        const newAnalyzerData = {
-          dataExist: false
-        };
-        if (response.data.data.analysed) {
-          newAnalyzerData.currentHeadlineData = response.data.data;
-          newAnalyzerData.headlineData = response.data.data;
-          newAnalyzerData.dataExist = true;
-          if ('undefined' !== typeof analyzer.headlineData) {
-            newAnalyzerData.previousHeadlinesData = [analyzer.headlineData, ...previousScores];
-          }
-        }
-        setAnalyzer({
-          ...analyzer,
-          ...newAnalyzerData
-        });
-      }).catch(error => {
-        const newAnalyzerData = {
-          dataExist: false
-        };
-        setAnalyzer({
-          ...analyzer,
-          ...newAnalyzerData
-        });
-        console.log(error);
-      });
-    }, 1000);
-  }, [postTitle]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PluginSidebarMoreMenuItem, {
-      target: "monsterinsights-headline-analyzer",
-      children: textHeadlineAnalyzer
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsxs)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_3__.PluginSidebar, {
-      name: "monsterinsights-headline-analyzer",
-      title: textHeadlineAnalyzer,
-      className: "monsterinsights-headline-analyzer-wrapper",
-      icon: _icons__WEBPACK_IMPORTED_MODULE_5__["default"].headline,
-      children: ['undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlineSwitcher__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        analyzer: analyzer,
-        setAnalyzer: updateAnalyzerData
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)("p", {
-        className: "monsterinsights-headline-analyzer-empty-title-warning",
-        children: emptyTitleWarning
-      }), 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed && previousScores.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelPreviousScores__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        analyzer: analyzer,
-        setAnalyzer: updateAnalyzerData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelWordBalance__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelSentiment__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelType__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelCharacterCount__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelWordCount__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelStartEndWords__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        data: analyzer.headlineData
-      }) : '', 'undefined' !== typeof analyzer.headlineData && analyzer.dataExist && analyzer.headlineData.analysed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_components_HeadlinePanelSearchPreview__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        data: analyzer.headlineData
-      }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)("div", {
-        className: "monsterinsights-headline-analyzer-bottom-notice",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)("p", {
-          dangerouslySetInnerHTML: {
-            __html: notice
-          }
-        })
-      })]
-    })]
-  });
-};
-
-// register & render editor sidebar plugin for post_type `post` only
-if ('undefined' !== typeof monsterinsights_gutenberg_tool_vars && monsterinsights_gutenberg_tool_vars.allowed_post_types.includes(monsterinsights_gutenberg_tool_vars.current_post_type) && monsterinsights_gutenberg_tool_vars.is_headline_analyzer_enabled) {
-  (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__.registerPlugin)('monsterinsights-headline-analyzer', {
-    icon: _icons__WEBPACK_IMPORTED_MODULE_5__["default"].headlineBlack,
-    render: MonsterInsightsHeadlineAnalyzer
-  });
-}
-
-/***/ },
-
 /***/ "./src/assets/scss/monsterinsights/editor.scss"
 /*!*****************************************************!*\
   !*** ./src/assets/scss/monsterinsights/editor.scss ***!
@@ -4904,4881 +5732,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	} else // removed by dead control flow
 {}
 }());
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/adapters/adapters.js"
-/*!*****************************************************!*\
-  !*** ./node_modules/axios/lib/adapters/adapters.js ***!
-  \*****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _http_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./http.js */ "./node_modules/axios/lib/helpers/null.js");
-/* harmony import */ var _xhr_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./xhr.js */ "./node_modules/axios/lib/adapters/xhr.js");
-/* harmony import */ var _fetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fetch.js */ "./node_modules/axios/lib/adapters/fetch.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-
-
-
-
-
-
-const knownAdapters = {
-  http: _http_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  xhr: _xhr_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-  fetch: {
-    get: _fetch_js__WEBPACK_IMPORTED_MODULE_3__.getFetch,
-  }
-}
-
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(knownAdapters, (fn, value) => {
-  if (fn) {
-    try {
-      Object.defineProperty(fn, 'name', {value});
-    } catch (e) {
-      // eslint-disable-next-line no-empty
-    }
-    Object.defineProperty(fn, 'adapterName', {value});
-  }
-});
-
-const renderReason = (reason) => `- ${reason}`;
-
-const isResolvedHandle = (adapter) => _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(adapter) || adapter === null || adapter === false;
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  getAdapter: (adapters, config) => {
-    adapters = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(adapters) ? adapters : [adapters];
-
-    const {length} = adapters;
-    let nameOrAdapter;
-    let adapter;
-
-    const rejectedReasons = {};
-
-    for (let i = 0; i < length; i++) {
-      nameOrAdapter = adapters[i];
-      let id;
-
-      adapter = nameOrAdapter;
-
-      if (!isResolvedHandle(nameOrAdapter)) {
-        adapter = knownAdapters[(id = String(nameOrAdapter)).toLowerCase()];
-
-        if (adapter === undefined) {
-          throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_4__["default"](`Unknown adapter '${id}'`);
-        }
-      }
-
-      if (adapter && (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(adapter) || (adapter = adapter.get(config)))) {
-        break;
-      }
-
-      rejectedReasons[id || '#' + i] = adapter;
-    }
-
-    if (!adapter) {
-
-      const reasons = Object.entries(rejectedReasons)
-        .map(([id, state]) => `adapter ${id} ` +
-          (state === false ? 'is not supported by the environment' : 'is not available in the build')
-        );
-
-      let s = length ?
-        (reasons.length > 1 ? 'since :\n' + reasons.map(renderReason).join('\n') : ' ' + renderReason(reasons[0])) :
-        'as no adapter specified';
-
-      throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_4__["default"](
-        `There is no suitable adapter to dispatch the request ` + s,
-        'ERR_NOT_SUPPORT'
-      );
-    }
-
-    return adapter;
-  },
-  adapters: knownAdapters
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/adapters/fetch.js"
-/*!**************************************************!*\
-  !*** ./node_modules/axios/lib/adapters/fetch.js ***!
-  \**************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   getFetch: () => (/* binding */ getFetch)
-/* harmony export */ });
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/composeSignals.js */ "./node_modules/axios/lib/helpers/composeSignals.js");
-/* harmony import */ var _helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/trackStream.js */ "./node_modules/axios/lib/helpers/trackStream.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-/* harmony import */ var _helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/progressEventReducer.js */ "./node_modules/axios/lib/helpers/progressEventReducer.js");
-/* harmony import */ var _helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helpers/resolveConfig.js */ "./node_modules/axios/lib/helpers/resolveConfig.js");
-/* harmony import */ var _core_settle_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../core/settle.js */ "./node_modules/axios/lib/core/settle.js");
-
-
-
-
-
-
-
-
-
-
-const DEFAULT_CHUNK_SIZE = 64 * 1024;
-
-const {isFunction} = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"];
-
-const globalFetchAPI = (({Request, Response}) => ({
-  Request, Response
-}))(_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].global);
-
-const {
-  ReadableStream, TextEncoder
-} = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].global;
-
-
-const test = (fn, ...args) => {
-  try {
-    return !!fn(...args);
-  } catch (e) {
-    return false
-  }
-}
-
-const factory = (env) => {
-  env = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].merge.call({
-    skipUndefined: true
-  }, globalFetchAPI, env);
-
-  const {fetch: envFetch, Request, Response} = env;
-  const isFetchSupported = envFetch ? isFunction(envFetch) : typeof fetch === 'function';
-  const isRequestSupported = isFunction(Request);
-  const isResponseSupported = isFunction(Response);
-
-  if (!isFetchSupported) {
-    return false;
-  }
-
-  const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream);
-
-  const encodeText = isFetchSupported && (typeof TextEncoder === 'function' ?
-      ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) :
-      async (str) => new Uint8Array(await new Request(str).arrayBuffer())
-  );
-
-  const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
-    let duplexAccessed = false;
-
-    const hasContentType = new Request(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin, {
-      body: new ReadableStream(),
-      method: 'POST',
-      get duplex() {
-        duplexAccessed = true;
-        return 'half';
-      },
-    }).headers.has('Content-Type');
-
-    return duplexAccessed && !hasContentType;
-  });
-
-  const supportsResponseStream = isResponseSupported && isReadableStreamSupported &&
-    test(() => _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isReadableStream(new Response('').body));
-
-  const resolvers = {
-    stream: supportsResponseStream && ((res) => res.body)
-  };
-
-  isFetchSupported && ((() => {
-    ['text', 'arrayBuffer', 'blob', 'formData', 'stream'].forEach(type => {
-      !resolvers[type] && (resolvers[type] = (res, config) => {
-        let method = res && res[type];
-
-        if (method) {
-          return method.call(res);
-        }
-
-        throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"](`Response type '${type}' is not supported`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NOT_SUPPORT, config);
-      })
-    });
-  })());
-
-  const getBodyLength = async (body) => {
-    if (body == null) {
-      return 0;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isBlob(body)) {
-      return body.size;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isSpecCompliantForm(body)) {
-      const _request = new Request(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin, {
-        method: 'POST',
-        body,
-      });
-      return (await _request.arrayBuffer()).byteLength;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isArrayBufferView(body) || _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isArrayBuffer(body)) {
-      return body.byteLength;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isURLSearchParams(body)) {
-      body = body + '';
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isString(body)) {
-      return (await encodeText(body)).byteLength;
-    }
-  }
-
-  const resolveBodyLength = async (headers, body) => {
-    const length = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].toFiniteNumber(headers.getContentLength());
-
-    return length == null ? getBodyLength(body) : length;
-  }
-
-  return async (config) => {
-    let {
-      url,
-      method,
-      data,
-      signal,
-      cancelToken,
-      timeout,
-      onDownloadProgress,
-      onUploadProgress,
-      responseType,
-      headers,
-      withCredentials = 'same-origin',
-      fetchOptions
-    } = (0,_helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_7__["default"])(config);
-
-    let _fetch = envFetch || fetch;
-
-    responseType = responseType ? (responseType + '').toLowerCase() : 'text';
-
-    let composedSignal = (0,_helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_3__["default"])([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
-
-    let request = null;
-
-    const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
-      composedSignal.unsubscribe();
-    });
-
-    let requestContentLength;
-
-    try {
-      if (
-        onUploadProgress && supportsRequestStream && method !== 'get' && method !== 'head' &&
-        (requestContentLength = await resolveBodyLength(headers, data)) !== 0
-      ) {
-        let _request = new Request(url, {
-          method: 'POST',
-          body: data,
-          duplex: "half"
-        });
-
-        let contentTypeHeader;
-
-        if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isFormData(data) && (contentTypeHeader = _request.headers.get('content-type'))) {
-          headers.setContentType(contentTypeHeader)
-        }
-
-        if (_request.body) {
-          const [onProgress, flush] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventDecorator)(
-            requestContentLength,
-            (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventReducer)((0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.asyncDecorator)(onUploadProgress))
-          );
-
-          data = (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_4__.trackStream)(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
-        }
-      }
-
-      if (!_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isString(withCredentials)) {
-        withCredentials = withCredentials ? 'include' : 'omit';
-      }
-
-      // Cloudflare Workers throws when credentials are defined
-      // see https://github.com/cloudflare/workerd/issues/902
-      const isCredentialsSupported = isRequestSupported && "credentials" in Request.prototype;
-
-      const resolvedOptions = {
-        ...fetchOptions,
-        signal: composedSignal,
-        method: method.toUpperCase(),
-        headers: headers.normalize().toJSON(),
-        body: data,
-        duplex: "half",
-        credentials: isCredentialsSupported ? withCredentials : undefined
-      };
-
-      request = isRequestSupported && new Request(url, resolvedOptions);
-
-      let response = await (isRequestSupported ? _fetch(request, fetchOptions) : _fetch(url, resolvedOptions));
-
-      const isStreamResponse = supportsResponseStream && (responseType === 'stream' || responseType === 'response');
-
-      if (supportsResponseStream && (onDownloadProgress || (isStreamResponse && unsubscribe))) {
-        const options = {};
-
-        ['status', 'statusText', 'headers'].forEach(prop => {
-          options[prop] = response[prop];
-        });
-
-        const responseContentLength = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].toFiniteNumber(response.headers.get('content-length'));
-
-        const [onProgress, flush] = onDownloadProgress && (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventDecorator)(
-          responseContentLength,
-          (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventReducer)((0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.asyncDecorator)(onDownloadProgress), true)
-        ) || [];
-
-        response = new Response(
-          (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_4__.trackStream)(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
-            flush && flush();
-            unsubscribe && unsubscribe();
-          }),
-          options
-        );
-      }
-
-      responseType = responseType || 'text';
-
-      let responseData = await resolvers[_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].findKey(resolvers, responseType) || 'text'](response, config);
-
-      !isStreamResponse && unsubscribe && unsubscribe();
-
-      return await new Promise((resolve, reject) => {
-        (0,_core_settle_js__WEBPACK_IMPORTED_MODULE_8__["default"])(resolve, reject, {
-          data: responseData,
-          headers: _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_5__["default"].from(response.headers),
-          status: response.status,
-          statusText: response.statusText,
-          config,
-          request
-        })
-      })
-    } catch (err) {
-      unsubscribe && unsubscribe();
-
-      if (err && err.name === 'TypeError' && /Load failed|fetch/i.test(err.message)) {
-        throw Object.assign(
-          new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"]('Network Error', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NETWORK, config, request),
-          {
-            cause: err.cause || err
-          }
-        )
-      }
-
-      throw _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].from(err, err && err.code, config, request);
-    }
-  }
-}
-
-const seedCache = new Map();
-
-const getFetch = (config) => {
-  let env = config ? config.env : {};
-  const {fetch, Request, Response} = env;
-  const seeds = [
-    Request, Response, fetch
-  ];
-
-  let len = seeds.length, i = len,
-    seed, target, map = seedCache;
-
-  while (i--) {
-    seed = seeds[i];
-    target = map.get(seed);
-
-    target === undefined && map.set(seed, target = (i ? new Map() : factory(env)))
-
-    map = target;
-  }
-
-  return target;
-};
-
-const adapter = getFetch();
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (adapter);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/adapters/xhr.js"
-/*!************************************************!*\
-  !*** ./node_modules/axios/lib/adapters/xhr.js ***!
-  \************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _core_settle_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../core/settle.js */ "./node_modules/axios/lib/core/settle.js");
-/* harmony import */ var _defaults_transitional_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../defaults/transitional.js */ "./node_modules/axios/lib/defaults/transitional.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cancel/CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
-/* harmony import */ var _helpers_parseProtocol_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helpers/parseProtocol.js */ "./node_modules/axios/lib/helpers/parseProtocol.js");
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-/* harmony import */ var _helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../helpers/progressEventReducer.js */ "./node_modules/axios/lib/helpers/progressEventReducer.js");
-/* harmony import */ var _helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../helpers/resolveConfig.js */ "./node_modules/axios/lib/helpers/resolveConfig.js");
-
-
-
-
-
-
-
-
-
-
-
-const isXHRAdapterSupported = typeof XMLHttpRequest !== 'undefined';
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isXHRAdapterSupported && function (config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    const _config = (0,_helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_9__["default"])(config);
-    let requestData = _config.data;
-    const requestHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(_config.headers).normalize();
-    let {responseType, onUploadProgress, onDownloadProgress} = _config;
-    let onCanceled;
-    let uploadThrottled, downloadThrottled;
-    let flushUpload, flushDownload;
-
-    function done() {
-      flushUpload && flushUpload(); // flush events
-      flushDownload && flushDownload(); // flush events
-
-      _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
-
-      _config.signal && _config.signal.removeEventListener('abort', onCanceled);
-    }
-
-    let request = new XMLHttpRequest();
-
-    request.open(_config.method.toUpperCase(), _config.url, true);
-
-    // Set the request timeout in MS
-    request.timeout = _config.timeout;
-
-    function onloadend() {
-      if (!request) {
-        return;
-      }
-      // Prepare the response
-      const responseHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(
-        'getAllResponseHeaders' in request && request.getAllResponseHeaders()
-      );
-      const responseData = !responseType || responseType === 'text' || responseType === 'json' ?
-        request.responseText : request.response;
-      const response = {
-        data: responseData,
-        status: request.status,
-        statusText: request.statusText,
-        headers: responseHeaders,
-        config,
-        request
-      };
-
-      (0,_core_settle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(function _resolve(value) {
-        resolve(value);
-        done();
-      }, function _reject(err) {
-        reject(err);
-        done();
-      }, response);
-
-      // Clean up request
-      request = null;
-    }
-
-    if ('onloadend' in request) {
-      // Use onloadend if available
-      request.onloadend = onloadend;
-    } else {
-      // Listen for ready state to emulate onloadend
-      request.onreadystatechange = function handleLoad() {
-        if (!request || request.readyState !== 4) {
-          return;
-        }
-
-        // The request errored out and we didn't get a response, this will be
-        // handled by onerror instead
-        // With one exception: request that using file: protocol, most browsers
-        // will return status as 0 even though it's a successful request
-        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-          return;
-        }
-        // readystate handler is calling before onerror or ontimeout handlers,
-        // so we should call onloadend on the next 'tick'
-        setTimeout(onloadend);
-      };
-    }
-
-    // Handle browser request cancellation (as opposed to a manual cancellation)
-    request.onabort = function handleAbort() {
-      if (!request) {
-        return;
-      }
-
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"]('Request aborted', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED, config, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-  request.onerror = function handleError(event) {
-       // Browsers deliver a ProgressEvent in XHR onerror
-       // (message may be empty; when present, surface it)
-       // See https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/error_event
-       const msg = event && event.message ? event.message : 'Network Error';
-       const err = new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](msg, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_NETWORK, config, request);
-       // attach the underlying event for consumers who want details
-       err.event = event || null;
-       reject(err);
-       request = null;
-    };
-    
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      let timeoutErrorMessage = _config.timeout ? 'timeout of ' + _config.timeout + 'ms exceeded' : 'timeout exceeded';
-      const transitional = _config.transitional || _defaults_transitional_js__WEBPACK_IMPORTED_MODULE_2__["default"];
-      if (_config.timeoutErrorMessage) {
-        timeoutErrorMessage = _config.timeoutErrorMessage;
-      }
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](
-        timeoutErrorMessage,
-        transitional.clarifyTimeoutError ? _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ETIMEDOUT : _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED,
-        config,
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Remove Content-Type if data is undefined
-    requestData === undefined && requestHeaders.setContentType(null);
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
-        request.setRequestHeader(key, val);
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(_config.withCredentials)) {
-      request.withCredentials = !!_config.withCredentials;
-    }
-
-    // Add responseType to request if needed
-    if (responseType && responseType !== 'json') {
-      request.responseType = _config.responseType;
-    }
-
-    // Handle progress if needed
-    if (onDownloadProgress) {
-      ([downloadThrottled, flushDownload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onDownloadProgress, true));
-      request.addEventListener('progress', downloadThrottled);
-    }
-
-    // Not all browsers support upload events
-    if (onUploadProgress && request.upload) {
-      ([uploadThrottled, flushUpload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onUploadProgress));
-
-      request.upload.addEventListener('progress', uploadThrottled);
-
-      request.upload.addEventListener('loadend', flushUpload);
-    }
-
-    if (_config.cancelToken || _config.signal) {
-      // Handle cancellation
-      // eslint-disable-next-line func-names
-      onCanceled = cancel => {
-        if (!request) {
-          return;
-        }
-        reject(!cancel || cancel.type ? new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_4__["default"](null, config, request) : cancel);
-        request.abort();
-        request = null;
-      };
-
-      _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
-      if (_config.signal) {
-        _config.signal.aborted ? onCanceled() : _config.signal.addEventListener('abort', onCanceled);
-      }
-    }
-
-    const protocol = (0,_helpers_parseProtocol_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_config.url);
-
-    if (protocol && _platform_index_js__WEBPACK_IMPORTED_MODULE_6__["default"].protocols.indexOf(protocol) === -1) {
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"]('Unsupported protocol ' + protocol + ':', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_BAD_REQUEST, config));
-      return;
-    }
-
-
-    // Send the request
-    request.send(requestData || null);
-  });
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/axios.js"
-/*!*****************************************!*\
-  !*** ./node_modules/axios/lib/axios.js ***!
-  \*****************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _helpers_bind_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/bind.js */ "./node_modules/axios/lib/helpers/bind.js");
-/* harmony import */ var _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/Axios.js */ "./node_modules/axios/lib/core/Axios.js");
-/* harmony import */ var _core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/mergeConfig.js */ "./node_modules/axios/lib/core/mergeConfig.js");
-/* harmony import */ var _defaults_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./defaults/index.js */ "./node_modules/axios/lib/defaults/index.js");
-/* harmony import */ var _helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/formDataToJSON.js */ "./node_modules/axios/lib/helpers/formDataToJSON.js");
-/* harmony import */ var _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cancel/CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
-/* harmony import */ var _cancel_CancelToken_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cancel/CancelToken.js */ "./node_modules/axios/lib/cancel/CancelToken.js");
-/* harmony import */ var _cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cancel/isCancel.js */ "./node_modules/axios/lib/cancel/isCancel.js");
-/* harmony import */ var _env_data_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./env/data.js */ "./node_modules/axios/lib/env/data.js");
-/* harmony import */ var _helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helpers/toFormData.js */ "./node_modules/axios/lib/helpers/toFormData.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _helpers_spread_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./helpers/spread.js */ "./node_modules/axios/lib/helpers/spread.js");
-/* harmony import */ var _helpers_isAxiosError_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./helpers/isAxiosError.js */ "./node_modules/axios/lib/helpers/isAxiosError.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-/* harmony import */ var _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./adapters/adapters.js */ "./node_modules/axios/lib/adapters/adapters.js");
-/* harmony import */ var _helpers_HttpStatusCode_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./helpers/HttpStatusCode.js */ "./node_modules/axios/lib/helpers/HttpStatusCode.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Create an instance of Axios
- *
- * @param {Object} defaultConfig The default config for the instance
- *
- * @returns {Axios} A new instance of Axios
- */
-function createInstance(defaultConfig) {
-  const context = new _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"](defaultConfig);
-  const instance = (0,_helpers_bind_js__WEBPACK_IMPORTED_MODULE_1__["default"])(_core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"].prototype.request, context);
-
-  // Copy axios.prototype to instance
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"].prototype, context, {allOwnKeys: true});
-
-  // Copy context to instance
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, context, null, {allOwnKeys: true});
-
-  // Factory for creating new instances
-  instance.create = function create(instanceConfig) {
-    return createInstance((0,_core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_3__["default"])(defaultConfig, instanceConfig));
-  };
-
-  return instance;
-}
-
-// Create the default instance to be exported
-const axios = createInstance(_defaults_index_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
-
-// Expose Axios class to allow class inheritance
-axios.Axios = _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"];
-
-// Expose Cancel & CancelToken
-axios.CanceledError = _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_6__["default"];
-axios.CancelToken = _cancel_CancelToken_js__WEBPACK_IMPORTED_MODULE_7__["default"];
-axios.isCancel = _cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_8__["default"];
-axios.VERSION = _env_data_js__WEBPACK_IMPORTED_MODULE_9__.VERSION;
-axios.toFormData = _helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_10__["default"];
-
-// Expose AxiosError class
-axios.AxiosError = _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_11__["default"];
-
-// alias for CanceledError for backward compatibility
-axios.Cancel = axios.CanceledError;
-
-// Expose all/spread
-axios.all = function all(promises) {
-  return Promise.all(promises);
-};
-
-axios.spread = _helpers_spread_js__WEBPACK_IMPORTED_MODULE_12__["default"];
-
-// Expose isAxiosError
-axios.isAxiosError = _helpers_isAxiosError_js__WEBPACK_IMPORTED_MODULE_13__["default"];
-
-// Expose mergeConfig
-axios.mergeConfig = _core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_3__["default"];
-
-axios.AxiosHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_14__["default"];
-
-axios.formToJSON = thing => (0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(thing) ? new FormData(thing) : thing);
-
-axios.getAdapter = _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_15__["default"].getAdapter;
-
-axios.HttpStatusCode = _helpers_HttpStatusCode_js__WEBPACK_IMPORTED_MODULE_16__["default"];
-
-axios.default = axios;
-
-// this module should only have a default export
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/cancel/CancelToken.js"
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/cancel/CancelToken.js ***!
-  \******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _CanceledError_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
-
-
-
-
-/**
- * A `CancelToken` is an object that can be used to request cancellation of an operation.
- *
- * @param {Function} executor The executor function.
- *
- * @returns {CancelToken}
- */
-class CancelToken {
-  constructor(executor) {
-    if (typeof executor !== 'function') {
-      throw new TypeError('executor must be a function.');
-    }
-
-    let resolvePromise;
-
-    this.promise = new Promise(function promiseExecutor(resolve) {
-      resolvePromise = resolve;
-    });
-
-    const token = this;
-
-    // eslint-disable-next-line func-names
-    this.promise.then(cancel => {
-      if (!token._listeners) return;
-
-      let i = token._listeners.length;
-
-      while (i-- > 0) {
-        token._listeners[i](cancel);
-      }
-      token._listeners = null;
-    });
-
-    // eslint-disable-next-line func-names
-    this.promise.then = onfulfilled => {
-      let _resolve;
-      // eslint-disable-next-line func-names
-      const promise = new Promise(resolve => {
-        token.subscribe(resolve);
-        _resolve = resolve;
-      }).then(onfulfilled);
-
-      promise.cancel = function reject() {
-        token.unsubscribe(_resolve);
-      };
-
-      return promise;
-    };
-
-    executor(function cancel(message, config, request) {
-      if (token.reason) {
-        // Cancellation has already been requested
-        return;
-      }
-
-      token.reason = new _CanceledError_js__WEBPACK_IMPORTED_MODULE_0__["default"](message, config, request);
-      resolvePromise(token.reason);
-    });
-  }
-
-  /**
-   * Throws a `CanceledError` if cancellation has been requested.
-   */
-  throwIfRequested() {
-    if (this.reason) {
-      throw this.reason;
-    }
-  }
-
-  /**
-   * Subscribe to the cancel signal
-   */
-
-  subscribe(listener) {
-    if (this.reason) {
-      listener(this.reason);
-      return;
-    }
-
-    if (this._listeners) {
-      this._listeners.push(listener);
-    } else {
-      this._listeners = [listener];
-    }
-  }
-
-  /**
-   * Unsubscribe from the cancel signal
-   */
-
-  unsubscribe(listener) {
-    if (!this._listeners) {
-      return;
-    }
-    const index = this._listeners.indexOf(listener);
-    if (index !== -1) {
-      this._listeners.splice(index, 1);
-    }
-  }
-
-  toAbortSignal() {
-    const controller = new AbortController();
-
-    const abort = (err) => {
-      controller.abort(err);
-    };
-
-    this.subscribe(abort);
-
-    controller.signal.unsubscribe = () => this.unsubscribe(abort);
-
-    return controller.signal;
-  }
-
-  /**
-   * Returns an object that contains a new `CancelToken` and a function that, when called,
-   * cancels the `CancelToken`.
-   */
-  static source() {
-    let cancel;
-    const token = new CancelToken(function executor(c) {
-      cancel = c;
-    });
-    return {
-      token,
-      cancel
-    };
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CancelToken);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/cancel/CanceledError.js"
-/*!********************************************************!*\
-  !*** ./node_modules/axios/lib/cancel/CanceledError.js ***!
-  \********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-
-/**
- * A `CanceledError` is an object that is thrown when an operation is canceled.
- *
- * @param {string=} message The message.
- * @param {Object=} config The config.
- * @param {Object=} request The request.
- *
- * @returns {CanceledError} The created error.
- */
-function CanceledError(message, config, request) {
-  // eslint-disable-next-line no-eq-null,eqeqeq
-  _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(this, message == null ? 'canceled' : message, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_CANCELED, config, request);
-  this.name = 'CanceledError';
-}
-
-_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].inherits(CanceledError, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"], {
-  __CANCEL__: true
-});
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CanceledError);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/cancel/isCancel.js"
-/*!***************************************************!*\
-  !*** ./node_modules/axios/lib/cancel/isCancel.js ***!
-  \***************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isCancel)
-/* harmony export */ });
-
-
-function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/Axios.js"
-/*!**********************************************!*\
-  !*** ./node_modules/axios/lib/core/Axios.js ***!
-  \**********************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _helpers_buildURL_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/buildURL.js */ "./node_modules/axios/lib/helpers/buildURL.js");
-/* harmony import */ var _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InterceptorManager.js */ "./node_modules/axios/lib/core/InterceptorManager.js");
-/* harmony import */ var _dispatchRequest_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dispatchRequest.js */ "./node_modules/axios/lib/core/dispatchRequest.js");
-/* harmony import */ var _mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mergeConfig.js */ "./node_modules/axios/lib/core/mergeConfig.js");
-/* harmony import */ var _buildFullPath_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./buildFullPath.js */ "./node_modules/axios/lib/core/buildFullPath.js");
-/* harmony import */ var _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/validator.js */ "./node_modules/axios/lib/helpers/validator.js");
-/* harmony import */ var _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-
-
-
-
-
-
-
-
-
-
-
-const validators = _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].validators;
-
-/**
- * Create a new instance of Axios
- *
- * @param {Object} instanceConfig The default config for the instance
- *
- * @return {Axios} A new instance of Axios
- */
-class Axios {
-  constructor(instanceConfig) {
-    this.defaults = instanceConfig || {};
-    this.interceptors = {
-      request: new _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__["default"](),
-      response: new _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__["default"]()
-    };
-  }
-
-  /**
-   * Dispatch a request
-   *
-   * @param {String|Object} configOrUrl The config specific for this request (merged with this.defaults)
-   * @param {?Object} config
-   *
-   * @returns {Promise} The Promise to be fulfilled
-   */
-  async request(configOrUrl, config) {
-    try {
-      return await this._request(configOrUrl, config);
-    } catch (err) {
-      if (err instanceof Error) {
-        let dummy = {};
-
-        Error.captureStackTrace ? Error.captureStackTrace(dummy) : (dummy = new Error());
-
-        // slice off the Error: ... line
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, '') : '';
-        try {
-          if (!err.stack) {
-            err.stack = stack;
-            // match without the 2 top stack lines
-          } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))) {
-            err.stack += '\n' + stack
-          }
-        } catch (e) {
-          // ignore the case where "stack" is an un-writable property
-        }
-      }
-
-      throw err;
-    }
-  }
-
-  _request(configOrUrl, config) {
-    /*eslint no-param-reassign:0*/
-    // Allow for axios('example/url'[, config]) a la fetch API
-    if (typeof configOrUrl === 'string') {
-      config = config || {};
-      config.url = configOrUrl;
-    } else {
-      config = configOrUrl || {};
-    }
-
-    config = (0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this.defaults, config);
-
-    const {transitional, paramsSerializer, headers} = config;
-
-    if (transitional !== undefined) {
-      _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(transitional, {
-        silentJSONParsing: validators.transitional(validators.boolean),
-        forcedJSONParsing: validators.transitional(validators.boolean),
-        clarifyTimeoutError: validators.transitional(validators.boolean)
-      }, false);
-    }
-
-    if (paramsSerializer != null) {
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(paramsSerializer)) {
-        config.paramsSerializer = {
-          serialize: paramsSerializer
-        }
-      } else {
-        _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(paramsSerializer, {
-          encode: validators.function,
-          serialize: validators.function
-        }, true);
-      }
-    }
-
-    // Set config.allowAbsoluteUrls
-    if (config.allowAbsoluteUrls !== undefined) {
-      // do nothing
-    } else if (this.defaults.allowAbsoluteUrls !== undefined) {
-      config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
-    } else {
-      config.allowAbsoluteUrls = true;
-    }
-
-    _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(config, {
-      baseUrl: validators.spelling('baseURL'),
-      withXsrfToken: validators.spelling('withXSRFToken')
-    }, true);
-
-    // Set config.method
-    config.method = (config.method || this.defaults.method || 'get').toLowerCase();
-
-    // Flatten headers
-    let contextHeaders = headers && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].merge(
-      headers.common,
-      headers[config.method]
-    );
-
-    headers && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(
-      ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-      (method) => {
-        delete headers[method];
-      }
-    );
-
-    config.headers = _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].concat(contextHeaders, headers);
-
-    // filter out skipped interceptors
-    const requestInterceptorChain = [];
-    let synchronousRequestInterceptors = true;
-    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-      if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
-        return;
-      }
-
-      synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
-
-      requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
-    });
-
-    const responseInterceptorChain = [];
-    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-      responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
-    });
-
-    let promise;
-    let i = 0;
-    let len;
-
-    if (!synchronousRequestInterceptors) {
-      const chain = [_dispatchRequest_js__WEBPACK_IMPORTED_MODULE_3__["default"].bind(this), undefined];
-      chain.unshift(...requestInterceptorChain);
-      chain.push(...responseInterceptorChain);
-      len = chain.length;
-
-      promise = Promise.resolve(config);
-
-      while (i < len) {
-        promise = promise.then(chain[i++], chain[i++]);
-      }
-
-      return promise;
-    }
-
-    len = requestInterceptorChain.length;
-
-    let newConfig = config;
-
-    while (i < len) {
-      const onFulfilled = requestInterceptorChain[i++];
-      const onRejected = requestInterceptorChain[i++];
-      try {
-        newConfig = onFulfilled(newConfig);
-      } catch (error) {
-        onRejected.call(this, error);
-        break;
-      }
-    }
-
-    try {
-      promise = _dispatchRequest_js__WEBPACK_IMPORTED_MODULE_3__["default"].call(this, newConfig);
-    } catch (error) {
-      return Promise.reject(error);
-    }
-
-    i = 0;
-    len = responseInterceptorChain.length;
-
-    while (i < len) {
-      promise = promise.then(responseInterceptorChain[i++], responseInterceptorChain[i++]);
-    }
-
-    return promise;
-  }
-
-  getUri(config) {
-    config = (0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this.defaults, config);
-    const fullPath = (0,_buildFullPath_js__WEBPACK_IMPORTED_MODULE_5__["default"])(config.baseURL, config.url, config.allowAbsoluteUrls);
-    return (0,_helpers_buildURL_js__WEBPACK_IMPORTED_MODULE_1__["default"])(fullPath, config.params, config.paramsSerializer);
-  }
-}
-
-// Provide aliases for supported request methods
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
-  /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, config) {
-    return this.request((0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
-      method,
-      url,
-      data: (config || {}).data
-    }));
-  };
-});
-
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  /*eslint func-names:0*/
-
-  function generateHTTPMethod(isForm) {
-    return function httpMethod(url, data, config) {
-      return this.request((0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
-        method,
-        headers: isForm ? {
-          'Content-Type': 'multipart/form-data'
-        } : {},
-        url,
-        data
-      }));
-    };
-  }
-
-  Axios.prototype[method] = generateHTTPMethod();
-
-  Axios.prototype[method + 'Form'] = generateHTTPMethod(true);
-});
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Axios);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/AxiosError.js"
-/*!***************************************************!*\
-  !*** ./node_modules/axios/lib/core/AxiosError.js ***!
-  \***************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [config] The config.
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- *
- * @returns {Error} The created error.
- */
-function AxiosError(message, code, config, request, response) {
-  Error.call(this);
-
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    this.stack = (new Error()).stack;
-  }
-
-  this.message = message;
-  this.name = 'AxiosError';
-  code && (this.code = code);
-  config && (this.config = config);
-  request && (this.request = request);
-  if (response) {
-    this.response = response;
-    this.status = response.status ? response.status : null;
-  }
-}
-
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].inherits(AxiosError, Error, {
-  toJSON: function toJSON() {
-    return {
-      // Standard
-      message: this.message,
-      name: this.name,
-      // Microsoft
-      description: this.description,
-      number: this.number,
-      // Mozilla
-      fileName: this.fileName,
-      lineNumber: this.lineNumber,
-      columnNumber: this.columnNumber,
-      stack: this.stack,
-      // Axios
-      config: _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toJSONObject(this.config),
-      code: this.code,
-      status: this.status
-    };
-  }
-});
-
-const prototype = AxiosError.prototype;
-const descriptors = {};
-
-[
-  'ERR_BAD_OPTION_VALUE',
-  'ERR_BAD_OPTION',
-  'ECONNABORTED',
-  'ETIMEDOUT',
-  'ERR_NETWORK',
-  'ERR_FR_TOO_MANY_REDIRECTS',
-  'ERR_DEPRECATED',
-  'ERR_BAD_RESPONSE',
-  'ERR_BAD_REQUEST',
-  'ERR_CANCELED',
-  'ERR_NOT_SUPPORT',
-  'ERR_INVALID_URL'
-// eslint-disable-next-line func-names
-].forEach(code => {
-  descriptors[code] = {value: code};
-});
-
-Object.defineProperties(AxiosError, descriptors);
-Object.defineProperty(prototype, 'isAxiosError', {value: true});
-
-// eslint-disable-next-line func-names
-AxiosError.from = (error, code, config, request, response, customProps) => {
-  const axiosError = Object.create(prototype);
-
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toFlatObject(error, axiosError, function filter(obj) {
-    return obj !== Error.prototype;
-  }, prop => {
-    return prop !== 'isAxiosError';
-  });
-
-  const msg = error && error.message ? error.message : 'Error';
-
-  // Prefer explicit code; otherwise copy the low-level error's code (e.g. ECONNREFUSED)
-  const errCode = code == null && error ? error.code : code;
-  AxiosError.call(axiosError, msg, errCode, config, request, response);
-
-  // Chain the original error on the standard field; non-enumerable to avoid JSON noise
-  if (error && axiosError.cause == null) {
-    Object.defineProperty(axiosError, 'cause', { value: error, configurable: true });
-  }
-
-  axiosError.name = (error && error.name) || 'Error';
-
-  customProps && Object.assign(axiosError, customProps);
-
-  return axiosError;
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AxiosError);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/AxiosHeaders.js"
-/*!*****************************************************!*\
-  !*** ./node_modules/axios/lib/core/AxiosHeaders.js ***!
-  \*****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _helpers_parseHeaders_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/parseHeaders.js */ "./node_modules/axios/lib/helpers/parseHeaders.js");
-
-
-
-
-
-const $internals = Symbol('internals');
-
-function normalizeHeader(header) {
-  return header && String(header).trim().toLowerCase();
-}
-
-function normalizeValue(value) {
-  if (value === false || value == null) {
-    return value;
-  }
-
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) ? value.map(normalizeValue) : String(value);
-}
-
-function parseTokens(str) {
-  const tokens = Object.create(null);
-  const tokensRE = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
-  let match;
-
-  while ((match = tokensRE.exec(str))) {
-    tokens[match[1]] = match[2];
-  }
-
-  return tokens;
-}
-
-const isValidHeaderName = (str) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
-
-function matchHeaderValue(context, value, header, filter, isHeaderNameFilter) {
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(filter)) {
-    return filter.call(this, value, header);
-  }
-
-  if (isHeaderNameFilter) {
-    value = header;
-  }
-
-  if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(value)) return;
-
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(filter)) {
-    return value.indexOf(filter) !== -1;
-  }
-
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isRegExp(filter)) {
-    return filter.test(value);
-  }
-}
-
-function formatHeader(header) {
-  return header.trim()
-    .toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
-      return char.toUpperCase() + str;
-    });
-}
-
-function buildAccessors(obj, header) {
-  const accessorName = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toCamelCase(' ' + header);
-
-  ['get', 'set', 'has'].forEach(methodName => {
-    Object.defineProperty(obj, methodName + accessorName, {
-      value: function(arg1, arg2, arg3) {
-        return this[methodName].call(this, header, arg1, arg2, arg3);
-      },
-      configurable: true
-    });
-  });
-}
-
-class AxiosHeaders {
-  constructor(headers) {
-    headers && this.set(headers);
-  }
-
-  set(header, valueOrRewrite, rewrite) {
-    const self = this;
-
-    function setHeader(_value, _header, _rewrite) {
-      const lHeader = normalizeHeader(_header);
-
-      if (!lHeader) {
-        throw new Error('header name must be a non-empty string');
-      }
-
-      const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(self, lHeader);
-
-      if(!key || self[key] === undefined || _rewrite === true || (_rewrite === undefined && self[key] !== false)) {
-        self[key || _header] = normalizeValue(_value);
-      }
-    }
-
-    const setHeaders = (headers, _rewrite) =>
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(header) || header instanceof this.constructor) {
-      setHeaders(header, valueOrRewrite)
-    } else if(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
-      setHeaders((0,_helpers_parseHeaders_js__WEBPACK_IMPORTED_MODULE_1__["default"])(header), valueOrRewrite);
-    } else if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(header) && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isIterable(header)) {
-      let obj = {}, dest, key;
-      for (const entry of header) {
-        if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(entry)) {
-          throw TypeError('Object iterator must return a key-value pair');
-        }
-
-        obj[key = entry[0]] = (dest = obj[key]) ?
-          (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]]) : entry[1];
-      }
-
-      setHeaders(obj, valueOrRewrite)
-    } else {
-      header != null && setHeader(valueOrRewrite, header, rewrite);
-    }
-
-    return this;
-  }
-
-  get(header, parser) {
-    header = normalizeHeader(header);
-
-    if (header) {
-      const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(this, header);
-
-      if (key) {
-        const value = this[key];
-
-        if (!parser) {
-          return value;
-        }
-
-        if (parser === true) {
-          return parseTokens(value);
-        }
-
-        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(parser)) {
-          return parser.call(this, value, key);
-        }
-
-        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isRegExp(parser)) {
-          return parser.exec(value);
-        }
-
-        throw new TypeError('parser must be boolean|regexp|function');
-      }
-    }
-  }
-
-  has(header, matcher) {
-    header = normalizeHeader(header);
-
-    if (header) {
-      const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(this, header);
-
-      return !!(key && this[key] !== undefined && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
-    }
-
-    return false;
-  }
-
-  delete(header, matcher) {
-    const self = this;
-    let deleted = false;
-
-    function deleteHeader(_header) {
-      _header = normalizeHeader(_header);
-
-      if (_header) {
-        const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(self, _header);
-
-        if (key && (!matcher || matchHeaderValue(self, self[key], key, matcher))) {
-          delete self[key];
-
-          deleted = true;
-        }
-      }
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(header)) {
-      header.forEach(deleteHeader);
-    } else {
-      deleteHeader(header);
-    }
-
-    return deleted;
-  }
-
-  clear(matcher) {
-    const keys = Object.keys(this);
-    let i = keys.length;
-    let deleted = false;
-
-    while (i--) {
-      const key = keys[i];
-      if(!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
-        delete this[key];
-        deleted = true;
-      }
-    }
-
-    return deleted;
-  }
-
-  normalize(format) {
-    const self = this;
-    const headers = {};
-
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(this, (value, header) => {
-      const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(headers, header);
-
-      if (key) {
-        self[key] = normalizeValue(value);
-        delete self[header];
-        return;
-      }
-
-      const normalized = format ? formatHeader(header) : String(header).trim();
-
-      if (normalized !== header) {
-        delete self[header];
-      }
-
-      self[normalized] = normalizeValue(value);
-
-      headers[normalized] = true;
-    });
-
-    return this;
-  }
-
-  concat(...targets) {
-    return this.constructor.concat(this, ...targets);
-  }
-
-  toJSON(asStrings) {
-    const obj = Object.create(null);
-
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(this, (value, header) => {
-      value != null && value !== false && (obj[header] = asStrings && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) ? value.join(', ') : value);
-    });
-
-    return obj;
-  }
-
-  [Symbol.iterator]() {
-    return Object.entries(this.toJSON())[Symbol.iterator]();
-  }
-
-  toString() {
-    return Object.entries(this.toJSON()).map(([header, value]) => header + ': ' + value).join('\n');
-  }
-
-  getSetCookie() {
-    return this.get("set-cookie") || [];
-  }
-
-  get [Symbol.toStringTag]() {
-    return 'AxiosHeaders';
-  }
-
-  static from(thing) {
-    return thing instanceof this ? thing : new this(thing);
-  }
-
-  static concat(first, ...targets) {
-    const computed = new this(first);
-
-    targets.forEach((target) => computed.set(target));
-
-    return computed;
-  }
-
-  static accessor(header) {
-    const internals = this[$internals] = (this[$internals] = {
-      accessors: {}
-    });
-
-    const accessors = internals.accessors;
-    const prototype = this.prototype;
-
-    function defineAccessor(_header) {
-      const lHeader = normalizeHeader(_header);
-
-      if (!accessors[lHeader]) {
-        buildAccessors(prototype, _header);
-        accessors[lHeader] = true;
-      }
-    }
-
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(header) ? header.forEach(defineAccessor) : defineAccessor(header);
-
-    return this;
-  }
-}
-
-AxiosHeaders.accessor(['Content-Type', 'Content-Length', 'Accept', 'Accept-Encoding', 'User-Agent', 'Authorization']);
-
-// reserved names hotfix
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].reduceDescriptors(AxiosHeaders.prototype, ({value}, key) => {
-  let mapped = key[0].toUpperCase() + key.slice(1); // map `set` => `Set`
-  return {
-    get: () => value,
-    set(headerValue) {
-      this[mapped] = headerValue;
-    }
-  }
-});
-
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].freezeMethods(AxiosHeaders);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AxiosHeaders);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/InterceptorManager.js"
-/*!***********************************************************!*\
-  !*** ./node_modules/axios/lib/core/InterceptorManager.js ***!
-  \***********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-class InterceptorManager {
-  constructor() {
-    this.handlers = [];
-  }
-
-  /**
-   * Add a new interceptor to the stack
-   *
-   * @param {Function} fulfilled The function to handle `then` for a `Promise`
-   * @param {Function} rejected The function to handle `reject` for a `Promise`
-   *
-   * @return {Number} An ID used to remove interceptor later
-   */
-  use(fulfilled, rejected, options) {
-    this.handlers.push({
-      fulfilled,
-      rejected,
-      synchronous: options ? options.synchronous : false,
-      runWhen: options ? options.runWhen : null
-    });
-    return this.handlers.length - 1;
-  }
-
-  /**
-   * Remove an interceptor from the stack
-   *
-   * @param {Number} id The ID that was returned by `use`
-   *
-   * @returns {Boolean} `true` if the interceptor was removed, `false` otherwise
-   */
-  eject(id) {
-    if (this.handlers[id]) {
-      this.handlers[id] = null;
-    }
-  }
-
-  /**
-   * Clear all interceptors from the stack
-   *
-   * @returns {void}
-   */
-  clear() {
-    if (this.handlers) {
-      this.handlers = [];
-    }
-  }
-
-  /**
-   * Iterate over all the registered interceptors
-   *
-   * This method is particularly useful for skipping over any
-   * interceptors that may have become `null` calling `eject`.
-   *
-   * @param {Function} fn The function to call for each interceptor
-   *
-   * @returns {void}
-   */
-  forEach(fn) {
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(this.handlers, function forEachHandler(h) {
-      if (h !== null) {
-        fn(h);
-      }
-    });
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InterceptorManager);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/buildFullPath.js"
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
-  \******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ buildFullPath)
-/* harmony export */ });
-/* harmony import */ var _helpers_isAbsoluteURL_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/isAbsoluteURL.js */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-/* harmony import */ var _helpers_combineURLs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/combineURLs.js */ "./node_modules/axios/lib/helpers/combineURLs.js");
-
-
-
-
-
-/**
- * Creates a new URL by combining the baseURL with the requestedURL,
- * only when the requestedURL is not already an absolute URL.
- * If the requestURL is absolute, this function returns the requestedURL untouched.
- *
- * @param {string} baseURL The base URL
- * @param {string} requestedURL Absolute or relative URL to combine
- *
- * @returns {string} The combined full path
- */
-function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
-  let isRelativeUrl = !(0,_helpers_isAbsoluteURL_js__WEBPACK_IMPORTED_MODULE_0__["default"])(requestedURL);
-  if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
-    return (0,_helpers_combineURLs_js__WEBPACK_IMPORTED_MODULE_1__["default"])(baseURL, requestedURL);
-  }
-  return requestedURL;
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/dispatchRequest.js"
-/*!********************************************************!*\
-  !*** ./node_modules/axios/lib/core/dispatchRequest.js ***!
-  \********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ dispatchRequest)
-/* harmony export */ });
-/* harmony import */ var _transformData_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./transformData.js */ "./node_modules/axios/lib/core/transformData.js");
-/* harmony import */ var _cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cancel/isCancel.js */ "./node_modules/axios/lib/cancel/isCancel.js");
-/* harmony import */ var _defaults_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../defaults/index.js */ "./node_modules/axios/lib/defaults/index.js");
-/* harmony import */ var _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cancel/CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-/* harmony import */ var _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../adapters/adapters.js */ "./node_modules/axios/lib/adapters/adapters.js");
-
-
-
-
-
-
-
-
-
-/**
- * Throws a `CanceledError` if cancellation has been requested.
- *
- * @param {Object} config The config that is to be used for the request
- *
- * @returns {void}
- */
-function throwIfCancellationRequested(config) {
-  if (config.cancelToken) {
-    config.cancelToken.throwIfRequested();
-  }
-
-  if (config.signal && config.signal.aborted) {
-    throw new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_3__["default"](null, config);
-  }
-}
-
-/**
- * Dispatch a request to the server using the configured adapter.
- *
- * @param {object} config The config that is to be used for the request
- *
- * @returns {Promise} The Promise to be fulfilled
- */
-function dispatchRequest(config) {
-  throwIfCancellationRequested(config);
-
-  config.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(config.headers);
-
-  // Transform request data
-  config.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-    config,
-    config.transformRequest
-  );
-
-  if (['post', 'put', 'patch'].indexOf(config.method) !== -1) {
-    config.headers.setContentType('application/x-www-form-urlencoded', false);
-  }
-
-  const adapter = _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_5__["default"].getAdapter(config.adapter || _defaults_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].adapter, config);
-
-  return adapter(config).then(function onAdapterResolution(response) {
-    throwIfCancellationRequested(config);
-
-    // Transform response data
-    response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-      config,
-      config.transformResponse,
-      response
-    );
-
-    response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(response.headers);
-
-    return response;
-  }, function onAdapterRejection(reason) {
-    if (!(0,_cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_1__["default"])(reason)) {
-      throwIfCancellationRequested(config);
-
-      // Transform response data
-      if (reason && reason.response) {
-        reason.response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-          config,
-          config.transformResponse,
-          reason.response
-        );
-        reason.response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(reason.response.headers);
-      }
-    }
-
-    return Promise.reject(reason);
-  });
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/mergeConfig.js"
-/*!****************************************************!*\
-  !*** ./node_modules/axios/lib/core/mergeConfig.js ***!
-  \****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ mergeConfig)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-
-
-
-
-
-const headersToObject = (thing) => thing instanceof _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_1__["default"] ? { ...thing } : thing;
-
-/**
- * Config-specific merge-function which creates a new config-object
- * by merging two configuration objects together.
- *
- * @param {Object} config1
- * @param {Object} config2
- *
- * @returns {Object} New object resulting from merging config2 to config1
- */
-function mergeConfig(config1, config2) {
-  // eslint-disable-next-line no-param-reassign
-  config2 = config2 || {};
-  const config = {};
-
-  function getMergedValue(target, source, prop, caseless) {
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(target) && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(source)) {
-      return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].merge.call({caseless}, target, source);
-    } else if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(source)) {
-      return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].merge({}, source);
-    } else if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(source)) {
-      return source.slice();
-    }
-    return source;
-  }
-
-  // eslint-disable-next-line consistent-return
-  function mergeDeepProperties(a, b, prop , caseless) {
-    if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(b)) {
-      return getMergedValue(a, b, prop , caseless);
-    } else if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(a)) {
-      return getMergedValue(undefined, a, prop , caseless);
-    }
-  }
-
-  // eslint-disable-next-line consistent-return
-  function valueFromConfig2(a, b) {
-    if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(b)) {
-      return getMergedValue(undefined, b);
-    }
-  }
-
-  // eslint-disable-next-line consistent-return
-  function defaultToConfig2(a, b) {
-    if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(b)) {
-      return getMergedValue(undefined, b);
-    } else if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(a)) {
-      return getMergedValue(undefined, a);
-    }
-  }
-
-  // eslint-disable-next-line consistent-return
-  function mergeDirectKeys(a, b, prop) {
-    if (prop in config2) {
-      return getMergedValue(a, b);
-    } else if (prop in config1) {
-      return getMergedValue(undefined, a);
-    }
-  }
-
-  const mergeMap = {
-    url: valueFromConfig2,
-    method: valueFromConfig2,
-    data: valueFromConfig2,
-    baseURL: defaultToConfig2,
-    transformRequest: defaultToConfig2,
-    transformResponse: defaultToConfig2,
-    paramsSerializer: defaultToConfig2,
-    timeout: defaultToConfig2,
-    timeoutMessage: defaultToConfig2,
-    withCredentials: defaultToConfig2,
-    withXSRFToken: defaultToConfig2,
-    adapter: defaultToConfig2,
-    responseType: defaultToConfig2,
-    xsrfCookieName: defaultToConfig2,
-    xsrfHeaderName: defaultToConfig2,
-    onUploadProgress: defaultToConfig2,
-    onDownloadProgress: defaultToConfig2,
-    decompress: defaultToConfig2,
-    maxContentLength: defaultToConfig2,
-    maxBodyLength: defaultToConfig2,
-    beforeRedirect: defaultToConfig2,
-    transport: defaultToConfig2,
-    httpAgent: defaultToConfig2,
-    httpsAgent: defaultToConfig2,
-    cancelToken: defaultToConfig2,
-    socketPath: defaultToConfig2,
-    responseEncoding: defaultToConfig2,
-    validateStatus: mergeDirectKeys,
-    headers: (a, b , prop) => mergeDeepProperties(headersToObject(a), headersToObject(b),prop, true)
-  };
-
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(Object.keys({...config1, ...config2}), function computeConfigValue(prop) {
-    const merge = mergeMap[prop] || mergeDeepProperties;
-    const configValue = merge(config1[prop], config2[prop], prop);
-    (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
-  });
-
-  return config;
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/settle.js"
-/*!***********************************************!*\
-  !*** ./node_modules/axios/lib/core/settle.js ***!
-  \***********************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ settle)
-/* harmony export */ });
-/* harmony import */ var _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-
-
-
-
-/**
- * Resolve or reject a Promise based on response status.
- *
- * @param {Function} resolve A function that resolves the promise.
- * @param {Function} reject A function that rejects the promise.
- * @param {object} response The response.
- *
- * @returns {object} The response.
- */
-function settle(resolve, reject, response) {
-  const validateStatus = response.config.validateStatus;
-  if (!response.status || !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  } else {
-    reject(new _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"](
-      'Request failed with status code ' + response.status,
-      [_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_REQUEST, _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
-      response.config,
-      response.request,
-      response
-    ));
-  }
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/core/transformData.js"
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/core/transformData.js ***!
-  \******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ transformData)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _defaults_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../defaults/index.js */ "./node_modules/axios/lib/defaults/index.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-
-
-
-
-
-
-/**
- * Transform the data for a request or a response
- *
- * @param {Array|Function} fns A single function or Array of functions
- * @param {?Object} response The response object
- *
- * @returns {*} The resulting transformed data
- */
-function transformData(fns, response) {
-  const config = this || _defaults_index_js__WEBPACK_IMPORTED_MODULE_1__["default"];
-  const context = response || config;
-  const headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_2__["default"].from(context.headers);
-  let data = context.data;
-
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(fns, function transform(fn) {
-    data = fn.call(config, data, headers.normalize(), response ? response.status : undefined);
-  });
-
-  headers.normalize();
-
-  return data;
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/defaults/index.js"
-/*!**************************************************!*\
-  !*** ./node_modules/axios/lib/defaults/index.js ***!
-  \**************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _transitional_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./transitional.js */ "./node_modules/axios/lib/defaults/transitional.js");
-/* harmony import */ var _helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/toFormData.js */ "./node_modules/axios/lib/helpers/toFormData.js");
-/* harmony import */ var _helpers_toURLEncodedForm_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/toURLEncodedForm.js */ "./node_modules/axios/lib/helpers/toURLEncodedForm.js");
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-/* harmony import */ var _helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/formDataToJSON.js */ "./node_modules/axios/lib/helpers/formDataToJSON.js");
-
-
-
-
-
-
-
-
-
-
-/**
- * It takes a string, tries to parse it, and if it fails, it returns the stringified version
- * of the input
- *
- * @param {any} rawValue - The value to be stringified.
- * @param {Function} parser - A function that parses a string into a JavaScript object.
- * @param {Function} encoder - A function that takes a value and returns a string.
- *
- * @returns {string} A stringified version of the rawValue.
- */
-function stringifySafely(rawValue, parser, encoder) {
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(rawValue)) {
-    try {
-      (parser || JSON.parse)(rawValue);
-      return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].trim(rawValue);
-    } catch (e) {
-      if (e.name !== 'SyntaxError') {
-        throw e;
-      }
-    }
-  }
-
-  return (encoder || JSON.stringify)(rawValue);
-}
-
-const defaults = {
-
-  transitional: _transitional_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-
-  adapter: ['xhr', 'http', 'fetch'],
-
-  transformRequest: [function transformRequest(data, headers) {
-    const contentType = headers.getContentType() || '';
-    const hasJSONContentType = contentType.indexOf('application/json') > -1;
-    const isObjectPayload = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(data);
-
-    if (isObjectPayload && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(data)) {
-      data = new FormData(data);
-    }
-
-    const isFormData = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFormData(data);
-
-    if (isFormData) {
-      return hasJSONContentType ? JSON.stringify((0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data)) : data;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBuffer(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBuffer(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isStream(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFile(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBlob(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)
-    ) {
-      return data;
-    }
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(data)) {
-      headers.setContentType('application/x-www-form-urlencoded;charset=utf-8', false);
-      return data.toString();
-    }
-
-    let isFileList;
-
-    if (isObjectPayload) {
-      if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
-        return (0,_helpers_toURLEncodedForm_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data, this.formSerializer).toString();
-      }
-
-      if ((isFileList = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(data)) || contentType.indexOf('multipart/form-data') > -1) {
-        const _FormData = this.env && this.env.FormData;
-
-        return (0,_helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-          isFileList ? {'files[]': data} : data,
-          _FormData && new _FormData(),
-          this.formSerializer
-        );
-      }
-    }
-
-    if (isObjectPayload || hasJSONContentType ) {
-      headers.setContentType('application/json', false);
-      return stringifySafely(data);
-    }
-
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    const transitional = this.transitional || defaults.transitional;
-    const forcedJSONParsing = transitional && transitional.forcedJSONParsing;
-    const JSONRequested = this.responseType === 'json';
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isResponse(data) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)) {
-      return data;
-    }
-
-    if (data && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(data) && ((forcedJSONParsing && !this.responseType) || JSONRequested)) {
-      const silentJSONParsing = transitional && transitional.silentJSONParsing;
-      const strictJSONParsing = !silentJSONParsing && JSONRequested;
-
-      try {
-        return JSON.parse(data, this.parseReviver);
-      } catch (e) {
-        if (strictJSONParsing) {
-          if (e.name === 'SyntaxError') {
-            throw _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].from(e, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_RESPONSE, this, null, this.response);
-          }
-          throw e;
-        }
-      }
-    }
-
-    return data;
-  }],
-
-  /**
-   * A timeout in milliseconds to abort a request. If set to 0 (default) a
-   * timeout is not created.
-   */
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-  maxBodyLength: -1,
-
-  env: {
-    FormData: _platform_index_js__WEBPACK_IMPORTED_MODULE_5__["default"].classes.FormData,
-    Blob: _platform_index_js__WEBPACK_IMPORTED_MODULE_5__["default"].classes.Blob
-  },
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  },
-
-  headers: {
-    common: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': undefined
-    }
-  }
-};
-
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['delete', 'get', 'head', 'post', 'put', 'patch'], (method) => {
-  defaults.headers[method] = {};
-});
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (defaults);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/defaults/transitional.js"
-/*!*********************************************************!*\
-  !*** ./node_modules/axios/lib/defaults/transitional.js ***!
-  \*********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  silentJSONParsing: true,
-  forcedJSONParsing: true,
-  clarifyTimeoutError: false
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/env/data.js"
-/*!********************************************!*\
-  !*** ./node_modules/axios/lib/env/data.js ***!
-  \********************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   VERSION: () => (/* binding */ VERSION)
-/* harmony export */ });
-const VERSION = "1.12.2";
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/AxiosURLSearchParams.js"
-/*!****************************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/AxiosURLSearchParams.js ***!
-  \****************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _toFormData_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toFormData.js */ "./node_modules/axios/lib/helpers/toFormData.js");
-
-
-
-
-/**
- * It encodes a string by replacing all characters that are not in the unreserved set with
- * their percent-encoded equivalents
- *
- * @param {string} str - The string to encode.
- *
- * @returns {string} The encoded string.
- */
-function encode(str) {
-  const charMap = {
-    '!': '%21',
-    "'": '%27',
-    '(': '%28',
-    ')': '%29',
-    '~': '%7E',
-    '%20': '+',
-    '%00': '\x00'
-  };
-  return encodeURIComponent(str).replace(/[!'()~]|%20|%00/g, function replacer(match) {
-    return charMap[match];
-  });
-}
-
-/**
- * It takes a params object and converts it to a FormData object
- *
- * @param {Object<string, any>} params - The parameters to be converted to a FormData object.
- * @param {Object<string, any>} options - The options object passed to the Axios constructor.
- *
- * @returns {void}
- */
-function AxiosURLSearchParams(params, options) {
-  this._pairs = [];
-
-  params && (0,_toFormData_js__WEBPACK_IMPORTED_MODULE_0__["default"])(params, this, options);
-}
-
-const prototype = AxiosURLSearchParams.prototype;
-
-prototype.append = function append(name, value) {
-  this._pairs.push([name, value]);
-};
-
-prototype.toString = function toString(encoder) {
-  const _encode = encoder ? function(value) {
-    return encoder.call(this, value, encode);
-  } : encode;
-
-  return this._pairs.map(function each(pair) {
-    return _encode(pair[0]) + '=' + _encode(pair[1]);
-  }, '').join('&');
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AxiosURLSearchParams);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/HttpStatusCode.js"
-/*!**********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/HttpStatusCode.js ***!
-  \**********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const HttpStatusCode = {
-  Continue: 100,
-  SwitchingProtocols: 101,
-  Processing: 102,
-  EarlyHints: 103,
-  Ok: 200,
-  Created: 201,
-  Accepted: 202,
-  NonAuthoritativeInformation: 203,
-  NoContent: 204,
-  ResetContent: 205,
-  PartialContent: 206,
-  MultiStatus: 207,
-  AlreadyReported: 208,
-  ImUsed: 226,
-  MultipleChoices: 300,
-  MovedPermanently: 301,
-  Found: 302,
-  SeeOther: 303,
-  NotModified: 304,
-  UseProxy: 305,
-  Unused: 306,
-  TemporaryRedirect: 307,
-  PermanentRedirect: 308,
-  BadRequest: 400,
-  Unauthorized: 401,
-  PaymentRequired: 402,
-  Forbidden: 403,
-  NotFound: 404,
-  MethodNotAllowed: 405,
-  NotAcceptable: 406,
-  ProxyAuthenticationRequired: 407,
-  RequestTimeout: 408,
-  Conflict: 409,
-  Gone: 410,
-  LengthRequired: 411,
-  PreconditionFailed: 412,
-  PayloadTooLarge: 413,
-  UriTooLong: 414,
-  UnsupportedMediaType: 415,
-  RangeNotSatisfiable: 416,
-  ExpectationFailed: 417,
-  ImATeapot: 418,
-  MisdirectedRequest: 421,
-  UnprocessableEntity: 422,
-  Locked: 423,
-  FailedDependency: 424,
-  TooEarly: 425,
-  UpgradeRequired: 426,
-  PreconditionRequired: 428,
-  TooManyRequests: 429,
-  RequestHeaderFieldsTooLarge: 431,
-  UnavailableForLegalReasons: 451,
-  InternalServerError: 500,
-  NotImplemented: 501,
-  BadGateway: 502,
-  ServiceUnavailable: 503,
-  GatewayTimeout: 504,
-  HttpVersionNotSupported: 505,
-  VariantAlsoNegotiates: 506,
-  InsufficientStorage: 507,
-  LoopDetected: 508,
-  NotExtended: 510,
-  NetworkAuthenticationRequired: 511,
-};
-
-Object.entries(HttpStatusCode).forEach(([key, value]) => {
-  HttpStatusCode[value] = key;
-});
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HttpStatusCode);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/bind.js"
-/*!************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/bind.js ***!
-  \************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ bind)
-/* harmony export */ });
-
-
-function bind(fn, thisArg) {
-  return function wrap() {
-    return fn.apply(thisArg, arguments);
-  };
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/buildURL.js"
-/*!****************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/buildURL.js ***!
-  \****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ buildURL)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/AxiosURLSearchParams.js */ "./node_modules/axios/lib/helpers/AxiosURLSearchParams.js");
-
-
-
-
-
-/**
- * It replaces all instances of the characters `:`, `$`, `,`, `+`, `[`, and `]` with their
- * URI encoded counterparts
- *
- * @param {string} val The value to be encoded.
- *
- * @returns {string} The encoded value.
- */
-function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+');
-}
-
-/**
- * Build a URL by appending params to the end
- *
- * @param {string} url The base of the url (e.g., http://www.google.com)
- * @param {object} [params] The params to be appended
- * @param {?(object|Function)} options
- *
- * @returns {string} The formatted url
- */
-function buildURL(url, params, options) {
-  /*eslint no-param-reassign:0*/
-  if (!params) {
-    return url;
-  }
-  
-  const _encode = options && options.encode || encode;
-
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(options)) {
-    options = {
-      serialize: options
-    };
-  } 
-
-  const serializeFn = options && options.serialize;
-
-  let serializedParams;
-
-  if (serializeFn) {
-    serializedParams = serializeFn(params, options);
-  } else {
-    serializedParams = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(params) ?
-      params.toString() :
-      new _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_1__["default"](params, options).toString(_encode);
-  }
-
-  if (serializedParams) {
-    const hashmarkIndex = url.indexOf("#");
-
-    if (hashmarkIndex !== -1) {
-      url = url.slice(0, hashmarkIndex);
-    }
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
-  }
-
-  return url;
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/combineURLs.js"
-/*!*******************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/combineURLs.js ***!
-  \*******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ combineURLs)
-/* harmony export */ });
-
-
-/**
- * Creates a new URL by combining the specified URLs
- *
- * @param {string} baseURL The base URL
- * @param {string} relativeURL The relative URL
- *
- * @returns {string} The combined URL
- */
-function combineURLs(baseURL, relativeURL) {
-  return relativeURL
-    ? baseURL.replace(/\/?\/$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-    : baseURL;
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/composeSignals.js"
-/*!**********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/composeSignals.js ***!
-  \**********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cancel/CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-const composeSignals = (signals, timeout) => {
-  const {length} = (signals = signals ? signals.filter(Boolean) : []);
-
-  if (timeout || length) {
-    let controller = new AbortController();
-
-    let aborted;
-
-    const onabort = function (reason) {
-      if (!aborted) {
-        aborted = true;
-        unsubscribe();
-        const err = reason instanceof Error ? reason : this.reason;
-        controller.abort(err instanceof _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"] ? err : new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_0__["default"](err instanceof Error ? err.message : err));
-      }
-    }
-
-    let timer = timeout && setTimeout(() => {
-      timer = null;
-      onabort(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"](`timeout ${timeout} of ms exceeded`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ETIMEDOUT))
-    }, timeout)
-
-    const unsubscribe = () => {
-      if (signals) {
-        timer && clearTimeout(timer);
-        timer = null;
-        signals.forEach(signal => {
-          signal.unsubscribe ? signal.unsubscribe(onabort) : signal.removeEventListener('abort', onabort);
-        });
-        signals = null;
-      }
-    }
-
-    signals.forEach((signal) => signal.addEventListener('abort', onabort));
-
-    const {signal} = controller;
-
-    signal.unsubscribe = () => _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(unsubscribe);
-
-    return signal;
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (composeSignals);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/cookies.js"
-/*!***************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/cookies.js ***!
-  \***************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasStandardBrowserEnv ?
-
-  // Standard browser envs support document.cookie
-  {
-    write(name, value, expires, path, domain, secure) {
-      const cookie = [name + '=' + encodeURIComponent(value)];
-
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isNumber(expires) && cookie.push('expires=' + new Date(expires).toGMTString());
-
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(path) && cookie.push('path=' + path);
-
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(domain) && cookie.push('domain=' + domain);
-
-      secure === true && cookie.push('secure');
-
-      document.cookie = cookie.join('; ');
-    },
-
-    read(name) {
-      const match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
-      return (match ? decodeURIComponent(match[3]) : null);
-    },
-
-    remove(name) {
-      this.write(name, '', Date.now() - 86400000);
-    }
-  }
-
-  :
-
-  // Non-standard browser env (web workers, react-native) lack needed support.
-  {
-    write() {},
-    read() {
-      return null;
-    },
-    remove() {}
-  });
-
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/formDataToJSON.js"
-/*!**********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/formDataToJSON.js ***!
-  \**********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-/**
- * It takes a string like `foo[x][y][z]` and returns an array like `['foo', 'x', 'y', 'z']
- *
- * @param {string} name - The name of the property to get.
- *
- * @returns An array of strings.
- */
-function parsePropPath(name) {
-  // foo[x][y][z]
-  // foo.x.y.z
-  // foo-x-y-z
-  // foo x y z
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].matchAll(/\w+|\[(\w*)]/g, name).map(match => {
-    return match[0] === '[]' ? '' : match[1] || match[0];
-  });
-}
-
-/**
- * Convert an array to an object.
- *
- * @param {Array<any>} arr - The array to convert to an object.
- *
- * @returns An object with the same keys and values as the array.
- */
-function arrayToObject(arr) {
-  const obj = {};
-  const keys = Object.keys(arr);
-  let i;
-  const len = keys.length;
-  let key;
-  for (i = 0; i < len; i++) {
-    key = keys[i];
-    obj[key] = arr[key];
-  }
-  return obj;
-}
-
-/**
- * It takes a FormData object and returns a JavaScript object
- *
- * @param {string} formData The FormData object to convert to JSON.
- *
- * @returns {Object<string, any> | null} The converted object.
- */
-function formDataToJSON(formData) {
-  function buildPath(path, value, target, index) {
-    let name = path[index++];
-
-    if (name === '__proto__') return true;
-
-    const isNumericKey = Number.isFinite(+name);
-    const isLast = index >= path.length;
-    name = !name && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(target) ? target.length : name;
-
-    if (isLast) {
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasOwnProp(target, name)) {
-        target[name] = [target[name], value];
-      } else {
-        target[name] = value;
-      }
-
-      return !isNumericKey;
-    }
-
-    if (!target[name] || !_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(target[name])) {
-      target[name] = [];
-    }
-
-    const result = buildPath(path, value, target[name], index);
-
-    if (result && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(target[name])) {
-      target[name] = arrayToObject(target[name]);
-    }
-
-    return !isNumericKey;
-  }
-
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFormData(formData) && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(formData.entries)) {
-    const obj = {};
-
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEachEntry(formData, (name, value) => {
-      buildPath(parsePropPath(name), value, obj, 0);
-    });
-
-    return obj;
-  }
-
-  return null;
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (formDataToJSON);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/isAbsoluteURL.js"
-/*!*********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
-  \*********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isAbsoluteURL)
-/* harmony export */ });
-
-
-/**
- * Determines whether the specified URL is absolute
- *
- * @param {string} url The URL to test
- *
- * @returns {boolean} True if the specified URL is absolute, otherwise false
- */
-function isAbsoluteURL(url) {
-  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
-  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-  // by any combination of letters, digits, plus, period, or hyphen.
-  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/isAxiosError.js"
-/*!********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
-  \********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isAxiosError)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-/**
- * Determines whether the payload is an error thrown by Axios
- *
- * @param {*} payload The value to test
- *
- * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
- */
-function isAxiosError(payload) {
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(payload) && (payload.isAxiosError === true);
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/isURLSameOrigin.js"
-/*!***********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
-  \***********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserEnv ? ((origin, isMSIE) => (url) => {
-  url = new URL(url, _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin);
-
-  return (
-    origin.protocol === url.protocol &&
-    origin.host === url.host &&
-    (isMSIE || origin.port === url.port)
-  );
-})(
-  new URL(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin),
-  _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator && /(msie|trident)/i.test(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator.userAgent)
-) : () => true);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/null.js"
-/*!************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/null.js ***!
-  \************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// eslint-disable-next-line strict
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (null);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/parseHeaders.js"
-/*!********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/parseHeaders.js ***!
-  \********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-// RawAxiosHeaders whose duplicates are ignored by node
-// c.f. https://nodejs.org/api/http.html#http_message_headers
-const ignoreDuplicateOf = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toObjectSet([
-  'age', 'authorization', 'content-length', 'content-type', 'etag',
-  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
-  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
-  'referer', 'retry-after', 'user-agent'
-]);
-
-/**
- * Parse headers into an object
- *
- * ```
- * Date: Wed, 27 Aug 2014 08:58:49 GMT
- * Content-Type: application/json
- * Connection: keep-alive
- * Transfer-Encoding: chunked
- * ```
- *
- * @param {String} rawHeaders Headers needing to be parsed
- *
- * @returns {Object} Headers parsed into an object
- */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rawHeaders => {
-  const parsed = {};
-  let key;
-  let val;
-  let i;
-
-  rawHeaders && rawHeaders.split('\n').forEach(function parser(line) {
-    i = line.indexOf(':');
-    key = line.substring(0, i).trim().toLowerCase();
-    val = line.substring(i + 1).trim();
-
-    if (!key || (parsed[key] && ignoreDuplicateOf[key])) {
-      return;
-    }
-
-    if (key === 'set-cookie') {
-      if (parsed[key]) {
-        parsed[key].push(val);
-      } else {
-        parsed[key] = [val];
-      }
-    } else {
-      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-    }
-  });
-
-  return parsed;
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/parseProtocol.js"
-/*!*********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/parseProtocol.js ***!
-  \*********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ parseProtocol)
-/* harmony export */ });
-
-
-function parseProtocol(url) {
-  const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
-  return match && match[1] || '';
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/progressEventReducer.js"
-/*!****************************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/progressEventReducer.js ***!
-  \****************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   asyncDecorator: () => (/* binding */ asyncDecorator),
-/* harmony export */   progressEventDecorator: () => (/* binding */ progressEventDecorator),
-/* harmony export */   progressEventReducer: () => (/* binding */ progressEventReducer)
-/* harmony export */ });
-/* harmony import */ var _speedometer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./speedometer.js */ "./node_modules/axios/lib/helpers/speedometer.js");
-/* harmony import */ var _throttle_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./throttle.js */ "./node_modules/axios/lib/helpers/throttle.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-
-
-
-
-const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
-  let bytesNotified = 0;
-  const _speedometer = (0,_speedometer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(50, 250);
-
-  return (0,_throttle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(e => {
-    const loaded = e.loaded;
-    const total = e.lengthComputable ? e.total : undefined;
-    const progressBytes = loaded - bytesNotified;
-    const rate = _speedometer(progressBytes);
-    const inRange = loaded <= total;
-
-    bytesNotified = loaded;
-
-    const data = {
-      loaded,
-      total,
-      progress: total ? (loaded / total) : undefined,
-      bytes: progressBytes,
-      rate: rate ? rate : undefined,
-      estimated: rate && total && inRange ? (total - loaded) / rate : undefined,
-      event: e,
-      lengthComputable: total != null,
-      [isDownloadStream ? 'download' : 'upload']: true
-    };
-
-    listener(data);
-  }, freq);
-}
-
-const progressEventDecorator = (total, throttled) => {
-  const lengthComputable = total != null;
-
-  return [(loaded) => throttled[0]({
-    lengthComputable,
-    total,
-    loaded
-  }), throttled[1]];
-}
-
-const asyncDecorator = (fn) => (...args) => _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(() => fn(...args));
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/resolveConfig.js"
-/*!*********************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/resolveConfig.js ***!
-  \*********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _isURLSameOrigin_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./isURLSameOrigin.js */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
-/* harmony import */ var _cookies_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cookies.js */ "./node_modules/axios/lib/helpers/cookies.js");
-/* harmony import */ var _core_buildFullPath_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/buildFullPath.js */ "./node_modules/axios/lib/core/buildFullPath.js");
-/* harmony import */ var _core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../core/mergeConfig.js */ "./node_modules/axios/lib/core/mergeConfig.js");
-/* harmony import */ var _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/AxiosHeaders.js */ "./node_modules/axios/lib/core/AxiosHeaders.js");
-/* harmony import */ var _buildURL_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./buildURL.js */ "./node_modules/axios/lib/helpers/buildURL.js");
-
-
-
-
-
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((config) => {
-  const newConfig = (0,_core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_5__["default"])({}, config);
-
-  let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
-
-  newConfig.headers = headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_6__["default"].from(headers);
-
-  newConfig.url = (0,_buildURL_js__WEBPACK_IMPORTED_MODULE_7__["default"])((0,_core_buildFullPath_js__WEBPACK_IMPORTED_MODULE_4__["default"])(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
-
-  // HTTP basic authentication
-  if (auth) {
-    headers.set('Authorization', 'Basic ' +
-      btoa((auth.username || '') + ':' + (auth.password ? unescape(encodeURIComponent(auth.password)) : ''))
-    );
-  }
-
-  if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isFormData(data)) {
-    if (_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserEnv || _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserWebWorkerEnv) {
-      headers.setContentType(undefined); // browser handles it
-    } else if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isFunction(data.getHeaders)) {
-      // Node.js FormData (like form-data package)
-      const formHeaders = data.getHeaders();
-      // Only set safe headers to avoid overwriting security headers
-      const allowedHeaders = ['content-type', 'content-length'];
-      Object.entries(formHeaders).forEach(([key, val]) => {
-        if (allowedHeaders.includes(key.toLowerCase())) {
-          headers.set(key, val);
-        }
-      });
-    }
-  }  
-
-  // Add xsrf header
-  // This is only done if running in a standard browser environment.
-  // Specifically not if we're in a web worker, or react-native.
-
-  if (_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserEnv) {
-    withXSRFToken && _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(newConfig));
-
-    if (withXSRFToken || (withXSRFToken !== false && (0,_isURLSameOrigin_js__WEBPACK_IMPORTED_MODULE_2__["default"])(newConfig.url))) {
-      // Add xsrf header
-      const xsrfValue = xsrfHeaderName && xsrfCookieName && _cookies_js__WEBPACK_IMPORTED_MODULE_3__["default"].read(xsrfCookieName);
-
-      if (xsrfValue) {
-        headers.set(xsrfHeaderName, xsrfValue);
-      }
-    }
-  }
-
-  return newConfig;
-});
-
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/speedometer.js"
-/*!*******************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/speedometer.js ***!
-  \*******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-
-/**
- * Calculate data maxRate
- * @param {Number} [samplesCount= 10]
- * @param {Number} [min= 1000]
- * @returns {Function}
- */
-function speedometer(samplesCount, min) {
-  samplesCount = samplesCount || 10;
-  const bytes = new Array(samplesCount);
-  const timestamps = new Array(samplesCount);
-  let head = 0;
-  let tail = 0;
-  let firstSampleTS;
-
-  min = min !== undefined ? min : 1000;
-
-  return function push(chunkLength) {
-    const now = Date.now();
-
-    const startedAt = timestamps[tail];
-
-    if (!firstSampleTS) {
-      firstSampleTS = now;
-    }
-
-    bytes[head] = chunkLength;
-    timestamps[head] = now;
-
-    let i = tail;
-    let bytesCount = 0;
-
-    while (i !== head) {
-      bytesCount += bytes[i++];
-      i = i % samplesCount;
-    }
-
-    head = (head + 1) % samplesCount;
-
-    if (head === tail) {
-      tail = (tail + 1) % samplesCount;
-    }
-
-    if (now - firstSampleTS < min) {
-      return;
-    }
-
-    const passed = startedAt && now - startedAt;
-
-    return passed ? Math.round(bytesCount * 1000 / passed) : undefined;
-  };
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (speedometer);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/spread.js"
-/*!**************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/spread.js ***!
-  \**************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ spread)
-/* harmony export */ });
-
-
-/**
- * Syntactic sugar for invoking a function and expanding an array for arguments.
- *
- * Common use case would be to use `Function.prototype.apply`.
- *
- *  ```js
- *  function f(x, y, z) {}
- *  var args = [1, 2, 3];
- *  f.apply(null, args);
- *  ```
- *
- * With `spread` this example can be re-written.
- *
- *  ```js
- *  spread(function(x, y, z) {})([1, 2, 3]);
- *  ```
- *
- * @param {Function} callback
- *
- * @returns {Function}
- */
-function spread(callback) {
-  return function wrap(arr) {
-    return callback.apply(null, arr);
-  };
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/throttle.js"
-/*!****************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/throttle.js ***!
-  \****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/**
- * Throttle decorator
- * @param {Function} fn
- * @param {Number} freq
- * @return {Function}
- */
-function throttle(fn, freq) {
-  let timestamp = 0;
-  let threshold = 1000 / freq;
-  let lastArgs;
-  let timer;
-
-  const invoke = (args, now = Date.now()) => {
-    timestamp = now;
-    lastArgs = null;
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-    fn(...args);
-  }
-
-  const throttled = (...args) => {
-    const now = Date.now();
-    const passed = now - timestamp;
-    if ( passed >= threshold) {
-      invoke(args, now);
-    } else {
-      lastArgs = args;
-      if (!timer) {
-        timer = setTimeout(() => {
-          timer = null;
-          invoke(lastArgs)
-        }, threshold - passed);
-      }
-    }
-  }
-
-  const flush = () => lastArgs && invoke(lastArgs);
-
-  return [throttled, flush];
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (throttle);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/toFormData.js"
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/toFormData.js ***!
-  \******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-/* harmony import */ var _platform_node_classes_FormData_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../platform/node/classes/FormData.js */ "./node_modules/axios/lib/helpers/null.js");
-
-
-
-
-// temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
-
-
-/**
- * Determines if the given thing is a array or js object.
- *
- * @param {string} thing - The object or array to be visited.
- *
- * @returns {boolean}
- */
-function isVisitable(thing) {
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(thing) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(thing);
-}
-
-/**
- * It removes the brackets from the end of a string
- *
- * @param {string} key - The key of the parameter.
- *
- * @returns {string} the key without the brackets.
- */
-function removeBrackets(key) {
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '[]') ? key.slice(0, -2) : key;
-}
-
-/**
- * It takes a path, a key, and a boolean, and returns a string
- *
- * @param {string} path - The path to the current key.
- * @param {string} key - The key of the current object being iterated over.
- * @param {string} dots - If true, the key will be rendered with dots instead of brackets.
- *
- * @returns {string} The path to the current key.
- */
-function renderKey(path, key, dots) {
-  if (!path) return key;
-  return path.concat(key).map(function each(token, i) {
-    // eslint-disable-next-line no-param-reassign
-    token = removeBrackets(token);
-    return !dots && i ? '[' + token + ']' : token;
-  }).join(dots ? '.' : '');
-}
-
-/**
- * If the array is an array and none of its elements are visitable, then it's a flat array.
- *
- * @param {Array<any>} arr - The array to check
- *
- * @returns {boolean}
- */
-function isFlatArray(arr) {
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(arr) && !arr.some(isVisitable);
-}
-
-const predicates = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toFlatObject(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"], {}, null, function filter(prop) {
-  return /^is[A-Z]/.test(prop);
-});
-
-/**
- * Convert a data object to FormData
- *
- * @param {Object} obj
- * @param {?Object} [formData]
- * @param {?Object} [options]
- * @param {Function} [options.visitor]
- * @param {Boolean} [options.metaTokens = true]
- * @param {Boolean} [options.dots = false]
- * @param {?Boolean} [options.indexes = false]
- *
- * @returns {Object}
- **/
-
-/**
- * It converts an object into a FormData object
- *
- * @param {Object<any, any>} obj - The object to convert to form data.
- * @param {string} formData - The FormData object to append to.
- * @param {Object<string, any>} options
- *
- * @returns
- */
-function toFormData(obj, formData, options) {
-  if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(obj)) {
-    throw new TypeError('target must be an object');
-  }
-
-  // eslint-disable-next-line no-param-reassign
-  formData = formData || new (_platform_node_classes_FormData_js__WEBPACK_IMPORTED_MODULE_2__["default"] || FormData)();
-
-  // eslint-disable-next-line no-param-reassign
-  options = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toFlatObject(options, {
-    metaTokens: true,
-    dots: false,
-    indexes: false
-  }, false, function defined(option, source) {
-    // eslint-disable-next-line no-eq-null,eqeqeq
-    return !_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(source[option]);
-  });
-
-  const metaTokens = options.metaTokens;
-  // eslint-disable-next-line no-use-before-define
-  const visitor = options.visitor || defaultVisitor;
-  const dots = options.dots;
-  const indexes = options.indexes;
-  const _Blob = options.Blob || typeof Blob !== 'undefined' && Blob;
-  const useBlob = _Blob && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isSpecCompliantForm(formData);
-
-  if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(visitor)) {
-    throw new TypeError('visitor must be a function');
-  }
-
-  function convertValue(value) {
-    if (value === null) return '';
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isDate(value)) {
-      return value.toISOString();
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBoolean(value)) {
-      return value.toString();
-    }
-
-    if (!useBlob && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBlob(value)) {
-      throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Blob is not supported. Use a Buffer instead.');
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBuffer(value) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isTypedArray(value)) {
-      return useBlob && typeof Blob === 'function' ? new Blob([value]) : Buffer.from(value);
-    }
-
-    return value;
-  }
-
-  /**
-   * Default visitor.
-   *
-   * @param {*} value
-   * @param {String|Number} key
-   * @param {Array<String|Number>} path
-   * @this {FormData}
-   *
-   * @returns {boolean} return true to visit the each prop of the value recursively
-   */
-  function defaultVisitor(value, key, path) {
-    let arr = value;
-
-    if (value && !path && typeof value === 'object') {
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '{}')) {
-        // eslint-disable-next-line no-param-reassign
-        key = metaTokens ? key : key.slice(0, -2);
-        // eslint-disable-next-line no-param-reassign
-        value = JSON.stringify(value);
-      } else if (
-        (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) && isFlatArray(value)) ||
-        ((_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(value) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '[]')) && (arr = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toArray(value))
-        )) {
-        // eslint-disable-next-line no-param-reassign
-        key = removeBrackets(key);
-
-        arr.forEach(function each(el, index) {
-          !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) && formData.append(
-            // eslint-disable-next-line no-nested-ternary
-            indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),
-            convertValue(el)
-          );
-        });
-        return false;
-      }
-    }
-
-    if (isVisitable(value)) {
-      return true;
-    }
-
-    formData.append(renderKey(path, key, dots), convertValue(value));
-
-    return false;
-  }
-
-  const stack = [];
-
-  const exposedHelpers = Object.assign(predicates, {
-    defaultVisitor,
-    convertValue,
-    isVisitable
-  });
-
-  function build(value, path) {
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(value)) return;
-
-    if (stack.indexOf(value) !== -1) {
-      throw Error('Circular reference detected in ' + path.join('.'));
-    }
-
-    stack.push(value);
-
-    _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(value, function each(el, key) {
-      const result = !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) && visitor.call(
-        formData, el, _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(key) ? key.trim() : key, path, exposedHelpers
-      );
-
-      if (result === true) {
-        build(el, path ? path.concat(key) : [key]);
-      }
-    });
-
-    stack.pop();
-  }
-
-  if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(obj)) {
-    throw new TypeError('data must be an object');
-  }
-
-  build(obj);
-
-  return formData;
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toFormData);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/toURLEncodedForm.js"
-/*!************************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/toURLEncodedForm.js ***!
-  \************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ toURLEncodedForm)
-/* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
-/* harmony import */ var _toFormData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toFormData.js */ "./node_modules/axios/lib/helpers/toFormData.js");
-/* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
-
-
-
-
-
-
-function toURLEncodedForm(data, options) {
-  return (0,_toFormData_js__WEBPACK_IMPORTED_MODULE_1__["default"])(data, new _platform_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].classes.URLSearchParams(), {
-    visitor: function(value, key, path, helpers) {
-      if (_platform_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].isNode && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBuffer(value)) {
-        this.append(key, value.toString('base64'));
-        return false;
-      }
-
-      return helpers.defaultVisitor.apply(this, arguments);
-    },
-    ...options
-  });
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/trackStream.js"
-/*!*******************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/trackStream.js ***!
-  \*******************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   readBytes: () => (/* binding */ readBytes),
-/* harmony export */   streamChunk: () => (/* binding */ streamChunk),
-/* harmony export */   trackStream: () => (/* binding */ trackStream)
-/* harmony export */ });
-
-const streamChunk = function* (chunk, chunkSize) {
-  let len = chunk.byteLength;
-
-  if (!chunkSize || len < chunkSize) {
-    yield chunk;
-    return;
-  }
-
-  let pos = 0;
-  let end;
-
-  while (pos < len) {
-    end = pos + chunkSize;
-    yield chunk.slice(pos, end);
-    pos = end;
-  }
-}
-
-const readBytes = async function* (iterable, chunkSize) {
-  for await (const chunk of readStream(iterable)) {
-    yield* streamChunk(chunk, chunkSize);
-  }
-}
-
-const readStream = async function* (stream) {
-  if (stream[Symbol.asyncIterator]) {
-    yield* stream;
-    return;
-  }
-
-  const reader = stream.getReader();
-  try {
-    for (;;) {
-      const {done, value} = await reader.read();
-      if (done) {
-        break;
-      }
-      yield value;
-    }
-  } finally {
-    await reader.cancel();
-  }
-}
-
-const trackStream = (stream, chunkSize, onProgress, onFinish) => {
-  const iterator = readBytes(stream, chunkSize);
-
-  let bytes = 0;
-  let done;
-  let _onFinish = (e) => {
-    if (!done) {
-      done = true;
-      onFinish && onFinish(e);
-    }
-  }
-
-  return new ReadableStream({
-    async pull(controller) {
-      try {
-        const {done, value} = await iterator.next();
-
-        if (done) {
-         _onFinish();
-          controller.close();
-          return;
-        }
-
-        let len = value.byteLength;
-        if (onProgress) {
-          let loadedBytes = bytes += len;
-          onProgress(loadedBytes);
-        }
-        controller.enqueue(new Uint8Array(value));
-      } catch (err) {
-        _onFinish(err);
-        throw err;
-      }
-    },
-    cancel(reason) {
-      _onFinish(reason);
-      return iterator.return();
-    }
-  }, {
-    highWaterMark: 2
-  })
-}
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/helpers/validator.js"
-/*!*****************************************************!*\
-  !*** ./node_modules/axios/lib/helpers/validator.js ***!
-  \*****************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _env_data_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../env/data.js */ "./node_modules/axios/lib/env/data.js");
-/* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
-
-
-
-
-
-const validators = {};
-
-// eslint-disable-next-line func-names
-['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach((type, i) => {
-  validators[type] = function validator(thing) {
-    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
-  };
-});
-
-const deprecatedWarnings = {};
-
-/**
- * Transitional option validator
- *
- * @param {function|boolean?} validator - set to false if the transitional option has been removed
- * @param {string?} version - deprecated version / removed since version
- * @param {string?} message - some message with additional info
- *
- * @returns {function}
- */
-validators.transitional = function transitional(validator, version, message) {
-  function formatMessage(opt, desc) {
-    return '[Axios v' + _env_data_js__WEBPACK_IMPORTED_MODULE_0__.VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
-  }
-
-  // eslint-disable-next-line func-names
-  return (value, opt, opts) => {
-    if (validator === false) {
-      throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"](
-        formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')),
-        _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_DEPRECATED
-      );
-    }
-
-    if (version && !deprecatedWarnings[opt]) {
-      deprecatedWarnings[opt] = true;
-      // eslint-disable-next-line no-console
-      console.warn(
-        formatMessage(
-          opt,
-          ' has been deprecated since v' + version + ' and will be removed in the near future'
-        )
-      );
-    }
-
-    return validator ? validator(value, opt, opts) : true;
-  };
-};
-
-validators.spelling = function spelling(correctSpelling) {
-  return (value, opt) => {
-    // eslint-disable-next-line no-console
-    console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
-    return true;
-  }
-};
-
-/**
- * Assert object's properties type
- *
- * @param {object} options
- * @param {object} schema
- * @param {boolean?} allowUnknown
- *
- * @returns {object}
- */
-
-function assertOptions(options, schema, allowUnknown) {
-  if (typeof options !== 'object') {
-    throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]('options must be an object', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_OPTION_VALUE);
-  }
-  const keys = Object.keys(options);
-  let i = keys.length;
-  while (i-- > 0) {
-    const opt = keys[i];
-    const validator = schema[opt];
-    if (validator) {
-      const value = options[opt];
-      const result = value === undefined || validator(value, opt, options);
-      if (result !== true) {
-        throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]('option ' + opt + ' must be ' + result, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_OPTION_VALUE);
-      }
-      continue;
-    }
-    if (allowUnknown !== true) {
-      throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Unknown option ' + opt, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_OPTION);
-    }
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  assertOptions,
-  validators
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/browser/classes/Blob.js"
-/*!*****************************************************************!*\
-  !*** ./node_modules/axios/lib/platform/browser/classes/Blob.js ***!
-  \*****************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (typeof Blob !== 'undefined' ? Blob : null);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/browser/classes/FormData.js"
-/*!*********************************************************************!*\
-  !*** ./node_modules/axios/lib/platform/browser/classes/FormData.js ***!
-  \*********************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (typeof FormData !== 'undefined' ? FormData : null);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/browser/classes/URLSearchParams.js"
-/*!****************************************************************************!*\
-  !*** ./node_modules/axios/lib/platform/browser/classes/URLSearchParams.js ***!
-  \****************************************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/AxiosURLSearchParams.js */ "./node_modules/axios/lib/helpers/AxiosURLSearchParams.js");
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (typeof URLSearchParams !== 'undefined' ? URLSearchParams : _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/browser/index.js"
-/*!**********************************************************!*\
-  !*** ./node_modules/axios/lib/platform/browser/index.js ***!
-  \**********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _classes_URLSearchParams_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./classes/URLSearchParams.js */ "./node_modules/axios/lib/platform/browser/classes/URLSearchParams.js");
-/* harmony import */ var _classes_FormData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classes/FormData.js */ "./node_modules/axios/lib/platform/browser/classes/FormData.js");
-/* harmony import */ var _classes_Blob_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classes/Blob.js */ "./node_modules/axios/lib/platform/browser/classes/Blob.js");
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  isBrowser: true,
-  classes: {
-    URLSearchParams: _classes_URLSearchParams_js__WEBPACK_IMPORTED_MODULE_0__["default"],
-    FormData: _classes_FormData_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Blob: _classes_Blob_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
-  protocols: ['http', 'https', 'file', 'blob', 'url', 'data']
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/common/utils.js"
-/*!*********************************************************!*\
-  !*** ./node_modules/axios/lib/platform/common/utils.js ***!
-  \*********************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   hasBrowserEnv: () => (/* binding */ hasBrowserEnv),
-/* harmony export */   hasStandardBrowserEnv: () => (/* binding */ hasStandardBrowserEnv),
-/* harmony export */   hasStandardBrowserWebWorkerEnv: () => (/* binding */ hasStandardBrowserWebWorkerEnv),
-/* harmony export */   navigator: () => (/* binding */ _navigator),
-/* harmony export */   origin: () => (/* binding */ origin)
-/* harmony export */ });
-const hasBrowserEnv = typeof window !== 'undefined' && typeof document !== 'undefined';
-
-const _navigator = typeof navigator === 'object' && navigator || undefined;
-
-/**
- * Determine if we're running in a standard browser environment
- *
- * This allows axios to run in a web worker, and react-native.
- * Both environments support XMLHttpRequest, but not fully standard globals.
- *
- * web workers:
- *  typeof window -> undefined
- *  typeof document -> undefined
- *
- * react-native:
- *  navigator.product -> 'ReactNative'
- * nativescript
- *  navigator.product -> 'NativeScript' or 'NS'
- *
- * @returns {boolean}
- */
-const hasStandardBrowserEnv = hasBrowserEnv &&
-  (!_navigator || ['ReactNative', 'NativeScript', 'NS'].indexOf(_navigator.product) < 0);
-
-/**
- * Determine if we're running in a standard browser webWorker environment
- *
- * Although the `isStandardBrowserEnv` method indicates that
- * `allows axios to run in a web worker`, the WebWorker will still be
- * filtered out due to its judgment standard
- * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
- * This leads to a problem when axios post `FormData` in webWorker
- */
-const hasStandardBrowserWebWorkerEnv = (() => {
-  return (
-    typeof WorkerGlobalScope !== 'undefined' &&
-    // eslint-disable-next-line no-undef
-    self instanceof WorkerGlobalScope &&
-    typeof self.importScripts === 'function'
-  );
-})();
-
-const origin = hasBrowserEnv && window.location.href || 'http://localhost';
-
-
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/platform/index.js"
-/*!**************************************************!*\
-  !*** ./node_modules/axios/lib/platform/index.js ***!
-  \**************************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node/index.js */ "./node_modules/axios/lib/platform/browser/index.js");
-/* harmony import */ var _common_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common/utils.js */ "./node_modules/axios/lib/platform/common/utils.js");
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  ..._common_utils_js__WEBPACK_IMPORTED_MODULE_1__,
-  ..._node_index_js__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
-
-
-/***/ },
-
-/***/ "./node_modules/axios/lib/utils.js"
-/*!*****************************************!*\
-  !*** ./node_modules/axios/lib/utils.js ***!
-  \*****************************************/
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _helpers_bind_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/bind.js */ "./node_modules/axios/lib/helpers/bind.js");
-
-
-
-
-// utils is a library of generic helper functions non-specific to axios
-
-const {toString} = Object.prototype;
-const {getPrototypeOf} = Object;
-const {iterator, toStringTag} = Symbol;
-
-const kindOf = (cache => thing => {
-    const str = toString.call(thing);
-    return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
-})(Object.create(null));
-
-const kindOfTest = (type) => {
-  type = type.toLowerCase();
-  return (thing) => kindOf(thing) === type
-}
-
-const typeOfTest = type => thing => typeof thing === type;
-
-/**
- * Determine if a value is an Array
- *
- * @param {Object} val The value to test
- *
- * @returns {boolean} True if value is an Array, otherwise false
- */
-const {isArray} = Array;
-
-/**
- * Determine if a value is undefined
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-const isUndefined = typeOfTest('undefined');
-
-/**
- * Determine if a value is a Buffer
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a Buffer, otherwise false
- */
-function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && isFunction(val.constructor.isBuffer) && val.constructor.isBuffer(val);
-}
-
-/**
- * Determine if a value is an ArrayBuffer
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is an ArrayBuffer, otherwise false
- */
-const isArrayBuffer = kindOfTest('ArrayBuffer');
-
-
-/**
- * Determine if a value is a view on an ArrayBuffer
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
- */
-function isArrayBufferView(val) {
-  let result;
-  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
-    result = ArrayBuffer.isView(val);
-  } else {
-    result = (val) && (val.buffer) && (isArrayBuffer(val.buffer));
-  }
-  return result;
-}
-
-/**
- * Determine if a value is a String
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a String, otherwise false
- */
-const isString = typeOfTest('string');
-
-/**
- * Determine if a value is a Function
- *
- * @param {*} val The value to test
- * @returns {boolean} True if value is a Function, otherwise false
- */
-const isFunction = typeOfTest('function');
-
-/**
- * Determine if a value is a Number
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a Number, otherwise false
- */
-const isNumber = typeOfTest('number');
-
-/**
- * Determine if a value is an Object
- *
- * @param {*} thing The value to test
- *
- * @returns {boolean} True if value is an Object, otherwise false
- */
-const isObject = (thing) => thing !== null && typeof thing === 'object';
-
-/**
- * Determine if a value is a Boolean
- *
- * @param {*} thing The value to test
- * @returns {boolean} True if value is a Boolean, otherwise false
- */
-const isBoolean = thing => thing === true || thing === false;
-
-/**
- * Determine if a value is a plain Object
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a plain Object, otherwise false
- */
-const isPlainObject = (val) => {
-  if (kindOf(val) !== 'object') {
-    return false;
-  }
-
-  const prototype = getPrototypeOf(val);
-  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(toStringTag in val) && !(iterator in val);
-}
-
-/**
- * Determine if a value is an empty object (safely handles Buffers)
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is an empty object, otherwise false
- */
-const isEmptyObject = (val) => {
-  // Early return for non-objects or Buffers to prevent RangeError
-  if (!isObject(val) || isBuffer(val)) {
-    return false;
-  }
-
-  try {
-    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
-  } catch (e) {
-    // Fallback for any other objects that might cause RangeError with Object.keys()
-    return false;
-  }
-}
-
-/**
- * Determine if a value is a Date
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a Date, otherwise false
- */
-const isDate = kindOfTest('Date');
-
-/**
- * Determine if a value is a File
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a File, otherwise false
- */
-const isFile = kindOfTest('File');
-
-/**
- * Determine if a value is a Blob
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a Blob, otherwise false
- */
-const isBlob = kindOfTest('Blob');
-
-/**
- * Determine if a value is a FileList
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a File, otherwise false
- */
-const isFileList = kindOfTest('FileList');
-
-/**
- * Determine if a value is a Stream
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a Stream, otherwise false
- */
-const isStream = (val) => isObject(val) && isFunction(val.pipe);
-
-/**
- * Determine if a value is a FormData
- *
- * @param {*} thing The value to test
- *
- * @returns {boolean} True if value is an FormData, otherwise false
- */
-const isFormData = (thing) => {
-  let kind;
-  return thing && (
-    (typeof FormData === 'function' && thing instanceof FormData) || (
-      isFunction(thing.append) && (
-        (kind = kindOf(thing)) === 'formdata' ||
-        // detect form-data instance
-        (kind === 'object' && isFunction(thing.toString) && thing.toString() === '[object FormData]')
-      )
-    )
-  )
-}
-
-/**
- * Determine if a value is a URLSearchParams object
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a URLSearchParams object, otherwise false
- */
-const isURLSearchParams = kindOfTest('URLSearchParams');
-
-const [isReadableStream, isRequest, isResponse, isHeaders] = ['ReadableStream', 'Request', 'Response', 'Headers'].map(kindOfTest);
-
-/**
- * Trim excess whitespace off the beginning and end of a string
- *
- * @param {String} str The String to trim
- *
- * @returns {String} The String freed of excess whitespace
- */
-const trim = (str) => str.trim ?
-  str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-
-/**
- * Iterate over an Array or an Object invoking a function for each item.
- *
- * If `obj` is an Array callback will be called passing
- * the value, index, and complete array for each item.
- *
- * If 'obj' is an Object callback will be called passing
- * the value, key, and complete object for each property.
- *
- * @param {Object|Array} obj The object to iterate
- * @param {Function} fn The callback to invoke for each item
- *
- * @param {Boolean} [allOwnKeys = false]
- * @returns {any}
- */
-function forEach(obj, fn, {allOwnKeys = false} = {}) {
-  // Don't bother if no value provided
-  if (obj === null || typeof obj === 'undefined') {
-    return;
-  }
-
-  let i;
-  let l;
-
-  // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
-    /*eslint no-param-reassign:0*/
-    obj = [obj];
-  }
-
-  if (isArray(obj)) {
-    // Iterate over array values
-    for (i = 0, l = obj.length; i < l; i++) {
-      fn.call(null, obj[i], i, obj);
-    }
-  } else {
-    // Buffer check
-    if (isBuffer(obj)) {
-      return;
-    }
-
-    // Iterate over object keys
-    const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
-    const len = keys.length;
-    let key;
-
-    for (i = 0; i < len; i++) {
-      key = keys[i];
-      fn.call(null, obj[key], key, obj);
-    }
-  }
-}
-
-function findKey(obj, key) {
-  if (isBuffer(obj)){
-    return null;
-  }
-
-  key = key.toLowerCase();
-  const keys = Object.keys(obj);
-  let i = keys.length;
-  let _key;
-  while (i-- > 0) {
-    _key = keys[i];
-    if (key === _key.toLowerCase()) {
-      return _key;
-    }
-  }
-  return null;
-}
-
-const _global = (() => {
-  /*eslint no-undef:0*/
-  if (typeof globalThis !== "undefined") return globalThis;
-  return typeof self !== "undefined" ? self : (typeof window !== 'undefined' ? window : globalThis)
-})();
-
-const isContextDefined = (context) => !isUndefined(context) && context !== _global;
-
-/**
- * Accepts varargs expecting each argument to be an object, then
- * immutably merges the properties of each object and returns result.
- *
- * When multiple objects contain the same key the later object in
- * the arguments list will take precedence.
- *
- * Example:
- *
- * ```js
- * var result = merge({foo: 123}, {foo: 456});
- * console.log(result.foo); // outputs 456
- * ```
- *
- * @param {Object} obj1 Object to merge
- *
- * @returns {Object} Result of all merge properties
- */
-function merge(/* obj1, obj2, obj3, ... */) {
-  const {caseless, skipUndefined} = isContextDefined(this) && this || {};
-  const result = {};
-  const assignValue = (val, key) => {
-    const targetKey = caseless && findKey(result, key) || key;
-    if (isPlainObject(result[targetKey]) && isPlainObject(val)) {
-      result[targetKey] = merge(result[targetKey], val);
-    } else if (isPlainObject(val)) {
-      result[targetKey] = merge({}, val);
-    } else if (isArray(val)) {
-      result[targetKey] = val.slice();
-    } else if (!skipUndefined || !isUndefined(val)) {
-      result[targetKey] = val;
-    }
-  }
-
-  for (let i = 0, l = arguments.length; i < l; i++) {
-    arguments[i] && forEach(arguments[i], assignValue);
-  }
-  return result;
-}
-
-/**
- * Extends object a by mutably adding to it the properties of object b.
- *
- * @param {Object} a The object to be extended
- * @param {Object} b The object to copy properties from
- * @param {Object} thisArg The object to bind function to
- *
- * @param {Boolean} [allOwnKeys]
- * @returns {Object} The resulting value of object a
- */
-const extend = (a, b, thisArg, {allOwnKeys}= {}) => {
-  forEach(b, (val, key) => {
-    if (thisArg && isFunction(val)) {
-      a[key] = (0,_helpers_bind_js__WEBPACK_IMPORTED_MODULE_0__["default"])(val, thisArg);
-    } else {
-      a[key] = val;
-    }
-  }, {allOwnKeys});
-  return a;
-}
-
-/**
- * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
- *
- * @param {string} content with BOM
- *
- * @returns {string} content value without BOM
- */
-const stripBOM = (content) => {
-  if (content.charCodeAt(0) === 0xFEFF) {
-    content = content.slice(1);
-  }
-  return content;
-}
-
-/**
- * Inherit the prototype methods from one constructor into another
- * @param {function} constructor
- * @param {function} superConstructor
- * @param {object} [props]
- * @param {object} [descriptors]
- *
- * @returns {void}
- */
-const inherits = (constructor, superConstructor, props, descriptors) => {
-  constructor.prototype = Object.create(superConstructor.prototype, descriptors);
-  constructor.prototype.constructor = constructor;
-  Object.defineProperty(constructor, 'super', {
-    value: superConstructor.prototype
-  });
-  props && Object.assign(constructor.prototype, props);
-}
-
-/**
- * Resolve object with deep prototype chain to a flat object
- * @param {Object} sourceObj source object
- * @param {Object} [destObj]
- * @param {Function|Boolean} [filter]
- * @param {Function} [propFilter]
- *
- * @returns {Object}
- */
-const toFlatObject = (sourceObj, destObj, filter, propFilter) => {
-  let props;
-  let i;
-  let prop;
-  const merged = {};
-
-  destObj = destObj || {};
-  // eslint-disable-next-line no-eq-null,eqeqeq
-  if (sourceObj == null) return destObj;
-
-  do {
-    props = Object.getOwnPropertyNames(sourceObj);
-    i = props.length;
-    while (i-- > 0) {
-      prop = props[i];
-      if ((!propFilter || propFilter(prop, sourceObj, destObj)) && !merged[prop]) {
-        destObj[prop] = sourceObj[prop];
-        merged[prop] = true;
-      }
-    }
-    sourceObj = filter !== false && getPrototypeOf(sourceObj);
-  } while (sourceObj && (!filter || filter(sourceObj, destObj)) && sourceObj !== Object.prototype);
-
-  return destObj;
-}
-
-/**
- * Determines whether a string ends with the characters of a specified string
- *
- * @param {String} str
- * @param {String} searchString
- * @param {Number} [position= 0]
- *
- * @returns {boolean}
- */
-const endsWith = (str, searchString, position) => {
-  str = String(str);
-  if (position === undefined || position > str.length) {
-    position = str.length;
-  }
-  position -= searchString.length;
-  const lastIndex = str.indexOf(searchString, position);
-  return lastIndex !== -1 && lastIndex === position;
-}
-
-
-/**
- * Returns new array from array like object or null if failed
- *
- * @param {*} [thing]
- *
- * @returns {?Array}
- */
-const toArray = (thing) => {
-  if (!thing) return null;
-  if (isArray(thing)) return thing;
-  let i = thing.length;
-  if (!isNumber(i)) return null;
-  const arr = new Array(i);
-  while (i-- > 0) {
-    arr[i] = thing[i];
-  }
-  return arr;
-}
-
-/**
- * Checking if the Uint8Array exists and if it does, it returns a function that checks if the
- * thing passed in is an instance of Uint8Array
- *
- * @param {TypedArray}
- *
- * @returns {Array}
- */
-// eslint-disable-next-line func-names
-const isTypedArray = (TypedArray => {
-  // eslint-disable-next-line func-names
-  return thing => {
-    return TypedArray && thing instanceof TypedArray;
-  };
-})(typeof Uint8Array !== 'undefined' && getPrototypeOf(Uint8Array));
-
-/**
- * For each entry in the object, call the function with the key and value.
- *
- * @param {Object<any, any>} obj - The object to iterate over.
- * @param {Function} fn - The function to call for each entry.
- *
- * @returns {void}
- */
-const forEachEntry = (obj, fn) => {
-  const generator = obj && obj[iterator];
-
-  const _iterator = generator.call(obj);
-
-  let result;
-
-  while ((result = _iterator.next()) && !result.done) {
-    const pair = result.value;
-    fn.call(obj, pair[0], pair[1]);
-  }
-}
-
-/**
- * It takes a regular expression and a string, and returns an array of all the matches
- *
- * @param {string} regExp - The regular expression to match against.
- * @param {string} str - The string to search.
- *
- * @returns {Array<boolean>}
- */
-const matchAll = (regExp, str) => {
-  let matches;
-  const arr = [];
-
-  while ((matches = regExp.exec(str)) !== null) {
-    arr.push(matches);
-  }
-
-  return arr;
-}
-
-/* Checking if the kindOfTest function returns true when passed an HTMLFormElement. */
-const isHTMLForm = kindOfTest('HTMLFormElement');
-
-const toCamelCase = str => {
-  return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g,
-    function replacer(m, p1, p2) {
-      return p1.toUpperCase() + p2;
-    }
-  );
-};
-
-/* Creating a function that will check if an object has a property. */
-const hasOwnProperty = (({hasOwnProperty}) => (obj, prop) => hasOwnProperty.call(obj, prop))(Object.prototype);
-
-/**
- * Determine if a value is a RegExp object
- *
- * @param {*} val The value to test
- *
- * @returns {boolean} True if value is a RegExp object, otherwise false
- */
-const isRegExp = kindOfTest('RegExp');
-
-const reduceDescriptors = (obj, reducer) => {
-  const descriptors = Object.getOwnPropertyDescriptors(obj);
-  const reducedDescriptors = {};
-
-  forEach(descriptors, (descriptor, name) => {
-    let ret;
-    if ((ret = reducer(descriptor, name, obj)) !== false) {
-      reducedDescriptors[name] = ret || descriptor;
-    }
-  });
-
-  Object.defineProperties(obj, reducedDescriptors);
-}
-
-/**
- * Makes all methods read-only
- * @param {Object} obj
- */
-
-const freezeMethods = (obj) => {
-  reduceDescriptors(obj, (descriptor, name) => {
-    // skip restricted props in strict mode
-    if (isFunction(obj) && ['arguments', 'caller', 'callee'].indexOf(name) !== -1) {
-      return false;
-    }
-
-    const value = obj[name];
-
-    if (!isFunction(value)) return;
-
-    descriptor.enumerable = false;
-
-    if ('writable' in descriptor) {
-      descriptor.writable = false;
-      return;
-    }
-
-    if (!descriptor.set) {
-      descriptor.set = () => {
-        throw Error('Can not rewrite read-only method \'' + name + '\'');
-      };
-    }
-  });
-}
-
-const toObjectSet = (arrayOrString, delimiter) => {
-  const obj = {};
-
-  const define = (arr) => {
-    arr.forEach(value => {
-      obj[value] = true;
-    });
-  }
-
-  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
-
-  return obj;
-}
-
-const noop = () => {}
-
-const toFiniteNumber = (value, defaultValue) => {
-  return value != null && Number.isFinite(value = +value) ? value : defaultValue;
-}
-
-
-
-/**
- * If the thing is a FormData object, return true, otherwise return false.
- *
- * @param {unknown} thing - The thing to check.
- *
- * @returns {boolean}
- */
-function isSpecCompliantForm(thing) {
-  return !!(thing && isFunction(thing.append) && thing[toStringTag] === 'FormData' && thing[iterator]);
-}
-
-const toJSONObject = (obj) => {
-  const stack = new Array(10);
-
-  const visit = (source, i) => {
-
-    if (isObject(source)) {
-      if (stack.indexOf(source) >= 0) {
-        return;
-      }
-
-      //Buffer check
-      if (isBuffer(source)) {
-        return source;
-      }
-
-      if(!('toJSON' in source)) {
-        stack[i] = source;
-        const target = isArray(source) ? [] : {};
-
-        forEach(source, (value, key) => {
-          const reducedValue = visit(value, i + 1);
-          !isUndefined(reducedValue) && (target[key] = reducedValue);
-        });
-
-        stack[i] = undefined;
-
-        return target;
-      }
-    }
-
-    return source;
-  }
-
-  return visit(obj, 0);
-}
-
-const isAsyncFn = kindOfTest('AsyncFunction');
-
-const isThenable = (thing) =>
-  thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
-
-// original code
-// https://github.com/DigitalBrainJS/AxiosPromise/blob/16deab13710ec09779922131f3fa5954320f83ab/lib/utils.js#L11-L34
-
-const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
-  if (setImmediateSupported) {
-    return setImmediate;
-  }
-
-  return postMessageSupported ? ((token, callbacks) => {
-    _global.addEventListener("message", ({source, data}) => {
-      if (source === _global && data === token) {
-        callbacks.length && callbacks.shift()();
-      }
-    }, false);
-
-    return (cb) => {
-      callbacks.push(cb);
-      _global.postMessage(token, "*");
-    }
-  })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
-})(
-  typeof setImmediate === 'function',
-  isFunction(_global.postMessage)
-);
-
-const asap = typeof queueMicrotask !== 'undefined' ?
-  queueMicrotask.bind(_global) : ( typeof process !== 'undefined' && process.nextTick || _setImmediate);
-
-// *********************
-
-
-const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  isArray,
-  isArrayBuffer,
-  isBuffer,
-  isFormData,
-  isArrayBufferView,
-  isString,
-  isNumber,
-  isBoolean,
-  isObject,
-  isPlainObject,
-  isEmptyObject,
-  isReadableStream,
-  isRequest,
-  isResponse,
-  isHeaders,
-  isUndefined,
-  isDate,
-  isFile,
-  isBlob,
-  isRegExp,
-  isFunction,
-  isStream,
-  isURLSearchParams,
-  isTypedArray,
-  isFileList,
-  forEach,
-  merge,
-  extend,
-  trim,
-  stripBOM,
-  inherits,
-  toFlatObject,
-  kindOf,
-  kindOfTest,
-  endsWith,
-  toArray,
-  forEachEntry,
-  matchAll,
-  isHTMLForm,
-  hasOwnProperty,
-  hasOwnProp: hasOwnProperty, // an alias to avoid ESLint no-prototype-builtins detection
-  reduceDescriptors,
-  freezeMethods,
-  toObjectSet,
-  toCamelCase,
-  noop,
-  toFiniteNumber,
-  findKey,
-  global: _global,
-  isContextDefined,
-  isSpecCompliantForm,
-  toJSONObject,
-  isAsyncFn,
-  isThenable,
-  setImmediate: _setImmediate,
-  asap,
-  isIterable
-});
 
 
 /***/ }

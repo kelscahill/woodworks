@@ -29,7 +29,7 @@ class MonsterInsights_Connect {
 	public function hooks() {
 
 		add_action( 'wp_ajax_monsterinsights_connect_url', array( $this, 'generate_connect_url' ) );
-		add_action( 'wp_ajax_monsterinsights_connect_process', array( $this, 'process' ) );
+		add_action( 'wp_ajax_nopriv_monsterinsights_connect_process', array( $this, 'process' ) );
 	}
 
 	/**
@@ -145,11 +145,6 @@ class MonsterInsights_Connect {
 			'<a target="_blank" href="' . monsterinsights_get_url( 'notice', 'could-not-upgrade', 'https://www.monsterinsights.com/' ) . '">',
 			'</a>'
 		);
-
-		// Check for permissions.
-		if ( ! monsterinsights_can_install_plugins() ) {
-			wp_send_json_error( $error );
-		}
 
 		// verify params present (oth & download link).
 		$post_oth = ! empty( $_REQUEST['oth'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['oth'] ) ) : '';

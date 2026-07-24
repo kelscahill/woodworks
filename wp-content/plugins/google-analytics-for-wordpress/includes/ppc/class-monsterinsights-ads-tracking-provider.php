@@ -86,19 +86,22 @@ abstract class MonsterInsights_Ads_Tracking_Provider
 	 * @param array $data
 	 * @param MonsterInsights_PPC_Tracking_Ecommerce_Tracking $ecommerce_provider
 	 *
-	 * @return void
+	 * @return bool True if the event was dispatched to a server handler, false otherwise.
 	 */
 	public function send_server_event( $event_name, $data, $ecommerce_provider ) {
 		// If the api token is not set, bail early.
 		if ( !$this->has_api_token() ) {
-			return;
+			return false;
 		}
 
 		$server_handler = $this->get_server_handler();
 
 		if ( $server_handler ) {
 			$server_handler->send_event( $event_name, $data, $ecommerce_provider );
+			return true;
 		}
+
+		return false;
 	}
 
 	/**

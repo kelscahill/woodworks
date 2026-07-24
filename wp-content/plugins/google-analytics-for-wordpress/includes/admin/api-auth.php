@@ -283,7 +283,7 @@ final class MonsterInsights_API_Auth {
 		// Check nonce
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
-		$url = admin_url( 'admin.php?page=monsterinsights-onboarding' );
+		$url = monsterinsights_get_onboarding_url();
 
 		// current user can authenticate
 		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
@@ -546,7 +546,7 @@ final class MonsterInsights_API_Auth {
 		// Check nonce
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
-		$url = network_admin_url( 'admin.php?page=monsterinsights-onboarding' );
+		$url = monsterinsights_get_onboarding_url();
 
 		// current user can delete
 		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
@@ -663,7 +663,12 @@ final class MonsterInsights_API_Auth {
 		$this->rotate_tt();
 
 		// Invalidate the cached Bearer token so the next page load
-		// generates a fresh token with new credentials.
+		// generates a fresh token with new credentials. The token class is
+		// only loaded on the `init` hook, which does not run during the
+		// plugin uninstall flow, so load it on demand here.
+		if ( ! class_exists( 'MonsterInsights_API_Token' ) ) {
+			require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/api/class-monsterinsights-api-token.php';
+		}
 		MonsterInsights_API_Token::invalidate( $this->is_network_admin() );
 
 		if ( is_wp_error( $ret ) && ! $force ) {
@@ -789,6 +794,10 @@ final class MonsterInsights_API_Auth {
 		$public_key = $is_network
 			? $auth->get_network_key()
 			: $auth->get_key();
+
+		if ( empty( $public_key ) ) {
+			wp_send_json_error( new WP_Error( 'monsterinsights_mp_token_no_public_key' ) );
+		}
 
 		$hashed_data = array(
 			'mp_token'  => !empty($_POST['mp_token']) ? sanitize_text_field( wp_unslash( $_POST['mp_token'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Missing
